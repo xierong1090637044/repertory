@@ -24,31 +24,33 @@ Page({
       return
     }
     for (var i = 0; i < that.data.goods.length; i++) {
-      if (that.data.goods[i].num > 0) {
+      if (that.data.goods[i].num == 0) {
         isAllZero = false
       }
     }
-    if (isAllZero) {
+    if (isAllZero == false) {
       $Message({
-        content: '请选择进货量',
+        content: '入库量必须大于1',
         type: 'warning',
         duration: 5
       });
       return
-    }
-    wx.showModal({
-      title: '提示',
-      content: '确认将商品入库？',
-      confirmText: '确认',
-      success: function (res) {
-        if (res.confirm) {
-          wx.setStorageSync("operate_goods", that.data.goods);
-          wx.navigateTo({
-            url: 'enter-history/enter-history',
-          })
+    }else
+    {
+      wx.showModal({
+        title: '提示',
+        content: '确认将商品入库？',
+        confirmText: '确认',
+        success: function (res) {
+          if (res.confirm) {
+            wx.setStorageSync("operate_goods", that.data.goods);
+            wx.navigateTo({
+              url: 'enter-history/enter-history',
+            })
+          }
         }
-      }
-    })
+      })
+    }
   },
   handleDel: function (e) {
     var that = this
