@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "库存助手-选择产品",
+  "usingComponents": {
+    "i-checkbox-group": "../../../component/checkbox-group/index",
+    "i-checkbox": "../../../component/checkbox/index",
+    "i-panel": "../../../component/panel/index",
+    "i-spin": "../../../component/spin/index",
+    "i-message": "../../../component/message/index"
+  }
+}

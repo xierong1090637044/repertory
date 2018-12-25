@@ -1,0 +1,30 @@
+<view class='page'>
+    <view style='line-height:35px;padding: 0 10px;'>操作产品</view>
+    <view>
+       <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
+          <view class='pro_list' style='color:#000'>
+               <view>产品：{{item.goodsName}}</view>
+               <view>零售价：￥{{item.retailPrice}}</view>
+          </view>
+          <view class='pro_list'>
+               <view>数量：X{{item.num}}</view>
+               <view>总价：￥{{item.total_money}}</view>
+          </view>
+       </view>
+       <view class='pro_allmoney'>总计：￥{{detail.all_money}}</view>
+    </view>
+
+    <view style='margin-top:20px' class='detail_bottom'>
+         <view style='display:flex;border-bottom:1px solid#ddd'>
+            <view><image src='{{detail.opreater.avatarUrl}}' class='avatar'></image></view>
+            <view class='common_style'>{{detail.opreater.nickName}}</view>
+            <view class='common_style'>（操作者）</view>
+         </view>
+         <view style='padding:10px 0 0'>
+            <view>操作时间：{{detail.createdAt}}</view>
+            <view wx:if="{{detail.beizhu==''}}">备注：暂无</view>
+            <view wx:else>备注：{{detail.beizhu}}</view>
+         </view>
+    </view>
+
+</view>

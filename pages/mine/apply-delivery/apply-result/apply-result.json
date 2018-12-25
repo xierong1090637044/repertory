@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "库存助手-审核结果",
+  "usingComponents": {
+    "i-panel": "../../../../component/panel/index",
+    "i-card": "../../../../component/card/index",
+    "i-input": "../../../../component/input/index",
+    "i-cell": "../../../../component/cell/index",
+    "i-button": "../../../../component/button/index",
+    "i-icon": "../../../../component/icon/index",
+    "i-message": "../../../../component/message/index"
+  }
+}

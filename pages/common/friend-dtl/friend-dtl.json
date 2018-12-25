@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "库存助手-资料卡",
+  "usingComponents": {
+    "i-spin": "../../../component/spin/index",
+    "i-switch": "../../../component/switch/index",
+    "i-panel": "../../../component/panel/index",
+    "i-card": "../../../component/card/index",
+    "i-input": "../../../component/input/index",
+    "i-cell": "../../../component/cell/index",
+    "i-button": "../../../component/button/index",
+    "i-icon": "../../../component/icon/index",
+    "i-message": "../../../component/message/index"
+  }
+}

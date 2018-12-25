@@ -1,0 +1,53 @@
+<!--pages/index/index.wxml-->
+<!-- <view hidden='{{!noticeShow}}'> -->
+<i-notice-bar icon="systemprompt" loop closable>
+    开发者对部分功能进行调整,具体优化调整请前往升级日志查看;大家有好的想法或者建议可以在优化建议中提出或添加开发者微信(864822121)进行反馈,帮助开发者一起打造出一个满足您需求的库存助手
+</i-notice-bar>
+<!-- </view> -->
+<view class='index-container'>
+  <view class='instruction'>
+    <view bindtap='handleInstruction'>
+      <i-icon type="feedback" size="17"/>使用说明
+    </view>
+  </view>
+  <image class="title" src="/images/authorize/title.png"></image>
+  <view class='content'>
+     <view class="hd">
+       <image class="wave" src="/images/authorize/wave.png" mode="aspectFill"></image>
+      <image class="wave wave-bg" src="/images/authorize/wave.png" mode="aspectFill"></image>   
+    </view> 
+    <view class='bd'>
+      <view class='module'>
+        <i-row i-class="margin-t-5">
+            <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
+              <navigator url='{{item.url}}'>
+                <i-grid i-class="module-grid">
+                  <i-grid-item>
+                      <i-grid-icon i-class='module-grid-icon'>
+                        <image src="{{item.icon}}" />
+                      </i-grid-icon>
+                      <i-grid-label>{{item.name}}</i-grid-label>
+                  </i-grid-item>
+                </i-grid>
+              </navigator>
+            </i-col>
+          </i-row>
+          <i-row i-class="margin-t-5">
+            <i-col span="8" i-class="padded-5" wx:for="{{secondaryModules}}" wx:key="unique">
+              <navigator url='{{item.url}}'>
+                <i-grid i-class="module-grid">
+                  <i-grid-item i-class="module-grid-item">
+                    <i-grid-icon i-class='module-grid-icon'>
+                      <image src="{{item.icon}}" />
+                    </i-grid-icon>
+                    <i-grid-label>{{item.name}}</i-grid-label>
+                  </i-grid-item>
+                </i-grid>
+              </navigator>
+            </i-col>
+          </i-row>
+      </view>
+    </view>
+  </view>
+</view>
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>

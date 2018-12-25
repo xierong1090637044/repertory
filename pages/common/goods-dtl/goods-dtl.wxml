@@ -1,0 +1,30 @@
+<!--pages/common/goods-dtl/goods-dtl.wxml-->
+<view>
+  <i-panel title="产品详情">
+    <i-card title="产品名称：{{goodsReserve.goodsName}}" 
+          extra="当前库存：{{goodsReserve.reserve}}"
+          full="true">
+      <view slot="content">
+        <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
+        <view>进货价格：{{goodsReserve.costPrice}} (元)</view>
+        <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
+      </view>
+    </i-card>
+  </i-panel>
+  <i-panel title="产品二维码">
+    <!-- <view class="container">
+      <i-spin fix wx:if="{{ spinShow }}"></i-spin>
+      <image src="{{shareImage}}" bindtap='handlePreviewImage' data-qrcode="{{shareImage}}" class="share-image margin-t-15"></image>
+      <canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage"/>
+    </view> -->
+    <view class='text-center padded-b-10'>
+      <i-spin fix wx:if="{{ spinShow }}"></i-spin>
+      <image data-qrcode="{{goodsReserve.qrCode}}"
+             src='{{goodsReserve.qrCode}}' style='width:80px;height:80px;margin-top:5px' slot="icon"></image>
+      <view>产品：{{goodsReserve.goodsName}}</view>
+      <canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage"/>
+      <button class="more-button bg-info text-white" size="mini" 
+              bindtap='handlePreviewImage' data-qrcode="{{shareImage}}" >下载二维码</button>
+    </view>
+  </i-panel>
+</view>

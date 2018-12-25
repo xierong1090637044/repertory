@@ -1,0 +1,36 @@
+.page
+{
+  height: 100vh;
+  overflow: scroll;
+}
+.item
+{
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.icon-order
+{
+  font-size: 22px;
+  color: #118fff;
+}
+.order_out
+{
+  padding: 0px 15px;
+  color: #f30;
+  border:1px solid#f30;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 7px;
+}
+.order_get
+{
+  padding: 0px 15px;
+  color: #2ca879;
+  border:1px solid#2ca879;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 7px;
+}

@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "库存助手-我的产品",
+  "usingComponents": {
+    "i-swipeout": "../../component/swipeout/index",
+    "i-input": "../../component/input/index",
+    "i-panel": "../../component/panel/index",
+    "i-cell-group": "../../component/cell-group/index",
+    "i-cell": "../../component/cell/index",
+    "i-spin": "../../component/spin/index",
+    "i-icon": "../../component/icon/index"
+  }
+}

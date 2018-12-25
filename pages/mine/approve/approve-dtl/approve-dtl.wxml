@@ -1,0 +1,49 @@
+<!--pages/mine/approve/approve-dtl/approve-dtl.wxml-->
+<view class='approve-dtl-container'>
+  <i-panel title="产品详情">
+    <i-card title="产品名称：{{approve.goodsName}}" 
+          extra="当前库存：{{approve.reserve}}"
+          full="true">
+      <view slot="content">
+        <view>产品规格：{{approve.packageContent}}*{{approve.packingUnit}}</view>
+        <view>进货价格：{{approve.costPrice}} (元)</view>
+        <view>零售价格：{{approve.retailPrice}} (元)</view>
+      </view>
+    </i-card>
+  </i-panel>
+  <i-panel title="申请信息">
+    <i-card i-class="card" 
+            thumb="{{approve.avatarUrl}}"
+            title="{{approve.applyUserName}}(申请者)" 
+            full="true">
+      <view slot="content">
+        <view>申请数量：{{approve.applyNum}}</view>
+        <view></view>
+        <view>申请时间：{{approve.createdAt}}</view>
+        <view>申请备注：{{approve.applyRemark}}</view>
+      </view>
+    </i-card>
+  </i-panel>
+  <i-panel title="审批信息">
+    <i-input wx:if="{{approve.status==0}}" value='{{remark}}' bind:change="inputRemark" name="remark" type="textarea" title="审批备注：" placeholder="请输入备注信息(最多120字)" maxlength="120" />
+    <i-card wx:else i-class="card" 
+            title="审批备注：{{approve.approveRemark}}" 
+            full="true">
+      <view slot="content">
+        <view>审批状态：
+          <text class='text-info' wx:if="{{approve.status==0}}">待审批</text>
+          <text class='text-success' wx:if="{{approve.status==1}}">已审批（通过）</text>
+          <text class='text-danger' wx:if="{{approve.status==-1}}">已审批核（未通过）</text>
+        </view>
+      </view>
+    </i-card>
+  </i-panel>
+</view>
+<view class='btn-group' wx:if="{{approve.status==0}}">
+  <button class='i-btn i-btn-primary i-btn-small' bindtap='handleVia'>
+    通过审批
+  </button>
+  <button class='i-btn i-btn-ghost i-btn-small' bindtap='handleFail'>
+    未通过审批
+  </button>
+</view>

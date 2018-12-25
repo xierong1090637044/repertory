@@ -1,0 +1,99 @@
+/* pages/mine/propose/propose.wxss */
+i-input textarea{
+  height:80px!important;
+}
+.feedback-img-panel{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15rpx 25rpx;
+}
+.feedback-photo-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    margin: 20rpx;
+    margin-right: 0;
+    width: 135rpx;
+    height: 135rpx;
+    border: 1rpx solid #e5e5e5;
+    border-radius: 5rpx;
+}
+.feedback-photo-item:active{
+    opacity: .8;
+}
+.feedback-photo-item .remind-img{
+    padding: 0;
+}
+.feedback-photo-item image{
+    width: 100%;
+    height: 100%;
+}
+.add-photo:active {
+    background: #f0f0f0;
+}
+.add-photo::before, .add-photo::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #e5e5e5;
+}
+.add-photo:active::before, .add-photo:active::after{
+    background: #ddd;
+}
+.add-photo::before {
+    width: 10rpx;
+    height: 80rpx;
+    margin-top: -40rpx;
+    margin-left: -5rpx;
+}
+.add-photo::after {
+    width: 80rpx;
+    height: 10rpx;
+    margin-top: -5rpx;
+    margin-left: -40rpx;
+}
+.feedback-remind {
+    flex: 1;
+    font-size: 9pt;
+    line-height: 135%;
+    color: rgb(160, 157, 157);
+    padding: 0 30rpx;
+    word-break: break-all;
+    text-indent: 1em;
+    padding-top: 30rpx;
+}
+.feedback-remind.text-center{
+    text-align: center;
+}
+.image_box {
+  width: 100%;
+  background: #fff;
+  padding: 10px 0 10rpx;
+}
+.picPre {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+}
+.picPre image {
+  width: 100%;
+  height: 180rpx;
+}
+.picPre .del {
+  position: absolute;
+  right: 0px;
+  top: -20rpx;
+  width: 16px;
+  height: 16px;
+  background-size: cover;
+}
+.i-btn{text-align:center;vertical-align:middle;touch-action:manipulation;cursor:pointer;background-image:none;white-space:nowrap;user-select:none;font-size:14px;border-radius:2px;border:0!important;position:relative;text-decoration:none;height:44px;line-height:44px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);color:#fff!important;background:#f7f7f7!important;color:#495060!important;margin:10px}
+.i-btn-primary{color:#fff!important;background:#2d8cf0!important}.i-btn-ghost{color:#fff!important;background:#fff!important;color:#495060!important}
+.i-btn-small{height:40px;line-height:40px}

@@ -1,0 +1,4 @@
+<!--pages/instruction/instruction.wxml-->
+<view class='content'>
+  <image mode='widthFix' src='/images/index/instruction.png'></image>
+</view>

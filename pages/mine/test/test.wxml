@@ -1,0 +1,4 @@
+<!--pages/mine/test/test.wxml-->
+<button bindtap='submitInfo' class='margin-5'>
+  <text>模板消息测试</text>
+</button>

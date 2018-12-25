@@ -1,0 +1,24 @@
+<view class='page'>
+    <view style='line-height:35px;padding: 0 10px;'>已选产品</view>
+    <view>
+       <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
+          <view class='pro_list' style='color:#000'>
+               <view>产品：{{item.goodsName}}</view>
+               <view>零售价：￥{{item.retailPrice}}</view>
+          </view>
+          <view class='pro_list'>
+               <view>数量：X{{item.num}}</view>
+               <view>总价：￥{{item.total_money}}</view>
+          </view>
+       </view>
+       <view class='pro_allmoney'>总计：￥{{all_money}}</view>
+    </view>
+    <view style='margin-top:20px'>
+         <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>
+    </view>
+
+    <view>
+        <button class='confrim_button' bindtap='confrim_delivery'>确认出库</button>
+    </view>
+
+</view>

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "库存助手-我的消息",
+  "usingComponents": {
+    "i-cell-group": "../../../component/cell-group/index",
+    "i-cell": "../../../component/cell/index",
+    "i-spin": "../../../component/spin/index",
+    "i-icon": "../../../component/icon/index",
+    "i-button": "../../../component/button/index"
+  }
+}

@@ -1,0 +1,65 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.91",
+	"appid": "wxeda1947acb39aab6",
+	"projectname": "%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86%E5%8A%A9%E6%89%8B",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": 0,
+					"name": "个人中心",
+					"pathName": "pages/mine/mine",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的消息",
+					"pathName": "pages/mine/message/message",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/goods/goods",
+					"query": "我的产品"
+				},
+				{
+					"id": 3,
+					"name": "测试页面",
+					"pathName": "pages/mine/test/test",
+					"query": ""
+				}
+			]
+		}
+	}
+}

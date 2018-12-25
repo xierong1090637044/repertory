@@ -1,0 +1,29 @@
+<!--pages/goods/goods-add/goods-add.wxml-->
+<i-message id="message" />
+<view class='goods-container'>
+  <form bindsubmit='handleAddGoods'>
+    <i-panel title="基本信息">
+      <i-input title="产品名称" value="{{goodsName}}" name="goodsName" placeholder="请输入产品名称" />
+      <i-input title="登记证号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记证号" />
+      <i-input title="生产厂家" value="{{producer}}" name="producer" placeholder="请输入生产厂家" />
+      <i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="请输入产品条码" />
+    </i-panel>
+    <i-panel title="产品规格">
+      <i-input title="包装含量" type="number" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
+      <i-input title="包装单位" placeholder="请选择包装单位" value="{{packingUnit}}" 
+name="packingUnit"/>
+    </i-panel>
+    <i-panel title="产品价格">
+      <i-input title="进货价格" type="digit" value="{{costPrice}}" name="costPrice" placeholder="请输入进货价格" />
+      <i-input title="零售价格" type="digit" value="{{retailPrice}}" name="retailPrice" placeholder="请选择零售价格" />
+    </i-panel>
+    <view class='btn-group'>
+      <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+        <i-icon type="add" /> 确认新增
+      </button>
+      <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">
+        上传中
+      </i-button>
+    </view>
+  </form>
+</view>

@@ -1,0 +1,12 @@
+/* pages/instruction/instruction.wxss */
+page{
+  background: #448def
+}
+.content{
+  position: relative; 
+  width : 100%;
+  height : auto;
+}
+.content image{
+  width: 100%
+}

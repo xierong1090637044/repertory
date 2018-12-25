@@ -1,0 +1,63 @@
+<!--pages/mine/friends/friends.wxml-->
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<!--搜索-->
+<view class="search-view">
+  <view class="search-bar">
+    <view class="search-bar-form">
+      <view class="search-bar-box">
+        <icon class="icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="search-bar-input" placeholder="请输入关键字查询" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchAction"/>
+        <view class="icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="search-bar-label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="icon-search" type="search" size="14"></icon>
+        <view class="search-bar-text">搜索</view>
+      </label>
+    </view>
+    <view class="search-bar-cancel-btn" hidden="{{!inputShowed}}" bindtap="searchAction">
+      搜索
+    </view>
+  </view>
+</view>
+<!--/.搜索-->
+<i-cell-group i-class="wrap">
+  <block wx:for="{{friends}}" wx:key="unique">
+    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
+    <view slot="content">
+     <i-cell bind:click="handleDetial" data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}">
+      <image src='{{item.avatarUrl}}' style='width:40px;height:40px;margin-top:5px' slot="icon"></image>
+     </i-cell>
+    </view>
+    <view slot="button" class="i-swipeout-button-group">
+      <view class="i-swipeout-button bg-info"
+            data-friendid="{{item.friendId}}" bindtap="handleFriendDtl">
+        查看
+      </view>
+      <view class="i-swipeout-button bg-danger" data-item="{{item}}" bindtap="handleFriendDel" >
+        删除
+      </view>
+    </view>
+    </i-swipeout>
+  </block>
+</i-cell-group>
+<view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+<block wx:else>
+  <view class="more">
+    <view wx:if="{{!isEnd}}">
+      <button class="more-button" formType="submit" size="mini" bindtap="loadMore">加载更多...</button>
+    </view>
+    <view class="no-more" wx:if="{{isEnd}}">
+      <view class="line">
+        <b></b><span>我是有底线的</span><b></b>
+      </view>
+    </view>
+  </view>
+</block>
+<view class="round-click" bindtap='handleAddFriend'>
+  <i-icon type="add" size='23' color='white'/>
+</view>

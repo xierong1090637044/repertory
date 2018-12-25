@@ -1,0 +1,17 @@
+<view class='page' wx:if="{{list !=''}}">
+   <view wx:for="{{list}}" wx:key="{{index}}" class='item' >
+     <view style='display:flex'>
+          <view style='line-height:40px'><i class="iconfont icon-jihua icon-order"></i></view>
+          <view style='margin-left:10px'>
+              <view>操作编号：{{item.obejctId}}</view>
+              <view>操作时间：{{item.createdAt}}</view>
+          </view>
+     </view>
+     <view wx:if='{{item.type == -1}}' class='order_out' data-id='{{item.objectId}}' bindtap='get_detail'>出库</view>
+     <view wx:else class='order_get' data-id='{{item.objectId}}' bindtap='get_detail'>入库</view>
+   </view>
+</view>
+<view class='no-data' wx:else>
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>

@@ -1,0 +1,23 @@
+<!--pages/mine/propose/propose.wxml-->
+<i-message id="message" />
+<i-panel title="新建优化建议">
+  <i-input i-class='border-b' name="title" value='{{title}}' bind:change='handleTitleInputChange' placeholder="请输入优化建议标题" />
+  <i-input type="textarea" name="content" value='{{content}}' bind:change='handleContentInputChange' placeholder="请输入优化建议内容" />
+</i-panel>
+<i-panel title="选择图片(可选)">
+  <view class="feedback-img-panel">
+    <view class="feedback-photo-item add-photo" bindtap="uploadPic" wx:if="{{!isSrc}}"></view>
+    <view wx:if="{{isSrc}}" class="image_box">
+      <view class="picPre">
+        <image src="{{src}}" mode="aspectFit"></image>
+        <image class='del' src='../../../images/common/del.png' bindtap="clearPic"></image>
+      </view>
+    </view>
+  </view>
+</i-panel>
+<text class="feedback-remind ">您可以添加开发者微信或QQ➭864822121提出优化建议。</text>
+<form bindsubmit="handleSubmit" report-submit='true' >
+  <button class='i-btn i-btn-primary i-btn-small' type="primary" size="small" formType="submit">
+    提交
+  </button>
+</form>

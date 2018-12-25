@@ -1,0 +1,6 @@
+/* pages/common/goods-dtl/goods-dtl.wxss */
+.share-image {
+  width: 600rpx;
+  height: 800rpx;
+  margin: 0 75rpx;
+}
