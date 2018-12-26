@@ -1,7 +1,10 @@
 <!--pages/goods/goods.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <!--搜索-->
-<view class="search-view">
+<i-notice-bar icon="systemprompt" closable>
+    左滑可以显示产品的操作菜单哦！
+</i-notice-bar>
+<view class="search-view" style='top:36px !important'>
   <view class="search-bar">
     <view class="search-bar-form">
       <view class="search-bar-box">

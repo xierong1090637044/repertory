@@ -56,10 +56,15 @@
     ]
   },
   "usingComponents": {
+    "i-card": "../../component/card/index",
+    "i-row": "../../component/row/index",
+    "i-col": "../../component/col/index",
+    "i-grid": "../../component/grid/index",
+    "i-grid-item": "../../component/grid-item/index",
+    "i-grid-icon": "../../component/grid-icon/index",
+    "i-grid-label": "../../component/grid-label/index",
     "i-spin": "../../component/spin/index",
-    "i-cell-group": "../../component/cell-group/index",
-    "i-cell": "../../component/cell/index",
-    "i-icon": "../../component/icon/index",
-    "i-modal": "../../component/modal/index"
+    "i-notice-bar": "../../component/notice-bar/index",
+    "i-icon": "../../component/icon/index"
   }
 }
