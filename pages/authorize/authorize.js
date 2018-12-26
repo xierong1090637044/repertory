@@ -11,7 +11,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   linkToIndex:function(){
-    wx.redirectTo({
+    wx.switchTab({
       url: '/pages/index/index',
     })
   },

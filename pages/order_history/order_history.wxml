@@ -1,6 +1,6 @@
 <view class='page' wx:if="{{list !=''}}">
    <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
-   <view wx:for="{{list}}" wx:key="{{index}}" class='item' data-id='{{item.objectId}}' bindtap='get_detail'>
+   <view wx:for="{{list}}" wx:key="{{index}}" class='item' bindtap='get_detail' data-id='{{item.objectId}}'>
      <view style='display:flex'>
           <view style='line-height:40px'><i class="iconfont icon-jihua icon-order"></i></view>
           <view style='margin-left:10px'>
@@ -8,8 +8,8 @@
               <view>操作时间：{{item.createdAt}}</view>
           </view>
      </view>
-     <view wx:if='{{item.type == -1}}' class='order_out' >出库</view>
-     <view wx:else class='order_get'>入库</view>
+     <view wx:if='{{item.type == -1}}' class='order_out'>出库</view>
+     <view wx:else class='order_get' >入库</view>
    </view>
 </view>
 <view class='no-data' wx:else>
