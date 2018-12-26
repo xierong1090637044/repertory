@@ -61,7 +61,7 @@ Page({
 
   confrim_delivery:function()
   {
-    console.log(that.data.beizhu_text);
+    that.setData({ button: true });
     var operation_ids = [];
 
     var Goods = Bmob.Object.extend("Goods");
@@ -118,7 +118,7 @@ Page({
                   query.set("all_money", that.data.all_money);
                   query.save().then(res => {
                     console.log("添加操作历史记录成功",res);
-                    that.setData({ button:true});
+                    
                     wx.showToast({
                       title: '产品出库成功',
                       icon: 'success',
