@@ -608,3 +608,24 @@ page{
 	color: #e51c23;
 	border-color: #e51c23;
 }
+
+.order_out
+{
+  padding: 0px 15px;
+  color: #f30;
+  border:1px solid#f30;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 7px;
+  border-radius: 4px;
+}
+.order_get
+{
+  padding: 0px 15px;
+  color: #2ca879;
+  border:1px solid#2ca879;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 7px;
+  border-radius: 4px;
+}
