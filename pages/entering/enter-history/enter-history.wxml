@@ -18,7 +18,7 @@
     </view>
 
     <view>
-        <button class='confrim_button' bindtap='confrim_delivery'>确认入库</button>
+        <button class='confrim_button' bindtap='confrim_delivery' disabled='{{button}}'>确认入库</button>
     </view>
 
 </view>
