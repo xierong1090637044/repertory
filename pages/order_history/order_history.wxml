@@ -3,7 +3,7 @@
      <view style='display:flex'>
           <view style='line-height:40px'><i class="iconfont icon-jihua icon-order"></i></view>
           <view style='margin-left:10px'>
-              <view>操作编号：{{item.obejctId}}</view>
+              <view>操作编号：{{item.objectId}}</view>
               <view>操作时间：{{item.createdAt}}</view>
           </view>
      </view>
