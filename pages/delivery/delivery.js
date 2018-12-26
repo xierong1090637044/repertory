@@ -9,7 +9,8 @@ Page({
    */
   data: {
     goods: [],
-    isEmpty: false
+    isEmpty: false,
+    url:"",
   },
   handleDelivery: function () {
     var that = this;
@@ -43,7 +44,7 @@ Page({
           if (res.confirm) {
             wx.setStorageSync("operate_goods", that.data.goods);
             wx.navigateTo({
-              url: 'delivery-history/delivery-history',
+              url: that.data.url,
             })
 
           }
@@ -90,7 +91,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    var that = this;
+    if (options.type == "friend") {
+      that.setData({
+        url: "delivery-history-fri/delivery-history-fri"
+      });
+    } else {
+      that.setData({
+        url: "delivery-history/delivery-history"
+      });
+    }
   },
 
   /**

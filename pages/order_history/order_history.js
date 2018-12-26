@@ -53,7 +53,6 @@ Page({
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("order_opreations");
     query.equalTo("opreater", "==", userid);
-    query.equalTo("is_show", "!=", false);
     query.order("-createdAt");
     query.find().then(res => {
       console.log(res);

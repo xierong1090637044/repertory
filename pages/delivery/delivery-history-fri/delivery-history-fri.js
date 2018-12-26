@@ -82,51 +82,51 @@ Page({
       tempBills.set('goodsName', that.data.goods[i].goodsName);
       tempBills.set('goodsId', tempGoods);
       tempBills.set('userId', user);
-      tempBills.set('type', 1);
-     
+      tempBills.set('type', -1);
+
 
       billsObj.push(tempBills)
     }
-    
-      //插入单据
-      Bmob.Object.saveAll(billsObj).then(function (res) {
-        console.log("批量新增单据成功", res);
-        for (var i = 0; i < res.length; i++) {
-          operation_ids.push(res[i].id);
-          if (i == (res.length - 1)) {
-            const relation = Bmob_new.Relation('Bills_friends'); // 需要关联的表
-            const relID = relation.add(operation_ids);
 
-            const pointer = Bmob_new.Pointer('_User')
-            const poiID = pointer.set(wx.getStorageSync('userid'));
+    //插入单据
+    Bmob.Object.saveAll(billsObj).then(function (res) {
+      console.log("批量新增单据成功", res);
+      for (var i = 0; i < res.length; i++) {
+        operation_ids.push(res[i].id);
+        if (i == (res.length - 1)) {
+          const relation = Bmob_new.Relation('Bills_friends'); // 需要关联的表
+          const relID = relation.add(operation_ids);
 
-            const query = Bmob_new.Query('order_opreations_fri');
-            query.set("relations", relID);
-            query.set("beizhu", that.data.beizhu_text);
-            query.set("type", 1);
-            query.set("opreater", poiID);
-            query.set("all_money", that.data.all_money);
-            query.set('is_check', false);
-            query.save().then(res => {
-              console.log("添加操作历史记录成功", res);
-              wx.showToast({
-                title: '请等待审批',
-                icon: 'success',
-                success: function () {
-                  setTimeout(() => {
-                    wx.navigateBack({
-                      delta: 3
-                    })
-                  }, 1000)
-                }
-              })
+          const pointer = Bmob_new.Pointer('_User')
+          const poiID = pointer.set(wx.getStorageSync('userid'));
+
+          const query = Bmob_new.Query('order_opreations_fri');
+          query.set("relations", relID);
+          query.set("beizhu", that.data.beizhu_text);
+          query.set("type", -1);
+          query.set("opreater", poiID);
+          query.set("all_money", that.data.all_money);
+          query.set('is_check', false);
+          query.save().then(res => {
+            console.log("添加操作历史记录成功", res);
+            wx.showToast({
+              title: '请等待审批',
+              icon: 'success',
+              success: function () {
+                setTimeout(() => {
+                  wx.navigateBack({
+                    delta: 3
+                  })
+                }, 1000)
+              }
             })
-          }
+          })
         }
-      },
-        function (error) {
-          // 批量新增异常处理
-          console.log("异常处理");
-        });
+      }
+    },
+      function (error) {
+        // 批量新增异常处理
+        console.log("异常处理");
+      });
   }
 })
