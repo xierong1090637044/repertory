@@ -141,7 +141,7 @@
     </view>
   </view>
   <view class="footer">
-    <text>Copyright @ {{year}} 陈剑术 All Rights Reserved</text>
-    <text>联系方式:864822121@qq.com</text>
+    <text>Copyright @ {{year}} 谢荣 All Rights Reserved</text>
+    <text>联系方式:1090637044@qq.com</text>
   </view>
 </view>

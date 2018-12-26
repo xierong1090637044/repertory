@@ -15,7 +15,7 @@
     </view>
   </view>
 </i-panel>
-<text class="feedback-remind ">您可以添加开发者微信或QQ➭864822121提出优化建议。</text>
+<text class="feedback-remind ">您可以添加开发者微信或QQ➭1090637044提出优化建议。</text>
 <form bindsubmit="handleSubmit" report-submit='true' >
   <button class='i-btn i-btn-primary i-btn-small' type="primary" size="small" formType="submit">
     提交
