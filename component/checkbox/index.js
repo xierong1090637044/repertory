@@ -12,6 +12,14 @@ Component({
             type: String,
             value: ''
         },
+        extra_value:{
+          type: String,
+          value: ''
+        },
+      another_value: {
+        type: String,
+        value: ''
+      },
         checked: {
             type: Boolean,
             value: false

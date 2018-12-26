@@ -1,1 +1,6 @@
-.i-checkbox-cell::after{display:block}.i-checkbox-checkbox-left{float:left}.i-checkbox-checkbox-right{float:right}.i-checkbox-radio{vertical-align:middle}.i-checkbox-title{display:inline-block;vertical-align:middle;margin-top: 4px}
+.i-checkbox-cell::after{display:block}
+.i-checkbox-checkbox-left{float:left}
+.i-checkbox-checkbox-right{float:right}
+.i-checkbox-radio{vertical-align:middle}
+.i-checkbox-title{vertical-align:middle;margin-top: 4px}
+.i-checkbox{display: flex;border-bottom: 1px solid#ddd;padding: 5px 10px}
