@@ -1,8 +1,10 @@
 // pages/common/goods-dtl/goods-dtl.js
 var { $Message } = require('../../../component/base/index');
-const Bmob = require('../../../utils/bmob.js')
+const Bmob = require('../../../utils/bmob.js');
+const Bmob_new = require('../../../utils/bmob_new.js')
 var _ = require('../../../utils/we-lodash.js');
-var config = require('../../../utils/config.js')
+var config = require('../../../utils/config.js');
+var that;
 Page({
 
   /**
@@ -203,16 +205,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var flag = options.type
-    var title = flag==1?'产品详情':'库存详情'
+    that = this;
+    var flag = options.type;
+    var title = flag==1?'产品详情':'库存详情';
     wx.setNavigationBarTitle({
       title: '库存助手-'+title
-    })
-    var item = JSON.parse(wx.getStorageSync('item'))
+    });
+    var item = JSON.parse(wx.getStorageSync('item'));
     this.setData({
       goodsReserve: item
     })
-    this.handleQRCodeDraw(item)
+    this.handleQRCodeDraw(item);
+    that.get_opera_detail(item.goodsId);
   },
 
   /**
@@ -230,37 +234,26 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
+  },
+
+  //得到该产品的操作详情
+  get_opera_detail:function(id)
+  {
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var day = now.getDate();
+    var lasthis_day = year + "-" + month + "-" + day+ " " + "00:00:00";
+    const query = Bmob_new.Query("Bills");
+    query.order("-createdAt");
+    query.equalTo("goodsId", "==", id);
+    query.equalTo("createdAt", ">", lasthis_day);
+    query.find().then(res => {
+      that.setData({ detail: res});
+    });
   }
 })
