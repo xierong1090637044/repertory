@@ -1,0 +1,38 @@
+.page
+{
+  padding: 10px 0;
+  color: #4d4d4d;
+}
+.pro_list
+{
+  display: flex;
+  justify-content: space-between;
+}
+.pro_listitem
+{
+  background-color: #fff;
+  padding: 5px 10px;
+  border-bottom: 1px solid#ddd;
+}
+.pro_allmoney
+{
+  background-color: #fff;
+  padding: 5px 10px;
+  text-align: right;
+  font-size: 16px;
+}
+.beizhu_style
+{
+  width: 100%;
+  background-color: #fff;
+  padding:10px;
+  font-size: 16px;
+}
+.confrim_button
+{
+  width: 60%;
+  background: #118fff;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 10%;
+}

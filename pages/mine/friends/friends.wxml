@@ -1,7 +1,10 @@
 <!--pages/mine/friends/friends.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <!--搜索-->
-<view class="search-view">
+<i-notice-bar icon="systemprompt" loop>
+    左滑可以显示好友的操作菜单哦！您可以跟您的好友一起进行库存管理！
+</i-notice-bar>
+<view class="search-view" style='top:36px !important'>
   <view class="search-bar">
     <view class="search-bar-form">
       <view class="search-bar-box">
@@ -26,14 +29,12 @@
   <block wx:for="{{friends}}" wx:key="unique">
     <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
     <view slot="content">
-     <i-cell bind:click="handleDetial" data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}">
+     <i-cell data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}">
       <image src='{{item.avatarUrl}}' style='width:40px;height:40px;margin-top:5px' slot="icon"></image>
      </i-cell>
     </view>
     <view slot="button" class="i-swipeout-button-group">
-      <view class="i-swipeout-button bg-info"
-            data-friendid="{{item.friendId}}" bindtap="handleFriendDtl">
-        查看
+      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendDtl">协同管理
       </view>
       <view class="i-swipeout-button bg-danger" data-item="{{item}}" bindtap="handleFriendDel" >
         删除

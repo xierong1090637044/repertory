@@ -1,7 +1,9 @@
 {
   "pages": [
-   
     "pages/index/index",
+    "pages/common/friend-together/friend-together",
+    "pages/mine/friends/friends",
+    
     "pages/authorize/authorize",
     "pages/common/friend-dtl/friend-dtl",
     "pages/common/goods-select/goods-select",
@@ -14,7 +16,6 @@
     "pages/goods/goods-add/goods-add",
     "pages/mine/mine",
     "pages/mine/about-us/about-us",
-    "pages/mine/friends/friends",
     "pages/mine/approve/approve",
     "pages/mine/approve/approve-dtl/approve-dtl",
     "pages/mine/apply-delivery/apply-delivery",
@@ -28,7 +29,9 @@
     "pages/order_history/detail/detail",
     "pages/entering/entering",
     "pages/order_history/order_history",
-    "pages/entering/enter-history/enter-history"
+    "pages/entering/enter-history/enter-history",
+    "pages/common/goods_select_fri/goods_select_fri",
+    "pages/entering/enter-history-fri/enter-history-fri"
   ],
   "window": {
     "navigationBarTextStyle": "white",
