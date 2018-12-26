@@ -4,7 +4,6 @@ Page({
 
   /*** 页面的初始数据*/
   data: {
-
   },
 
   /*** 生命周期函数--监听页面加载*/
@@ -50,13 +49,16 @@ Page({
 
   get_list:function()
   {
+    that.setData({ spinShow:true});
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("order_opreations");
     query.equalTo("opreater", "==", userid);
+    query.order("-createdAt");
     query.find().then(res => {
-      console.log(res)
+      console.log(res);
       that.setData({
-        list: res
+        list: res,
+        spinShow:false
       })
     });
   },

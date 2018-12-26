@@ -27,6 +27,7 @@ Page({
 
   getdetail:function(id)
   {
+    that.setData({ spinShow:true});
     const query = Bmob.Query('order_opreations');
     query.include("opreater");
     query.get(id).then(res => {
@@ -37,7 +38,7 @@ Page({
       query.relation('Bills').then(res => {
         query.include("Goods");
         console.log(res);
-        that.setData({ products: res.results });
+        that.setData({ products: res.results, spinShow:false });
       })
     }).catch(err => {
       console.log(err)

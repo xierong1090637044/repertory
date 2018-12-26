@@ -1,4 +1,6 @@
 <view class='page'>
+    <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+    
     <view style='line-height:35px;padding: 0 10px;'>操作产品</view>
     <view>
        <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
