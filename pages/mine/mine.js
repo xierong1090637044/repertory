@@ -10,7 +10,6 @@ Page({
     spinShow: true,
     userInfo: {},
     modules: [
-      { name: '我的好友', icon: 'group', url: '/pages/mine/friends/friends' },
       { name: '我的消息', icon: 'message', url: '/pages/mine/message/message' },
       { name: '待我审批', icon: 'task', url: '/pages/mine/approve/approve' },
       { name: '我的申请', icon: 'createtask', url: '/pages/mine/apply-delivery/apply-delivery' },
