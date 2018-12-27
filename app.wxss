@@ -641,3 +641,12 @@ page{
   margin-top: 7px;
   border-radius: 4px;
 }
+
+.confrim_button
+{
+  width: 60%;
+  background: #118fff;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 10%;
+}

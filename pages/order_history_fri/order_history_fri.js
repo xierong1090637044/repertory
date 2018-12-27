@@ -4,12 +4,13 @@ Page({
 
   /*** 页面的初始数据*/
   data: {
+    
   },
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
-    that.get_list();
+    that.get_list_check();
   },
 
   /*** 生命周期函数--监听页面初次渲染完成*/
@@ -47,28 +48,26 @@ Page({
 
   },
 
-  get_list:function()
-  {
-    that.setData({ spinShow:true});
+  get_list_check: function () {
+    that.setData({ spinShow: true });
     var userid = wx.getStorageSync("userid");
-    const query = Bmob.Query("order_opreations");
+    const query = Bmob.Query("order_opreations_fri");
     query.equalTo("master", "==", userid);
     query.order("-createdAt");
     query.find().then(res => {
       console.log(res);
       that.setData({
         list: res,
-        spinShow:false
+        spinShow: false
       })
     });
   },
 
   //点击得到详情
-  get_detail:function(e)
-  {
+  get_detail: function (e) {
     var id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: 'detail/detail?id='+id,
-    })
+      wx.navigateTo({
+        url: 'detail/detail?id=' + id,
+      })
   }
 })

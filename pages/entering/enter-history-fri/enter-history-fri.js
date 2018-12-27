@@ -99,12 +99,14 @@ Page({
 
             const pointer = Bmob_new.Pointer('_User')
             const poiID = pointer.set(wx.getStorageSync('userid'));
+            const poiID1 = pointer.set(wx.getStorageSync('friendId'));
 
             const query = Bmob_new.Query('order_opreations_fri');
             query.set("relations", relID);
             query.set("beizhu", that.data.beizhu_text);
             query.set("type", 1);
             query.set("opreater", poiID);
+            query.set("master", poiID1);
             query.set("all_money", that.data.all_money);
             query.set('is_check', false);
             query.save().then(res => {

@@ -1,0 +1,25 @@
+<view class='page' wx:if="{{list !=''}}">
+   <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+   <view wx:for="{{list}}" wx:key="{{index}}" class='item' bindtap='get_detail' data-id='{{item.objectId}}'>
+     <view style='display:flex'>
+          <view style='line-height:16px;text-align:center' wx:if="{{item.is_check}}">
+             <view><i class="iconfont icon-dagou icon-order"></i></view>
+             <view class='text-yes'><text>已审批</text></view>
+          </view>
+          <view style='line-height:16px;text-align:center' wx:else>
+             <view><i class="iconfont icon-shanchuguanbicha2 icon-no"></i></view>
+             <view class='text-no'><text>待审批</text></view>
+          </view>
+          <view style='margin-left:10px'>
+              <view>操作编号：{{item.objectId}}</view>
+              <view>操作时间：{{item.createdAt}}</view>
+          </view>
+     </view>
+     <view wx:if='{{item.type == -1}}' class='order_out'>出库</view>
+     <view wx:else class='order_get' >入库</view>
+   </view>
+</view>
+<view class='no-data' wx:else>
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>

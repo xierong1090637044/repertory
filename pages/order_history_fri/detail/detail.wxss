@@ -28,3 +28,29 @@
   padding:10px;
   font-size: 16px;
 }
+.confrim_button
+{
+  width: 60%;
+  background: #118fff;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 10%;
+}
+.detail_bottom
+{
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+}
+.avatar
+{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.common_style
+{
+  line-height:40px;
+  margin-left:10px;
+  color: #000;
+}

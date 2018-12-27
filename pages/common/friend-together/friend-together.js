@@ -21,7 +21,7 @@ Page({
       },
       {
         name: '他/她的产品', icon: '../../../images/index/goods.png',
-        url: '/pages/goods/goods'
+        url: '/pages/goods/goods-fri/goods-fri'
       },
     ],
   },

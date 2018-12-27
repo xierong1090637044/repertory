@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/common/friend-together/friend-together",
     "pages/index/index",
-    
+    "pages/order_history_fri/order_history_fri",
+    "pages/common/friend-together/friend-together",
     "pages/mine/friends/friends",
     "pages/authorize/authorize",
     "pages/common/friend-dtl/friend-dtl",
@@ -32,7 +32,9 @@
     "pages/entering/enter-history/enter-history",
     "pages/common/goods_select_fri/goods_select_fri",
     "pages/entering/enter-history-fri/enter-history-fri",
-    "pages/delivery/delivery-history-fri/delivery-history-fri"
+    "pages/delivery/delivery-history-fri/delivery-history-fri",
+    "pages/order_history_fri/detail/detail",
+    "pages/goods/goods-fri/goods-fri"
   ],
   "window": {
     "navigationBarTextStyle": "white",
