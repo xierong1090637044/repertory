@@ -14,6 +14,38 @@
     <view class="log-list">
     <view class="describe">
       <view class="desc-title">
+        <text class="desc-v">v1.1.0 公测版</text>
+        <text class="desc-time">2018.12.27</text>
+      </view>
+      <text class="desc-content">优化升级</text>
+      <view class="desc-list">
+        <text class="desc-list-item">增加与好友共同管理产品的功能，您可以在我的好友页面右滑，与他共同管理</text>
+      </view>
+      <text class="desc-content">升级计划</text>
+      <view class="desc-list">
+        <text class="desc-list-item"></text>
+        <text class="desc-list-item">产品出库时，价格可以变动</text>
+      </view>
+    </view>
+    <view class="describe">
+      <view class="desc-title">
+        <text class="desc-v">v1.0.9 公测版</text>
+        <text class="desc-time">2018.12.25</text>
+      </view>
+      <text class="desc-content">优化升级</text>
+      <view class="desc-list">
+        <text class="desc-list-item">项目整体页风格的改动</text>
+        <text class="desc-list-item">增加总的操作记录</text>
+        <text class="desc-list-item">增加单个产品的操作记录</text>
+      </view>
+      <text class="desc-content">升级计划</text>
+      <view class="desc-list">
+        <text class="desc-list-item">与好友共同管理产品的开发</text>
+        <text class="desc-list-item">产品出库时，价格可以变动</text>
+      </view>
+    </view>
+    <view class="describe">
+      <view class="desc-title">
         <text class="desc-v">v1.0.8 公测版</text>
         <text class="desc-time">2018.09.03</text>
       </view>
