@@ -19,12 +19,13 @@
       </view>
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
-        <text class="desc-list-item">增加与好友共同管理产品的功能，您可以在我的好友页面右滑，与他共同管理</text>
+        <text class="desc-list-item">增加与好友共同管理产品的功能，您可以在我的好友页面左滑，与他共同管理产品</text>
+        <text class="desc-list-item">产品出库时，价格可以变动</text>
       </view>
       <text class="desc-content">升级计划</text>
       <view class="desc-list">
         <text class="desc-list-item"></text>
-        <text class="desc-list-item">产品出库时，价格可以变动</text>
+        <text class="desc-list-item">增加pc端可以导出产品表格数据功能</text>
       </view>
     </view>
     <view class="describe">

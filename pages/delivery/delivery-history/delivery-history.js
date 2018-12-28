@@ -115,6 +115,7 @@ Page({
                   query.set("beizhu", that.data.beizhu_text);
                   query.set("type", -1);
                   query.set("opreater", poiID);
+                  query.set("master", poiID);
                   query.set("all_money", that.data.all_money);
                   query.save().then(res => {
                     console.log("添加操作历史记录成功",res);

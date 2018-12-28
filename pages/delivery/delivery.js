@@ -70,6 +70,7 @@ Page({
   handleNumChange: function (e) {
     var that = this
     var idx = e.currentTarget.dataset.idx
+    console.log(idx);
     var tempGoods = that.data.goods
     if (tempGoods[idx].reserve < e.detail.value) {
       wx.showToast({
@@ -82,6 +83,19 @@ Page({
       tempGoods[idx].num = e.detail.value;
       tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].retailPrice;
     }
+    that.setData({
+      goods: tempGoods
+    })
+  },
+
+  getrealprice:function(e)
+  {
+    var that = this;
+    var really_money = e.detail.value;
+    var idx = e.target.dataset.idx;
+    var tempGoods = that.data.goods;
+    tempGoods[idx].retailPrice = really_money;
+    tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].retailPrice;
     that.setData({
       goods: tempGoods
     })

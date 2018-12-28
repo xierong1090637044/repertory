@@ -650,3 +650,12 @@ page{
   font-size: 16px;
   margin-top: 10%;
 }
+.input_withlabel
+{
+  display: flex;
+  line-height: 25px;
+}
+.input_label
+{
+  color: #f30;
+}
