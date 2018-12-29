@@ -17,7 +17,6 @@ Page({
     productCode: '',//产品条码
     packageContent: '',//包装含量
     packingUnit: '',//包装单位
-    packingUnitVal: '',
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
     loading: false
@@ -37,32 +36,21 @@ Page({
       costPrice: goods.costPrice,
       retailPrice: goods.retailPrice
     })
-    var packingUnit = _.chain(that.data.packingUnits)
-      .filter(function (res) {
-        return res.id == goods.packingUnit;
-      })
-      .map(function (res) {
-        return res;
-      })
-      .first()
-      .value();
-    that.setData({
-      packingUnitVal: packingUnit.name
-    })
   },
 
-  handlePackingUnit: function (e) {
+  /*handlePackingUnit: function (e) {
     var puId = this.data.packingUnits[e.detail.value].id
     var puVal = this.data.packingUnits[e.detail.value].name
     this.setData({
       packingUnit: puId,
       packingUnitVal: puVal
     })
-  },
+  },*/
 
   handleEditGoods: function (e) {
     var that = this
     var goodsForm = e.detail.value
+    console.log(e);
     //先进行表单非空验证
     if (goodsForm.goodsName == "") {
       $Message({
@@ -115,7 +103,7 @@ Page({
                     results.set("packageContent", goodsForm.packageContent);
                     results.set("costPrice", goodsForm.costPrice);
                     results.set("retailPrice", goodsForm.retailPrice);
-                    results.set("packingUnit", that.data.packingUnit);
+                    results.set("packingUnit", goodsForm.packingUnit);
                     results.set("reserve", results.get('reserve'));
                     results.save(null, {
                       success: function (result) {

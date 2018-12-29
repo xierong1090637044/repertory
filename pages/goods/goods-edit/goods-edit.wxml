@@ -11,9 +11,7 @@
     </i-panel>
     <i-panel title="产品规格" style="flex:1">
       <i-input title="包装含量" type="number" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
-      <picker bindchange="handlePackingUnit" range-key="name" value="{{index}}" range="{{packingUnits}}">
-        <i-input title="包装单位" placeholder="请选择包装单位" value="{{packingUnitVal}}"  disabled />
-      </picker>
+        <i-input title="包装单位" placeholder="请输入包装单位" name="packingUnit" value="{{packingUnit}}"  />
     </i-panel>
     <i-panel title="产品价格">
       <i-input title="进货价格" type="digit" value="{{costPrice}}" name="costPrice" placeholder="请输入进货价格" />
