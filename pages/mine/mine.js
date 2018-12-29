@@ -12,7 +12,7 @@ Page({
     modules: [
       { name: '我的消息', icon: 'message', url: '/pages/mine/message/message' },
       { name: '待我审批', icon: 'task', url: '/pages/order_history_fri/order_history_fri' },
-      { name: '我的申请', icon: 'createtask', url: '/pages/mine/apply-delivery/apply-delivery' },
+    //{ name: '我的申请', icon: 'createtask', url: '/pages/mine/apply-delivery/apply-delivery' },
       // { name: '我的单据', icon: 'createtask', url: '/pages/mine/reserve/reserve' },
       { name: '升级日志', icon: 'activity', url: '/pages/mine/upgrade/upgrade' },
       { name: '优化建议', icon: 'interactive', url: '/pages/mine/propose/propose' },
