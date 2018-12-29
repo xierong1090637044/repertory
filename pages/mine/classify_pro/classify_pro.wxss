@@ -1,0 +1,53 @@
+.page
+{
+  padding: 0 15px;
+}
+.conbindinput
+{
+  display: flex;
+  justify-content: center;
+  line-height: 35px;
+  border: 1px solid#118fff;
+  width: auto;
+  margin: 0 auto;
+  padding: 0 10px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+.add_classify_input
+{
+  line-height: 35px;
+  height: 35px;
+  vertical-align:middle;
+}
+
+.my_classify
+{
+  margin-top: 20px;
+  line-height: 40px;
+}
+.icon-search
+{
+  margin-right: 10px;
+}
+.search-input
+{
+  width: 80px;
+}
+
+
+.classify_item
+{
+  display: flex;
+  justify-content: space-between;
+  line-height: 30px;
+  border-bottom:1px solid#ddd;
+  font-size: 16px;
+  border-radius: 4px;
+  margin-bottom: 10px
+}
+.classify_content
+{
+  border:1px solid#ddd;
+  padding:10px 10px 0;
+}

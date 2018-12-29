@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/order_history_fri/order_history_fri",
     "pages/common/friend-together/friend-together",
+    "pages/mine/classify_pro/classify_pro",
     "pages/mine/friends/friends",
     "pages/authorize/authorize",
     "pages/common/friend-dtl/friend-dtl",

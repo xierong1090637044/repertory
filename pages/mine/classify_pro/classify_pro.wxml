@@ -1,0 +1,16 @@
+<view class='page'>
+<view class='conbindinput'>
+     <view class='icon-search'><i class="iconfont icon-chaxun" style="color:#118fff"></i></view>
+     <view class='search-input'><input placeholder='输入产品类别' class='add_classify_input' placeholder-class='add_classify_input'/></view>
+</view>
+
+<view class='my_classify'>我的产品类别：</view>
+  <view class='classify_content'>
+    <view wx:for="{{classify}}" wx:key="{{index}}" class='classify_item'>
+      <view>{{item.classify}}</view>
+      <view bindtap='delete_classify' data-id='{{item.objectId}}'>
+        <i class="iconfont icon-shanchuguanbicha2" style="color:#118fff"></i>
+      </view>
+    </view>
+  </view>
+</view>
