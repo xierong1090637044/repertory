@@ -1,4 +1,105 @@
-<!--pages/instruction/instruction.wxml-->
-<view class='content'>
-  <image mode='widthFix' src='/images/index/instruction.png'></image>
+<!--pages/mine/upgrade/upgrade.wxml-->
+<view class="container">
+  <view class="content">
+  
+    <view class="version">
+      <view class="version-title">
+        <text class="title-name">库存助手</text>
+        <text class="version-text">{{version}}</text>
+        <text class="version-text">公测版</text>
+      </view>
+      <view>
+        <text class="version-log-link">使用帮助</text>
+      </view>  
+    </view>
+
+    <view class='list-item'>
+       <view class='list-title'>1.我的产品->点击我的产品->产品添加</view>
+       <view class='img-list'>
+          <view  class='item-image'>
+            <image src='{{res[1].image.url}}' class='image'></image>
+            <text>添加商品</text>
+          </view>
+          <view class='item-image'>
+             <image src='{{res[0].image.url}}' class='image'></image>
+             <text>添加成功</text>
+          </view>
+       </view>
+    </view>
+
+    <view class='list-item'>
+       <view class='list-title'>2.库存管理->点击产品出库（入库）->产品出入库</view>
+       <view class='img-list'>
+          <view  class='item-image-more'>
+            <image src='{{res[2].image.url}}' class='image'></image>
+            <text>选择商品</text>
+          </view>
+          <view class='item-image-more'>
+             <image src='{{res[3].image.url}}' class='image'></image>
+             <text>输入出入库的数量</text>
+          </view>
+          <view  class='item-image'>
+            <image src='{{res[4].image.url}}' class='image'></image>
+            <text>确认商品信息</text>
+          </view>
+          <view class='item-image'>
+             <image src='{{res[5].image.url}}' class='image'></image>
+             <text>查看操作记录</text>
+          </view>
+       </view>
+    </view>
+
+    <view class='list-item' >
+       <view class='list-title'>3.查看财务报表</view>
+       <view class='img-list' style='text-align:left !important'>
+          <view  class='item-image-more'>
+            <image src='{{res[7].image.url}}' class='image'></image>
+            <view style='text-align:center'>查看财务情况</view>
+          </view>
+       </view>
+    </view>
+
+    <view class='list-item'>
+       <view class='list-title'>4.协同管理->点击我的好友</view>
+       <view class='img-list'>
+          <view  class='item-image-more'>
+            <image src='{{res[8].image.url}}' class='image'></image>
+            <text>点击添加好友</text>
+          </view>
+          <view class='item-image-more'>
+             <image src='{{res[9].image.url}}' class='image'></image>
+             <text>扫描好友二维码</text>
+          </view>
+          <view  class='item-image-more'>
+            <image src='{{res[10].image.url}}' class='image'></image>
+            <text>发送好友申请</text>
+          </view>
+          <view class='item-image-more'>
+             <image src='{{res[11].image.url}}' class='image'></image>
+             <text style='font-size:12px'>我的消息里-好友点击通过</text>
+          </view>
+          <view class='item-image-more'>
+             <image src='{{res[11].image.url}}' class='image'></image>
+             <text style='font-size:12px'>我的消息里-好友点击通过</text>
+          </view>
+          <view class='item-image-more'>
+             <image src='{{res[12].image.url}}' class='image'></image>
+             <text style='font-size:12px'>左滑显示操作菜单</text>
+          </view>
+          <view class='item-image'>
+             <image src='{{res[13].image.url}}' class='image'></image>
+             <text style='font-size:12px'>帮助好友管理库存</text>
+          </view>
+          <view class='item-image'>
+             <image src='{{res[14].image.url}}' class='image'></image>
+             <text style='font-size:12px'>通知好友审批</text>
+          </view>
+       </view>
+    </view>
+
+  </view>
+  <view class="footer">
+    <text>Copyright @ {{year}} 谢荣 All Rights Reserved</text>
+    <text>联系方式:1090637044@qq.com</text>
+  </view>
 </view>

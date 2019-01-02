@@ -1,12 +1,104 @@
 /* pages/instruction/instruction.wxss */
-page{
-  background: #448def
+.container{
+    background: #f4f4f4;
+    padding: 0;
+    font-size: 11pt;
 }
 .content{
-  position: relative; 
-  width : 100%;
-  height : auto;
+    flex: 1;
 }
-.content image{
-  width: 100%
+.version{
+    height: 100rpx;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 45rpx;
+    box-sizing: border-box;
+    font-size: 13pt;
+    color: #666;
+    border-bottom: 1px #e5e5e5 solid;
+}
+.version-title{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.title-name{
+    padding-right: 10rpx;
+}
+.version-text{
+    font-size: 10pt;
+    line-height: 100%;
+    color: #118fff;
+    border: 1px solid #118fff;
+    padding: 5rpx 10rpx;
+    border-radius: 5rpx;
+    margin-left: 10rpx;
+    text-align: center;
+}
+.version-log-link{
+    position: relative;
+    font-size: 12pt;
+    color: #118fff;
+}
+.version-log-link:active{
+    opacity: .8;
+}
+.update-log::after{
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: -1px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #e55c5c;
+}
+.log-list{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    font-size: 28rpx;
+    line-height: 150%;
+    text-align: center;
+    padding: 50rpx 0 15rpx;
+    color: #c2c2c2;
+}
+
+.list-item
+{
+  padding:  0 15px 15px;
+}
+.list-title
+{
+  line-height: 40px;
+  color: #000;
+  font-weight: bold;
+  font-style: italic;
+}
+.item-image
+{
+  width: 40%;
+  margin: 0 5%;
+  display:inline-block;
+  font-size: 12px;
+}
+.item-image-more
+{
+  width: 40%;
+  margin: 0 5% 10px;
+  display:inline-block;
+}
+.img-list
+{
+  text-align: center;
+}
+.image
+{
+  width: 100%;
 }
