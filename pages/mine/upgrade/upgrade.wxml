@@ -23,6 +23,7 @@
         <text class="desc-list-item">页面优化升级</text>
         <text class="desc-list-item">产品修改时，单位的错误</text>
         <text class="desc-list-item">更新使用说明</text>
+        <text class="desc-list-item">操作记录和待我审批增加Tab选项</text>
         <text class="desc-list-item">产品出库时，价格可以变动</text>
       </view>
       <text class="desc-content">升级计划</text>
