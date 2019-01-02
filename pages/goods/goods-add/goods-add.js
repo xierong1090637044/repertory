@@ -89,6 +89,7 @@ Page({
                       goods.save(null, {
                         success: function (result) {
                           console.log("新增产品成功");
+                          wx.setStorageSync("is_add", true)
                           wx.showToast({
                             title: '新增产品成功',
                             icon: 'success',

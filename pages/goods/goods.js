@@ -342,6 +342,7 @@ Page({
    */
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
+    this.handleRefresh()
   },
 
   /**
@@ -355,7 +356,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.handleRefresh()
+    var is_add = wx.getStorageSync("is_add");
+    if(is_add)
+    {
+      this.handleRefresh();
+      wx.setStorageSync("is_add", false);
+    }
   },
 
   /**

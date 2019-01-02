@@ -58,12 +58,6 @@ Page({
         type: 'warning',
         duration: 5
       });
-    } else if (goodsForm.regNumber == "") {
-      $Message({
-        content: '请输入登记证号',
-        type: 'warning',
-        duration: 5
-      });
     } else if (goodsForm.costPrice == "" || goodsForm.costPrice == 0) {
       $Message({
         content: '请输入进货价格',
@@ -108,6 +102,7 @@ Page({
                     results.save(null, {
                       success: function (result) {
                         console.log("修改产品成功");
+                        wx.setStorageSync("is_add", true);
                         wx.showToast({
                           title: '修改产品成功',
                           icon: 'success',
