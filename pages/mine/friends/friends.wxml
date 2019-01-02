@@ -25,7 +25,13 @@
   </view>
 </view>
 <!--/.搜索-->
-<i-cell-group i-class="wrap-2">
+
+<view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+
+<i-cell-group i-class="wrap-2" wx:else>
   <block wx:for="{{friends}}" wx:key="unique">
     <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
     <view slot="content">
@@ -43,17 +49,6 @@
     </i-swipeout>
   </block>
 </i-cell-group>
-<view class='no-data' wx:if="{{isEmpty}}">
-  <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
-</view>
-<block wx:else>
-  <view class="more">
-    <view wx:if="{{!isEnd}}">
-      <button class="more-button" formType="submit" size="mini" bindtap="loadMore">加载更多...</button>
-    </view>
-  </view>
-</block>
 
 <view class='btn-group' bindtap='handleAddFriend'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
