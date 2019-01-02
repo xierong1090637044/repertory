@@ -1,7 +1,6 @@
 .page
 {
   height: 100vh;
-  overflow: scroll;
 }
 .item
 {
@@ -15,4 +14,9 @@
 {
   font-size: 22px;
   color: #118fff;
+}
+.list-item
+{
+  height: calc(100vh - 42px);
+  overflow: scroll;
 }

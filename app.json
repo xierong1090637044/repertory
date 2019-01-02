@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/order_history_fri/order_history_fri",
     "pages/common/friend-together/friend-together",
     "pages/mine/friends/friends",
     "pages/authorize/authorize",
@@ -28,6 +27,7 @@
     "pages/delivery/delivery-history/delivery-history",
     "pages/order_history/detail/detail",
     "pages/entering/entering",
+    "pages/order_history_fri/order_history_fri",
     "pages/order_history/order_history",
     "pages/entering/enter-history/enter-history",
     "pages/common/goods_select_fri/goods_select_fri",
@@ -72,6 +72,8 @@
     "i-grid-label": "component/grid-label/index",
     "i-spin": "component/spin/index",
     "i-notice-bar": "component/notice-bar/index",
-    "i-icon": "component/icon/index"
+    "i-icon": "component/icon/index",
+    "i-tab": "component/tab/index",
+    "i-tabs": "component/tabs/index"
   }
 }
