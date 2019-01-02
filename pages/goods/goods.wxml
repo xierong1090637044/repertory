@@ -1,7 +1,7 @@
 <!--pages/goods/goods.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <!--搜索-->
-<i-notice-bar icon="systemprompt" closable>
+<i-notice-bar icon="systemprompt">
     左滑可以显示产品的操作菜单哦！
 </i-notice-bar>
 <view class="search-view" style='top:36px !important'>
@@ -23,7 +23,7 @@
   </view>
 </view>
 <!--/.搜索-->
-<i-cell-group i-class="wrap">
+<i-cell-group i-class="wrap" bindmyevent="loadMore">
   <block wx:for="{{goods}}" wx:key="unique">
     <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
       <view slot="content">
@@ -42,20 +42,17 @@
   <image src='/images/common/no-data.png'></image>
   <text>暂无数据</text>
 </view>
-<block wx:else>
+
+<!--<block wx:else>
   <view class="more">
     <view wx:if="{{!isEnd}}">
       <button class="more-button" formType="submit" size="mini" bindtap="loadMore">加载更多...</button>
     </view>
-    <view class="no-more" wx:if="{{isEnd}}">
-      <view class="line">
-        <b></b><span>我是有底线的</span><b></b>
-      </view>
-    </view>
   </view>
-</block>
-<navigator url='/pages/goods/goods-add/goods-add' >
-  <view class="round-click">
-    <text>新增产品</text>
-  </view>
+</block>-->
+
+<navigator url='/pages/goods/goods-add/goods-add' class='btn-group'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      <i-icon type="add" /> 新增产品
+    </button>
 </navigator>

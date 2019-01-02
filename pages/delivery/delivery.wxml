@@ -23,6 +23,9 @@
   <image src='/images/common/no-data.png'></image>
   <text>暂无数据</text>
 </view>
-<view class="round-click" bindtap='handleDelivery'>
-  <text>确认出库</text>
+
+<view class='btn-group' bindtap='handleDelivery' style='margin-top:40px'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      确认出库
+    </button>
 </view>

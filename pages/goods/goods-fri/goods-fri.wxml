@@ -1,7 +1,7 @@
 <!--pages/goods/goods.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <!--搜索-->
-<i-notice-bar icon="systemprompt" closable>
+<i-notice-bar icon="systemprompt">
    ♪♪♪让我们一起管理好我们的产品吧♪♪♪
 </i-notice-bar>
 <view class="search-view" style='top:36px !important'>

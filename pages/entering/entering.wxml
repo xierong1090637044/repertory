@@ -20,6 +20,9 @@
   <image src='/images/common/no-data.png'></image>
   <text>暂无数据</text>
 </view>
-<view class="round-click" bindtap='handleEntering'>
-  <text>确认入库</text>
+
+<view class='btn-group' bindtap='handleEntering' style='margin-top:40px'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      确认入库
+    </button>
 </view>

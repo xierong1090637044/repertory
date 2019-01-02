@@ -25,7 +25,7 @@
   </view>
 </view>
 <!--/.搜索-->
-<i-cell-group i-class="wrap">
+<i-cell-group i-class="wrap-2">
   <block wx:for="{{friends}}" wx:key="unique">
     <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
     <view slot="content">
@@ -52,13 +52,11 @@
     <view wx:if="{{!isEnd}}">
       <button class="more-button" formType="submit" size="mini" bindtap="loadMore">加载更多...</button>
     </view>
-    <view class="no-more" wx:if="{{isEnd}}">
-      <view class="line">
-        <b></b><span>我是有底线的</span><b></b>
-      </view>
-    </view>
   </view>
 </block>
-<view class="round-click" bindtap='handleAddFriend'>
-  <i-icon type="add" size='23' color='white'/>
+
+<view class='btn-group' bindtap='handleAddFriend'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      添加好友
+    </button>
 </view>

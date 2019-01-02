@@ -30,7 +30,7 @@
   </i-panel>
 
   <view style='margin-bottom:15px;'>
-      <view class='header_content'>近一个月操作记录</view>
+      <view class='header_content'>近七天操作记录</view>
       <view class='all_list'>
           <view wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
               <view>

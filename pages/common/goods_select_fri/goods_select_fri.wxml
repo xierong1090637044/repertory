@@ -31,15 +31,9 @@
   <image src='/images/common/no-data.png'></image>
   <text>暂无数据</text>
 </view>
-<block wx:else>
-  <view class="more">
-    <view class="no-more">
-      <view class="line">
-        <b></b><span>我是有底线的</span><b></b>
-      </view>
-    </view>
-  </view>
-</block>
-<view class="round-click" bindtap='link2page'>
-  <text>确认选择</text>
+
+<view class='btn-group' bindtap='link2page'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      确认选择
+    </button>
 </view>

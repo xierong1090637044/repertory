@@ -243,17 +243,36 @@ Page({
   //得到该产品的操作详情
   get_opera_detail:function(id)
   {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth();
-    var day = now.getDate();
-    var lasthis_day = year + "-" + month + "-" + day+ " " + "00:00:00";
+    console.log(that.getDay(-7));
     const query = Bmob_new.Query("Bills");
     query.order("-createdAt");
     query.equalTo("goodsId", "==", id);
-    query.equalTo("createdAt", ">", lasthis_day);
+    query.equalTo("createdAt", ">", that.getDay(-7));
     query.find().then(res => {
+      console.log(res);
       that.setData({ detail: res});
     });
-  }
+  },
+
+  getDay: function (day) {
+    var that = this;
+    var today = new Date();
+    var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+    today.setTime(targetday_milliseconds);
+    var tYear = today.getFullYear();
+    var tMonth = today.getMonth();
+    var tDate = today.getDate();
+    tMonth = that.handleMonth(tMonth + 1);
+    tDate = that.handleMonth(tDate);
+    return tYear + "-" + tMonth + "-" + tDate + " "+"00:00:00";
+  },
+
+  handleMonth: function (month) {
+    var m = month;
+    if (month.toString().length == 1) {
+      m = "0" + month;
+    }
+    return m;
+  },
+
 })

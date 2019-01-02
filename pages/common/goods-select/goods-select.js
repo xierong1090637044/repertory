@@ -111,7 +111,7 @@ Page({
     query.equalTo("userId", userid);
     query.descending("createdAt"); //按照时间降序
     query.include("userId");
-    query.limit(1000)
+    query.limit(10000)
     query.find({
       success: function (res) {
         var tempGoodsArr = new Array();

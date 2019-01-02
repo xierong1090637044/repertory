@@ -93,6 +93,7 @@ Page({
       content: '是否删除【'+item.goodsName+'】产品',
       success: function (res) {
         if (res.confirm) {
+          wx.showLoading({title: '删除中...',});
           var BillsTemp = Bmob.Object.extend("BillsTemp");
           var queryBillsTemp = new Bmob.Query(BillsTemp);
           queryBillsTemp.equalTo("goodsId", id);
@@ -129,6 +130,7 @@ Page({
                   success: function (result) {
                     result.destroy({
                       success: function (res) {
+                        wx.hideLoading();
                         wx.showToast({
                           title: '删除成功',
                           icon: 'success'
@@ -209,21 +211,26 @@ Page({
       wx.hideLoading()
     }, 1000)
     
-    that.setData({
-      currentPage: that.data.currentPage + 1
-    });
     //先判断是不是最后一页
     if (that.data.currentPage + 1 == that.data.totalPage) {
       that.setData({
-        isEnd: true
-      })
+        isEnd: true,
+        currentPage: that.data.currentPage
+      });
+      wx.showToast({
+        icon: "none",
+        title: '已经到底啦',
+      });
       // if (that.data.endPage != 0) { //如果最后一页的加载不等于0
       //   that.setData({
       //     limitPage: that.data.endPage,
       //   })
       // }
-      this.loadGoods();
+      
     } else {
+      that.setData({
+        currentPage: that.data.currentPage + 1
+      });
       this.loadGoods();
     }
   },
@@ -384,5 +391,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
 })
