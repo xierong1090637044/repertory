@@ -20,6 +20,9 @@
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
         <text class="desc-list-item">增加与好友共同管理产品的功能，您可以在我的好友页面左滑，与他共同管理产品</text>
+        <text class="desc-list-item">页面优化升级</text>
+        <text class="desc-list-item">产品修改时，单位的错误</text>
+        <text class="desc-list-item">更新使用说明</text>
         <text class="desc-list-item">产品出库时，价格可以变动</text>
       </view>
       <text class="desc-content">升级计划</text>
