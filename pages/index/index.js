@@ -103,5 +103,12 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  skip:function()
+  {
+    wx.navigateTo({
+      url: '../mine/upgrade/upgrade',
+    })
   }
 })

@@ -39,3 +39,8 @@
       <image src='{{qrcode}}' style='width:85px;height:85px;'></image>
     </view>
 </i-modal>
+
+<view class='about_us' bindtap='skip'>
+   <i class="iconfont icon-wode"></i>
+   <text>关于我们</text>
+</view>
