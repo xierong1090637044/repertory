@@ -24,6 +24,14 @@ Page({
     var friendId = e.currentTarget.dataset.friendid
     wx.setStorageSync('friendId', friendId)
     wx.navigateTo({
+      url: '/pages/common/friend-dtl/friend-dtl'
+    })
+  },
+
+  handleFriendAuth: function (e) {
+    var friendId = e.currentTarget.dataset.friendid
+    wx.setStorageSync('friendId', friendId)
+    wx.navigateTo({
       url: '/pages/common/friend-together/friend-together'
     })
   },
@@ -322,7 +330,6 @@ Page({
    */
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
-    this.handleRefresh()
   },
 
   /**
@@ -336,7 +343,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.handleRefresh();
   },
 
   /**
@@ -372,5 +379,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
-})
+  },
+ })

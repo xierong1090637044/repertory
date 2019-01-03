@@ -93,14 +93,25 @@ Page({
           success: function (result) {
             result.set('status', 1);
             result.save();
-            wx.showToast({
-              title: '添加好友成功',
-              icon: 'none',
-              success: function () {
-                that.loadFriendsTempAll()
-                that.loadFriendsTemp()
+
+            user.id = userid;
+            friend.id = friendId;
+            friends.set("userId", friend);
+            friends.set("friendId", user);
+            friends.set("stockSee", 0);
+            friends.set("stockManager", 0);
+            friends.save(null, {
+              success:function(){
+                wx.showToast({
+                  title: '添加好友成功',
+                  icon: 'none',
+                  success: function () {
+                    that.loadFriendsTempAll()
+                    that.loadFriendsTemp()
+                  }
+                })
               }
-            })
+            });
           },
           error: function (object, error) {
             console.log(error)

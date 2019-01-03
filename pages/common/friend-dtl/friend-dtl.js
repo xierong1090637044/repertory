@@ -2,7 +2,8 @@
 const Bmob = require('../../../utils/bmob.js')
 var config = require('../../../utils/config.js')
 var userid = '';
-var friend = {}
+var friend = {};
+var objectId;
 Page({
   /**
    * 页面的初始数据
@@ -45,15 +46,71 @@ Page({
     })
   },
   handleSwitchSee: function () {
+    var that = this;
     this.setData({
       switchSee: !this.data.switchSee
-    })
+    });
+    that.add_auth('see');
   },
   handleSwitchManager: function () {
+    var that = this;
     this.setData({
       switchManager: !this.data.switchManager
-    })
+    });
+    that.add_auth('manager');
   },
+
+  //添加权限功能
+  add_auth:function(type)
+  {
+    var that = this;
+    var Diary = Bmob.Object.extend("Friends");
+    var query = new Bmob.Query(Diary);
+    query.get(objectId, {
+      success: function (result) {
+        if (type == "manager") {
+          if (!that.data.switchManager) {
+            result.set('stockManager', 0);
+          } else {
+            result.set('stockManager', 1);
+          }
+        } else {
+          if (!that.data.switchSee) {
+            result.set('stockSee', 0);
+          } else {
+            result.set('stockSee', 1);
+          }
+        }
+        result.save();
+      },
+    });
+  },
+
+  //得到权限信息
+  getauth:function()
+  {
+    var that = this;
+    var friend = wx.getStorageSync("userid");
+    var user = wx.getStorageSync("friendId");
+    var Diary = Bmob.Object.extend("Friends");
+    var query = new Bmob.Query(Diary);
+    query.equalTo("userId", user);
+    query.equalTo("friendId", friend);
+    // 查询所有数据
+    query.find({
+      success: function (results) {
+        objectId = results[0].id;
+        var stockManager = results[0].get("stockManager");
+        var stockSee = results[0].get("stockSee");
+        console.log(stockManager, stockSee);
+
+        (stockManager == 0)?that.setData({ switchManager: false }):that.setData({ switchManager: true });
+
+        (stockSee == 0)?that.setData({ switchSee: false }):that.setData({ switchSee: true });
+      }
+    });
+  },
+
   handleCheckIsAdd: function () {
     var that = this
     var FriendsTemp = Bmob.Object.extend("FriendsTemp");
@@ -170,7 +227,8 @@ Page({
    */
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
-    this.fetchFriendInfo()
+    this.fetchFriendInfo();
+    this.getauth();
   },
 
   /**
