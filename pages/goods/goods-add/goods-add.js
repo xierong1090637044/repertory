@@ -76,43 +76,66 @@ Page({
                       return
                     }else{
                       // 添加产品
-                      goods.set("userId", user);
-                      goods.set("goodsName", goodsForm.goodsName);
-                      goods.set("regNumber", goodsForm.regNumber);
-                      goods.set("producer", goodsForm.producer);
-                      goods.set("productCode", goodsForm.productCode);
-                      goods.set("packageContent", goodsForm.packageContent);
-                      goods.set("costPrice", goodsForm.costPrice);
-                      goods.set("retailPrice", goodsForm.retailPrice);
-                      goods.set("packingUnit", goodsForm.packingUnit);
-                      goods.set("reserve", 0);
-                      goods.save(null, {
-                        success: function (result) {
-                          console.log("新增产品成功");
-                          wx.setStorageSync("is_add", true)
-                          wx.showToast({
-                            title: '新增产品成功',
-                            icon: 'success',
-                            success: function () {
-                              that.setData({
-                                goodsName: "",
-                                regNumber: "",
-                                producer: "",
-                                productCode: "",
-                                packageContent: "",
-                                packingUnit: "",
-                                costPrice: '',
-                                retailPrice: '',
-                                loading: false
-                              })
+                          goods.set("userId", user);
+                          goods.set("goodsName", goodsForm.goodsName);
+                          goods.set("regNumber", goodsForm.regNumber);
+                          goods.set("producer", goodsForm.producer);
+                          goods.set("productCode", goodsForm.productCode);
+                          goods.set("packageContent", goodsForm.packageContent);
+                          goods.set("costPrice", goodsForm.costPrice);
+                          goods.set("retailPrice", goodsForm.retailPrice);
+                          goods.set("packingUnit", goodsForm.packingUnit);
+                          goods.set("reserve", 0);
+                          goods.save(null, {
+                            success: function (result) {
+                              wx.setStorageSync("is_add", true);
+                              wx.request({
+                                url: 'https://route.showapi.com/1129-1', 
+                                data: {
+                                  showapi_appid: '84916',
+                                  showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+                                  content: (goodsForm.productCode == "") ? result.id : goodsForm.productCode,
+                                  height:"120",
+                                  width:"500"
+                                },
+                                header: {
+                                  'content-type': 'application/json' // 默认值
+                                },
+                                success(res) {
+                                  console.log(res.data.showapi_res_body.imgUrl)
+                                  var Diary = Bmob.Object.extend("Goods");
+                                  var query = new Bmob.Query(Diary);
+                                  query.get(result.id, {
+                                    success: function (result) {
+                                      result.set('single_code', res.data.showapi_res_body.imgUrl);
+                                      result.save();
+                                      wx.showToast({
+                                        title: '新增产品成功',
+                                        icon: 'success',
+                                        success: function () {
+                                          that.setData({
+                                            goodsName: "",
+                                            regNumber: "",
+                                            producer: "",
+                                            productCode: "",
+                                            packageContent: "",
+                                            packingUnit: "",
+                                            costPrice: '',
+                                            retailPrice: '',
+                                            loading: false
+                                          })
+                                        }
+                                      })
+                                    },
+                                  });
+                                }
+                              });
+                            },
+                            error: function (result, error) {
+                              //添加失败
+                              console.log("添加失败:" + error);
                             }
                           })
-                        },
-                        error: function (result, error) {
-                          //添加失败
-                          console.log("添加失败:" + error);
-                        }
-                      })
                     }
                   },
                   error: function (error) {

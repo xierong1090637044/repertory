@@ -16,3 +16,11 @@
 {
   padding: 15px;
 }
+.no_operations
+{
+  background-color: #fff;
+  padding: 10px 15px;
+  max-height:60vh;
+  overflow:scroll;
+  line-height: 46px;
+}

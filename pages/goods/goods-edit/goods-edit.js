@@ -103,13 +103,40 @@ Page({
                       success: function (result) {
                         console.log("修改产品成功");
                         wx.setStorageSync("is_add", true);
-                        wx.showToast({
-                          title: '修改产品成功',
-                          icon: 'success',
-                          success: function () {
-                            wx.navigateBack()
+                        wx.request({
+                          url: 'https://route.showapi.com/1129-1',
+                          data: {
+                            showapi_appid: '84916',
+                            showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+                            content: (goodsForm.productCode == "") ? goodsForm.goodsId : goodsForm.productCode,
+                            height: "120",
+                            width: "500"
+                          },
+                          header: {
+                            'content-type': 'application/json' // 默认值
+                          },
+                          success(res) {
+                            console.log(res.data.showapi_res_body.imgUrl)
+                            var Diary = Bmob.Object.extend("Goods");
+                            var query = new Bmob.Query(Diary);
+                            query.get(goodsForm.goodsId, {
+                              success: function (result) {
+                                result.set('single_code', res.data.showapi_res_body.imgUrl);
+                                result.save();
+                                wx.showToast({
+                                  title: '修改产品成功',
+                                  icon: 'success',
+                                  success: function () {
+                                    setTimeout(function(){
+                                      wx.navigateBack()
+                                    },1000)
+                                  }
+                                })
+                              },
+                            });
                           }
-                        })
+                        });
+                       
                       },
                       error: function (result, error) {
                         //修改失败

@@ -12,27 +12,26 @@
     </i-card>
   </i-panel>
 
-  <i-panel title="产品二维码">
-    <!-- <view class="container">
-      <i-spin fix wx:if="{{ spinShow }}"></i-spin>
-      <image src="{{shareImage}}" bindtap='handlePreviewImage' data-qrcode="{{shareImage}}" class="share-image margin-t-15"></image>
-      <canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage"/>
-    </view> -->
-    <view class='text-center padded-b-10'>
-      <i-spin fix wx:if="{{ spinShow }}"></i-spin>
-      <image data-qrcode="{{goodsReserve.qrCode}}"
-             src='{{goodsReserve.qrCode}}' style='width:80px;height:80px;margin-top:5px' slot="icon"></image>
-      <view>产品：{{goodsReserve.goodsName}}</view>
-      <canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage"/>
+  <i-panel title="产品条形码">
+    <view class='text-center padded-b-10' style='padding-top: 0.5rem'>
+      <view wx:if="{{goodsReserve.qrCode !=''}}">
+        <image src='{{goodsReserve.qrCode}}' style='width:200px;height:40px;margin-top:5px' slot="icon"></image>
+        <view>产品：{{goodsReserve.goodsName}}</view>
       <button class="more-button bg-info text-white" size="mini" 
-              bindtap='handlePreviewImage' data-qrcode="{{shareImage}}" >下载二维码</button>
+              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.qrCode}}" >预览截图下载</button>
+      </view>
+      <view wx:else >
+          <view style='color:#999;padding:10px 0'>暂无（修改后可生成）</view>
+          <view>产品：{{goodsReserve.goodsName}}</view>
+      </view>
+      
     </view>
   </i-panel>
 
   <view style='margin-bottom:15px;'>
       <view class='header_content'>近七天操作记录</view>
-      <view class='all_list'>
-          <view wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
+      <view class='all_list' wx:if="{{detail !=''}}">
+          <view  wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
               <view>
                   <view>{{item.createdAt}}</view>
                   <view>X{{item.num}}</view>
@@ -41,5 +40,6 @@
               <view wx:else class='order_out'>出库</view>
           </view>
       </view>
+      <view wx:else class='no_operations'>暂无操作记录</view>
   </view>
 </view>

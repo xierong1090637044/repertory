@@ -12,15 +12,17 @@
       <i-icon type="feedback" size="17"/>使用说明
     </view>
   </view>
-  <image class="title" src="/images/authorize/title.png"></image>
+  <view class='title'>
+     <image class="title-image" src="/images/authorize/title.png"></image>
+  </view>
   <view class='content'>
-     <view class="hd">
+     <!--<view class="hd">
        <image class="wave" src="/images/authorize/wave.png" mode="aspectFill"></image>
       <image class="wave wave-bg" src="/images/authorize/wave.png" mode="aspectFill"></image>   
-    </view> 
+    </view> -->
     <view class='bd'>
       <view class='module'>
-        <i-row i-class="margin-t-5">
+        <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
                 <i-grid i-class="module-grid">
@@ -28,13 +30,13 @@
                       <i-grid-icon i-class='module-grid-icon'>
                         <image src="{{item.icon}}" />
                       </i-grid-icon>
-                      <i-grid-label>{{item.name}}</i-grid-label>
+                      <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
                   </i-grid-item>
                 </i-grid>
               </navigator>
             </i-col>
           </i-row>
-          <i-row i-class="margin-t-5">
+          <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{secondaryModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
                 <i-grid i-class="module-grid">
@@ -42,7 +44,7 @@
                     <i-grid-icon i-class='module-grid-icon'>
                       <image src="{{item.icon}}" />
                     </i-grid-icon>
-                    <i-grid-label>{{item.name}}</i-grid-label>
+                    <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
                   </i-grid-item>
                 </i-grid>
               </navigator>
@@ -52,4 +54,4 @@
     </view>
   </view>
 </view>
-<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<!--<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>-->
