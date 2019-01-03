@@ -1,7 +1,10 @@
 // pages/goods/goods-add/goods-add.js
 var { $Message } = require('../../../component/base/index');
-const Bmob = require('../../../utils/bmob.js')
-const config = require('../../../utils/config.js')
+const Bmob = require('../../../utils/bmob.js');
+const Bmob_new = require('../../../utils/bmob_new.js');
+const config = require('../../../utils/config.js');
+var temppath;
+var that;
 Page({
 
   /**
@@ -17,7 +20,8 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
-    loading:false
+    loading:false,
+    image:"none"
   },
 
   handleAddGoods:function(e){
@@ -109,23 +113,41 @@ Page({
                                     success: function (result) {
                                       result.set('single_code', res.data.showapi_res_body.imgUrl);
                                       result.save();
-                                      wx.showToast({
-                                        title: '新增产品成功',
-                                        icon: 'success',
-                                        success: function () {
-                                          that.setData({
-                                            goodsName: "",
-                                            regNumber: "",
-                                            producer: "",
-                                            productCode: "",
-                                            packageContent: "",
-                                            packingUnit: "",
-                                            costPrice: '',
-                                            retailPrice: '',
-                                            loading: false
+
+                                      var file;
+                                      var tempFilePaths = temppath;
+                                      for (let item of tempFilePaths) {
+                                        console.log('itemn', item)
+                                        file = Bmob_new.File(goodsForm.goodsName+'.jpg', item);
+                                      }
+                                      file.save().then(res => {
+                                        const query = Bmob_new.Query('Goods');
+                                        query.set('id', result.id) //需要修改的objectId
+                                        query.set('goodsIcon', JSON.parse(res[0]).url);
+                                        query.save().then(res => {
+                                          console.log(res)
+                                          wx.showToast({
+                                            title: '新增产品成功',
+                                            icon: 'success',
+                                            success: function () {
+                                              that.setData({
+                                                goodsName: "",
+                                                regNumber: "",
+                                                producer: "",
+                                                productCode: "",
+                                                packageContent: "",
+                                                packingUnit: "",
+                                                costPrice: '',
+                                                retailPrice: '',
+                                                loading: false
+                                              })
+                                            }
                                           })
-                                        }
+                                        }).catch(err => {
+                                          console.log(err)
+                                        })
                                       })
+                                      
                                     },
                                   });
                                 }
@@ -150,11 +172,23 @@ Page({
     }
   },
 
+  //选择图片
+  choose_image:function()
+  {
+    wx.chooseImage({
+      success: function (res) {
+        console.log(res)
+        temppath = res.tempFilePaths
+        that.setData({ temppath: temppath,icon:"none",image:"inline-block"})
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    that = this;
   },
 
   /**

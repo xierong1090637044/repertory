@@ -3,6 +3,9 @@ var { $Message } = require('../../../component/base/index');
 const Bmob = require('../../../utils/bmob.js')
 const config = require('../../../utils/config.js')
 var _ = require('../../../utils/we-lodash.js');
+const Bmob_new = require('../../../utils/bmob_new.js');
+var temppath;
+var that;
 Page({
 
   /**
@@ -19,13 +22,14 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
-    loading: false
+    loading: false,
   },
 
   initGoods:function(){
     var that = this
     var goods = wx.getStorageSync('editGoods')
     that.setData({
+      temppath: (goods.goodsIcon == "") ? "/images/common/goods-default.png" : goods.goodsIcon,
       goodsId: goods.goodsId,
       goodsName: goods.goodsName,
       regNumber: goods.regNumber,
@@ -37,15 +41,6 @@ Page({
       retailPrice: goods.retailPrice
     })
   },
-
-  /*handlePackingUnit: function (e) {
-    var puId = this.data.packingUnits[e.detail.value].id
-    var puVal = this.data.packingUnits[e.detail.value].name
-    this.setData({
-      packingUnit: puId,
-      packingUnitVal: puVal
-    })
-  },*/
 
   handleEditGoods: function (e) {
     var that = this
@@ -91,6 +86,7 @@ Page({
                   success: function (results) {
                     // 修改产品
                     results.set("goodsName", goodsForm.goodsName);
+                    results.set("goodsIcon", goodsForm.goodsIcon);
                     results.set("regNumber", goodsForm.regNumber);
                     results.set("producer", goodsForm.producer);
                     results.set("productCode", goodsForm.productCode);
@@ -156,11 +152,23 @@ Page({
     }
   },
 
+  //选择图片
+  choose_image: function () {
+    wx.chooseImage({
+      success: function (res) {
+        console.log(res)
+        temppath = res.tempFilePaths
+        that.setData({ temppath: temppath, icon: "none", image: "inline-block" })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initGoods()
+    this.initGoods();
+    that = this;
   },
 
   /**
