@@ -670,6 +670,7 @@ page{
 .input_label
 {
   color: #f30;
+  max-width: 100px;
 }
 
 .btn-group{

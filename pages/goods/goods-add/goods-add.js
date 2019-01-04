@@ -1,7 +1,10 @@
 // pages/goods/goods-add/goods-add.js
 var { $Message } = require('../../../component/base/index');
-const Bmob = require('../../../utils/bmob.js')
-const config = require('../../../utils/config.js')
+const Bmob = require('../../../utils/bmob.js');
+const Bmob_new = require('../../../utils/bmob_new.js');
+const config = require('../../../utils/config.js');
+var temppath;
+var that;
 Page({
 
   /**
@@ -17,7 +20,9 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
-    loading:false
+    loading:false,
+    image:"none",
+    is_choose: false,
   },
 
   handleAddGoods:function(e){
@@ -76,43 +81,106 @@ Page({
                       return
                     }else{
                       // 添加产品
-                      goods.set("userId", user);
-                      goods.set("goodsName", goodsForm.goodsName);
-                      goods.set("regNumber", goodsForm.regNumber);
-                      goods.set("producer", goodsForm.producer);
-                      goods.set("productCode", goodsForm.productCode);
-                      goods.set("packageContent", goodsForm.packageContent);
-                      goods.set("costPrice", goodsForm.costPrice);
-                      goods.set("retailPrice", goodsForm.retailPrice);
-                      goods.set("packingUnit", goodsForm.packingUnit);
-                      goods.set("reserve", 0);
-                      goods.save(null, {
-                        success: function (result) {
-                          console.log("新增产品成功");
-                          wx.setStorageSync("is_add", true)
-                          wx.showToast({
-                            title: '新增产品成功',
-                            icon: 'success',
-                            success: function () {
-                              that.setData({
-                                goodsName: "",
-                                regNumber: "",
-                                producer: "",
-                                productCode: "",
-                                packageContent: "",
-                                packingUnit: "",
-                                costPrice: '',
-                                retailPrice: '',
-                                loading: false
-                              })
+                          goods.set("userId", user);
+                          goods.set("goodsName", goodsForm.goodsName);
+                          goods.set("regNumber", goodsForm.regNumber);
+                          goods.set("producer", goodsForm.producer);
+                          goods.set("productCode", goodsForm.productCode);
+                          goods.set("packageContent", goodsForm.packageContent);
+                          goods.set("costPrice", goodsForm.costPrice);
+                          goods.set("retailPrice", goodsForm.retailPrice);
+                          goods.set("packingUnit", goodsForm.packingUnit);
+                          goods.set("reserve", 0);
+                          goods.save(null, {
+                            success: function (result) {
+                              wx.setStorageSync("is_add", true);
+                              wx.request({
+                                url: 'https://route.showapi.com/1129-1', 
+                                data: {
+                                  showapi_appid: '84916',
+                                  showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+                                  content: (goodsForm.productCode == "") ? (result.id +"-false") : (goodsForm.productCode+"-true"),
+                                  height:"100",
+                                  width:"125"
+                                },
+                                header: {
+                                  'content-type': 'application/json' // 默认值
+                                },
+                                success(res) {
+                                  console.log(res.data.showapi_res_body.imgUrl)
+                                  var Diary = Bmob.Object.extend("Goods");
+                                  var query = new Bmob.Query(Diary);
+                                  query.get(result.id, {
+                                    success: function (result) {
+                                      result.set('single_code', res.data.showapi_res_body.imgUrl);
+                                      result.save();
+
+                                      if (that.data.is_choose)
+                                      {
+                                        var file;
+                                        var tempFilePaths = temppath;
+                                        for (let item of tempFilePaths) {
+                                          console.log('itemn', item)
+                                          file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
+                                        }
+                                        file.save().then(res => {
+                                          const query = Bmob_new.Query('Goods');
+                                          query.set('id', result.id) //需要修改的objectId
+                                          query.set('goodsIcon', JSON.parse(res[0]).url);
+                                          query.save().then(res => {
+                                            console.log(res)
+                                            wx.showToast({
+                                              title: '新增产品成功',
+                                              icon: 'success',
+                                              success: function () {
+                                                that.setData({
+                                                  goodsName: "",
+                                                  regNumber: "",
+                                                  producer: "",
+                                                  productCode: "",
+                                                  packageContent: "",
+                                                  packingUnit: "",
+                                                  costPrice: '',
+                                                  retailPrice: '',
+                                                  loading: false
+                                                })
+                                              }
+                                            })
+                                          }).catch(err => {
+                                            console.log(err)
+                                          })
+                                        })
+                                      }else{
+                                        wx.showToast({
+                                          title: '新增产品成功',
+                                          icon: 'success',
+                                          success: function () {
+                                            that.setData({
+                                              goodsName: "",
+                                              regNumber: "",
+                                              producer: "",
+                                              productCode: "",
+                                              packageContent: "",
+                                              packingUnit: "",
+                                              costPrice: '',
+                                              retailPrice: '',
+                                              loading: false
+                                            })
+                                          }
+                                        })
+                                      }
+                                      
+                                      
+                                    },
+                                  });
+                                }
+                              });
+                            },
+                            error: function (result, error) {
+                              //添加失败
+                              console.log("添加失败:" + error);
                             }
                           })
-                        },
-                        error: function (result, error) {
-                          //添加失败
-                          console.log("添加失败:" + error);
-                        }
-                      })
                     }
                   },
                   error: function (error) {
@@ -127,11 +195,23 @@ Page({
     }
   },
 
+  //选择图片
+  choose_image:function()
+  {
+    wx.chooseImage({
+      success: function (res) {
+        console.log(res)
+        temppath = res.tempFilePaths
+        that.setData({ temppath: temppath, icon: "none", image: "inline-block", is_choose: true,})
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    that = this;
   },
 
   /**

@@ -3,6 +3,9 @@ var { $Message } = require('../../../component/base/index');
 const Bmob = require('../../../utils/bmob.js')
 const config = require('../../../utils/config.js')
 var _ = require('../../../utils/we-lodash.js');
+const Bmob_new = require('../../../utils/bmob_new.js');
+var temppath;
+var that;
 Page({
 
   /**
@@ -19,13 +22,15 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
-    loading: false
+    loading: false,
+    is_choose:false,
   },
 
   initGoods:function(){
     var that = this
     var goods = wx.getStorageSync('editGoods')
     that.setData({
+      temppath: (goods.goodsIcon == "") ? "/images/common/goods-default.png" : goods.goodsIcon,
       goodsId: goods.goodsId,
       goodsName: goods.goodsName,
       regNumber: goods.regNumber,
@@ -37,15 +42,6 @@ Page({
       retailPrice: goods.retailPrice
     })
   },
-
-  /*handlePackingUnit: function (e) {
-    var puId = this.data.packingUnits[e.detail.value].id
-    var puVal = this.data.packingUnits[e.detail.value].name
-    this.setData({
-      packingUnit: puId,
-      packingUnitVal: puVal
-    })
-  },*/
 
   handleEditGoods: function (e) {
     var that = this
@@ -91,6 +87,7 @@ Page({
                   success: function (results) {
                     // 修改产品
                     results.set("goodsName", goodsForm.goodsName);
+                    results.set("goodsIcon", goodsForm.goodsIcon);
                     results.set("regNumber", goodsForm.regNumber);
                     results.set("producer", goodsForm.producer);
                     results.set("productCode", goodsForm.productCode);
@@ -103,13 +100,71 @@ Page({
                       success: function (result) {
                         console.log("修改产品成功");
                         wx.setStorageSync("is_add", true);
-                        wx.showToast({
-                          title: '修改产品成功',
-                          icon: 'success',
-                          success: function () {
-                            wx.navigateBack()
+                        wx.request({
+                          url: 'https://route.showapi.com/1129-1',
+                          data: {
+                            showapi_appid: '84916',
+                            showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+                            content: (goodsForm.productCode == "") ? (result.id + "-false") : (goodsForm.productCode + "-true"),
+                            height: "120",
+                            width: "500"
+                          },
+                          header: {
+                            'content-type': 'application/json' // 默认值
+                          },
+                          success(res) {
+                            console.log(res.data.showapi_res_body.imgUrl)
+                            var Diary = Bmob.Object.extend("Goods");
+                            var query = new Bmob.Query(Diary);
+                            query.get(goodsForm.goodsId, {
+                              success: function (result) {
+                                result.set('single_code', res.data.showapi_res_body.imgUrl);
+                                result.save();
+
+                                if(that.data.is_choose)
+                                {
+                                  var file;
+                                  var tempFilePaths = temppath;
+                                  for (let item of tempFilePaths) {
+                                    console.log('itemn', item)
+                                    file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
+                                  }
+                                  file.save().then(res => {
+                                    const query = Bmob_new.Query('Goods');
+                                    query.set('id', goodsForm.goodsId) //需要修改的objectId
+                                    query.set('goodsIcon', JSON.parse(res[0]).url);
+                                    query.save().then(res => {
+                                      console.log(res)
+                                      wx.showToast({
+                                        title: '修改产品成功',
+                                        icon: 'success',
+                                        success: function () {
+                                          setTimeout(function () {
+                                            wx.navigateBack()
+                                          }, 1000)
+                                        }
+                                      })
+                                    }).catch(err => {
+                                      console.log(err)
+                                    })
+                                  })
+                                }else{
+                                  wx.showToast({
+                                    title: '修改产品成功',
+                                    icon: 'success',
+                                    success: function () {
+                                      setTimeout(function () {
+                                        wx.navigateBack()
+                                      }, 1000)
+                                    }
+                                  })
+                                }
+
+                              },
+                            });
                           }
-                        })
+                        });
+                       
                       },
                       error: function (result, error) {
                         //修改失败
@@ -129,11 +184,23 @@ Page({
     }
   },
 
+  //选择图片
+  choose_image: function () {
+    wx.chooseImage({
+      success: function (res) {
+        console.log(res)
+        temppath = res.tempFilePaths
+        that.setData({ temppath: temppath, is_choose: true, image: "inline-block" })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initGoods()
+    this.initGoods();
+    that = this;
   },
 
   /**

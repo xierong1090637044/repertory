@@ -184,6 +184,7 @@ Page({
           tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
           tempGoods.goodsId = res[i].id || '';
           tempGoods.goodsName = res[i].get("goodsName") || '';
+          tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
           tempGoods.regNumber = res[i].get("regNumber") || '';
           tempGoods.producer = res[i].get("producer") || '';
           tempGoods.productCode = res[i].get("productCode") || '';
@@ -192,7 +193,7 @@ Page({
           tempGoods.reserve = res[i].get("reserve") || 0;
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.qrCode = config.api.fetchQRCode + res[i].id || '';
+          tempGoods.single_code = res[i].get("single_code") || '';
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
@@ -284,6 +285,7 @@ Page({
           tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
           tempGoods.goodsId = res[i].id || '';
           tempGoods.goodsName = res[i].get("goodsName") || '';
+          tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
           tempGoods.regNumber = res[i].get("regNumber") || '';
           tempGoods.producer = res[i].get("producer") || '';
           tempGoods.productCode = res[i].get("productCode") || '';
@@ -292,7 +294,7 @@ Page({
           tempGoods.reserve = res[i].get("reserve") || 0;
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.qrCode = config.api.fetchQRCode + res[i].id || '';
+          tempGoods.single_code = res[i].get("single_code") || '';
           tempGoodsArr.push(tempGoods);
         }
         that.setData({

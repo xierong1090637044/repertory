@@ -21,7 +21,7 @@
 </view>
 <!--/.搜索-->
 <i-message id="message" />
-<i-panel i-class="wrap">
+<i-panel i-class="wrap1">
   <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
     <i-checkbox wx:for="{{goods}}" another_value="产品名称：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
     </i-checkbox>

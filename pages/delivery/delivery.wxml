@@ -1,6 +1,6 @@
 <!--pages/delivery/delivery.wxml-->
 <i-message id="message" />
-<view class='padded-t-10' wx:if="{{!isEmpty}}">
+<view class='padded-t-10 extra' wx:if="{{!isEmpty}}">
   <view class='margin-b-10' wx:for="{{goods}}" wx:key="{{item.goodsId}}">
     <i-card title="产品名称：{{item.goodsName}}" extra="当前库存：{{item.reserve}}">
       <view slot="content">

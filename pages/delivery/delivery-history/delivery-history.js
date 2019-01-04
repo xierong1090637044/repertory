@@ -125,8 +125,8 @@ Page({
                       icon: 'success',
                       success: function () {
                         setTimeout(() => {
-                          wx.reLaunch({
-                            url: '/pages/index/index',
+                          wx.navigateBack({
+                            delta: 2
                           })
                         }, 1000)
                       }

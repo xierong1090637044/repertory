@@ -2,7 +2,7 @@
 <!-- <view hidden='{{!noticeShow}}'> -->
 <view bindtap='skip'>
     <i-notice-bar icon="systemprompt" loop closable>
-    开发者对部分功能进行调整,具体优化调整请前往升级日志查看;大家有好的想法或者建议可以在优化建议中提出或添加开发者微信(1090637044)进行反馈,帮助开发者一起打造出一个满足您需求的库存助手
+    {{message}}
     </i-notice-bar>
 </view>
 <!-- </view> -->
@@ -12,15 +12,13 @@
       <i-icon type="feedback" size="17"/>使用说明
     </view>
   </view>
-  <image class="title" src="/images/authorize/title.png"></image>
+  <view class='title'>
+     <image class="title-image" src="/images/authorize/title.png"></image>
+  </view>
   <view class='content'>
-     <view class="hd">
-       <image class="wave" src="/images/authorize/wave.png" mode="aspectFill"></image>
-      <image class="wave wave-bg" src="/images/authorize/wave.png" mode="aspectFill"></image>   
-    </view> 
     <view class='bd'>
       <view class='module'>
-        <i-row i-class="margin-t-5">
+        <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
                 <i-grid i-class="module-grid">
@@ -28,13 +26,13 @@
                       <i-grid-icon i-class='module-grid-icon'>
                         <image src="{{item.icon}}" />
                       </i-grid-icon>
-                      <i-grid-label>{{item.name}}</i-grid-label>
+                      <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
                   </i-grid-item>
                 </i-grid>
               </navigator>
             </i-col>
           </i-row>
-          <i-row i-class="margin-t-5">
+          <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{secondaryModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
                 <i-grid i-class="module-grid">
@@ -42,7 +40,7 @@
                     <i-grid-icon i-class='module-grid-icon'>
                       <image src="{{item.icon}}" />
                     </i-grid-icon>
-                    <i-grid-label>{{item.name}}</i-grid-label>
+                    <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
                   </i-grid-item>
                 </i-grid>
               </navigator>
@@ -51,5 +49,13 @@
       </view>
     </view>
   </view>
+
+  <view class='scan_code' bindtap='scan_code'>
+     <i class="iconfont icon-saomiao icon-scan"></i>
+     <text>扫描产品条形码</text>
+  </view>
+
+  <view class='scan_notice'>（不可以从相册选取）</view>
+
 </view>
-<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<!--<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>-->
