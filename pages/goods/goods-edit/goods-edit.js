@@ -23,6 +23,7 @@ Page({
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
     loading: false,
+    is_choose:false,
   },
 
   initGoods:function(){
@@ -119,15 +120,46 @@ Page({
                               success: function (result) {
                                 result.set('single_code', res.data.showapi_res_body.imgUrl);
                                 result.save();
-                                wx.showToast({
-                                  title: '修改产品成功',
-                                  icon: 'success',
-                                  success: function () {
-                                    setTimeout(function(){
-                                      wx.navigateBack()
-                                    },1000)
+
+                                if(that.data.is_choose)
+                                {
+                                  var file;
+                                  var tempFilePaths = temppath;
+                                  for (let item of tempFilePaths) {
+                                    console.log('itemn', item)
+                                    file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
                                   }
-                                })
+                                  file.save().then(res => {
+                                    const query = Bmob_new.Query('Goods');
+                                    query.set('id', goodsForm.goodsId) //需要修改的objectId
+                                    query.set('goodsIcon', JSON.parse(res[0]).url);
+                                    query.save().then(res => {
+                                      console.log(res)
+                                      wx.showToast({
+                                        title: '修改产品成功',
+                                        icon: 'success',
+                                        success: function () {
+                                          setTimeout(function () {
+                                            wx.navigateBack()
+                                          }, 1000)
+                                        }
+                                      })
+                                    }).catch(err => {
+                                      console.log(err)
+                                    })
+                                  })
+                                }else{
+                                  wx.showToast({
+                                    title: '修改产品成功',
+                                    icon: 'success',
+                                    success: function () {
+                                      setTimeout(function () {
+                                        wx.navigateBack()
+                                      }, 1000)
+                                    }
+                                  })
+                                }
+
                               },
                             });
                           }
@@ -158,7 +190,7 @@ Page({
       success: function (res) {
         console.log(res)
         temppath = res.tempFilePaths
-        that.setData({ temppath: temppath, icon: "none", image: "inline-block" })
+        that.setData({ temppath: temppath, is_choose: true, image: "inline-block" })
       }
     })
   },
