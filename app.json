@@ -23,7 +23,6 @@
     "pages/mine/propose/propose",
     "pages/mine/message/message",
     "pages/mine/upgrade/upgrade",
-    "pages/mine/test/test",
     "pages/delivery/delivery-history/delivery-history",
     "pages/order_history/detail/detail",
     "pages/entering/entering",
