@@ -1,4 +1,5 @@
-// pages/index/index.js
+var Bmob = require('../../utils/bmob_new.js');
+var that;
 Page({
 
   /**
@@ -66,14 +67,26 @@ Page({
     })
     
   },
+
+  getnoticetext:function()
+  {
+    const query = Bmob.Query('notice');
+    query.get('aTOj555V').then(res => {
+      that.setData({message:res.content});
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var noticeShow = wx.getStorageSync('noticeShow')
+    that = this;
+    var noticeShow = wx.getStorageSync('noticeShow');
     this.setData({
       noticeShow: noticeShow === ''?true : false
-    })
+    });
+
+    that.getnoticetext();
   },
 
   /**
