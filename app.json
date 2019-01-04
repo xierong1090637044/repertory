@@ -34,8 +34,7 @@
     "pages/entering/enter-history-fri/enter-history-fri",
     "pages/delivery/delivery-history-fri/delivery-history-fri",
     "pages/order_history_fri/detail/detail",
-    "pages/goods/goods-fri/goods-fri",
-    "pages/test/test"
+    "pages/goods/goods-fri/goods-fri"
   ],
   "window": {
     "navigationBarTextStyle": "white",

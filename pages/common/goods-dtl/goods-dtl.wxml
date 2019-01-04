@@ -14,15 +14,21 @@
 
   <i-panel title="产品条形码">
     <view class='text-center padded-b-10' style='padding-top: 0.5rem'>
-      <view wx:if="{{goodsReserve.qrCode !=''}}">
-        <image src='{{goodsReserve.qrCode}}' style='width:200px;height:40px;margin-top:5px' slot="icon"></image>
-        <view>产品：{{goodsReserve.goodsName}}</view>
-      <button class="more-button bg-info text-white" size="mini" 
-              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.qrCode}}" >预览截图下载</button>
-      </view>
-      <view wx:else >
+      <view wx:if="{{goodsReserve.single_code ==null }}">
           <view style='color:#999;padding:10px 0'>暂无（修改后可生成）</view>
           <view>产品：{{goodsReserve.goodsName}}</view>
+      </view>
+
+      <view wx:elif="{{goodsReserve.single_code ==''}}" >
+          <view style='color:#999;padding:10px 0'>暂无（修改后可生成）</view>
+          <view>产品：{{goodsReserve.goodsName}}</view>
+      </view>
+
+      <view wx:else >
+          <image src='{{goodsReserve.single_code}}' style='width:200px;height:40px;margin-top:5px' slot="icon"></image>
+        <view>产品：{{goodsReserve.goodsName}}</view>
+      <button class="more-button bg-info text-white" size="mini" 
+              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.single_code}}" >预览截图下载</button>
       </view>
       
     </view>

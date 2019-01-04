@@ -21,7 +21,8 @@ Page({
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
     loading:false,
-    image:"none"
+    image:"none",
+    is_choose: false,
   },
 
   handleAddGoods:function(e){
@@ -98,9 +99,9 @@ Page({
                                 data: {
                                   showapi_appid: '84916',
                                   showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
-                                  content: (goodsForm.productCode == "") ? result.id : goodsForm.productCode,
-                                  height:"120",
-                                  width:"500"
+                                  content: (goodsForm.productCode == "") ? (result.id +"-false") : (goodsForm.productCode+"-true"),
+                                  height:"100",
+                                  width:"125"
                                 },
                                 header: {
                                   'content-type': 'application/json' // 默认值
@@ -114,39 +115,61 @@ Page({
                                       result.set('single_code', res.data.showapi_res_body.imgUrl);
                                       result.save();
 
-                                      var file;
-                                      var tempFilePaths = temppath;
-                                      for (let item of tempFilePaths) {
-                                        console.log('itemn', item)
-                                        file = Bmob_new.File(goodsForm.goodsName+'.jpg', item);
-                                      }
-                                      file.save().then(res => {
-                                        const query = Bmob_new.Query('Goods');
-                                        query.set('id', result.id) //需要修改的objectId
-                                        query.set('goodsIcon', JSON.parse(res[0]).url);
-                                        query.save().then(res => {
-                                          console.log(res)
-                                          wx.showToast({
-                                            title: '新增产品成功',
-                                            icon: 'success',
-                                            success: function () {
-                                              that.setData({
-                                                goodsName: "",
-                                                regNumber: "",
-                                                producer: "",
-                                                productCode: "",
-                                                packageContent: "",
-                                                packingUnit: "",
-                                                costPrice: '',
-                                                retailPrice: '',
-                                                loading: false
-                                              })
-                                            }
+                                      if (that.data.is_choose)
+                                      {
+                                        var file;
+                                        var tempFilePaths = temppath;
+                                        for (let item of tempFilePaths) {
+                                          console.log('itemn', item)
+                                          file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
+                                        }
+                                        file.save().then(res => {
+                                          const query = Bmob_new.Query('Goods');
+                                          query.set('id', result.id) //需要修改的objectId
+                                          query.set('goodsIcon', JSON.parse(res[0]).url);
+                                          query.save().then(res => {
+                                            console.log(res)
+                                            wx.showToast({
+                                              title: '新增产品成功',
+                                              icon: 'success',
+                                              success: function () {
+                                                that.setData({
+                                                  goodsName: "",
+                                                  regNumber: "",
+                                                  producer: "",
+                                                  productCode: "",
+                                                  packageContent: "",
+                                                  packingUnit: "",
+                                                  costPrice: '',
+                                                  retailPrice: '',
+                                                  loading: false
+                                                })
+                                              }
+                                            })
+                                          }).catch(err => {
+                                            console.log(err)
                                           })
-                                        }).catch(err => {
-                                          console.log(err)
                                         })
-                                      })
+                                      }else{
+                                        wx.showToast({
+                                          title: '新增产品成功',
+                                          icon: 'success',
+                                          success: function () {
+                                            that.setData({
+                                              goodsName: "",
+                                              regNumber: "",
+                                              producer: "",
+                                              productCode: "",
+                                              packageContent: "",
+                                              packingUnit: "",
+                                              costPrice: '',
+                                              retailPrice: '',
+                                              loading: false
+                                            })
+                                          }
+                                        })
+                                      }
+                                      
                                       
                                     },
                                   });
@@ -179,7 +202,7 @@ Page({
       success: function (res) {
         console.log(res)
         temppath = res.tempFilePaths
-        that.setData({ temppath: temppath,icon:"none",image:"inline-block"})
+        that.setData({ temppath: temppath, icon: "none", image: "inline-block", is_choose: true,})
       }
     })
   },

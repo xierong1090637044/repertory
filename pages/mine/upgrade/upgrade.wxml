@@ -21,6 +21,9 @@
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
         <text class="desc-list-item">增加产品条形码</text>
+        <text class="desc-list-item">增加产品图像上传</text>
+        <text class="desc-list-item">好友管理产品页面，不可滚动修复</text>
+        <text class="desc-list-item">增加通过扫产品条形码获取信息</text>
         <text class="desc-list-item">页面优化升级</text>
       </view>
     </view>

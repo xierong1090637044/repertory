@@ -105,7 +105,7 @@ Page({
                           data: {
                             showapi_appid: '84916',
                             showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
-                            content: (goodsForm.productCode == "") ? goodsForm.goodsId : goodsForm.productCode,
+                            content: (goodsForm.productCode == "") ? (result.id + "-false") : (goodsForm.productCode + "-true"),
                             height: "120",
                             width: "500"
                           },

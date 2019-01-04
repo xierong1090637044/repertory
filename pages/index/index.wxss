@@ -92,3 +92,32 @@
 .view-hidden{
   display: none;
 }
+
+.scan_code
+{
+  position: fixed;
+  width: calc(100% - 30px);
+  left: 15px;
+  right: 15px;
+  bottom: 10%;
+  background: linear-gradient(to right, #118fff , #11c4ff);
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  color: #fff;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.2)
+}
+.icon-scan
+{
+  margin-right: 10px;
+}
+
+.scan_notice
+{
+  width: 100%;
+  position: fixed;
+  bottom: 5%;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+}

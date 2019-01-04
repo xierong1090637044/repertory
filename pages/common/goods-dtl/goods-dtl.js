@@ -19,11 +19,11 @@ Page({
   },
 
   handlePreviewImage: function (e) {
-    var qrCode = e.target.dataset.qrcode
-    console.log(qrCode);
+    var single_code = e.target.dataset.qrcode
+    console.log(e);
     wx.previewImage({
-      current: qrCode,
-      urls: [qrCode]
+      current: single_code,
+      urls: [single_code]
     })
   },
 
@@ -31,17 +31,52 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     that = this;
     var flag = options.type;
     var title = flag==1?'产品详情':'库存详情';
     wx.setNavigationBarTitle({
       title: '库存助手-'+title
     });
-    var item = JSON.parse(wx.getStorageSync('item'));
-    this.setData({
-      goodsReserve: item
-    })
-    that.get_opera_detail(item.goodsId);
+
+    if (options.has_code == "false")
+    {
+      const query = Bmob_new.Query('Goods');
+      query.get(options.id).then(res => {
+        console.log(res)
+        that.setData({ goodsReserve:res});
+        that.get_opera_detail(options.id);
+      })
+    } else if (options.has_code == "true"){
+      const query = Bmob_new.Query('Goods');
+      query.equalTo("productCode", "==", options.id);
+      query.find().then(res => {
+        console.log(res)
+        if(res.length > 1)
+        {
+          wx.showModal({
+            title: '提示',
+            content: '您当前条形码有多个商品绑定',
+            success(result) {
+              if (result.confirm) {
+                that.setData({ goodsReserve: res[0] });
+                that.get_opera_detail(res[0].objectId);
+              }
+            }
+          })
+        }else{
+          that.setData({ goodsReserve: res[0] });
+          that.get_opera_detail(res[0].objectId);
+        }
+        
+      })
+    }else{
+      var item = JSON.parse(wx.getStorageSync('item'));
+      this.setData({
+        goodsReserve: item
+      })
+      that.get_opera_detail(item.goodsId);
+    }
   },
 
   /**

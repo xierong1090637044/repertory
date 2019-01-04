@@ -16,10 +16,6 @@
      <image class="title-image" src="/images/authorize/title.png"></image>
   </view>
   <view class='content'>
-     <!--<view class="hd">
-       <image class="wave" src="/images/authorize/wave.png" mode="aspectFill"></image>
-      <image class="wave wave-bg" src="/images/authorize/wave.png" mode="aspectFill"></image>   
-    </view> -->
     <view class='bd'>
       <view class='module'>
         <i-row>
@@ -53,5 +49,13 @@
       </view>
     </view>
   </view>
+
+  <view class='scan_code' bindtap='scan_code'>
+     <i class="iconfont icon-saomiao icon-scan"></i>
+     <text>扫描产品条形码</text>
+  </view>
+
+  <view class='scan_notice'>（不可以从相册选取）</view>
+
 </view>
 <!--<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>-->

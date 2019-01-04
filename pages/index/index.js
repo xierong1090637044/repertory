@@ -41,6 +41,31 @@ Page({
       url: '/pages/instruction/instruction'
     })
   },
+
+  //点击扫描产品条形码
+  scan_code:function()
+  {
+    wx.scanCode({
+      onlyFromCamera: true,
+      success(res) {
+        console.log(res)
+        var result = res.result;
+        var array = result.split("-");
+        console.log(array);
+        if(array[1] == "false")
+        {
+          wx.navigateTo({
+            url: '../common/goods-dtl/goods-dtl?has_code=false&id=' + array[0],
+          })
+        }else{
+          wx.navigateTo({
+            url: '../common/goods-dtl/goods-dtl?has_code=true&id=' + array[0],
+          })
+        }
+      }
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
