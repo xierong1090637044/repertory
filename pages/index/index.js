@@ -34,10 +34,6 @@ Page({
       {
         name: '操作记录', icon: '../../images/index/order_history.png',
         url: '/pages/order_history/order_history'
-      },
-      {
-        name: '记账本', icon: '../../images/index/delivery.png',
-        url: '/pages/common/goods-select/goods-select?type=delivery'
       }, 
     ],
     spinShow: true,

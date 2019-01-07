@@ -1,7 +1,7 @@
 <!--pages/index/index.wxml-->
 <!-- <view hidden='{{!noticeShow}}'> -->
 <view bindtap='skip'>
-    <i-notice-bar icon="systemprompt" loop>
+    <i-notice-bar icon="systemprompt">
     {{message}}
     </i-notice-bar>
 </view>
@@ -17,7 +17,8 @@
   </view>
   <view class='content'>
     <view class='bd'>
-      <view class='module' indicator-dots="true" circular="true" autoplay='true' indicator-active-color="#118fff">
+      <swiper class='module' indicator-dots="true" circular="true" indicator-active-color="#118fff">
+        <swiper-item>
           <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
@@ -32,7 +33,9 @@
               </navigator>
             </i-col>
           </i-row>
+        </swiper-item>
 
+        <swiper-item>
           <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{secondaryModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
@@ -47,8 +50,9 @@
               </navigator>
             </i-col>
           </i-row>
+          </swiper-item>
         
-      </view>
+      </swiper>
     </view>
   </view>
 

@@ -54,3 +54,8 @@
   margin-left:10px;
   color: #000;
 }
+
+.real_color
+{
+  color: #f30!important;
+}
