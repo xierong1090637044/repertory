@@ -47,3 +47,8 @@
   height: 50px;
   line-height: 50px;
 }
+.content_scroll
+{
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
+}
