@@ -1,7 +1,7 @@
 <!--pages/index/index.wxml-->
 <!-- <view hidden='{{!noticeShow}}'> -->
 <view bindtap='skip'>
-    <i-notice-bar icon="systemprompt" loop closable>
+    <i-notice-bar icon="systemprompt" loop>
     {{message}}
     </i-notice-bar>
 </view>
@@ -17,8 +17,9 @@
   </view>
   <view class='content'>
     <view class='bd'>
-      <view class='module'>
-        <i-row>
+      <swiper class='module' indicator-dots="true" circular="true" autoplay='true' indicator-active-color="#118fff">
+        <swiper-item>
+          <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
                 <i-grid i-class="module-grid">
@@ -32,21 +33,26 @@
               </navigator>
             </i-col>
           </i-row>
+        </swiper-item>
+
+        <swiper-item>
           <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{secondaryModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
                 <i-grid i-class="module-grid">
-                  <i-grid-item i-class="module-grid-item">
-                    <i-grid-icon i-class='module-grid-icon'>
-                      <image src="{{item.icon}}" />
-                    </i-grid-icon>
-                    <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
+                  <i-grid-item>
+                      <i-grid-icon i-class='module-grid-icon'>
+                        <image src="{{item.icon}}" />
+                      </i-grid-icon>
+                      <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
                   </i-grid-item>
                 </i-grid>
               </navigator>
             </i-col>
           </i-row>
-      </view>
+        </swiper-item>
+        
+      </swiper>
     </view>
   </view>
 
@@ -58,4 +64,5 @@
   <view class='scan_notice'>（不可以从相册选取）</view>
 
 </view>
+<view class='every' style='height:{{height}}'></view>
 <!--<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>-->

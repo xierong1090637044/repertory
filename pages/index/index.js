@@ -16,19 +16,29 @@ Page({
       {
         name: '我的产品', icon: '../../images/index/goods.png',
         url: '/pages/goods/goods'
-      }, 
-    ],
-    secondaryModules: [
-      { name: '财务报表', icon: '../../images/index/finance.png', 
+      },
+      {
+        name: '我的客户', icon: '../../images/index/entering.png',
+        url: '/pages/second/custom/custom'
+      },
+      {
+        name: '财务报表', icon: '../../images/index/finance.png',
         url: '/pages/finance/finance'
-      }, 
-      { name: '我的好友', icon: '../../images/index/mine.png', 
+      },
+      {
+        name: '我的好友', icon: '../../images/index/mine.png',
         url: '/pages/mine/friends/friends'
       },
+    ],
+    secondaryModules: [
       {
         name: '操作记录', icon: '../../images/index/order_history.png',
         url: '/pages/order_history/order_history'
       },
+      {
+        name: '记账本', icon: '../../images/index/delivery.png',
+        url: '/pages/common/goods-select/goods-select?type=delivery'
+      }, 
     ],
     spinShow: true,
     noticeShow:true
@@ -87,25 +97,20 @@ Page({
     });
 
     that.getnoticetext();
+
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  /*** 生命周期函数--监听页面初次渲染完成*/
   onReady: function () {
-    var that = this;
-    setTimeout(function () {
-      that.setData({
-        spinShow: false
-      });
-    }, 1000);
+    //that.setData({ swiperheight})
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
+
   },
 
   /**

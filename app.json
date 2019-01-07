@@ -35,6 +35,17 @@
     "pages/order_history_fri/detail/detail",
     "pages/goods/goods-fri/goods-fri"
   ],
+
+  "subPackages": [
+    {
+      "root": "pages/second/",
+      "pages": [
+        "custom/custom",
+        "custom/custom_add/custom_add"
+      ]
+    }
+  ],
+
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#118fff",
