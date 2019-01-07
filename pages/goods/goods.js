@@ -135,7 +135,7 @@ Page({
                           title: '删除成功',
                           icon: 'success'
                         })
-                        that.onShow();
+                        that.onLoad();
                       },
                       error: function (result, error) {
                         console.log(error);
