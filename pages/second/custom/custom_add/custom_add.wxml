@@ -6,7 +6,7 @@
     <i-panel title="基本信息">
       <i-input title="客户编号" value="{{custom.custom_type}}" name="custom_type" placeholder="必填项，姓名首字母" maxlength='1'/>
       <i-input title="客户姓名" value="{{custom.custom_name}}" name="custom_name" placeholder="必填项，客户姓名" />
-      <i-input title="联系电话" value="{{custom.custom_phone}}" name="custom_phone" placeholder="联系电话" />
+      <i-input title="联系电话" value="{{custom.custom_phone}}" name="custom_phone" placeholder="联系电话" maxlength='11'/>
       <i-input title="联系地址" value="{{custom.custom_address}}" name="custom_address" placeholder="联系地址" />
     </i-panel>
     

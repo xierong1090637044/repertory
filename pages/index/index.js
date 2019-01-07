@@ -18,7 +18,7 @@ Page({
         url: '/pages/goods/goods'
       },
       {
-        name: '我的客户', icon: '../../images/index/entering.png',
+        name: '我的客户', icon: '../../images/index/customs.png',
         url: '/pages/second/custom/custom'
       },
       {
