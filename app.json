@@ -41,7 +41,8 @@
       "root": "pages/second/",
       "pages": [
         "custom/custom",
-        "custom/custom_add/custom_add"
+        "custom/custom_add/custom_add",
+        "choose_custom/choose_custom"
       ]
     }
   ],

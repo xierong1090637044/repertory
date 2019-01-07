@@ -17,8 +17,7 @@
   </view>
   <view class='content'>
     <view class='bd'>
-      <swiper class='module' indicator-dots="true" circular="true" autoplay='true' indicator-active-color="#118fff">
-        <swiper-item>
+      <view class='module' indicator-dots="true" circular="true" autoplay='true' indicator-active-color="#118fff">
           <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
@@ -33,9 +32,7 @@
               </navigator>
             </i-col>
           </i-row>
-        </swiper-item>
 
-        <swiper-item>
           <i-row>
             <i-col span="8" i-class="padded-5" wx:for="{{secondaryModules}}" wx:key="unique">
               <navigator url='{{item.url}}'>
@@ -50,9 +47,8 @@
               </navigator>
             </i-col>
           </i-row>
-        </swiper-item>
         
-      </swiper>
+      </view>
     </view>
   </view>
 
