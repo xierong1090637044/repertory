@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "产品出库操作记录"
+  "navigationBarTitleText": "产品出库操作记录",
+  "usingComponents": {
+    "i-panel": "../../../component/panel/index",
+    "i-input": "../../../component/input/index"
+  }
 }

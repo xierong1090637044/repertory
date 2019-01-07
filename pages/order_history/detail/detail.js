@@ -29,7 +29,7 @@ Page({
   {
     that.setData({ spinShow:true});
     const query = Bmob.Query('order_opreations');
-    query.include("opreater");
+    query.include("opreater","custom");
     query.get(id).then(res => {
       console.log(res);
       that.setData({detail:res});

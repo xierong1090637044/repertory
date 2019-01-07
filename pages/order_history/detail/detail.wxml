@@ -16,6 +16,13 @@
        <view class='pro_allmoney'>总计：￥{{detail.all_money}}</view>
     </view>
 
+    <view>
+      <i-panel title="开单明细">
+        <i-input  wx:if="{{detail.custom !=null}}" title="客户姓名：" value="{{detail.custom.custom_name}}" disabled="true"/>
+        <i-input title="实际收款" value="￥{{detail.real_money == null ?'未填写':detail.real_money}}"bindchange='getreal_money'/>
+      </i-panel>
+    </view>
+
     <view style='margin-top:20px' class='detail_bottom'>
          <view style='display:flex;border-bottom:1px solid#ddd'>
             <view><image src='{{detail.opreater.avatarUrl}}' class='avatar'></image></view>
