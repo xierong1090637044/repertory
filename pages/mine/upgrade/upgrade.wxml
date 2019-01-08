@@ -15,6 +15,31 @@
 
     <view class="describe">
       <view class="desc-title">
+        <text class="desc-v">v1.1.2 公测版</text>
+        <text class="desc-time">2018.01.08</text>
+      </view>
+      <text class="desc-content">优化升级</text>
+      <view class="desc-list">
+        <text class="desc-list-item">增加我的客户页面</text>
+        <text class="desc-list-item">增加产品出库时可以填写开单明细</text>
+        <text class="desc-list-item">增加操作记录可以撤回操作</text>
+        <text class="desc-list-item">页面显示优化</text>
+        <text class="desc-list-item">添加产品时，可以自定义库存量</text>
+      </view>
+      <text class="desc-content">升级计划</text>
+      <view class="desc-list">
+        <text class="desc-list-item">增加pc端可以导出产品表格数据功能（开发中）</text>
+        <text class="desc-list-item">增加员工权限管理设置</text>
+        <text class="desc-list-item">增加库存盘点页面</text>
+        <text class="desc-list-item">增加供销商页面</text>
+        <text class="desc-list-item">优化条形码显示</text>
+        <text class="desc-list-item">优化条形码操作</text>
+        <text class="desc-list-item">员工操作和本人一致</text>
+      </view>
+    </view>
+
+    <view class="describe">
+      <view class="desc-title">
         <text class="desc-v">v1.1.1 公测版</text>
         <text class="desc-time">2018.01.03</text>
       </view>

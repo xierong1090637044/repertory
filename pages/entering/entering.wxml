@@ -21,7 +21,7 @@
   <text>暂无数据</text>
 </view>
 
-<view class='btn-group' bindtap='handleEntering' style='margin-top:40px'>
+<view class='btn-group' bindtap='handleEntering'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
       确认入库
     </button>

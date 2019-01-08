@@ -92,6 +92,7 @@ Page({
     var that = this;
     var friend = wx.getStorageSync("userid");
     var user = wx.getStorageSync("friendId");
+    
     var Diary = Bmob.Object.extend("Friends");
     var query = new Bmob.Query(Diary);
     query.equalTo("userId", user);
@@ -99,6 +100,7 @@ Page({
     // 查询所有数据
     query.find({
       success: function (results) {
+        console.log(results);
         objectId = results[0].id;
         var stockManager = results[0].get("stockManager");
         var stockSee = results[0].get("stockSee");

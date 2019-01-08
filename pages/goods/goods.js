@@ -135,7 +135,7 @@ Page({
                           title: '删除成功',
                           icon: 'success'
                         })
-                        that.onShow();
+                        that.onLoad();
                       },
                       error: function (result, error) {
                         console.log(error);
@@ -166,6 +166,7 @@ Page({
   },
 
   loadGoods:function(){
+    wx.showLoading({title: '加载中...'})
     var that = this;
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
@@ -197,20 +198,13 @@ Page({
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
+        wx.hideLoading();
       }
     })
   },
   //加载下一页
   loadMore: function () {
     var that = this;
-    wx.showLoading({
-      title: '正在加载',
-      mask: true
-    });
-    //一秒后关闭加载提示框
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 1000)
     
     //先判断是不是最后一页
     if (that.data.currentPage + 1 == that.data.totalPage) {
@@ -222,12 +216,6 @@ Page({
         icon: "none",
         title: '已经到底啦',
       });
-      // if (that.data.endPage != 0) { //如果最后一页的加载不等于0
-      //   that.setData({
-      //     limitPage: that.data.endPage,
-      //   })
-      // }
-      
     } else {
       that.setData({
         currentPage: that.data.currentPage + 1
@@ -235,6 +223,7 @@ Page({
       this.loadGoods();
     }
   },
+
   loadAll: function () {
     var that = this;
     var Goods = Bmob.Object.extend("Goods");

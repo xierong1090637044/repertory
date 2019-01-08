@@ -20,13 +20,13 @@ Page({
     inputVal: ""
   },
 
-  handleFriendDtl:function(e){
+  /*handleFriendDtl:function(e){
     var friendId = e.currentTarget.dataset.friendid
     wx.setStorageSync('friendId', friendId)
     wx.navigateTo({
       url: '/pages/common/friend-dtl/friend-dtl'
     })
-  },
+  },*/
 
   handleFriendAuth: function (e) {
     var friendId = e.currentTarget.dataset.friendid

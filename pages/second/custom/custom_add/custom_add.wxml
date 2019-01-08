@@ -1,0 +1,39 @@
+<!--pages/goods/goods-add/goods-add.wxml-->
+<i-message id="message" />
+<view class='goods-container'>
+  <form bindsubmit='handleAddCustoms'>
+
+    <i-panel title="基本信息">
+      <i-input title="客户编号" value="{{custom.custom_type}}" name="custom_type" placeholder="必填项，姓名首字母" maxlength='1'/>
+      <i-input title="客户姓名" value="{{custom.custom_name}}" name="custom_name" placeholder="必填项，客户姓名" />
+      <i-input title="联系电话" value="{{custom.custom_phone}}" name="custom_phone" placeholder="联系电话" maxlength='11'/>
+      <i-input title="联系地址" value="{{custom.custom_address}}" name="custom_address" placeholder="联系地址" />
+    </i-panel>
+    
+    <view class='btn-group' wx:if="{{is_modify==false}}">
+      <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+        <i-icon type="add" /> 确认
+      </button>
+      
+      <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">
+        上传中
+      </i-button>
+    </view>
+
+    <view class='btn-group' wx:else>
+      <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+        <i-icon type="add" /> 修改
+      </button>
+
+      <button class='i-btn i-btn-error i-btn-small' wx:if="{{!loading}}" bindtap='_delete'>
+        <i-icon type="warning" /> 删除
+      </button>
+      
+      <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">
+        上传中
+      </i-button>
+    </view>
+
+
+  </form>
+</view>

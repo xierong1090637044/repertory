@@ -1,7 +1,7 @@
 <!--pages/index/index.wxml-->
 <!-- <view hidden='{{!noticeShow}}'> -->
 <view bindtap='skip'>
-    <i-notice-bar icon="systemprompt" loop closable>
+    <i-notice-bar icon="systemprompt" loop>
     {{message}}
     </i-notice-bar>
 </view>

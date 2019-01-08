@@ -20,6 +20,7 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
+    reserve:0,
     loading:false,
     image:"none",
     is_choose: false,
@@ -28,6 +29,7 @@ Page({
   handleAddGoods:function(e){
     var that = this
     var goodsForm = e.detail.value
+    console.log(goodsForm);
     //先进行表单非空验证
     if (goodsForm.goodsName == "") {
       $Message({
@@ -90,7 +92,7 @@ Page({
                           goods.set("costPrice", goodsForm.costPrice);
                           goods.set("retailPrice", goodsForm.retailPrice);
                           goods.set("packingUnit", goodsForm.packingUnit);
-                          goods.set("reserve", 0);
+                          goods.set("reserve", Number(goodsForm.reserve));
                           goods.save(null, {
                             success: function (result) {
                               wx.setStorageSync("is_add", true);
@@ -142,6 +144,7 @@ Page({
                                                   packingUnit: "",
                                                   costPrice: '',
                                                   retailPrice: '',
+                                                  reserve:0,
                                                   loading: false
                                                 })
                                               }
@@ -164,6 +167,7 @@ Page({
                                               packingUnit: "",
                                               costPrice: '',
                                               retailPrice: '',
+                                              reserve:0,
                                               loading: false
                                             })
                                           }
@@ -178,13 +182,13 @@ Page({
                             },
                             error: function (result, error) {
                               //添加失败
-                              console.log("添加失败:" + error);
+                              console.log(error);
                             }
                           })
                     }
                   },
                   error: function (error) {
-                    console.log("查询失败: " + error.code + " " + error.message);
+                    console.log(error.code + " " + error.message);
                   }
                 });
               }
