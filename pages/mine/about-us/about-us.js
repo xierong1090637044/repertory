@@ -2,7 +2,6 @@
 var app = getApp();
 Page({
   data: {
-    spinShow: true,
     year: '',
     painting: {},
     shareImage: ''
@@ -47,11 +46,6 @@ Page({
     that.setData({
       year: new Date().getFullYear()
     });
-    setTimeout(function(){
-      that.setData({
-        spinShow: false
-      });
-    },2000)
   },
   onReady: function () {
     //this.handleQRCodeDraw()

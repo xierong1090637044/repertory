@@ -1,1 +1,6 @@
-/* pages/common/goods-select/goods-select.wxss */
+.wrap_overflow
+{
+  margin-top:48px;
+  height:calc(100vh - 110px);
+  overflow-y:scroll !important;
+}

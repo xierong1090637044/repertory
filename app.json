@@ -34,8 +34,12 @@
     "pages/entering/enter-history-fri/enter-history-fri",
     "pages/delivery/delivery-history-fri/delivery-history-fri",
     "pages/order_history_fri/detail/detail",
-    "pages/goods/goods-fri/goods-fri"
+    "pages/goods/goods-fri/goods-fri",
+    "pages/second/custom/custom",
+    "pages/second/custom/custom_add/custom_add",
+    "pages/second/choose_custom/choose_custom"
   ],
+
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#118fff",
@@ -55,6 +59,12 @@
         "text": "首页"
       },
       {
+        "iconPath": "images/index/customs.png",
+        "selectedIconPath": "images/index/customs_s.png",
+        "pagePath": "pages/second/custom/custom",
+        "text": "客户"
+      },
+      {
         "iconPath": "images/index/personcenter.png",
         "selectedIconPath": "images/index/personcenter_s.png",
         "pagePath": "pages/mine/mine",
@@ -62,6 +72,7 @@
       }
     ]
   },
+  
   "usingComponents": {
     "i-card": "component/card/index",
     "i-row": "component/row/index",

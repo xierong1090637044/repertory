@@ -32,15 +32,15 @@
 </view>
 
 <i-cell-group i-class="wrap-2" wx:else>
-  <block wx:for="{{friends}}" wx:key="unique">
-    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
+  <block wx:for="{{friends}}" wx:key="unique" >
+    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}" data-friendid="{{item.friendId}}" bindtap="handleFriendDtl">
     <view slot="content">
      <i-cell data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}">
       <image src='{{item.avatarUrl}}' style='width:40px;height:40px;margin-top:5px' slot="icon"></image>
      </i-cell>
     </view>
     <view slot="button" class="i-swipeout-button-group">
-      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendDtl">协同管理
+      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendAuth">协同管理
       </view>
       <view class="i-swipeout-button bg-danger" data-item="{{item}}" bindtap="handleFriendDel" >
         删除
