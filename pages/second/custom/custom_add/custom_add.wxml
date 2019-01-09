@@ -10,7 +10,7 @@
       <i-input title="联系地址" value="{{custom.custom_address}}" name="custom_address" placeholder="联系地址" />
     </i-panel>
     
-    <view class='btn-group' wx:if="{{is_modify==false}}">
+    <view class='btn-group' wx:if="{{is_modify==false}}" style='margin-top:10%'>
       <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
         <i-icon type="add" /> 确认
       </button>
@@ -20,13 +20,17 @@
       </i-button>
     </view>
 
-    <view class='btn-group' wx:else>
+    <view class='btn-group' wx:else style='margin-top:10%'>
       <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
         <i-icon type="add" /> 修改
       </button>
 
       <button class='i-btn i-btn-error i-btn-small' wx:if="{{!loading}}" bindtap='_delete'>
         <i-icon type="warning" /> 删除
+      </button>
+
+      <button class='i-btn i-btn-phone i-btn-small' bindtap='make_phone'>
+        <i-icon type="mobilephone" /> 联系他/她
       </button>
       
       <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">

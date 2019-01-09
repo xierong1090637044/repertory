@@ -16,6 +16,7 @@
 .i-btn-primary{color:#fff!important;background:#2d8cf0!important}
 .i-btn-ghost{background:#fff!important;color:#495060!important}
 .i-btn-error{color:#fff!important;background:#ed3f14!important}
+.i-btn-phone{color:#fff!important;background:#2ca879!important}
 .i-btn-small{height:40px;line-height:40px}
 
 .icon-upload
