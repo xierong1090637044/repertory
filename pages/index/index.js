@@ -6,28 +6,37 @@ Page({
    */
   data: {
     firstlyModules: [
-      { name: '产品入库', icon: '../../images/index/entering.png',
+      {
+        name: '产品入库', icon: '../../images/index/entering.png',
         url: '/pages/common/goods-select/goods-select?type=entering'
-      }, 
-      { name: '产品出库', icon: '../../images/index/delivery.png', 
+      },
+      {
+        name: '产品出库', icon: '../../images/index/delivery.png',
         url: '/pages/common/goods-select/goods-select?type=delivery'
       },
       {
         name: '我的产品', icon: '../../images/index/goods.png',
         url: '/pages/goods/goods'
-      }, 
-    ],
-    secondaryModules: [
-      { name: '财务报表', icon: '../../images/index/finance.png', 
+      },
+      {
+        name: '我的客户', icon: '../../images/index/customs.png',
+        url: '/pages/second/custom/custom'
+      },
+      {
+        name: '财务报表', icon: '../../images/index/finance.png',
         url: '/pages/finance/finance'
-      }, 
-      { name: '我的好友', icon: '../../images/index/mine.png', 
-        url: '/pages/mine/friends/friends'
       },
       {
         name: '操作记录', icon: '../../images/index/order_history.png',
         url: '/pages/order_history/order_history'
       },
+    ],
+    secondaryModules: [
+      {
+        name: '我的好友', icon: '../../images/index/mine.png',
+        url: '/pages/mine/friends/friends'
+      },
+
     ],
     spinShow: true,
     noticeShow:true

@@ -59,12 +59,6 @@
         "text": "首页"
       },
       {
-        "iconPath": "images/index/customs.png",
-        "selectedIconPath": "images/index/customs_s.png",
-        "pagePath": "pages/second/custom/custom",
-        "text": "客户"
-      },
-      {
         "iconPath": "images/index/personcenter.png",
         "selectedIconPath": "images/index/personcenter_s.png",
         "pagePath": "pages/mine/mine",

@@ -166,7 +166,6 @@ Page({
   },
 
   loadGoods:function(){
-    wx.showLoading({title: '加载中...'})
     var that = this;
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
@@ -198,7 +197,6 @@ Page({
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
-        wx.hideLoading();
       }
     })
   },
@@ -315,7 +313,7 @@ Page({
       limitPage: config.pageSize,
       goods: [],
       isEnd: false,
-      isEmpty: true,
+      isEmpty: false,
       inputVal:'',
       inputShowed:false,
       spinShow: true
