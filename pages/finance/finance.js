@@ -51,7 +51,8 @@ Page({
           var tempFin = {}
           tempFin.num = results[i].get('num') || 0;
           tempFin.type = results[i].get('type') || 0;
-          tempFin.goods = results[i].get('goodsId')
+          tempFin.goods = results[i].get('goodsId');
+          tempFin.retailPrice = results[i].get('retailPrice') || 0;
           tempFin.createdAt = results[i].createdAt.substring(0, 10) || '';
           tempFinArr.push(tempFin)
         }
@@ -152,11 +153,11 @@ Page({
 
         //统计总出库金额
         var totalDeliveryPrice = _.reduce(filterDelivery, function (result, item) {
-          return result + item.num * item.goods.retailPrice;
+          return result + item.num * item.retailPrice;
         }, 0);
 
         var totalProfit = _.reduce(filterDelivery, function (result, item) {
-          return result + (item.num * item.goods.retailPrice - item.num * item.goods.costPrice);
+          return result + (item.num * item.retailPrice - item.num * item.goods.costPrice);
         }, 0);
 
         //统计近7日的入库
@@ -176,11 +177,11 @@ Page({
 
         //统计近7日出库金额
         var weekDeliveryPrice = _.reduce(filterWeekDelivery, function (result, item) {
-          return result + item.num * item.goods.retailPrice;
+          return result + item.num * item.retailPrice;
         }, 0);
 
         var weekProfit = _.reduce(filterWeekDelivery, function (result, item) {
-          return result + (item.num * item.goods.retailPrice - item.num * item.goods.costPrice);
+          return result + (item.num * item.retailPrice - item.num * item.goods.costPrice);
         }, 0);
 
         that.setData({
@@ -206,11 +207,11 @@ Page({
             }, 0);
 
             price = _.reduce(groupDelivery[that.getDay(i)], function (result, item) {
-              return result + item.num * item.goods.retailPrice;
+              return result + item.num * item.retailPrice;
             }, 0);
 
             profit = _.reduce(groupDelivery[that.getDay(i)], function (result, item) {
-              return result + (item.num * item.goods.retailPrice - item.num * item.goods.costPrice);
+              return result + (item.num * item.retailPrice - item.num * item.goods.costPrice);
             }, 0);
 
             //设置当日出库数量及金额

@@ -4,20 +4,20 @@
        <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
                <view>产品：{{item.goodsName}}</view>
-               <view>零售价：￥{{item.retailPrice}}</view>
+               <view>建议零售价：￥{{item.retailPrice}}</view>
           </view>
           <view class='pro_list'>
-               <view>数量：X{{item.num}}</view>
+               <view>实际卖出价：￥{{item.modify_retailPrice}}（X{{item.num}}）</view>
                <view>总价：￥{{item.total_money}}</view>
           </view>
        </view>
        <view class='pro_allmoney'>总计：￥{{all_money}}</view>
     </view>
 
-    <i-panel title="开单明细">
+    <i-panel title="开单明细（用于记录客户是否有无欠款）">
       <i-input title="客户姓名" value="{{custom.custom_name}}" placeholder="选择客户" disabled="true" bindtap='choose_custom'/>
       <i-input title="实际应收" value="{{all_money}}" placeholder="选择客户" disabled="true"/>
-      <i-input title="实际收款" value="{{real_money}}" placeholder="输入实际收到的钱款" bindchange='getreal_money'/>
+      <i-input title="实际收款（可修改）" value="{{real_money}}" placeholder="输入实际收到的钱款" bindchange='getreal_money'/>
     </i-panel>
 
     <view style='margin-top:20px'>

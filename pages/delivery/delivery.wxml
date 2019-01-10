@@ -5,7 +5,7 @@
     <i-card title="产品名称：{{item.goodsName}}" extra="当前库存：{{item.reserve}}">
       <view slot="content">
         <view>产品规格：{{item.packageContent}}/{{item.packingUnit}}</view>
-        <view>零售价格：{{item.retailPrice}}(元)</view>
+        <view>建议零售价格：{{item.retailPrice}}(元)</view>
         <view class='input_withlabel'>
             <view>实际价格（可修改）：</view>
             <view><input placeholder='{{item.retailPrice}}' bindinput='getrealprice' placeholder-class='input_label' class='input_label' data-idx="{{index}}" type='number'/></view>

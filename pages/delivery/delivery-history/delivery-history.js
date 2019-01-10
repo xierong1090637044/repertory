@@ -102,7 +102,7 @@ Page({
               var user = new Bmob.User();
               user.id = wx.getStorageSync('userid');
               tempBills.set('goodsName', that.data.goods[i].goodsName);
-              tempBills.set('retailPrice', that.data.goods[i].retailPrice);
+              tempBills.set('retailPrice', that.data.goods[i].modify_retailPrice);
               tempBills.set('num', that.data.goods[i].num)
               tempBills.set('total_money', that.data.goods[i].total_money);
               tempBills.set('goodsName', that.data.goods[i].goodsName);
