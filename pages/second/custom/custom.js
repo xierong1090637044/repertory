@@ -16,6 +16,7 @@ Page({
     wx.showLoading({title: '加载中...'})
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("customs");
+    query.order("custom_type");
     query.equalTo("parent", "==", userid);
     query.find().then(res => {
       console.log(res);
@@ -41,23 +42,28 @@ Page({
     wx.showLoading({title: '加载中...'});
 
     var name = e.detail.value;
-    const query = Bmob.Query("customs");
-    (name == '')?that.getcustom_list():query.equalTo("custom_name", "==", name);
-    query.find().then(res => {
-      if(res.length == 0)
-      {
-        that.setData({
-          isEmpty: true
-        });
-        wx.hideLoading();
-      }else{
-        that.setData({
-          customs: res,
-          isEmpty: false
-        });
-        wx.hideLoading();
-      }
-    });
+    if(name == '')
+    {
+      that.getcustom_list();
+    }else{
+      const query = Bmob.Query("customs");
+      query.equalTo("custom_name", "==", name);
+      query.order("custom_type");
+      query.find().then(res => {
+        if (res.length == 0) {
+          that.setData({
+            isEmpty: true
+          });
+          wx.hideLoading();
+        } else {
+          that.setData({
+            customs: res,
+            isEmpty: false
+          });
+          wx.hideLoading();
+        }
+      });
+    }
   },
 
   //点击查看详情
