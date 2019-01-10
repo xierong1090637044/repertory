@@ -13,7 +13,7 @@ Page({
     goods:[],
     currentPage: 0, //要跳过查询的页数
     limitPage: config.pageSize,//首先显示3条数据（之后加载时都增加3条数据，直到再次加载不够3条）
-    isEmpty: true, //当前查询出来的数据是否为空
+    isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了
     endPage: 0, //最后一页加载多少条
     totalPage: 0, //总页数

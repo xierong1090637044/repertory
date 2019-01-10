@@ -1,6 +1,12 @@
 <!--pages/common/goods-select/goods-select.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <!--搜索-->
+
+<view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+<view wx:else>
 <view class="search-view">
   <view class="search-bar">
     <view class="search-bar-form">
@@ -27,13 +33,11 @@
     </i-checkbox>
   </i-checkbox-group>
 </i-panel>
-<view class='no-data' wx:if="{{isEmpty}}">
-  <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
-</view>
 
 <view class='btn-group' bindtap='link2page'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
       确认选择
     </button>
+</view>
+
 </view>

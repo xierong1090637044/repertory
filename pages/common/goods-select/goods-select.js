@@ -16,7 +16,7 @@ Page({
     currGoods: [],
     goods: [],
     totalGoods: [],
-    isEmpty: true,
+    isEmpty: false,
     // 搜索
     inputShowed: false,
     inputVal: ""
@@ -114,11 +114,12 @@ Page({
     query.limit(10000)
     query.find({
       success: function (res) {
+        console.log(res.length);
+        if (res.length == 0) {
+          that.setData({ isEmpty: true })
+        }
         var tempGoodsArr = new Array();
         for (var i = 0; i < res.length; i++) {
-          that.setData({
-            isEmpty: false
-          })
           var tempGoods = {}
           tempGoods.goodsId = res[i].id || '';
           tempGoods.goodsName = res[i].get("goodsName") || '';
