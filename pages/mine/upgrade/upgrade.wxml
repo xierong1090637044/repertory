@@ -15,6 +15,20 @@
 
     <view class="describe">
       <view class="desc-title">
+        <text class="desc-v">v1.1.3 公测版</text>
+        <text class="desc-time">2018.01.10</text>
+      </view>
+      <text class="desc-content">优化升级</text>
+      <view class="desc-list">
+        <text class="desc-list-item">页面优化</text>
+        <text class="desc-list-item">财务报表利润数据异常修改</text>
+        <text class="desc-list-item">操作记录显示优化</text>
+        <text class="desc-list-item">产品出入显示优化</text>
+      </view>
+    </view>
+
+    <view class="describe">
+      <view class="desc-title">
         <text class="desc-v">v1.1.2 公测版</text>
         <text class="desc-time">2018.01.08</text>
       </view>
