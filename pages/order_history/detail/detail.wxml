@@ -5,7 +5,7 @@
     <view>
        <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
-               <view>产品：{{item.goodsName}}</view>
+               <view>产品：{{item.goodsName}}（成本价：{{item.goodsId.costPrice}}）</view>
                <view>建议零售价：￥{{item.goodsId.retailPrice}}</view>
           </view>
           <view class='pro_list'>
