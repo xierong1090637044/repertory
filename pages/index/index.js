@@ -19,8 +19,8 @@ Page({
         url: '/pages/goods/goods'
       },
       {
-        name: '我的客户', icon: '../../images/index/customs.png',
-        url: '/pages/second/custom/custom'
+        name: '协同管理', icon: '../../images/index/mine.png',
+        url: '/pages/mine/friends/friends'
       },
       {
         name: '财务报表', icon: '../../images/index/finance.png',
@@ -33,10 +33,9 @@ Page({
     ],
     secondaryModules: [
       {
-        name: '我的好友', icon: '../../images/index/mine.png',
-        url: '/pages/mine/friends/friends'
+        name: '我的客户', icon: '../../images/index/customs.png',
+        url: '/pages/second/custom/custom'
       },
-
     ],
     spinShow: true,
     noticeShow:true

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/mine/account/account",
     "pages/common/friend-together/friend-together",
     "pages/mine/friends/friends",
     "pages/authorize/authorize",
@@ -23,7 +24,6 @@
     "pages/mine/propose/propose",
     "pages/mine/message/message",
     "pages/mine/upgrade/upgrade",
-    "pages/mine/test/test",
     "pages/delivery/delivery-history/delivery-history",
     "pages/order_history/detail/detail",
     "pages/entering/entering",
@@ -39,7 +39,6 @@
     "pages/second/custom/custom_add/custom_add",
     "pages/second/choose_custom/choose_custom"
   ],
-
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#118fff",
@@ -66,7 +65,6 @@
       }
     ]
   },
-  
   "usingComponents": {
     "i-card": "component/card/index",
     "i-row": "component/row/index",

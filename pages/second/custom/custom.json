@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "库存助手-我的客户"
+  "navigationBarTitleText": "库存助手-我的客户",
+  "usingComponents": {
+    "i-spin": "../../../component/spin/index"
+  }
 }

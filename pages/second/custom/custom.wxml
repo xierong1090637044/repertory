@@ -7,6 +7,8 @@
   </view>
 </bar>
 
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+
 <view class='no-data' wx:if="{{isEmpty}}">
   <image src='/images/common/no-data.png'></image>
   <text>暂无数据</text>

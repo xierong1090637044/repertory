@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "库存助手-账号信息",
+  "usingComponents": {
+    "i-spin": "../../../component/spin/index",
+    "i-panel": "../../../component/panel/index",
+    "i-cell-group": "../../../component/cell-group/index",
+    "i-cell": "../../../component/cell/index",
+    "i-icon": "../../../component/icon/index"
+  }
+}

@@ -7,13 +7,13 @@ Page({
     CustomBar: app.globalData.CustomBar,
     hidden: true,
     customs:[],
-    isEmpty:false
+    isEmpty:false,
+    spinShow:true
   },
 
   //得到客户列表
   getcustom_list:function()
   {
-    wx.showLoading({title: '加载中...'})
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("customs");
     query.order("custom_type");
@@ -23,15 +23,15 @@ Page({
       if(res.length == 0)
       {
         that.setData({
-          isEmpty: true
+          isEmpty: true,
+          spinShow:false
         });
-        wx.hideLoading();
       }else{
         that.setData({
           customs: res,
-          isEmpty: false
+          isEmpty: false,
+          spinShow: false
         });
-        wx.hideLoading();
       }
     });
   },
@@ -39,8 +39,6 @@ Page({
   //搜索
   complete:function(e)
   {
-    wx.showLoading({title: '加载中...'});
-
     var name = e.detail.value;
     if(name == '')
     {
@@ -52,15 +50,15 @@ Page({
       query.find().then(res => {
         if (res.length == 0) {
           that.setData({
-            isEmpty: true
+            isEmpty: true,
+            spinShow: false
           });
-          wx.hideLoading();
         } else {
           that.setData({
             customs: res,
-            isEmpty: false
+            isEmpty: false,
+            spinShow: false
           });
-          wx.hideLoading();
         }
       });
     }
