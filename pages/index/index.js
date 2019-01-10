@@ -20,7 +20,7 @@ Page({
       },
       {
         name: '协同管理', icon: '../../images/index/mine.png',
-        url: '/pages/mine/friends/friends'
+        url: '/pages/friends/friends'
       },
       {
         name: '财务报表', icon: '../../images/index/finance.png',

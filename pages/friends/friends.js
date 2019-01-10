@@ -1,7 +1,7 @@
 // pages/mine/friends/friends.js
-const Bmob = require('../../../utils/bmob.js')
-var config = require('../../../utils/config.js')
-var _ = require('../../../utils/we-lodash.js');
+const Bmob = require('../../utils/bmob.js')
+var config = require('../../utils/config.js')
+var _ = require('../../utils/we-lodash.js');
 var userid = '';
 Page({
 
