@@ -3,6 +3,7 @@ const Bmob = require('../../utils/bmob.js')
 var config = require('../../utils/config.js')
 var _ = require('../../utils/we-lodash.js');
 var userid = '';
+var that;
 Page({
 
   /**
@@ -11,17 +12,36 @@ Page({
   data: {
     spinShow:true,
     goods:[],
-    currentPage: 0, //要跳过查询的页数
-    limitPage: config.pageSize,//首先显示3条数据（之后加载时都增加3条数据，直到再次加载不够3条）
+    limitPage: 10,//限制显示条数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了
-    endPage: 0, //最后一页加载多少条
-    totalPage: 0, //总页数
     totalGoods: [],
     // 搜索
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    current: '1',
+    length:null,
   },
+
+  //tab改变事件
+  handleChange({ detail }) {
+    this.setData({
+      current: detail.key,
+      type:true
+    });
+    if (detail.key == 1) {
+      that.loadGoods(true);
+      this.setData({
+        type: true
+      });
+    } else {
+      that.loadGoods(false);
+      this.setData({
+        type: false
+      });
+    }
+  },
+
   // 搜索
   showInput: function () {
     this.setData({
@@ -39,34 +59,18 @@ Page({
       inputVal: ""
     });
     this.handleResetData()
-    this.loadAll()
-    this.loadGoods()
+    this.loadGoods(true)
   },
   inputTyping: function (e) {
     this.setData({
       inputVal: e.detail.value
     });
   },
+
   searchAction: function (e) {
     var that = this;
     var inputVal = this.data.inputVal
-    var filterGoods = _.chain(that.data.totalGoods)
-      .filter(function (res) {
-        return res.goodsName.match(new RegExp(inputVal));
-      })
-      .map(function (res) {
-        return res;
-      })
-      .value();
-    var isEmpty = true
-    if (filterGoods.length){
-      isEmpty = false
-    }
-    that.setData({
-      goods: filterGoods,
-      isEmpty: isEmpty,
-      isEnd: !isEmpty
-    })
+    that.loadGoods(that.data.type, inputVal);
   },
 	// /.搜索
   handleDetial: function (e) {
@@ -76,6 +80,7 @@ Page({
       url: '/pages/common/goods-dtl/goods-dtl?type=1'
     })
   },
+
   handleEditGoods:function(e){
     var that = this
     var item = e.currentTarget.dataset.item
@@ -84,6 +89,7 @@ Page({
       url: '/pages/goods/goods-edit/goods-edit',
     })
   },
+
   handleDelGoods: function (e){
     var that = this
     var item = e.currentTarget.dataset.item
@@ -165,13 +171,21 @@ Page({
     })
   },
 
-  loadGoods:function(){
+  loadGoods:function(type,content){
     var that = this;
+    that.setData({spinShow:true});
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
+    if(type){
+      query.greaterThan("reserve", 10);//库存充足
+    }else{
+      query.lessThanOrEqualTo("reserve", 10);//库存紧张
+    }
+
+    if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
+    
     query.limit(that.data.limitPage);
-    query.skip(that.data.limitPage * that.data.currentPage);
     query.descending("createdAt"); //按照时间降序
     query.include("userId");
     query.find({
@@ -196,106 +210,13 @@ Page({
           tempGoods.single_code = res[i].get("single_code") || '';
           tempGoodsArr.push(tempGoods);
         }
+        console.log(res.length);
         that.handleData(tempGoodsArr);
+        that.setData({ type: type, length: res.length});
       }
     })
-  },
-  //加载下一页
-  loadMore: function () {
-    var that = this;
-    
-    //先判断是不是最后一页
-    if (that.data.currentPage + 1 == that.data.totalPage) {
-      that.setData({
-        isEnd: true,
-        currentPage: that.data.currentPage
-      });
-      wx.showToast({
-        icon: "none",
-        title: '已经到底啦',
-      });
-    } else {
-      that.setData({
-        currentPage: that.data.currentPage + 1
-      });
-      this.loadGoods();
-    }
   },
 
-  loadAll: function () {
-    var that = this;
-    var Goods = Bmob.Object.extend("Goods");
-    var query = new Bmob.Query(Goods);
-    query.equalTo("userId", userid);
-    query.descending("createdAt"); //按照时间降序
-    query.include("userId");
-    query.limit(1000)
-    query.find({
-      success: function (res) {
-        var count = res.length;
-        var totalPage = 0;
-        var endPage = 0;
-        if(count == 0){
-          that.setData({
-            isEmpty: true
-          })
-        }
-        else if (count % that.data.limitPage == 0) {
-          totalPage = parseInt(count / that.data.limitPage);
-          if (totalPage == 1){
-            that.setData({
-              isEnd: true,
-              isEmpty: false
-            })
-          }
-        } else {
-          var lowPage = parseInt(count / that.data.limitPage);
-          totalPage = lowPage + 1;
-          if (lowPage == 0) {
-            that.setData({
-              isEnd: true,
-              isEmpty: false
-            })
-          }else{
-            endPage = count - (lowPage * that.data.limitPage);
-          }
-        }
-        
-        var tempGoodsArr = new Array();
-        for (var i = 0; i < res.length; i++) {
-          that.setData({
-            isEmpty: false
-          })
-          var tempGoods = {}
-          tempGoods.userid = userid || '';
-          tempGoods.userName = res[i].get("userId").username || '';
-          tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
-          tempGoods.goodsId = res[i].id || '';
-          tempGoods.goodsName = res[i].get("goodsName") || '';
-          tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
-          tempGoods.regNumber = res[i].get("regNumber") || '';
-          tempGoods.producer = res[i].get("producer") || '';
-          tempGoods.productCode = res[i].get("productCode") || '';
-          tempGoods.packageContent = res[i].get("packageContent") || '';
-          tempGoods.packingUnit = res[i].get("packingUnit") || '';
-          tempGoods.reserve = res[i].get("reserve") || 0;
-          tempGoods.costPrice = res[i].get("costPrice") || 0;
-          tempGoods.retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.single_code = res[i].get("single_code") || '';
-          tempGoodsArr.push(tempGoods);
-        }
-        that.setData({
-          totalCount: count,
-          endPage: endPage,
-          totalPage: totalPage,
-          totalGoods: tempGoodsArr || [],
-          spinShow: false
-        })
-        console.log("【我的产品】【共有" + count + "条记录】 " + "【共有" + totalPage + "页】" + " 【最后一页加载" + endPage + "条】");
-      }
-    })
-  },
-  
   //数据存储
   handleData: function (data) {
     let page = this.data.currentPage + 1;
@@ -303,27 +224,45 @@ Page({
     data = data || [];
     this.setData({
       goods: page === 1 || page === undefined ? data : this.data.goods.concat(data),
+      spinShow: false
     });
+  },
+
+  //滚动加载更多
+  loadMore:function()
+  {
+    var that = this;
+    if(that.data.length < that.data.limitPage)
+    {
+      wx.showToast({
+        icon:'none',
+        title: '到底啦',
+      })
+    }else{
+      that.setData({ limitPage: that.data.limitPage + that.data.limitPage,})
+      that.loadGoods(that.data.type);
+    }
+    
   },
 
   //重置
   handleResetData:function(){
     this.setData({
       currentPage: 0,
-      limitPage: config.pageSize,
+      limitPage: 10,
       goods: [],
       isEnd: false,
       isEmpty: false,
       inputVal:'',
       inputShowed:false,
-      spinShow: true
+      spinShow: true,
+      current: '1',
     })
   },
 
   handleRefresh:function(){
     this.handleResetData()
-    this.loadAll()
-    this.loadGoods()
+    this.loadGoods(true)
   },
 
   /**
@@ -331,7 +270,8 @@ Page({
    */
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
-    this.handleRefresh()
+    this.handleRefresh();
+    that = this;
   },
 
   /**

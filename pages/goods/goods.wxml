@@ -2,15 +2,10 @@
 <!--搜索-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 
-<view class='no-data' wx:if="{{isEmpty}}">
-  <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
-</view>
-<view wx:else>
 <i-notice-bar icon="systemprompt">
     左滑可以显示产品的操作菜单哦！
 </i-notice-bar>
-<view class="search-view" style='top:36px !important'>
+<view class="search-view" >
   <view class="search-bar">
     <view class="search-bar-form">
       <view class="search-bar-box">
@@ -29,7 +24,18 @@
   </view>
 </view>
 <!--/.搜索-->
-<i-cell-group i-class="wrap" bindmyevent="loadMore">
+
+<i-tabs current="{{ current }}" bindchange="handleChange">
+      <i-tab key="1" title="库存充足"></i-tab>
+      <i-tab key="2" title="库存紧缺"></i-tab>
+</i-tabs>
+
+<view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+<view wx:else>
+<i-cell-group i-class="goods_wrap" bindmyevent="loadMore">
   <block wx:for="{{goods}}" wx:key="unique">
     <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
       <view slot="content">

@@ -26,3 +26,8 @@
     align-items:center;
 }
 
+.goods_wrap{
+  height: calc(100vh - 202px);
+  overflow: scroll;
+}
+
