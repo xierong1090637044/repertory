@@ -5,12 +5,12 @@
     <view>
        <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
-               <view>产品：{{item.goodsName}}（成本价：{{item.goodsId.costPrice}}）</view>
+               <view>产品：￥{{item.goodsName}}（成本价：{{item.goodsId.costPrice}}）</view>
                <view >建议零售价：￥{{item.goodsId.retailPrice}}</view>
           </view>
           <view class='pro_list'>
                <view wx:if="{{item.type == -1}}">实际卖出价：￥{{item.retailPrice}}（X{{item.num}}）</view>
-              <view wx:else></view>
+              <view wx:else>数量：X{{item.num}}</view>
                <view>总价：￥{{item.total_money}}</view>
           </view>
        </view>
