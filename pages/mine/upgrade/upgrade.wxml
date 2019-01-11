@@ -24,6 +24,7 @@
         <text class="desc-list-item">财务报表利润数据异常修改</text>
         <text class="desc-list-item">操作记录显示优化</text>
         <text class="desc-list-item">产品出入显示优化</text>
+        <text class="desc-list-item">协同操作逻辑进行重新设计</text>
       </view>
     </view>
 
