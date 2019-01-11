@@ -10,20 +10,7 @@ Page({
   data: {
     spinShow: true,
     friend: {},
-    firstlyModules: [
-      {
-        name: '协作入库', icon: '../../../images/index/entering.png',
-        url: '/pages/friends/goods_select_fri/goods_select_fri?type=entering'
-      },
-      {
-        name: '协作出库', icon: '../../../images/index/delivery.png',
-        url: '/pages/friends/goods_select_fri/goods_select_fri?type=delivery'
-      },
-      {
-        name: '他/她的产品', icon: '../../../images/index/goods.png',
-        url: '/pages/friends/goods-fri/goods-fri'
-      },
-    ],
+    firstlyModules: [],
   },
   
   fetchFriendInfo: function () {
@@ -46,12 +33,55 @@ Page({
       }
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  
+  getauth:function()
+  {
+    var that = this;
+    var auths =[];
+    var Diary = Bmob.Object.extend("Friends");
+    var query = new Bmob.Query(Diary);
+    query.equalTo("userId", wx.getStorageSync("friendId"));
+    query.equalTo("friendId", wx.getStorageSync("userid"));
+    // 查询所有数据
+    query.find({
+      success: function (results) {
+        console.log(results);
+        var stockManager = results[0].get("stockManager");
+        var stockSee = results[0].get("stockSee");
+
+        if (stockManager == 1)
+        {
+          auths.push({
+            name: '协作入库', icon: '../../../images/index/entering.png',
+            url: '/pages/friends/goods_select_fri/goods_select_fri?type=entering'
+          },
+            {
+              name: '协作出库', icon: '../../../images/index/delivery.png',
+              url: '/pages/friends/goods_select_fri/goods_select_fri?type=delivery'
+            });
+        } 
+        if (stockSee == 1)
+        {
+          auths.push({name: '他/她的产品', icon: '../../../images/index/goods.png',
+          url: '/pages/friends/goods-fri/goods-fri'
+          });
+        }
+
+        that.setData({
+          firstlyModules: auths
+        })
+      },
+      error: function (error) {
+        console.log("查询失败: " + error.code + " " + error.message);
+      }
+    });
+  },
+
+  /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
-    this.fetchFriendInfo()
+    this.fetchFriendInfo();
+    this.getauth();
   },
 
   /**

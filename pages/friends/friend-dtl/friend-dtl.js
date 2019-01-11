@@ -93,8 +93,8 @@ Page({
   getauth:function()
   {
     var that = this;
-    var friend = wx.getStorageSync("userid");
-    var user = wx.getStorageSync("friendId");
+    var user = wx.getStorageSync("userid");
+    var friend = wx.getStorageSync("friendId");
     
     var Diary = Bmob.Object.extend("Friends");
     var query = new Bmob.Query(Diary);
@@ -153,6 +153,7 @@ Page({
       }
     });
   },
+
   handleFriendDel: function (e) {
     var that = this
     var item = e.currentTarget.dataset.item
@@ -160,52 +161,47 @@ Page({
     var query1 = new Bmob.Query(Friends);
     query1.equalTo("userId", userid);
     query1.equalTo("friendId", item.id);
-    var query2 = new Bmob.Query(Friends);
-    query2.equalTo("userId", item.id);
-    query2.equalTo("friendId", userid);
-    var mainQuery = Bmob.Query.or(query1, query2);
-    mainQuery.first({
-      success: function (object) {
-        object.destroy({
-          success: function (deleteObject) {
-            var FriendsTemp = Bmob.Object.extend("FriendsTemp");
-            var query1 = new Bmob.Query(FriendsTemp);
-            query1.equalTo("userId", userid);
-            query1.equalTo("friendId", item.friendId);
-            var query2 = new Bmob.Query(FriendsTemp);
-            query2.equalTo("userId", item.friendId);
-            query2.equalTo("friendId", userid);
-            var mainQuery = Bmob.Query.or(query1, query2);
-            mainQuery.first({
-              success: function (object) {
-                object.destroy({
-                  success: function (deleteObject) {
-                    wx.showToast({
-                      title: '删除好友成功',
-                      icon: 'success',
-                      success: function () {
-                        that.fetchFriendInfo()
-                      }
-                    })
-                  },
-                  error: function (object, error) {
-                    console.log('删除失败');
+    query1.find().then(function (todos) {
+      return Bmob.Object.destroyAll(todos);
+    }).then(function (todos) {
+      var FriendsTemp = Bmob.Object.extend("FriendsTemp");
+      var query1 = new Bmob.Query(FriendsTemp);
+      query1.equalTo("userId", userid);
+      query1.equalTo("friendId", item.friendId);
+      var query2 = new Bmob.Query(FriendsTemp);
+      query2.equalTo("userId", item.friendId);
+      query2.equalTo("friendId", userid);
+      var mainQuery = Bmob.Query.or(query1, query2);
+      mainQuery.first({
+        success: function (object) {
+          object.destroy({
+            success: function (deleteObject) {
+              var query3 = new Bmob.Query(Friends);
+              query3.equalTo("userId", item.id);
+              query3.equalTo("friendId", userid);
+              query3.find().then(function (todos) {
+                return Bmob.Object.destroyAll(todos);
+              }).then(function (todos) {
+                wx.showToast({
+                  title: '删除好友成功',
+                  icon: 'success',
+                  success: function () {
+                    that.fetchFriendInfo()
                   }
-                });
-              },
-              error: function (error) {
-                console.log("查询失败: " + error.code + " " + error.message);
-              }
-            });
-          },
-          error: function (object, error) {
-            console.log('删除失败');
-          }
-        });
-      },
-      error: function (object, error) {
-        console.log("query object fail");
-      }
+                })
+              })
+            },
+            error: function (object, error) {
+              console.log('删除失败');
+            }
+          });
+        },
+        error: function (error) {
+          console.log("查询失败: " + error.code + " " + error.message);
+        }
+      });
+    }, function (error) {
+      // 异常处理
     });
   },
   fetchFriendInfo: function () {

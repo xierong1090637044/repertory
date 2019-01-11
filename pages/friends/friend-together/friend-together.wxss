@@ -73,10 +73,11 @@
 }
 
 .content{
-  flex:1;position:absolute;width:100%;min-height:50%;
+  width:100%;min-height:50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 50px;
 }
 .module
 {

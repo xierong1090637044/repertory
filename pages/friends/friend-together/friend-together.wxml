@@ -9,7 +9,7 @@
   </view>
   </view>
 
-<view class='bd'>
+<view class='bd' wx:if="{{firstlyModules.length > 0}}">
       <view class='module'>
         <i-row i-class="margin-t-5">
             <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
@@ -27,3 +27,8 @@
           </i-row>
       </view>
 </view>
+<view class='content' wx:else>
+    <view class='no-data'>
+      <text>对方未给你授权，请联系对方给你权限</text>
+    </view>
+  </view>
