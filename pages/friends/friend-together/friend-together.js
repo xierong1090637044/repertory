@@ -13,15 +13,15 @@ Page({
     firstlyModules: [
       {
         name: '协作入库', icon: '../../../images/index/entering.png',
-        url: '/pages/common/goods_select_fri/goods_select_fri?type=entering'
+        url: '/pages/friends/goods_select_fri/goods_select_fri?type=entering'
       },
       {
         name: '协作出库', icon: '../../../images/index/delivery.png',
-        url: '/pages/common/goods_select_fri/goods_select_fri?type=delivery'
+        url: '/pages/friends/goods_select_fri/goods_select_fri?type=delivery'
       },
       {
         name: '他/她的产品', icon: '../../../images/index/goods.png',
-        url: '/pages/goods/goods-fri/goods-fri'
+        url: '/pages/friends/goods-fri/goods-fri'
       },
     ],
   },

@@ -44,7 +44,7 @@ Page({
     wx.hideLoading();
   },
 
-  handleFriendDel: function (e) {
+  /*handleFriendDel: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.item;
     wx.showModal({
@@ -101,7 +101,7 @@ Page({
         }
       }
     })
-  },
+  },*/
 
   handleAddFriend:function(){
     wx.showActionSheet({
@@ -231,15 +231,9 @@ Page({
         var tempFriendArr = new Array();
         for (var i = 0; i < res.length; i++) {
           var tempFriend = {}
-          if (userid == res[i].get("userId").objectId) {
-            tempFriend.friendId = res[i].get("friendId").objectId;
-            tempFriend.userName = res[i].get("friendId").username;
-            tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
-          } else {
-            tempFriend.friendId = res[i].get("userId").objectId;
-            tempFriend.userName = res[i].get("userId").username;
-            tempFriend.avatarUrl = res[i].get("userId").avatarUrl;
-          }
+          tempFriend.friendId = res[i].get("friendId").objectId;
+          tempFriend.userName = res[i].get("friendId").username;
+          tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
           tempFriend.id = res[i].id || '';
           tempFriend.status = res[i].get("status") || 0;
           tempFriendArr.push(tempFriend);
@@ -320,15 +314,9 @@ Page({
             isEmpty: false
           })
           var tempFriend = {}
-          if (userid == res[i].get("userId").objectId) {
-            tempFriend.friendId = res[i].get("friendId").objectId;
-            tempFriend.userName = res[i].get("friendId").username;
-            tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
-          } else {
-            tempFriend.friendId = res[i].get("userId").objectId;
-            tempFriend.userName = res[i].get("userId").username;
-            tempFriend.avatarUrl = res[i].get("userId").avatarUrl;
-          }
+          tempFriend.friendId = res[i].get("friendId").objectId;
+          tempFriend.userName = res[i].get("friendId").username;
+          tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
           tempFriend.id = res[i].id || '';
           tempFriend.status = res[i].get("status") || 0;
           tempFriendArr.push(tempFriend);

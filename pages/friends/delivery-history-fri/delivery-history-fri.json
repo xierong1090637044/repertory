@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "产品出库协同操作记录",
+  "usingComponents": {
+    "i-panel": "../../../component/panel/index",
+    "i-input": "../../../component/input/index"
+  }
 }

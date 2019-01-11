@@ -90,7 +90,7 @@ Page({
     if(options.type == "friend")
     {
       that.setData({
-        url:"enter-history-fri/enter-history-fri"
+        url:"../friends/enter-history-fri/enter-history-fri"
       });
     }else{
       that.setData({

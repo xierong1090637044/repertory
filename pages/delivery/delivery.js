@@ -123,7 +123,7 @@ Page({
     var that = this;
     if (options.type == "friend") {
       that.setData({
-        url: "delivery-history-fri/delivery-history-fri"
+        url: "../friends/delivery-history-fri/delivery-history-fri"
       });
     } else {
       that.setData({

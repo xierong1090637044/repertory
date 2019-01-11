@@ -1,2 +1,31 @@
-<!--pages/delivery/delivery-history-fri/delivery-history-fri.wxml-->
-<text>pages/delivery/delivery-history-fri/delivery-history-fri.wxml</text>
+<view class='page'>
+    <view style='line-height:35px;padding: 0 10px;'>已选产品</view>
+    <view style='max-height:25vh;overflow-x:scroll'>
+       <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
+          <view class='pro_list' style='color:#000'>
+               <view>产品：{{item.goodsName}}</view>
+               <view>建议零售价：￥{{item.retailPrice}}</view>
+          </view>
+          <view class='pro_list'>
+               <view>实际卖出价：￥{{item.modify_retailPrice}}（X{{item.num}}）</view>
+               <view>总价：￥{{item.total_money}}</view>
+          </view>
+       </view>
+    </view>
+     <view class='pro_allmoney'>总计：￥{{all_money}}</view>
+
+    <i-panel title="开单明细（用于记录客户是否有无欠款）">
+      <i-input title="客户姓名" value="{{custom.custom_name}}" placeholder="选择客户" disabled="true" bindtap='choose_custom'/>
+      <i-input title="实际应收" value="{{all_money}}" placeholder="选择客户" disabled="true"/>
+      <i-input title="实际收款（可修改）" value="{{real_money}}" placeholder="输入实际收到的钱款" bindchange='getreal_money'/>
+    </i-panel>
+
+    <view style='margin-top:20px'>
+         <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>
+    </view>
+
+    <view>
+        <button class='confrim_button' bindtap='confrim_delivery' disabled='{{button}}'>确认出库</button>
+    </view>
+
+</view>
