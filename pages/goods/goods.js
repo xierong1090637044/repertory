@@ -178,9 +178,9 @@ Page({
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
     if(type){
-      query.greaterThan("reserve", 10);//库存充足
+      query.greaterThan("reserve", 0);//库存充足
     }else{
-      query.lessThanOrEqualTo("reserve", 10);//库存紧张
+      query.lessThanOrEqualTo("reserve", 0);//库存紧张
     }
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
@@ -210,9 +210,14 @@ Page({
           tempGoods.single_code = res[i].get("single_code") || '';
           tempGoodsArr.push(tempGoods);
         }
-        console.log(res.length);
         that.handleData(tempGoodsArr);
         that.setData({ type: type, length: res.length});
+        if(res.length == 0)
+        {
+          that.setData({ contentEmpty:true})
+        }else{
+          that.setData({ contentEmpty: false })
+        }
       }
     })
   },
@@ -249,7 +254,7 @@ Page({
   handleResetData:function(){
     this.setData({
       currentPage: 0,
-      limitPage: 10,
+      limitPage: 30,
       goods: [],
       isEnd: false,
       isEmpty: false,

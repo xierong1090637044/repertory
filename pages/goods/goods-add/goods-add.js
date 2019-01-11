@@ -29,7 +29,6 @@ Page({
   handleAddGoods:function(e){
     var that = this
     var goodsForm = e.detail.value
-    console.log(goodsForm);
     //先进行表单非空验证
     if (goodsForm.goodsName == "") {
       $Message({

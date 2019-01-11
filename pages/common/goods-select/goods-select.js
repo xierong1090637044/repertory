@@ -19,8 +19,31 @@ Page({
     isEmpty: false,
     // 搜索
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    currenttab: '1',
+    length: null,
   },
+
+  //tab改变事件
+  handleChange({ detail }) {
+    var that = this;
+    this.setData({
+      currenttab: detail.key,
+      type: true
+    });
+    if (detail.key == 1) {
+      that.loadGoods(true);
+      this.setData({
+        type: true
+      });
+    } else {
+      that.loadGoods(false);
+      this.setData({
+        type: false
+      });
+    }
+  },
+
   // 搜索
   showInput: function () {
     this.setData({
@@ -48,17 +71,7 @@ Page({
   searchAction: function (e) {
     var that = this;
     var inputVal = this.data.inputVal
-    var filterGoods = _.chain(that.data.goods)
-      .filter(function (res) {
-        return res.goodsName.match(new RegExp(inputVal));
-      })
-      .map(function (res) {
-        return res;
-      })
-      .value();
-    that.setData({
-      goods: filterGoods
-    })
+    that.loadGoods(that.data.type, inputVal);
   },
   // /.搜索
   link2page: function () {
@@ -104,25 +117,32 @@ Page({
     });
   },
 
-  loadGoods: function () {
+  loadGoods: function (type, content) {
     var that = this;
+    that.setData({ spinShow: true });
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
+    if (type) {
+      query.greaterThan("reserve", 0);//库存充足
+    } else {
+      query.lessThanOrEqualTo("reserve", 0);//库存紧张
+    }
+
+    if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     query.descending("createdAt"); //按照时间降序
     query.include("userId");
-    query.limit(10000)
     query.find({
       success: function (res) {
-        console.log(res.length);
-        if (res.length == 0) {
-          that.setData({ isEmpty: true })
-        }
         var tempGoodsArr = new Array();
         for (var i = 0; i < res.length; i++) {
           var tempGoods = {}
+          tempGoods.userid = userid || '';
+          tempGoods.userName = res[i].get("userId").username || '';
+          tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
           tempGoods.goodsId = res[i].id || '';
           tempGoods.goodsName = res[i].get("goodsName") || '';
+          tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
           tempGoods.regNumber = res[i].get("regNumber") || '';
           tempGoods.producer = res[i].get("producer") || '';
           tempGoods.productCode = res[i].get("productCode") || '';
@@ -131,16 +151,22 @@ Page({
           tempGoods.reserve = res[i].get("reserve") || 0;
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.num = 0;
+          tempGoods.single_code = res[i].get("single_code") || '';
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
-        setTimeout(() => {
-          wx.hideLoading();
-        }, 1000);
+        that.setData({ type: type, length: res.length });
+
+        if (res.length == 0)
+        {
+          that.setData({ contentEmpty:true})
+        }else{
+          that.setData({ contentEmpty: false })
+        }
       }
     })
   },
+
   //数据存储
   handleData: function (data) {
     //设置数据
@@ -157,7 +183,6 @@ Page({
   onLoad: function (options) {
     userid = wx.getStorageSync("userid")
     curModule = options.type
-    
   },
 
   /**
@@ -171,7 +196,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.loadGoods()
+    this.setData({
+      currenttab: "1",
+      type: true
+    });
+    this.loadGoods(true);
     this.setData({
       current: [],
       currGoods: []

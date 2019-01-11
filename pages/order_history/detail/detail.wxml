@@ -2,10 +2,10 @@
     <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
     
     <view style='line-height:35px;padding: 0 10px;'>操作产品</view>
-    <view>
+    <view style='max-height:30vh;overflow-x:scroll'>
        <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
-               <view>产品：￥{{item.goodsName}}（成本价：{{item.goodsId.costPrice}}）</view>
+               <view>产品：{{item.goodsName}}（成本价：￥{{item.goodsId.costPrice}}）</view>
                <view >建议零售价：￥{{item.goodsId.retailPrice}}</view>
           </view>
           <view class='pro_list'>
@@ -14,10 +14,10 @@
                <view>总价：￥{{item.total_money}}</view>
           </view>
        </view>
-       <view class='pro_allmoney'>总计：￥{{detail.all_money}}</view>
     </view>
+    <view class='pro_allmoney'>总计：￥{{detail.all_money}}</view>
 
-    <view>
+    <view wx:if="{{detail.type == -1}}">
       <i-panel title="开单明细">
         <i-input  wx:if="{{detail.custom !=null}}" title="客户姓名：" value="{{detail.custom.custom_name}}" disabled="true"/>
         <i-input title="实际收款" value="{{detail.real_money == null ?'未填写':detail.real_money}}"bindchange='getreal_money' i-class='real_color' disabled="true"/>

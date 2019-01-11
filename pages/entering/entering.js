@@ -24,11 +24,14 @@ Page({
       });
       return
     }
+
     for (var i = 0; i < that.data.goods.length; i++) {
-      if (that.data.goods[i].num == 0) {
+      console.log(that.data.goods[i].num);
+      if (that.data.goods[i].num == 0 || that.data.goods[i].num == null) {
         isAllZero = false
       }
     }
+
     if (isAllZero == false) {
       $Message({
         content: '入库量必须大于1',

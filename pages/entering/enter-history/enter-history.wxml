@@ -1,6 +1,6 @@
 <view class='page'>
     <view style='line-height:35px;padding: 0 10px;'>已选产品</view>
-    <view>
+    <view style='max-height:30vh;overflow-x:scroll'>
        <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
                <view>产品：{{item.goodsName}}</view>
@@ -11,8 +11,9 @@
                <view>总价：￥{{item.total_money}}</view>
           </view>
        </view>
-       <view class='pro_allmoney'>总计：￥{{all_money}}</view>
     </view>
+    <view class='pro_allmoney'>总计：￥{{all_money}}</view>
+
     <view style='margin-top:20px'>
          <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>
     </view>

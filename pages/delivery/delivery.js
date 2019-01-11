@@ -26,7 +26,7 @@ Page({
       return
     }
     for (var i = 0; i < that.data.goods.length; i++) {
-      if (that.data.goods[i].num == 0) {
+      if (that.data.goods[i].num == 0 || that.data.goods[i].num == null) {
         isAllZero = false
       }
     }

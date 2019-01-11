@@ -26,11 +26,17 @@
 <!--/.搜索-->
 
 <i-tabs current="{{ current }}" bindchange="handleChange">
-      <i-tab key="1" title="库存充足"></i-tab>
+      <i-tab key="1" title="库存有余"></i-tab>
       <i-tab key="2" title="库存紧缺"></i-tab>
 </i-tabs>
 
 <view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+
+<view wx:else>
+<view class='no-data' wx:if="{{contentEmpty}}" style='height:calc(100vh - 202px)'>
   <image src='/images/common/no-data.png'></image>
   <text>暂无数据</text>
 </view>
@@ -52,6 +58,8 @@
     </i-swipeout>
   </block>
 </i-cell-group>
+</view>
+
 </view>
 
 <navigator url='/pages/goods/goods-add/goods-add' class='btn-group'>

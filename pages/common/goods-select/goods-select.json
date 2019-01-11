@@ -5,6 +5,7 @@
     "i-checkbox": "../../../component/checkbox/index",
     "i-panel": "../../../component/panel/index",
     "i-spin": "../../../component/spin/index",
-    "i-message": "../../../component/message/index"
+    "i-message": "../../../component/message/index",
+    "i-tabs": "../../../component/tabs/index"
   }
 }
