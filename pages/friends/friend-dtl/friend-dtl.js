@@ -15,6 +15,7 @@ Page({
     switchSee: false,
     switchManager: false
   },
+
   handleAddFriend: function (e) {
     var that = this
     var friendId = e.currentTarget.dataset.friendid
@@ -45,6 +46,7 @@ Page({
       }
     })
   },
+
   handleSwitchSee: function () {
     var that = this;
     this.setData({
@@ -52,6 +54,7 @@ Page({
     });
     that.add_auth('see');
   },
+
   handleSwitchManager: function () {
     var that = this;
     this.setData({
@@ -101,6 +104,7 @@ Page({
     query.find({
       success: function (results) {
         console.log(results);
+        if(results.length == 0){return};
         objectId = results[0].id;
         var stockManager = results[0].get("stockManager");
         var stockSee = results[0].get("stockSee");

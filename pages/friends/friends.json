@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-我的好友",
+  "navigationBarTitleText": "库存助手-协同管理",
   "usingComponents": {
     "i-swipeout": "../../../component/swipeout/index",
     "i-spin": "../../../component/spin/index",
@@ -8,6 +8,8 @@
     "i-cell": "../../../component/cell/index",
     "i-button": "../../../component/button/index",
     "i-icon": "../../../component/icon/index",
-    "i-message": "../../../component/message/index"
+    "i-message": "../../../component/message/index",
+    "i-modal": "../../../component/modal/index",
+    "i-input": "../../../component/input/index"
   }
 }

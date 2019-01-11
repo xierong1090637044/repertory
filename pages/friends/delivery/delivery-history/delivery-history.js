@@ -1,4 +1,4 @@
-// pages/common/goods_select_fri/goods_select_fri.js
+// pages/friends/delivery/delivery-history/delivery-history.js
 Page({
 
   /**

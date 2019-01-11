@@ -27,7 +27,6 @@
 }
 .wrap-2
 {
-  margin-top:48px;
   height:calc(100vh - 184px);
   overflow:scroll;
 }

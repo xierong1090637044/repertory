@@ -33,17 +33,18 @@
 
 <i-cell-group i-class="wrap-2" wx:else>
   <block wx:for="{{friends}}" wx:key="unique" >
-    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}" data-friendid="{{item.friendId}}" bindtap="handleFriendDtl">
+    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}" data-friendid="{{item.friendId}}">
     <view slot="content">
      <i-cell data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}">
       <image src='{{item.avatarUrl}}' style='width:40px;height:40px;margin-top:5px' slot="icon"></image>
      </i-cell>
     </view>
     <view slot="button" class="i-swipeout-button-group">
-      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendAuth">协同管理
+      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendAuth" style='width:68px'>协同管理
       </view>
-      <view class="i-swipeout-button bg-danger" data-item="{{item}}" bindtap="handleFriendDel" >
-        删除
+      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendDtl" style='width:68px'>权限设置
+      </view>
+      <view class="i-swipeout-button bg-danger" data-item="{{item}}" bindtap="handleFriendDel" style='width:68px'>删除
       </view>
     </view>
     </i-swipeout>
@@ -52,6 +53,10 @@
 
 <view class='btn-group' bindtap='handleAddFriend'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      添加员工
+      添加好友
     </button>
 </view>
+
+<i-modal title="好友账号Id" visible="{{visible}}" bind:ok="handlegetId" bind:cancel="handleClose">
+    <i-input placeholder="请输入账号id" bind:change="getstaffId"/>
+</i-modal>

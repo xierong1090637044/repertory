@@ -69,6 +69,7 @@ Page({
     })
   },
 	// /.搜索
+
   handleAddFriend:function(e){
     var that = this
     var id = e.currentTarget.dataset.id
@@ -82,36 +83,16 @@ Page({
     friend.id = friendId;
     friends.set("userId", user);
     friends.set("friendId", friend);
-    friends.set("stockSee", 0);
-    friends.set("stockManager", 0);
+    friends.set("stockSee", 1);
+    friends.set("stockManager", 1);
     friends.save(null, {
       success: function (result) {
         var FriendsTemp = Bmob.Object.extend("FriendsTemp");
         var query = new Bmob.Query(FriendsTemp);
-        console.log(id)
         query.get(id, {
           success: function (result) {
             result.set('status', 1);
             result.save();
-
-            user.id = userid;
-            friend.id = friendId;
-            friends.set("userId", friend);
-            friends.set("friendId", user);
-            friends.set("stockSee", 0);
-            friends.set("stockManager", 0);
-            friends.save(null, {
-              success:function(){
-                wx.showToast({
-                  title: '添加好友成功',
-                  icon: 'none',
-                  success: function () {
-                    that.loadFriendsTempAll()
-                    that.loadFriendsTemp()
-                  }
-                })
-              }
-            });
           },
           error: function (object, error) {
             console.log(error)
@@ -121,11 +102,36 @@ Page({
       error: function (result, error) {
         console.log("添加好友失败:" + JSON.stringify(error));
       }
-    })
+    });
+
+    setTimeout(function(){
+      var friendId = e.currentTarget.dataset.friendid
+      var Friends = Bmob.Object.extend("Friends");
+      var FriendUser = Bmob.Object.extend("User");
+      var friends = new Friends();
+      var user = new Bmob.User();
+      var friend = new FriendUser();
+      user.id = userid;
+      friend.id = friendId;
+      friends.set("userId", friend);
+      friends.set("friendId", user);
+      friends.set("stockSee", 1);
+      friends.set("stockManager", 1);
+      friends.save();
+      wx.showToast({
+        title: '添加成功',
+        icon: "none",
+        success: function () {
+          that.loadFriendsTempAll()
+          that.loadFriendsTemp()
+        }
+      })
+    },1000)
   },
   handleDetial:function(e){
     var item = e.target.dataset.item
   },
+
   loadFriendsTemp: function () {
     var that = this;
     var FriendsTemp = Bmob.Object.extend("FriendsTemp");
@@ -194,6 +200,7 @@ Page({
       this.loadFriendsTemp();
     }
   },
+
   loadFriendsTempAll: function () {
     var that = this;
     var FriendsTemp = Bmob.Object.extend("FriendsTemp");

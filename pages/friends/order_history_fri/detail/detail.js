@@ -1,4 +1,4 @@
-var Bmob = require('../../../utils/bmob_new.js');
+var Bmob = require('../../../../utils/bmob_new.js');
 var that;
 Page({
 

@@ -1,8 +1,11 @@
 // pages/mine/friends/friends.js
-const Bmob = require('../../utils/bmob.js')
+const Bmob = require('../../utils/bmob.js');
+const Bmob_new = require('../../utils/bmob_new.js')
 var config = require('../../utils/config.js')
 var _ = require('../../utils/we-lodash.js');
 var userid = '';
+var staffId;
+var that;
 Page({
 
   /**
@@ -17,23 +20,28 @@ Page({
     isEnd: false, //是否到底了
     // 搜索
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    visible:false
   },
 
-  /*handleFriendDtl:function(e){
+  handleFriendDtl:function(e){
+    wx.showLoading({title: '加载中...'});
     var friendId = e.currentTarget.dataset.friendid
     wx.setStorageSync('friendId', friendId)
     wx.navigateTo({
-      url: '/pages/common/friend-dtl/friend-dtl'
-    })
-  },*/
+      url: '/pages/friends/friend-dtl/friend-dtl'
+    });
+    wx.hideLoading();
+  },
 
   handleFriendAuth: function (e) {
+    wx.showLoading({ title: '加载中...' })
     var friendId = e.currentTarget.dataset.friendid
     wx.setStorageSync('friendId', friendId)
     wx.navigateTo({
-      url: '/pages/common/friend-together/friend-together'
-    })
+      url: '/pages/friends/friend-together/friend-together'
+    });
+    wx.hideLoading();
   },
 
   handleFriendDel: function (e) {
@@ -96,20 +104,71 @@ Page({
   },
 
   handleAddFriend:function(){
-    wx.scanCode({
-      onlyFromCamera: false,
-      scanType: ['qrCode'],
-      success: (res) => {
-        var friendId = res.result
-        var User = Bmob.Object.extend("_User");
-        var query = new Bmob.Query(User);
-        wx.setStorageSync('friendId', friendId)
-        wx.navigateTo({
-          url: '/pages/common/friend-dtl/friend-dtl'
-        })
+    wx.showActionSheet({
+      itemList: ['搜索账号添加', '扫码添加'],
+      success(res) {
+        console.log(res.tapIndex)
+        if (res.tapIndex == 1)
+        {
+          wx.scanCode({
+            onlyFromCamera: false,
+            scanType: ['qrCode'],
+            success: (res) => {
+              var friendId = res.result
+              wx.setStorageSync('friendId', friendId)
+              wx.navigateTo({
+                url: '/pages/friends/friend-dtl/friend-dtl'
+              })
+            }
+          })
+        }else{
+          that.setData({ visible:true});
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
       }
-    })
+    });
   },
+
+  //输入员工id事件
+  getstaffId:function(e)
+  {
+    staffId = e.detail.detail.value;
+  },
+
+  //modal点击确定事件
+  handlegetId:function()
+  {
+    if (staffId == null || staffId.length == 0) {
+      wx.showToast({
+        title: '请输入Id',
+        icon: "none"
+      });
+    } else {
+      wx.showLoading({ title: '加载中...' });
+      const query = Bmob_new.Query('_User');
+      query.get(staffId).then(res => {
+        wx.hideLoading();
+        wx.setStorageSync('friendId', staffId);
+        wx.navigateTo({
+          url: '/pages/friends/friend-dtl/friend-dtl'
+        })
+      }).catch(err => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '查无此人',
+          icon: "none"
+        });
+      })
+    }
+  },
+
+  //modal点击取消事件
+  handleClose:function(){
+    that.setData({ visible:false})
+  },
+
   // 搜索
   showInput: function () {
     this.setData({
@@ -162,16 +221,12 @@ Page({
     var Friends = Bmob.Object.extend("Friends");
     var query1 = new Bmob.Query(Friends);
     query1.equalTo("userId", userid);
-
-    var query2 = new Bmob.Query(Friends);
-    query2.equalTo("friendId", userid);
-    var mainQuery = Bmob.Query.or(query1, query2);
-    mainQuery.limit(that.data.limitPage);
-    mainQuery.skip(that.data.limitPage * that.data.currentPage);
-    mainQuery.descending("createdAt"); //按照时间降序
-    mainQuery.include("userId");
-    mainQuery.include("friendId");
-    mainQuery.find({
+    query1.limit(that.data.limitPage);
+    query1.skip(that.data.limitPage * that.data.currentPage);
+    query1.descending("createdAt"); //按照时间降序
+    query1.include("userId");
+    query1.include("friendId");
+    query1.find({
       success: function (res) {
         var tempFriendArr = new Array();
         for (var i = 0; i < res.length; i++) {
@@ -214,11 +269,6 @@ Page({
       that.setData({
         isEnd: true
       })
-      // if (that.data.endPage != 0) { //如果最后一页的加载不等于0
-      //   that.setData({
-      //     limitPage: that.data.endPage,
-      //   })
-      // }
       this.loadFriends();
     } else {
       this.loadFriends();
@@ -229,13 +279,10 @@ Page({
     var Friends = Bmob.Object.extend("Friends");
     var query1 = new Bmob.Query(Friends);
     query1.equalTo("userId", userid);
-    var query2 = new Bmob.Query(Friends);
-    query2.equalTo("friendId", userid);
-    var mainQuery = Bmob.Query.or(query1, query2);
-    mainQuery.limit(1000)
-    mainQuery.include("userId");
-    mainQuery.include("friendId");
-    mainQuery.find({
+    query1.limit(1000)
+    query1.include("userId");
+    query1.include("friendId");
+    query1.find({
       success: function (res) {
         console.log(res)
         var count = res.length;
@@ -294,7 +341,6 @@ Page({
           totalFriends: tempFriendArr || [],
           spinShow: false
         })
-        console.log("【我的产品】【共有" + count + "条记录】 " + "【共有" + totalPage + "页】" + " 【最后一页加载" + endPage + "条】");
       }
     })
   },
@@ -330,6 +376,7 @@ Page({
    */
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
+    that = this;
   },
 
   /**
