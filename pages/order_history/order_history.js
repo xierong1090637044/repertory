@@ -73,7 +73,7 @@ Page({
     }
     query.order("-createdAt");
     query.find().then(res => {
-      console.log(res);
+      //console.log(res);
       that.setData({
         list: res,
         spinShow:false
