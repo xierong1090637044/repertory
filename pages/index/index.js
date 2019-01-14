@@ -59,7 +59,7 @@ Page({
         console.log(res)
         var result = res.result;
         var array = result.split("-");
-        console.log(array);
+        
         if(array[1] == "false")
         {
           wx.navigateTo({

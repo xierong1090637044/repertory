@@ -95,89 +95,61 @@ Page({
                           goods.save(null, {
                             success: function (result) {
                               wx.setStorageSync("is_add", true);
-                              wx.request({
-                                url: 'https://route.showapi.com/1129-1', 
-                                data: {
-                                  showapi_appid: '84916',
-                                  showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
-                                  content: (goodsForm.productCode == "") ? (result.id +"-false") : (goodsForm.productCode+"-true"),
-                                  height:"100",
-                                  width:"125"
-                                },
-                                header: {
-                                  'content-type': 'application/json' // 默认值
-                                },
-                                success(res) {
-                                  console.log(res.data.showapi_res_body.imgUrl)
-                                  var Diary = Bmob.Object.extend("Goods");
-                                  var query = new Bmob.Query(Diary);
-                                  query.get(result.id, {
-                                    success: function (result) {
-                                      result.set('single_code', res.data.showapi_res_body.imgUrl);
-                                      result.save();
-
-                                      if (that.data.is_choose)
-                                      {
-                                        var file;
-                                        var tempFilePaths = temppath;
-                                        for (let item of tempFilePaths) {
-                                          console.log('itemn', item)
-                                          file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
-                                        }
-                                        file.save().then(res => {
-                                          const query = Bmob_new.Query('Goods');
-                                          query.set('id', result.id) //需要修改的objectId
-                                          query.set('goodsIcon', JSON.parse(res[0]).url);
-                                          query.save().then(res => {
-                                            console.log(res)
-                                            wx.showToast({
-                                              title: '新增产品成功',
-                                              icon: 'success',
-                                              success: function () {
-                                                that.setData({
-                                                  goodsName: "",
-                                                  regNumber: "",
-                                                  producer: "",
-                                                  productCode: "",
-                                                  packageContent: "",
-                                                  packingUnit: "",
-                                                  costPrice: '',
-                                                  retailPrice: '',
-                                                  reserve:0,
-                                                  loading: false
-                                                })
-                                              }
-                                            })
-                                          }).catch(err => {
-                                            console.log(err)
-                                          })
-                                        })
-                                      }else{
-                                        wx.showToast({
-                                          title: '新增产品成功',
-                                          icon: 'success',
-                                          success: function () {
-                                            that.setData({
-                                              goodsName: "",
-                                              regNumber: "",
-                                              producer: "",
-                                              productCode: "",
-                                              packageContent: "",
-                                              packingUnit: "",
-                                              costPrice: '',
-                                              retailPrice: '',
-                                              reserve:0,
-                                              loading: false
-                                            })
-                                          }
+                              if (that.data.is_choose) {
+                                var file;
+                                var tempFilePaths = temppath;
+                                for (let item of tempFilePaths) {
+                                  console.log('itemn', item)
+                                  file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
+                                }
+                                file.save().then(res => {
+                                  const query = Bmob_new.Query('Goods');
+                                  query.set('id', result.id) //需要修改的objectId
+                                  query.set('goodsIcon', JSON.parse(res[0]).url);
+                                  query.save().then(res => {
+                                    console.log(res)
+                                    wx.showToast({
+                                      title: '新增产品成功',
+                                      icon: 'success',
+                                      success: function () {
+                                        that.setData({
+                                          goodsName: "",
+                                          regNumber: "",
+                                          producer: "",
+                                          productCode: "",
+                                          packageContent: "",
+                                          packingUnit: "",
+                                          costPrice: '',
+                                          retailPrice: '',
+                                          reserve: 0,
+                                          loading: false
                                         })
                                       }
-                                      
-                                      
-                                    },
-                                  });
-                                }
-                              });
+                                    })
+                                  }).catch(err => {
+                                    console.log(err)
+                                  })
+                                })
+                              } else {
+                                wx.showToast({
+                                  title: '新增产品成功',
+                                  icon: 'success',
+                                  success: function () {
+                                    that.setData({
+                                      goodsName: "",
+                                      regNumber: "",
+                                      producer: "",
+                                      productCode: "",
+                                      packageContent: "",
+                                      packingUnit: "",
+                                      costPrice: '',
+                                      retailPrice: '',
+                                      reserve: 0,
+                                      loading: false
+                                    })
+                                  }
+                                })
+                              }
                             },
                             error: function (result, error) {
                               //添加失败

@@ -39,21 +39,15 @@ Page({
       title: '库存助手-'+title
     });
 
-    if (options.has_code == "false")
+    if(options.id !=null )
     {
       const query = Bmob_new.Query('Goods');
-      query.get(options.id).then(res => {
-        console.log(res)
-        that.setData({ goodsReserve:res});
-        that.get_opera_detail(options.id);
-      })
-    } else if (options.has_code == "true"){
-      const query = Bmob_new.Query('Goods');
-      query.equalTo("productCode", "==", options.id);
+      const query1 = query.equalTo("productCode", "==", options.id);
+      const query2 = query.equalTo("objectId", "==", options.id);
+      query.or(query1, query2);
       query.find().then(res => {
         console.log(res)
-        if(res.length > 1)
-        {
+        if (res.length > 1) {
           wx.showModal({
             title: '提示',
             content: '您当前条形码有多个商品绑定',
@@ -64,19 +58,23 @@ Page({
               }
             }
           })
-        }else{
+        } else {
           that.setData({ goodsReserve: res[0] });
           that.get_opera_detail(res[0].objectId);
         }
-        
       })
-    }else{
+    }
       var item = JSON.parse(wx.getStorageSync('item'));
       this.setData({
         goodsReserve: item
       })
       that.get_opera_detail(item.goodsId);
-    }
+    if (item.productCode == null || item.productCode =="")
+      {
+        that.getsinglecode(item.goodsId);
+      }else{
+        that.getsinglecode(item.productCode);
+      }
   },
 
   /**
@@ -98,6 +96,30 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  //得到产品条形码
+  getsinglecode:function(content)
+  {
+    wx.showLoading({title: '加载中...'})
+    wx.request({
+      url: 'https://route.showapi.com/1129-1',
+      data: {
+        showapi_appid: '84916',
+        showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+        content: content,
+        height: "100",
+        width: "125"
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        wx.hideLoading();
+        console.log(res.data.showapi_res_body.imgUrl);
+        that.setData({ single_code: res.data.showapi_res_body.imgUrl});
+      }
+    });
   },
 
   //得到该产品的操作详情
