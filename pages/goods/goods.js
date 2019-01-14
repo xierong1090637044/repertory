@@ -12,7 +12,7 @@ Page({
   data: {
     spinShow:true,
     goods:[],
-    limitPage: 10,//限制显示条数
+    limitPage: 50,//限制显示条数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了
     totalGoods: [],
@@ -254,7 +254,7 @@ Page({
   handleResetData:function(){
     this.setData({
       currentPage: 0,
-      limitPage: 30,
+      limitPage: 50,
       goods: [],
       isEnd: false,
       isEmpty: false,
