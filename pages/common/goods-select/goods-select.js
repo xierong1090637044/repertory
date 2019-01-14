@@ -151,6 +151,7 @@ Page({
           tempGoods.reserve = res[i].get("reserve") || 0;
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
+          tempGoods.modify_retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.single_code = res[i].get("single_code") || '';
           tempGoodsArr.push(tempGoods);
         }

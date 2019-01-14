@@ -2,7 +2,6 @@
 const Bmob = require('../../utils/bmob.js')
 var _ = require('../../utils/we-lodash.js');
 var { $Message } = require('../../component/base/index');
-var really_money;
 Page({
 
   /**
@@ -80,20 +79,9 @@ Page({
         icon: 'warning'
       })
       tempGoods[idx].num = tempGoods[idx].reserve;
-      if(that.data.is_input)
-      {
-        tempGoods[idx].modify_retailPrice = really_money;
-      }else{
-        tempGoods[idx].modify_retailPrice = tempGoods[idx].retailPrice;
-      }
       tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].modify_retailPrice;
     } else {
       tempGoods[idx].num = e.detail.value;
-      if (that.data.is_input) {
-        tempGoods[idx].modify_retailPrice = really_money;
-      } else {
-        tempGoods[idx].modify_retailPrice = tempGoods[idx].retailPrice;
-      }
       tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].modify_retailPrice;
     }
     that.setData({
@@ -104,14 +92,13 @@ Page({
   getrealprice:function(e)
   {
     var that = this;
-    really_money = e.detail.value;
+    var really_money = e.detail.value;
     var idx = e.target.dataset.idx;
     var tempGoods = that.data.goods;
     tempGoods[idx].modify_retailPrice = really_money;
     tempGoods[idx].total_money = tempGoods[idx].num * really_money;
     that.setData({
       goods: tempGoods,
-      is_input:true
     })
   },
 
