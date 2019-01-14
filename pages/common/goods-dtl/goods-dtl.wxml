@@ -40,7 +40,8 @@
           <view  wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
               <view>
                   <view>{{item.createdAt}}</view>
-                  <view>X{{item.num}}</view>
+                  <view wx:if='{{item.type == -1}}'>实际出库价格：￥{{item.retailPrice}}（X{{item.num}}）</view>
+                   <view  wx:else>X{{item.num}}</view>
               </view>
               <view wx:if='{{item.type ==1}}' class='order_get'>入库</view>
               <view wx:else class='order_out'>出库</view>
