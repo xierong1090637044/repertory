@@ -125,11 +125,9 @@ Page({
   //得到该产品的操作详情
   get_opera_detail:function(id)
   {
-    console.log(that.getDay(-7));
     const query = Bmob_new.Query("Bills");
     query.order("-createdAt");
     query.equalTo("goodsId", "==", id);
-    query.equalTo("createdAt", ">", that.getDay(-7));
     query.find().then(res => {
       console.log(res);
       that.setData({ detail: res});
