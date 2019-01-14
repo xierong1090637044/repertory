@@ -3,6 +3,7 @@ const Bmob = require('../../utils/bmob.js')
 var config = require('../../utils/config.js')
 var _ = require('../../utils/we-lodash.js');
 var userid = '';
+var now_product;
 var that;
 Page({
 
@@ -72,28 +73,50 @@ Page({
     var inputVal = this.data.inputVal
     that.loadGoods(that.data.type, inputVal);
   },
-	// /.搜索
+
+  //产品点击
   handleDetial: function (e) {
-    var item = e.target.dataset.item
-    wx.setStorageSync('item', JSON.stringify(item))
-    wx.navigateTo({
-      url: '/pages/common/goods-dtl/goods-dtl?type=1'
+    var item = e.target.dataset.item;
+    now_product = item;
+    wx.setStorageSync('item', JSON.stringify(item));
+
+    wx.showActionSheet({
+      itemList: ['查看详情', '编辑产品', '删除产品'],
+      success(res) {
+        console.log(res.tapIndex)
+        if (res.tapIndex == 0)
+        {
+          wx.navigateTo({
+            url: '/pages/common/goods-dtl/goods-dtl?type=1'
+          });
+        } else if (res.tapIndex == 1)
+        {
+          that.handleEditGoods();
+        } else if (res.tapIndex == 2) {
+          that.handleDelGoods();
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
     })
+
   },
 
   handleEditGoods:function(e){
     var that = this
-    var item = e.currentTarget.dataset.item
+    var item = now_product;
     wx.setStorageSync('editGoods', item)
     wx.navigateTo({
       url: '/pages/goods/goods-edit/goods-edit',
     })
   },
 
-  handleDelGoods: function (e){
+  handleDelGoods: function (){
     var that = this
-    var item = e.currentTarget.dataset.item
-    var id = e.currentTarget.dataset.item.goodsId
+    var item = now_product;
+    console.log(now_product);
+    var id = now_product.goodsId
     wx.showModal({
       title: '提示',
       content: '是否删除【'+item.goodsName+'】产品',
@@ -212,12 +235,34 @@ Page({
         }
         that.handleData(tempGoodsArr);
         that.setData({ type: type, length: res.length});
+
         if(res.length == 0)
         {
           that.setData({ contentEmpty:true})
         }else{
           that.setData({ contentEmpty: false })
         }
+      }
+    })
+  },
+
+  //得到总库存数和总金额
+  loadallGoods:function()
+  {
+    var that = this;
+    var total_reserve = 0;
+    var total_money = 0;
+    var Goods = Bmob.Object.extend("Goods");
+    var query = new Bmob.Query(Goods);
+    query.equalTo("userId", userid);
+    query.find({
+      success: function (res) {
+        for (var i = 0; i < res.length; i++) {
+          total_reserve = total_reserve + res[i].get("reserve");
+          total_money = total_money + res[i].get("reserve") * res[i].get("retailPrice");
+        }
+        that.setData({total_reserve: total_reserve, total_money: total_money });
+        console.log(total_reserve, total_money);
       }
     })
   },
@@ -277,6 +322,7 @@ Page({
     userid = wx.getStorageSync("userid");
     this.handleRefresh();
     that = this;
+    that.loadallGoods();
   },
 
   /**

@@ -31,3 +31,12 @@
   overflow: scroll;
 }
 
+.fristcontent
+{
+  display:flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  color:#f76a24;
+  background-color:#fefcec;
+}
+
