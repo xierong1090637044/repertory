@@ -1,8 +1,8 @@
 <view class='page' wx:if="{{list !=''}}">
    <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
    <i-tabs current="{{ current }}" bindchange="handleChange">
-      <i-tab key="1" title="近七日记录"></i-tab>
-      <i-tab key="2" title="近一个月记录"></i-tab>
+      <i-tab key="1" title="近一个月记录"></i-tab>
+      <i-tab key="2" title="全部记录"></i-tab>
    </i-tabs>
    <view class='list-item'>
       <view wx:for="{{list}}" wx:key="{{index}}" class='item' bindtap='get_detail' data-id='{{item.objectId}}'>

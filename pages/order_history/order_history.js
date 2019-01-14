@@ -13,9 +13,9 @@ Page({
     });
     if (detail.key == 1)
     {
-      that.get_list("day");
-    }else{
       that.get_list("month");
+    }else{
+      that.get_list("all");
     }
   },
 
@@ -32,7 +32,7 @@ Page({
 
   /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-    that.get_list("day");
+    that.get_list("month");
   },
 
   /*** 生命周期函数--监听页面隐藏*/
@@ -67,13 +67,10 @@ Page({
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("order_opreations");
     query.equalTo("master", "==", userid);
-    if(type =="day")
+    if(type =="month")
     {
-      query.equalTo("createdAt", ">", that.getDay(-7));
-    }else{
       query.equalTo("createdAt", ">", that.getDay(-30));
     }
-    
     query.order("-createdAt");
     query.find().then(res => {
       console.log(res);
