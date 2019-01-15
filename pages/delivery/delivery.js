@@ -1,7 +1,9 @@
 // pages/delivery/delivery.js
-const Bmob = require('../../utils/bmob.js')
+const Bmob = require('../../utils/bmob.js');
+const Bmob_new = require('../../utils/bmob_new.js');
 var _ = require('../../utils/we-lodash.js');
 var { $Message } = require('../../component/base/index');
+var that;
 Page({
 
   /**
@@ -11,8 +13,10 @@ Page({
     goods: [],
     isEmpty: false,
     url:"",
-    is_input:null
+    is_input:null,
+    url: "delivery-history/delivery-history"
   },
+
   handleDelivery: function () {
     var that = this;
     var isAllZero = true
@@ -66,7 +70,6 @@ Page({
     that.setData({
       goods: tempGoods
     })
-
   },
   handleNumChange: function (e) {
     var that = this
@@ -76,7 +79,7 @@ Page({
     if (tempGoods[idx].reserve < e.detail.value) {
       wx.showToast({
         title: '库存不足',
-        icon: 'warning'
+        icon: 'none'
       })
       tempGoods[idx].num = tempGoods[idx].reserve;
       tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].modify_retailPrice;
@@ -102,43 +105,57 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //通过二维码获取商品
+  getcode_product:function(id)
+  {
+    var code_product = [];
+    const query = Bmob_new.Query('Goods');
+    query.get(id).then(res => {
+      console.log(res);
+      res.total_money = res.retailPrice;
+      res.modify_retailPrice = res.retailPrice;
+      code_product.push(res);
+      that.setData({
+        goods: code_product,
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+
+  },
+
+  /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     console.log(options)
-    var that = this;
-    if (options.type == "friend") {
-      that.setData({
-        url: "../friends/delivery-history-fri/delivery-history-fri"
-      });
+    that = this;
+    if (options.id != null) {
+      that.getcode_product(options.id);
     } else {
-      that.setData({
-        url: "delivery-history/delivery-history"
-      });
+      if (options.type == "friend") {
+        that.setData({
+          url: "../friends/delivery-history-fri/delivery-history-fri"
+        });
+      }
+      
+      wx.getStorage({
+        key: 'currGoods',
+        success: function (res) {
+          that.setData({
+            goods: res.data,
+          })
+        }
+      })
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  /*** 生命周期函数--监听页面初次渲染完成*/
   onReady: function () {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-    var that = this
-    wx.getStorage({
-      key: 'currGoods',
-      success: function (res) {
-        that.setData({
-          goods: res.data
-        })
-      }
-    })
+    
   },
 
   /**

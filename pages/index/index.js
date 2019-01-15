@@ -1,4 +1,5 @@
 // pages/index/index.js
+var that;
 Page({
 
   /**
@@ -53,32 +54,48 @@ Page({
   //点击扫描产品条形码
   scan_code:function()
   {
+    wx.showActionSheet({
+          itemList: ['扫码出库', '扫码入库', '查看详情'],
+          success(res) {
+            console.log(res.tapIndex)
+            that.scan(res.tapIndex);
+          },
+          fail(res) {
+            console.log(res.errMsg)
+          }
+        })
+  },
+
+  scan:function(type)
+  {
     wx.scanCode({
       onlyFromCamera: true,
       success(res) {
         console.log(res)
         var result = res.result;
         var array = result.split("-");
-        
-        if(array[1] == "false")
-        {
+
+        if (type == 0) {
+          wx.navigateTo({
+            url: '../delivery/delivery?id=' + array[0],
+          })
+        } else if (type == 1) {
+          wx.navigateTo({
+            url: '../entering/entering?id=' + array[0],
+          })
+        } else if (type == 2) {
           wx.navigateTo({
             url: '../common/goods-dtl/goods-dtl?has_code=false&id=' + array[0],
-          })
-        }else{
-          wx.navigateTo({
-            url: '../common/goods-dtl/goods-dtl?has_code=true&id=' + array[0],
           })
         }
       }
     })
-    
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
+  /** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
-    var noticeShow = wx.getStorageSync('noticeShow')
+    that = this;
+    var noticeShow = wx.getStorageSync('noticeShow');
     this.setData({
       noticeShow: noticeShow === ''?true : false
     })

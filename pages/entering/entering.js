@@ -1,7 +1,9 @@
 // pages/entering/entering.js
-const Bmob = require('../../utils/bmob.js')
+const Bmob = require('../../utils/bmob.js');
+const Bmob_new = require('../../utils/bmob_new.js');
 var _ = require('../../utils/we-lodash.js');
 var { $Message } = require('../../component/base/index');
+var that = this;
 Page({
 
   /**
@@ -10,7 +12,8 @@ Page({
   data: {
     goods: [],
     url:"",
-    isEmpty: false
+    isEmpty: false,
+    url: "enter-history/enter-history"
   },
   
   handleEntering: function () {
@@ -56,6 +59,7 @@ Page({
       })
     }
   },
+
   handleDel: function (e) {
     var that = this
     var idx = e.currentTarget.dataset.idx
@@ -70,6 +74,7 @@ Page({
       goods: tempGoods
     })
   },
+
   handleNumChange: function (e) {
     var that = this
     var idx = e.currentTarget.dataset.idx
@@ -81,21 +86,44 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //通过二维码获取商品
+  getcode_product: function (id) {
+    var code_product = [];
+    const query = Bmob_new.Query('Goods');
+    query.get(id).then(res => {
+      console.log(res);
+      res.total_money = res.retailPrice;
+      res.modify_retailPrice = res.retailPrice;
+      res.goodsId = res.objectId;
+      code_product.push(res);
+      that.setData({
+        goods: code_product,
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+
+  },
+
+  /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
-    console.log(options)
-    var that = this;
-    if(options.type == "friend")
-    {
-      that.setData({
-        url:"../friends/enter-history-fri/enter-history-fri"
-      });
-    }else{
-      that.setData({
-        url: "enter-history/enter-history"
-      });
+    that = this;
+    if (options.id != null) {
+      that.getcode_product(options.id);
+    } else {
+      if (options.type == "friend") {
+        that.setData({
+          url: "../friends/enter-history-fri/enter-history-fri"
+        });
+      }
+      wx.getStorage({
+        key: 'currGoods',
+        success: function (res) {
+          that.setData({
+            goods: res.data,
+          })
+        }
+      })
     }
   },
 
@@ -110,15 +138,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    wx.getStorage({
-      key: 'currGoods',
-      success: function (res) {
-        that.setData({
-          goods: res.data
-        })
-      }
-    })
   },
 
   /**
