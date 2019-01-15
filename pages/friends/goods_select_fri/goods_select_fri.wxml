@@ -1,6 +1,13 @@
 <!--pages/common/goods-select/goods-select.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <!--搜索-->
+
+<view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+
+<view wx:else>
 <view class="search-view">
   <view class="search-bar">
     <view class="search-bar-form">
@@ -20,20 +27,31 @@
   </view>
 </view>
 <!--/.搜索-->
-<i-message id="message" />
-<i-panel i-class="wrap1">
+
+<i-tabs current="{{ currenttab }}" bindchange="handleChange">
+      <i-tab key="1" title="库存有余"></i-tab>
+      <i-tab key="2" title="库存紧缺"></i-tab>
+</i-tabs>
+
+
+<view class='no-data' wx:if="{{contentEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+
+<view  wx:else>
+<i-panel i-class="wrap_overflow">
   <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
     <i-checkbox wx:for="{{goods}}" another_value="产品名称：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
     </i-checkbox>
   </i-checkbox-group>
 </i-panel>
-<view class='no-data' wx:if="{{isEmpty}}">
-  <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
-</view>
 
 <view class='btn-group' bindtap='link2page'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
       确认选择
     </button>
+</view>
+</view>
+
 </view>

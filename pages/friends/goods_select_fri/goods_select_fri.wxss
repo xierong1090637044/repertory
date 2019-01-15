@@ -1,1 +1,5 @@
-/* pages/common/goods_select_fri/goods_select_fri.wxss */
+.wrap_overflow
+{
+  height:calc(100vh - 158px);
+  overflow-y:scroll !important;
+}
