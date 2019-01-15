@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "库存助手-操作记录"
+  "navigationBarTitleText": "库存助手-操作记录",
+  "usingComponents": {
+    "i-page": "../../component/page/index"
+  }
 }

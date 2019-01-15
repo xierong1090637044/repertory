@@ -18,6 +18,11 @@
       </view>
    </view>
    
+   <i-page current="{{ page }}" total="{{all_page}}" bind:change="handlePageChange">
+    <view slot="prev">上一页</view>
+    <view slot="next">下一页</view>
+</i-page>
+
 </view>
 <view class='no-data' wx:else>
   <image src='/images/common/no-data.png'></image>

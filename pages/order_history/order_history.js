@@ -1,28 +1,52 @@
 var Bmob = require('../../utils/bmob_new.js');
 var that;
+var c_type;
 Page({
 
   /*** 页面的初始数据*/
   data: {
     current: '1',
+    page:1,
+    limit:20
   },
 
+  //tab改变
   handleChange({ detail }) {
     this.setData({
       current: detail.key,
     });
     if (detail.key == 1)
     {
+      c_type = "month";
       that.get_list("month");
+      that.getallpage("month");
     }else{
+      c_type = "all";
       that.get_list("all");
+      that.getallpage("all");
+    }
+  },
+
+  //页码改变
+  handlePageChange({ detail }) {
+    const type = detail.type;
+    if (type === 'next') {
+      this.setData({
+        page: this.data.page + 1
+      });
+      that.get_list(c_type);
+    } else if (type === 'prev') {
+      this.setData({
+        page: this.data.page - 1
+      });
+      that.get_list(c_type);
     }
   },
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
-    
+    that.get_list("month");
   },
 
   /*** 生命周期函数--监听页面初次渲染完成*/
@@ -32,7 +56,7 @@ Page({
 
   /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-    that.get_list("month");
+    that.getallpage("month");
   },
 
   /*** 生命周期函数--监听页面隐藏*/
@@ -62,11 +86,12 @@ Page({
 
   get_list:function(type)
   {
-    console.log(type)
     that.setData({ spinShow:true});
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("order_opreations");
     query.equalTo("master", "==", userid);
+    query.limit(that.data.limit);
+    query.skip(that.data.limit*(that.data.page-1));
     if(type =="month")
     {
       query.equalTo("createdAt", ">", that.getDay(-30));
@@ -77,6 +102,21 @@ Page({
       that.setData({
         list: res,
         spinShow:false
+      })
+    });
+  },
+
+  getallpage: function (type)
+  {
+    var userid = wx.getStorageSync("userid");
+    const query = Bmob.Query("order_opreations");
+    query.equalTo("master", "==", userid);
+    if (type == "month") {
+      query.equalTo("createdAt", ">", that.getDay(-30));
+    }
+    query.find().then(res => {
+      that.setData({
+        all_page: Math.ceil(res.length / that.data.limit) ,
       })
     });
   },
