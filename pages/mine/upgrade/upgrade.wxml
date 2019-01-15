@@ -15,6 +15,21 @@
 
     <view class="describe">
       <view class="desc-title">
+        <text class="desc-v">v1.1.4 公测版</text>
+        <text class="desc-time">2018.01.15</text>
+      </view>
+      <text class="desc-content">优化升级</text>
+      <view class="desc-list">
+        <text class="desc-list-item">页面操作优化</text>
+        <text class="desc-list-item">增加扫条形码操作</text>
+        <text class="desc-list-item">修改协同操作出库显示问题</text>
+        <text class="desc-list-item">操作记录增加分页</text>
+
+      </view>
+    </view>
+
+    <view class="describe">
+      <view class="desc-title">
         <text class="desc-v">v1.1.3 公测版</text>
         <text class="desc-time">2018.01.10</text>
       </view>
