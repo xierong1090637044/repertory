@@ -19,12 +19,30 @@ Page({
   },
 
   handlePreviewImage: function (e) {
-    var single_code = e.target.dataset.qrcode
-    console.log(e);
-    wx.previewImage({
-      current: single_code,
-      urls: [single_code]
-    })
+    var single_code = e.target.dataset.qrcode;
+    wx.showLoading({ title: '加载中...' })
+    wx.request({
+      url: 'https://route.showapi.com/1129-1',
+      data: {
+        showapi_appid: '84916',
+        showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+        content: single_code,
+        height: "40",
+        width: "125"
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        wx.hideLoading();
+        wx.previewImage({
+          current: res.data.showapi_res_body.imgUrl,
+          urls: [res.data.showapi_res_body.imgUrl]
+        })
+      }
+    });
+   
+    
   },
 
   /**
@@ -69,12 +87,6 @@ Page({
         goodsReserve: item
       })
       that.get_opera_detail(item.goodsId);
-    if (item.productCode == null || item.productCode =="")
-      {
-        that.getsinglecode(item.goodsId);
-      }else{
-        that.getsinglecode(item.productCode);
-      }
   },
 
   /**
@@ -101,25 +113,7 @@ Page({
   //得到产品条形码
   getsinglecode:function(content)
   {
-    wx.showLoading({title: '加载中...'})
-    wx.request({
-      url: 'https://route.showapi.com/1129-1',
-      data: {
-        showapi_appid: '84916',
-        showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
-        content: content,
-        height: "100",
-        width: "125"
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        wx.hideLoading();
-        console.log(res.data.showapi_res_body.imgUrl);
-        that.setData({ single_code: res.data.showapi_res_body.imgUrl});
-      }
-    });
+    
   },
 
   //得到该产品的操作详情

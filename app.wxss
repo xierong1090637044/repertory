@@ -192,7 +192,8 @@ page{
   background-color: #DBDBDB;
   background-repeat: repeat-x;
   margin-top: 10rpx;
-  width: 240rpx;
+  min-width: 240rpx;
+  max-width: 320rpx;
   border-radius: 300rpx;
 }
 
