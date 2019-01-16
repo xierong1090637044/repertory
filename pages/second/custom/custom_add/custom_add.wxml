@@ -32,6 +32,10 @@
       <button class='i-btn i-btn-phone i-btn-small' bindtap='make_phone'>
         <i-icon type="mobilephone" /> 联系他/她
       </button>
+
+      <button class='i-btn i-btn-ghost i-btn-small' bindtap='getmoney_detail'>
+        <i-icon type="activity" /> 查看来往记录
+      </button>
       
       <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">
         上传中

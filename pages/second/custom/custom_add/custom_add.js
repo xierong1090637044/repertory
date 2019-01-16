@@ -50,6 +50,7 @@ Page({
           wx.showToast({
             title: '添加成功',
           })
+          that.setData({ custom:null})
         }
       }).catch(err => {
         console.log(err)
@@ -96,6 +97,14 @@ Page({
   {
     wx.makePhoneCall({
       phoneNumber: that.data.custom.custom_phone
+    })
+  },
+
+  //查看来往记录点击
+  getmoney_detail:function()
+  {
+    wx.navigateTo({
+      url: '../../../order_history/order_history?custom_id=' + that.data.custom.objectId,
     })
   },
 

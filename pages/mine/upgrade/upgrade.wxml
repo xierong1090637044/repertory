@@ -21,10 +21,11 @@
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
         <text class="desc-list-item">页面操作优化</text>
+        <text class="desc-list-item">优化条形码显示</text>
         <text class="desc-list-item">增加扫条形码操作</text>
         <text class="desc-list-item">修改协同操作出库显示问题</text>
         <text class="desc-list-item">操作记录增加分页</text>
-
+        <text class="desc-list-item">增加查看客户之间的来往明细</text>
       </view>
     </view>
 
