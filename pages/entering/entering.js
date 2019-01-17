@@ -91,16 +91,24 @@ Page({
     var code_product = [];
     const query = Bmob_new.Query('Goods');
     query.get(id).then(res => {
-      console.log(res);
       res.total_money = res.retailPrice;
       res.modify_retailPrice = res.retailPrice;
-      res.goodsId = res.objectId;
       code_product.push(res);
       that.setData({
         goods: code_product,
       })
     }).catch(err => {
-      console.log(err)
+      const query = Bmob_new.Query("Goods");
+      query.equalTo("productCode", "==", id);
+      query.find().then(res => {
+        console.log(res);
+        res[0].total_money = res[0].retailPrice;
+        res[0].modify_retailPrice = res[0].retailPrice;
+        code_product.push(res[0]);
+        that.setData({
+          goods: code_product,
+        })
+      });
     })
 
   },
