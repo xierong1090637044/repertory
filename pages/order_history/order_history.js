@@ -2,6 +2,8 @@ var Bmob = require('../../utils/bmob_new.js');
 var that;
 var c_type;
 var custom_id;
+var select_start_data;
+var select_end_data;
 Page({
 
   /*** 页面的初始数据*/
@@ -55,6 +57,12 @@ Page({
       that.get_list("month", custom_id);
       that.getallpage("month", custom_id);
     }
+
+    var today = new Date();
+    var tYear = today.getFullYear();
+    var tMonth = today.getMonth() + 1;
+    var tDate = today.getDate();
+    that.setData({ now_data: tYear + '-' + '-' + tDate, start_data: "请选择", end_data: "请选择"});
   },
 
   /*** 生命周期函数--监听页面初次渲染完成*/
@@ -73,13 +81,32 @@ Page({
 
   },
 
-  get_list:function(type,custom)
+  //选择开始日期
+  bindStartDateChange(e) {
+    select_start_data = e.detail.value + " 00:00:00";
+    that.get_list(c_type, custom_id, select_start_data, select_end_data);
+    that.getallpage(c_type, custom_id, select_start_data, select_end_data);
+    that.setData({ start_data: e.detail.value})
+  },
+
+  //选择结束日期
+  bindEndDateChange(e) {
+    select_end_data = e.detail.value + " 00:00:00";
+    that.get_list(c_type, custom_id, select_start_data,select_end_data);
+    that.getallpage(c_type, custom_id, select_start_data,select_end_data);
+    that.setData({ end_data: e.detail.value })
+  },
+
+  get_list:function(type,custom,start_data,end_data)
   {
     that.setData({ spinShow:true});
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("order_opreations");
     query.equalTo("master", "==", userid);
     query.equalTo("custom", "==", custom);
+    if (start_data != null) query.equalTo("createdAt", ">", start_data);
+    if (end_data != null) query.equalTo("createdAt", "<", end_data);
+    query.include("opreater");
     query.limit(that.data.limit);
     query.skip(that.data.limit*(that.data.page-1));
     if(type =="month")
@@ -88,20 +115,35 @@ Page({
     }
     query.order("-createdAt");
     query.find().then(res => {
-      //console.log(res);
+      var items_length = res.length;
+      var goods = res;
+      var products =[];
+      
+      for (var i = 0; i < items_length;i++)
+      {
+        const query = Bmob.Query('order_opreations')
+        query.include("goodsId");
+        query.field('relations', res[i].objectId);
+        query.relation('Bills').then(res => {
+          products.push(res.results);
+          that.setData({ product: products})
+        })
+      }
+
       that.setData({
-        list: res,
-        spinShow:false
-      })
+        list: goods,
+        spinShow: false
+      })   
     });
   },
 
-  getallpage: function (type,custom)
+  getallpage: function (type,custom,data)
   {
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("order_opreations");
     query.equalTo("master", "==", userid);
     query.equalTo("custom", "==", custom);
+    if (data != null) query.equalTo("createdAt", ">", data);
     if (type == "month") {
       query.equalTo("createdAt", ">", that.getDay(-30));
     }

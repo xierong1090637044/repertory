@@ -1,5 +1,15 @@
-<view class='page' wx:if="{{list !=''}}">
+    <view class='select_time'>
+        <picker mode="date" value="{{start_data}}" bindchange="bindStartDateChange">
+         <view >开始时间：{{start_data}}</view>
+        </picker>
+        <picker mode="date" value="{{end_data}}" bindchange="bindEndDateChange" end="{{now_data}}">
+         <view >结束时间：{{end_data}}</view>
+        </picker>
+      </view>
+   <view class='page' wx:if="{{list !=''}}">
+
    <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+
    <i-tabs current="{{ current }}" bindchange="handleChange">
       <i-tab key="1" title="近一个月记录"></i-tab>
       <i-tab key="2" title="全部记录"></i-tab>
@@ -9,8 +19,9 @@
      <view style='display:flex'>
           <view style='line-height:40px'><i class="iconfont icon-jihua icon-order"></i></view>
           <view style='margin-left:10px'>
-              <view>操作编号：{{item.objectId}}</view>
-              <view>操作时间：{{item.createdAt}}</view>
+              <view><text style='color:#999'>操作者：</text>{{item.opreater.username}}</view>
+              <view><text style='color:#999'>操作商品：</text>{{product[index][0].goodsName}}  等...</view>
+              <view><text style='color:#999'>操作时间：</text>{{item.createdAt}}</view>
           </view>
        </view>
        <view wx:if='{{item.type == -1}}' class='order_out'>出库</view>

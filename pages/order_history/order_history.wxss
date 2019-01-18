@@ -1,6 +1,6 @@
 .page
 {
-  height: 100vh;
+  overflow: hidden;
 }
 .item
 {
@@ -17,6 +17,15 @@
 }
 .list-item
 {
-  height: calc(100vh - 92px);
+  height: calc(100vh - 132px);
   overflow: scroll;
+}
+
+.select_time
+{
+  display: flex;
+  justify-content: space-between;
+  line-height: 40px;
+  color: #999;
+  padding: 0 15px;
 }

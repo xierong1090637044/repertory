@@ -1,0 +1,33 @@
+<i-notice-bar icon="systemprompt" loop>
+     希望大家可以找到合适的供货商，如您也想成为供货商，可以联系我，微信号xierong1090637044
+</i-notice-bar>
+
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+
+<view class='list'>
+  <view class='left-item'>
+    <view wx:for="{{class_pro}}" data-id="{{item.objectId}}" bindtap='get_products' wx:key="{{index}}" class="{{item.objectId == select_id ? 'select':'normal'}}">{{item.name}}</view>
+  </view>
+  <view class='right-item'>
+      <view class='no-data' wx:if="{{isEmpty}}">
+        <image src='/images/common/no-data.png'></image>
+        <text>暂无数据</text>
+     </view>
+     <view wx:for='{{user}}' wx:key='{{index}}' style='margin-bottom:10px;background: #fff;'  data-id='{{item.objectId}}' bindtap='goto_next'>
+       <i-card title="" extra="{{item.user.nickName}}" thumb="{{item.user.avatarUrl}}" full>
+         <view slot="content">
+           <view wx:for='{{products[index]}}' class='product_item' wx:key="{{index}}">
+              <image  wx:if ="{{item.goodsIcon == null}}" src='/images/common/goods-default.png' class='product_img'></image>
+              <image  wx:else src='{{item.goodsIcon}}' class='product_img'></image>
+              <view class='product_item_name'>{{item.goodsName}}</view>
+              <view class='product_item_price'>
+                 <text style='color:#4d4d4d;font-weight:bold'>批发价</text>
+                 ￥{{item.costPrice}}
+              </view>
+           </view>
+         </view>
+         <view slot="footer" class='product_footer'>查看详情</view>
+      </i-card>
+    </view>
+  </view>
+</view>

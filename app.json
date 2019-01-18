@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/producer/producer",
     "pages/index/index",
     "pages/friends/friends",
     "pages/mine/account/account",

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "库存助手-供销商",
+  "usingComponents": {
+    "i-page": "../../component/page/index",
+    "i-spin": "../../component/spin/index",
+    "i-notice-bar": "../../component/notice-bar/index",
+    "i-card": "../../component/card/index"
+  }
+}

@@ -20,9 +20,13 @@ Page({
         url: '/pages/goods/goods'
       },
       {
-        name: '协同管理', icon: '../../images/index/mine.png',
-        url: '/pages/friends/friends'
+        name: '我的客户', icon: '../../images/index/customs.png',
+        url: '/pages/second/custom/custom'
       },
+     /* {
+        name: '供货商', icon: '../../images/index/mine.png',
+        url: '/pages/producer/producer',
+      },*/
       {
         name: '财务报表', icon: '../../images/index/finance.png',
         url: '/pages/finance/finance'
@@ -34,8 +38,8 @@ Page({
     ],
     secondaryModules: [
       {
-        name: '我的客户', icon: '../../images/index/customs.png',
-        url: '/pages/second/custom/custom'
+        name: '协同管理', icon: '../../images/index/mine.png',
+        url: '/pages/friends/friends'
       },
     ],
     spinShow: true,

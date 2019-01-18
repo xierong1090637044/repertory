@@ -2,7 +2,7 @@
 <!-- <view hidden='{{!noticeShow}}'> -->
 <view bindtap='skip'>
     <i-notice-bar icon="systemprompt" loop>
-     开发者对部分功能进行调整,具体优化调整请前往升级日志查看;大家有好的想法或者建议可以在优化建议中提出或添加开发者微信(1090637044)进行反馈,帮助开发者一起打造出一个满足您需求的库存助手
+      网页端正在完善，大家想导出表格数据的，可以联系我，微信号xierong1090637044
     </i-notice-bar>
 </view>
 <!-- </view> -->
