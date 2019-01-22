@@ -1,9 +1,12 @@
 // pages/goods/goods.js
-const Bmob = require('../../utils/bmob.js')
+const Bmob = require('../../utils/bmob.js');
+const Bmob_new = require('../../utils/bmob_new.js')
 var config = require('../../utils/config.js')
 var _ = require('../../utils/we-lodash.js');
 var userid = '';
 var now_product;
+var select_id = null;//类别选择的id
+var class_text;
 var that;
 Page({
 
@@ -13,7 +16,7 @@ Page({
   data: {
     spinShow:true,
     goods:[],
-    limitPage: 50,//限制显示条数
+    limitPage: 200,//限制显示条数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了
     totalGoods: [],
@@ -24,6 +27,68 @@ Page({
     length:null,
   },
 
+  //处理modal的显示与消失
+  add_class:function(){
+    that.setData({ visible: true });
+  },
+
+  handleClose:function(){
+    that.setData({ visible: false });
+  },
+
+  //输入产品类别事件
+  getclass_text: function (e) {
+    class_text = e.detail.detail.value;
+  },
+
+  //modal点击确定事件
+  getclass_text_confrim:function(){
+    wx.showLoading({title: '添加中...'})
+    const pointer = Bmob_new.Pointer('_User')
+    const poiID = pointer.set(wx.getStorageSync("userid"));
+
+    const query = Bmob_new.Query('class_user');
+    query.set("parent", poiID)
+    query.set("class_text", class_text);
+    query.save().then(res => {
+      console.log(res);
+      that.setData({ visible: false });
+      that.getclass_list();
+      wx.hideLoading();
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+
+  //得到类别列表
+  getclass_list:function()
+  {
+    const query = Bmob_new.Query("class_user");
+    query.equalTo("parent", "==", wx.getStorageSync("userid"));
+    query.find().then(res => {
+      that.setData({ class_text: res});
+      wx.setStorageSync("class", res);
+    });
+  },
+
+  //点击得到该商品类别的产品
+  getclass_pro: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    if(id == null || id=='')
+    {
+      select_id = null;
+      that.setData({ select_id: null ,current: '1',});
+      that.loadGoods(true);
+      that.loadallGoods();
+    }else{
+      select_id = id;
+      that.setData({ select_id: id });
+      that.loadGoods(that.data.type,null,id);
+      that.loadallGoods(id);
+    }
+  },
+
   //tab改变事件
   handleChange({ detail }) {
     this.setData({
@@ -31,12 +96,12 @@ Page({
       type:true
     });
     if (detail.key == 1) {
-      that.loadGoods(true);
+      that.loadGoods(true,null,select_id);
       this.setData({
         type: true
       });
     } else {
-      that.loadGoods(false);
+      that.loadGoods(false,null,select_id);
       this.setData({
         type: false
       });
@@ -196,7 +261,7 @@ Page({
     })
   },
 
-  loadGoods:function(type,content){
+  loadGoods:function(type,content,class_id){
     var that = this;
     that.setData({spinShow:true});
     var Goods = Bmob.Object.extend("Goods");
@@ -209,9 +274,10 @@ Page({
     }
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
+    if (class_id != null) query.equalTo("goodsClass", class_id);
     
     query.limit(that.data.limitPage);
-    query.descending("createdAt"); //按照时间降序
+    query.ascending("goodsName"); //按照时间降序
     query.include("userId");
     query.find({
       success: function (res) {
@@ -249,7 +315,7 @@ Page({
   },
 
   //得到总库存数和总金额
-  loadallGoods:function()
+  loadallGoods:function(class_id)
   {
     var that = this;
     var total_reserve = 0;
@@ -257,6 +323,7 @@ Page({
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
+    if (class_id != null) query.equalTo("goodsClass", class_id);
     query.find({
       success: function (res) {
         for (var i = 0; i < res.length; i++) {
@@ -301,7 +368,7 @@ Page({
   handleResetData:function(){
     this.setData({
       currentPage: 0,
-      limitPage: 50,
+      limitPage: 200,
       goods: [],
       isEnd: false,
       isEmpty: false,
@@ -314,7 +381,7 @@ Page({
 
   handleRefresh:function(){
     this.handleResetData()
-    this.loadGoods(true)
+    this.loadGoods(true,null,select_id)
   },
 
   /**
@@ -325,6 +392,7 @@ Page({
     this.handleRefresh();
     that = this;
     that.loadallGoods();
+    that.getclass_list();
   },
 
   /**

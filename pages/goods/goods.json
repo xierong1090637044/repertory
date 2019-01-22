@@ -8,6 +8,7 @@
     "i-cell": "../../component/cell/index",
     "i-spin": "../../component/spin/index",
     "i-icon": "../../component/icon/index",
-    "i-tabs": "../../component/tabs/index"
+    "i-tabs": "../../component/tabs/index",
+    "i-modal": "../../../component/modal/index"
   }
 }

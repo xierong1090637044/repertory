@@ -29,6 +29,7 @@
 .goods_wrap{
   height: calc(100vh - 202px);
   overflow: scroll;
+  background: #fff;
 }
 
 .fristcontent
@@ -38,5 +39,34 @@
   padding: 8px 10px;
   color:#f76a24;
   background-color:#fefcec;
+}
+
+
+.left_item
+{
+  width: 20%;
+  background: #fff;
+  color: #4d4d4d;
+  line-height: 40px;
+  text-align: center;
+}
+.right_item
+{
+  width: 80%;
+}
+.add_class
+{
+  background: #f30;
+  color: #fff;
+}
+.class_items
+{
+  height: calc(100vh - 242px);
+  overflow: scroll;
+}
+.select
+{
+  background: #118fff;
+  color: #fff;
 }
 
