@@ -4,6 +4,7 @@ const Bmob = require('../../../utils/bmob.js');
 const Bmob_new = require('../../../utils/bmob_new.js');
 const config = require('../../../utils/config.js');
 var temppath;
+var class_text;
 var that;
 Page({
 
@@ -20,11 +21,29 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
+    goodsClass:'',//产品类别
     reserve:0,
     loading:false,
     image:"none",
     is_choose: false,
   },
+
+  //商品类别点击
+  add_class:function()
+  {
+    class_text = wx.getStorageSync("class");
+    that.setData({ class_text: class_text})
+  },
+
+  bindPickerChange(e) {
+    class_text = wx.getStorageSync("class");
+    var index = e.detail.value;
+    this.setData({
+      class_select_text: class_text[index].class_text,
+      goodsClass: class_text[index].objectId
+    })
+  },
+
 
   handleAddGoods:function(e){
     var that = this
@@ -62,6 +81,10 @@ Page({
               success: function (res) {
                 var Goods = Bmob.Object.extend("Goods");
                 var goods = new Goods();
+                var Class_User = Bmob.Object.extend("class_user");
+                var class_user = new Class_User();
+                class_user.id = that.data.goodsClass;
+
                 var user = new Bmob.User();
                 user.id = res.data;
                 //判断产品是否已存在
@@ -83,6 +106,7 @@ Page({
                     }else{
                       // 添加产品
                           goods.set("userId", user);
+                          goods.set("goodsClass", class_user);
                           goods.set("goodsName", goodsForm.goodsName);
                           goods.set("regNumber", goodsForm.regNumber);
                           goods.set("producer", goodsForm.producer);
@@ -187,6 +211,8 @@ Page({
    */
   onLoad: function (options) {
     that = this;
+    var class_text = wx.getStorageSync("class");
+    that.setData({ class_text: class_text })
   },
 
   /**

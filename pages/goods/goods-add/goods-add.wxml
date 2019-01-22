@@ -15,9 +15,15 @@
     
     <i-panel title="基本信息（产品名称必填）">
       <i-input title="产品名称" value="{{goodsName}}" name="goodsName" placeholder="请输入产品名称" />
-      <i-input title="登记证号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记证号" />
+      <!--<i-input title="登记证号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记证号" />-->
       <i-input title="生产厂家" value="{{producer}}" name="producer" placeholder="请输入生产厂家" />
       <i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="已知产品条码输入已知的，未知则自动生成" />
+    </i-panel>
+
+    <i-panel title="产品类别">
+     <picker bindchange="bindPickerChange" value="{{index}}" range="{{class_text}}" range-key="class_text">
+        <i-input title="产品类别" value="{{class_select_text}}" name="goodsClass" placeholder="请选择产品类别" disabled='true'/>
+     </picker>
     </i-panel>
 
     <i-panel title="产品规格">
