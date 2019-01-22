@@ -1,10 +1,13 @@
 // pages/common/goods-select/goods-select.js
-const Bmob = require('../../../utils/bmob.js')
+const Bmob = require('../../../utils/bmob.js');
+const Bmob_new = require('../../../utils/bmob_new.js')
 var config = require('../../../utils/config.js')
 var _ = require('../../../utils/we-lodash.js');
 var { $Message } = require('../../../component/base/index');
 var userid = '';
-var curModule = ''
+var curModule = '';
+var that;
+var select_id;//产品类别id
 Page({
 
   /**
@@ -32,17 +35,45 @@ Page({
       type: true
     });
     if (detail.key == 1) {
-      that.loadGoods(true);
+      that.loadGoods(true,select_id);
       this.setData({
         type: true
       });
     } else {
-      that.loadGoods(false);
+      that.loadGoods(false, select_id);
       this.setData({
         type: false
       });
     }
   },
+
+  //得到类别列表
+  getclass_list: function () {
+    const query = Bmob_new.Query("class_user");
+    query.equalTo("parent", "==", wx.getStorageSync("userid"));
+    query.find().then(res => {
+      that.setData({ class_text: res });
+      wx.setStorageSync("class", res);
+    });
+  },
+
+  //点击得到该商品类别的产品
+  getclass_pro: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    if (id == null || id == '') {
+      select_id = null;
+      that.setData({ select_id: null, current: '1', });
+      that.loadGoods(true);
+      //that.loadallGoods();
+    } else {
+      select_id = id;
+      that.setData({ select_id: id });
+      that.loadGoods(that.data.type, null, id);
+      //that.loadallGoods(id);
+    }
+  },
+
 
   // 搜索
   showInput: function () {
@@ -117,12 +148,13 @@ Page({
     });
   },
 
-  loadGoods: function (type, content) {
+  loadGoods: function (type, content, class_id) {
     var that = this;
     that.setData({ spinShow: true });
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
+    if (class_id != null) query.equalTo("goodsClass", class_id);
     if (type) {
       query.greaterThan("reserve", 0);//库存充足
     } else {
@@ -182,8 +214,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    userid = wx.getStorageSync("userid")
-    curModule = options.type
+    that = this;
+    userid = wx.getStorageSync("userid");
+    curModule = options.type;
+    that.getclass_list();
   },
 
   /**

@@ -676,3 +676,37 @@ page{
 .i-btn{text-align:center;vertical-align:middle;touch-action:manipulation;cursor:pointer;background-image:none;white-space:nowrap;user-select:none;font-size:14px;border-radius:2px;border:0!important;position:relative;text-decoration:none;height:44px;line-height:44px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);color:#fff!important;background:#f7f7f7!important;margin:10px}
 .i-btn-primary{color:#fff!important;background:#2d8cf0!important}.i-btn-ghost{color:#fff!important;background:#fff!important;}
 .i-btn-small{height:40px;line-height:40px}
+
+.left_item
+{
+  width: calc(20% - 1px);
+  background: #fff;
+  color: #4d4d4d;
+  line-height: 40px;
+  text-align: center;
+  border-right: 1px solid#ddd;
+}
+.right_item
+{
+  width: 80%;
+}
+.add_class
+{
+  background: #f30;
+  color: #fff;
+}
+.class_items
+{
+  height: calc(100vh - 242px);
+  overflow: scroll;
+}
+.select
+{
+  background: #118fff;
+  border-bottom: 1px solid#ddd;
+  color: #fff;
+}
+.normal
+{
+  border-bottom: 1px solid#ddd;
+}

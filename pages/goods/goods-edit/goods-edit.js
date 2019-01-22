@@ -6,6 +6,7 @@ var _ = require('../../../utils/we-lodash.js');
 const Bmob_new = require('../../../utils/bmob_new.js');
 var temppath;
 var that;
+var class_text;
 Page({
 
   /**
@@ -26,6 +27,21 @@ Page({
     is_choose:false,
   },
 
+  //商品类别点击
+  add_class: function () {
+    class_text = wx.getStorageSync("class");
+    that.setData({ class_text: class_text })
+  },
+
+  bindPickerChange(e) {
+    class_text = wx.getStorageSync("class");
+    var index = e.detail.value;
+    this.setData({
+      class_select_text: class_text[index].class_text,
+      goodsClass: class_text[index].objectId
+    })
+  },
+
   initGoods:function(){
     var that = this
     var goods = wx.getStorageSync('editGoods')
@@ -39,7 +55,8 @@ Page({
       packageContent: goods.packageContent,
       packingUnit: goods.packingUnit,
       costPrice: goods.costPrice,
-      retailPrice: goods.retailPrice
+      retailPrice: goods.retailPrice,
+      class_select_text: (goods.class_text.class_text == null) ? null : goods.class_text.class_text,
     })
   },
 
@@ -81,12 +98,18 @@ Page({
                 var Goods = Bmob.Object.extend("Goods");
                 var user = new Bmob.User();
                 user.id = res.data;
+
+                var Class_User = Bmob.Object.extend("class_user");
+                var class_user = new Class_User();
+                class_user.id = that.data.goodsClass;
+
                 //判断产品是否已存在
                 var query = new Bmob.Query(Goods);
                 query.get(goodsForm.goodsId,{
                   success: function (results) {
                     // 修改产品
                     results.set("goodsName", goodsForm.goodsName);
+                    results.set("goodsClass", class_user);
                     results.set("goodsIcon", goodsForm.goodsIcon);
                     results.set("regNumber", goodsForm.regNumber);
                     results.set("producer", goodsForm.producer);
@@ -100,70 +123,15 @@ Page({
                       success: function (result) {
                         console.log("修改产品成功");
                         wx.setStorageSync("is_add", true);
-                        wx.request({
-                          url: 'https://route.showapi.com/1129-1',
-                          data: {
-                            showapi_appid: '84916',
-                            showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
-                            content: (goodsForm.productCode == "") ? (result.id + "-false") : (goodsForm.productCode + "-true"),
-                            height: "120",
-                            width: "500"
-                          },
-                          header: {
-                            'content-type': 'application/json' // 默认值
-                          },
-                          success(res) {
-                            console.log(res.data.showapi_res_body.imgUrl)
-                            var Diary = Bmob.Object.extend("Goods");
-                            var query = new Bmob.Query(Diary);
-                            query.get(goodsForm.goodsId, {
-                              success: function (result) {
-                                result.set('single_code', res.data.showapi_res_body.imgUrl);
-                                result.save();
-
-                                if(that.data.is_choose)
-                                {
-                                  var file;
-                                  var tempFilePaths = temppath;
-                                  for (let item of tempFilePaths) {
-                                    console.log('itemn', item)
-                                    file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
-                                  }
-                                  file.save().then(res => {
-                                    const query = Bmob_new.Query('Goods');
-                                    query.set('id', goodsForm.goodsId) //需要修改的objectId
-                                    query.set('goodsIcon', JSON.parse(res[0]).url);
-                                    query.save().then(res => {
-                                      console.log(res)
-                                      wx.showToast({
-                                        title: '修改产品成功',
-                                        icon: 'success',
-                                        success: function () {
-                                          setTimeout(function () {
-                                            wx.navigateBack()
-                                          }, 1000)
-                                        }
-                                      })
-                                    }).catch(err => {
-                                      console.log(err)
-                                    })
-                                  })
-                                }else{
-                                  wx.showToast({
-                                    title: '修改产品成功',
-                                    icon: 'success',
-                                    success: function () {
-                                      setTimeout(function () {
-                                        wx.navigateBack()
-                                      }, 1000)
-                                    }
-                                  })
-                                }
-
-                              },
-                            });
+                        wx.showToast({
+                          title: '修改产品成功',
+                          icon: 'success',
+                          success: function () {
+                            setTimeout(function () {
+                              wx.navigateBack()
+                            }, 1000)
                           }
-                        });
+                        })
                        
                       },
                       error: function (result, error) {
@@ -201,6 +169,7 @@ Page({
   onLoad: function (options) {
     this.initGoods();
     that = this;
+    that.add_class();
   },
 
   /**

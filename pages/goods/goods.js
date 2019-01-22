@@ -279,6 +279,7 @@ Page({
     query.limit(that.data.limitPage);
     query.ascending("goodsName"); //按照时间降序
     query.include("userId");
+    query.include("goodsClass");
     query.find({
       success: function (res) {
         var tempGoodsArr = new Array();
@@ -298,7 +299,7 @@ Page({
           tempGoods.reserve = res[i].get("reserve") || 0;
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.single_code = res[i].get("single_code") || '';
+          tempGoods.class_text = res[i].get("goodsClass") || '';
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);

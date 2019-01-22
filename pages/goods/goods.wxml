@@ -49,9 +49,9 @@
   </view>
 
   <view class='no-data' wx:if="{{contentEmpty}}" style='height:calc(100vh - 202px)'>
-  <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
-</view>
+    <image src='/images/common/no-data.png'></image>
+    <text>暂无数据</text>
+  </view>
 
   <view class='right_item' wx:else>
   <i-cell-group i-class="goods_wrap" bindmyevent="loadMore">

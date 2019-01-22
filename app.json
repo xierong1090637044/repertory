@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/producer/producer",
     "pages/index/index",
+    "pages/producer/producer",
     "pages/friends/friends",
     "pages/mine/account/account",
     "pages/authorize/authorize",
@@ -13,8 +13,8 @@
     "pages/delivery/delivery-history/delivery-history",
     "pages/entering/entering",
     "pages/entering/enter-history/enter-history",
-    "pages/goods/goods",
     "pages/goods/goods-edit/goods-edit",
+    "pages/goods/goods",
     "pages/goods/goods-add/goods-add",
     "pages/mine/mine",
     "pages/mine/about-us/about-us",

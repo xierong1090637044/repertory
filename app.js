@@ -5,7 +5,7 @@ var Bmob_new = require('utils/bmob_new.js');
 Bmob.initialize(config.appId, config.apiKey);
 Bmob_new.initialize(config.appId, config.apiKey);
 App({
-  version: 'v1.1.4', //版本号
+  version: 'v1.1.5', //版本号
   onLaunch: function () {
     var that = this;
     //判断是否用于已登录

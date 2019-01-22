@@ -18,6 +18,13 @@
       <i-input title="生产厂家" value="{{producer}}" name="producer" placeholder="请输入生产厂家" />
       <i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="请输入产品条码" />
     </i-panel>
+
+    <i-panel title="产品类别">
+     <picker bindchange="bindPickerChange" value="{{index}}" range="{{class_text}}" range-key="class_text">
+        <i-input title="产品类别" value="{{class_select_text}}" name="goodsClass" placeholder="请选择产品类别" disabled='true'/>
+     </picker>
+    </i-panel>
+    
     <i-panel title="产品规格" style="flex:1">
       <i-input title="包装含量" type="number" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
         <i-input title="包装单位" placeholder="请输入包装单位" name="packingUnit" value="{{packingUnit}}"  />
