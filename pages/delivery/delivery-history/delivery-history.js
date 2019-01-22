@@ -105,7 +105,6 @@ Page({
               tempBills.set('retailPrice', that.data.goods[i].modify_retailPrice);
               tempBills.set('num', that.data.goods[i].num);
               tempBills.set('total_money', that.data.goods[i].total_money);
-              tempBills.set('goodsName', that.data.goods[i].goodsName);
               tempBills.set('goodsId', tempGoods);
               tempBills.set('userId', user);
               tempBills.set('type', -1);
@@ -138,6 +137,7 @@ Page({
                   query.set("type", -1);
                   query.set("opreater", poiID);
                   query.set("master", poiID);
+                  query.set('goodsName', that.data.goods[0].goodsName);
                   query.set('real_money', Number(that.data.real_money));
                   if (that.data.custom.objectId != null) {
                     const custom = Bmob_new.Pointer('customs');

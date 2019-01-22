@@ -20,7 +20,7 @@
           <view style='line-height:40px'><i class="iconfont icon-jihua icon-order"></i></view>
           <view style='margin-left:10px'>
               <view><text style='color:#999'>操作者：</text>{{item.opreater.username}}</view>
-              <view><text style='color:#999'>操作商品：</text>{{product[index][0].goodsName}}  等...</view>
+              <view wx:if='{{item.goodsName != null}}'><text style='color:#999'>操作商品：</text>{{item.goodsName}}  等...</view>
               <view><text style='color:#999'>操作时间：</text>{{item.createdAt}}</view>
           </view>
        </view>

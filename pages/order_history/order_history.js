@@ -97,6 +97,7 @@ Page({
     that.setData({ end_data: e.detail.value })
   },
 
+  //得到列表
   get_list:function(type,custom,start_data,end_data)
   {
     that.setData({ spinShow:true});
@@ -117,18 +118,6 @@ Page({
     query.find().then(res => {
       var items_length = res.length;
       var goods = res;
-      var products =[];
-      
-      for (var i = 0; i < items_length;i++)
-      {
-        const query = Bmob.Query('order_opreations')
-        query.include("goodsId");
-        query.field('relations', res[i].objectId);
-        query.relation('Bills').then(res => {
-          products.push(res.results);
-          that.setData({ product: products})
-        })
-      }
 
       that.setData({
         list: goods,
