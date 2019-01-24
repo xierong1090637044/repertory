@@ -3,7 +3,7 @@
   <i-panel title="产品详情">
     <i-card title="产品名称：{{goodsReserve.goodsName}}" 
           extra="当前库存：{{goodsReserve.reserve}}"
-          full="true">
+          full="true" thumb="{{goodsReserve.goodsIcon}}">
       <view slot="content">
         <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
         <view>进货价格：{{goodsReserve.costPrice}} (元)</view>

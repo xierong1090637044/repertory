@@ -18,6 +18,7 @@ Page({
     shareImage: ''
   },
 
+  //点击预览"条形码并下载"
   handlePreviewImage: function (e) {
     var single_code = e.target.dataset.qrcode;
     wx.showLoading({ title: '加载中...' })
@@ -45,9 +46,7 @@ Page({
     
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     console.log(options);
     that = this;
