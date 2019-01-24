@@ -11,8 +11,8 @@ Page({
     userInfo: {},
     modules: [
       { name: '我的账号', icon: 'mine', url: '/pages/mine/account/account' },
+      { name: '产品类别', icon: 'task', url: '/pages/mine/add_class/add_class' },
       { name: '我的申请', icon: 'message', url: '/pages/mine/message/message' },
-      //{ name: '待我审批', icon: 'task', url: '/pages/order_history_fri/order_history_fri' },
       { name: '升级日志', icon: 'activity', url: '/pages/mine/upgrade/upgrade' },
       { name: '优化建议', icon: 'interactive', url: '/pages/mine/propose/propose' },
     ],

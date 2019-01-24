@@ -66,7 +66,11 @@
       </view>
 
       <view class='list_style'> 
-        <view wx:if="{{item.type == 1}}"><text class='text_color'>入库单价：</text>￥{{item.retailPrice}}</view>
+        <view wx:if="{{item.type == 1}}">
+            <text class='text_color'>入库单价：</text>
+            ￥{{item.retailPrice}}
+            <text>(成本价：￥{{item.goodsId.costPrice}})</text>
+        </view>
         <view wx:else>
           <text class='text_color'>出库单价：</text>
           ￥{{item.retailPrice}}

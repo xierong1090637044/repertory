@@ -26,6 +26,7 @@
     "pages/mine/apply-delivery/apply-result/apply-result",
     "pages/mine/propose/propose",
     "pages/mine/message/message",
+    "pages/mine/add_class/add_class",
     "pages/mine/upgrade/upgrade",
     "pages/order_history/detail/detail",
     "pages/order_history/order_history",
