@@ -16,12 +16,15 @@
     <view class="describe">
       <view class="desc-title">
         <text class="desc-v">v1.1.5 公测版</text>
-        <text class="desc-time">2018.01.22</text>
+        <text class="desc-time">2018.01.24</text>
       </view>
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
         <text class="desc-list-item">操作页面显示优化</text>
         <text class="desc-list-item">增加产品显示类别</text>
+        <text class="desc-list-item">增加盈收记录页面</text>
+        <text class="desc-list-item">选择产品页面优化（增加类别选择）</text>
+        <text class="desc-list-item">个人中心增加类别操作，个人可以新增类别</text>
       </view>
     </view>
 
