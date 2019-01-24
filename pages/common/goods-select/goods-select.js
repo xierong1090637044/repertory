@@ -36,27 +36,26 @@ Page({
   bindclass_Change: function (e) {
     var index = e.detail.value;
     select_id = class_array[index].objectId;
-    that.setData({ selectd_class: class_array[index].class_text });
+    that.setData({ selectd_class: class_array[index].class_text, current: [], currGoods: [] });
     that.loadGoods(type, null, select_id);
-    that.loadallGoods(id);
   },
 
   //选择库存情况
   bindstock_Change: function (e) {
     if (e.detail.value == "0") {
       that.loadGoods(true, null, select_id);
-      that.setData({ selectd_stock: that.data.stock[e.detail.value] });
+      that.setData({
+        selectd_stock: that.data.stock[e.detail.value], current: [],currGoods: [] });
       type = true;
     } else {
       that.loadGoods(false, null, select_id);
-      that.setData({ selectd_stock: that.data.stock[e.detail.value] });
+      that.setData({ selectd_stock: that.data.stock[e.detail.value], current: [], currGoods: [] });
       type = false;
     }
   },
 
   //得到类别列表
   getclass_list: function () {
-    wx.showLoading({ title: '加载中...' })
     const query = Bmob_new.Query("class_user");
     query.equalTo("parent", "==", userid);
     query.find().then(res => {
@@ -67,7 +66,6 @@ Page({
       all.objectId = null;
 
       res.push(all);
-      wx.hideLoading();
       that.setData({ all_class: res });
       class_array = res;
     });
@@ -228,7 +226,7 @@ Page({
 
   /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-    this.loadGoods(type,null,select_id);
+    this.loadGoods(null, null, null);
     this.setData({
       current: [],
       currGoods: []
@@ -239,14 +237,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
+  /*** 生命周期函数--监听页面卸载*/
   onUnload: function () {
-
+    type = null;//库存情况
+    select_id = null;//类别选择的id
   },
 
   /**

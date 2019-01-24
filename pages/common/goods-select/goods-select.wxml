@@ -1,5 +1,6 @@
 <!--pages/common/goods-select/goods-select.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<i-message id="message" />
 <!--搜索-->
 
 <view class='no-data' wx:if="{{isEmpty}}">

@@ -55,13 +55,13 @@ Page({
         type: 'warning',
         duration: 5
       });
-    } else if (goodsForm.costPrice == "" || goodsForm.costPrice == 0) {
+    } else if (goodsForm.costPrice == "") {
       $Message({
         content: '请输入进货价格',
         type: 'warning',
         duration: 5
       });
-    } else if (goodsForm.retailPrice == "" || goodsForm.retailPrice == 0) {
+    } else if (goodsForm.retailPrice == "") {
       $Message({
         content: '请输入零售价格',
         type: 'warning',

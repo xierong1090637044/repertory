@@ -32,7 +32,7 @@
 name="packingUnit"/>
     </i-panel>
 
-    <i-panel title="产品价格（必填）">
+    <i-panel title="产品价格（必填）（都为0为自用产品）">
       <i-input title="进货价格" type="digit" value="{{costPrice}}" name="costPrice" placeholder="请输入进货价格" />
       <i-input title="零售价格" type="digit" value="{{retailPrice}}" name="retailPrice" placeholder="请选择零售价格" />
     </i-panel>

@@ -48,7 +48,7 @@ Page({
     select_id = class_array[index].objectId;
     that.setData({ selectd_class: class_array[index].class_text});
     that.loadGoods(type,null,select_id);
-    that.loadallGoods(id);
+    that.loadallGoods(select_id);
   },
 
   // 搜索
@@ -389,7 +389,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    type = null;//库存情况
+    select_id = null;//类别选择的id
   },
 
   /**
