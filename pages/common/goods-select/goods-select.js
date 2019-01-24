@@ -7,6 +7,8 @@ var { $Message } = require('../../../component/base/index');
 var userid = '';
 var curModule = '';
 var that;
+var type;//库存情况
+var class_array;//产品类别
 var select_id;//产品类别id
 Page({
 
@@ -25,86 +27,51 @@ Page({
     inputVal: "",
     currenttab: '1',
     length: null,
+    selectd_stock: "库存情况",
+    stock: ["库存充足", "库存不足"],
+    selectd_class: "产品类别"
   },
 
-  //tab改变事件
-  handleChange({ detail }) {
-    var that = this;
-    this.setData({
-      currenttab: detail.key,
-      type: true,
-      current: [],
-      currGoods: [],
-      goods: [],
-      totalGoods: [],
-      isEmpty: false,
-      // 搜索
-      inputShowed: false,
-      inputVal: "",
-      length: null,
-    });
-    if (detail.key == 1) {
-      that.loadGoods(true,null,select_id);
-      this.setData({
-        type: true
-      });
+  //选择产品类别
+  bindclass_Change: function (e) {
+    var index = e.detail.value;
+    select_id = class_array[index].objectId;
+    that.setData({ selectd_class: class_array[index].class_text });
+    that.loadGoods(type, null, select_id);
+    that.loadallGoods(id);
+  },
+
+  //选择库存情况
+  bindstock_Change: function (e) {
+    if (e.detail.value == "0") {
+      that.loadGoods(true, null, select_id);
+      that.setData({ selectd_stock: that.data.stock[e.detail.value] });
+      type = true;
     } else {
-      that.loadGoods(false, null,select_id);
-      this.setData({
-        type: false
-      });
+      that.loadGoods(false, null, select_id);
+      that.setData({ selectd_stock: that.data.stock[e.detail.value] });
+      type = false;
     }
   },
 
   //得到类别列表
   getclass_list: function () {
+    wx.showLoading({ title: '加载中...' })
     const query = Bmob_new.Query("class_user");
-    query.equalTo("parent", "==", wx.getStorageSync("userid"));
+    query.equalTo("parent", "==", userid);
     query.find().then(res => {
-      that.setData({ class_text: res });
       wx.setStorageSync("class", res);
+
+      var all = {};
+      all.class_text = "全部";
+      all.objectId = null;
+
+      res.push(all);
+      wx.hideLoading();
+      that.setData({ all_class: res });
+      class_array = res;
     });
   },
-
-  //点击得到该商品类别的产品
-  getclass_pro: function (e) {
-    var id = e.currentTarget.dataset.id;
-    if (id == null || id == '') {
-      select_id = null;
-      that.setData({ 
-        select_id: null, 
-        currenttab: '1', 
-        current: [],
-        currGoods: [],
-        goods: [],
-        totalGoods: [],
-        isEmpty: false,
-        // 搜索
-        inputShowed: false,
-        inputVal: "",
-        length: null,
-        });
-      that.loadGoods(true);
-      //that.loadallGoods();
-    } else {
-      select_id = id;
-      that.setData({ 
-        select_id: id,
-        current: [],
-        currGoods: [],
-        goods: [],
-        totalGoods: [],
-        isEmpty: false,
-        // 搜索
-        inputShowed: false,
-        inputVal: "",
-        length: null,
-        });
-      that.loadGoods(that.data.type, null, id);
-      //that.loadallGoods(id);
-    }
-  },
-
 
   // 搜索
   showInput: function () {
@@ -133,7 +100,7 @@ Page({
   searchAction: function (e) {
     var that = this;
     var inputVal = this.data.inputVal
-    that.loadGoods(that.data.type, inputVal);
+    that.loadGoods(type, inputVal,select_id);
   },
   // /.搜索
   link2page: function () {
@@ -186,17 +153,27 @@ Page({
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
     if (class_id != null) query.equalTo("goodsClass", class_id);
-    if (type) {
+    if (type == true) {
       query.greaterThan("reserve", 0);//库存充足
-    } else {
+    } else if(type == false) {
       query.lessThanOrEqualTo("reserve", 0);//库存紧张
-    }
+    }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     query.ascending("goodsName"); //按照货物名字
     query.include("userId");
     query.find({
       success: function (res) {
+
+        that.setData({ length: res.length });
+        if (res.length == 0) {
+          that.setData({ contentEmpty: true })
+        } else {
+          that.setData({ contentEmpty: false })
+        }
+
+        that.getclass_list();
+
         var tempGoodsArr = new Array();
         for (var i = 0; i < res.length; i++) {
           var tempGoods = {}
@@ -219,14 +196,6 @@ Page({
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
-        that.setData({ type: type, length: res.length });
-
-        if (res.length == 0)
-        {
-          that.setData({ contentEmpty:true})
-        }else{
-          that.setData({ contentEmpty: false })
-        }
       }
     })
   },
@@ -238,7 +207,7 @@ Page({
     this.setData({
       goods: data,
       totalGoods: data,
-      spinShow: false
+      spinShow: false,
     });
   },
   /**
@@ -248,7 +217,6 @@ Page({
     that = this;
     userid = wx.getStorageSync("userid");
     curModule = options.type;
-    that.getclass_list();
   },
 
   /**
@@ -258,15 +226,9 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-    this.setData({
-      currenttab: "1",
-      type: true
-    });
-    this.loadGoods(true);
+    this.loadGoods(type,null,select_id);
     this.setData({
       current: [],
       currGoods: []

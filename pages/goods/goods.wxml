@@ -27,10 +27,31 @@
 </view>
 <!--/.搜索-->
 
-<i-tabs current="{{ current }}" bindchange="handleChange">
+<!--<i-tabs current="{{ current }}" bindchange="handleChange">
       <i-tab key="1" title="库存有余"></i-tab>
       <i-tab key="2" title="库存紧缺"></i-tab>
-</i-tabs>
+</i-tabs>-->
+
+<!--*筛选器*-->
+  <view class='select'>
+    <view class="section">
+      <picker bindchange="bindclass_Change" range-key	="class_text" range="{{all_class}}">
+        <view class="picker">
+          <text>{{selectd_class}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <picker bindchange="bindstock_Change" value="{{index}}" range="{{stock}}">
+        <view class="picker">
+          <text>{{selectd_stock}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+        </view>
+      </picker>
+    </view>
+  </view>
 
 <view class='no-data' wx:if="{{isEmpty}}">
   <image src='/images/common/no-data.png'></image>
@@ -78,7 +99,3 @@
       <i-icon type="add" /> 新增产品
     </button>
 </navigator>
-
-<i-modal title="产品分类" visible="{{visible}}" bind:ok="getclass_text_confrim" bind:cancel="handleClose">
-    <i-input placeholder="请输入产品类别" bind:change="getclass_text" maxlength='4'/>
-</i-modal>

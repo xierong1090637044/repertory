@@ -5,9 +5,11 @@ var config = require('../../utils/config.js')
 var _ = require('../../utils/we-lodash.js');
 var userid = '';
 var now_product;
-var select_id = null;//类别选择的id
 var class_text;
 var that;
+var type;//库存情况
+var class_array;//产品类别
+var select_id = null;//类别选择的id
 Page({
 
   /**
@@ -27,85 +29,26 @@ Page({
     length:null,
   },
 
-  //处理modal的显示与消失
-  add_class:function(){
-    that.setData({ visible: true });
-  },
-
-  handleClose:function(){
-    that.setData({ visible: false });
-  },
-
-  //输入产品类别事件
-  getclass_text: function (e) {
-    class_text = e.detail.detail.value;
-  },
-
-  //modal点击确定事件
-  getclass_text_confrim:function(){
-    wx.showLoading({title: '添加中...'})
-    const pointer = Bmob_new.Pointer('_User')
-    const poiID = pointer.set(wx.getStorageSync("userid"));
-
-    const query = Bmob_new.Query('class_user');
-    query.set("parent", poiID)
-    query.set("class_text", class_text);
-    query.save().then(res => {
-      console.log(res);
-      that.setData({ visible: false });
-      that.getclass_list();
-      wx.hideLoading();
-    }).catch(err => {
-      console.log(err)
-    })
-  },
-
-  //得到类别列表
-  getclass_list:function()
-  {
-    const query = Bmob_new.Query("class_user");
-    query.equalTo("parent", "==", wx.getStorageSync("userid"));
-    query.find().then(res => {
-      that.setData({ class_text: res});
-      wx.setStorageSync("class", res);
-    });
-  },
-
-  //点击得到该商品类别的产品
-  getclass_pro: function (e) {
-    var id = e.currentTarget.dataset.id;
-    console.log(id);
-    if(id == null || id=='')
-    {
-      select_id = null;
-      that.setData({ select_id: null ,current: '1',});
-      that.loadGoods(true);
-      that.loadallGoods();
+  //选择库存情况
+  bindstock_Change: function (e) {
+    if (e.detail.value == "0") {
+      that.loadGoods(true, null, select_id);
+      that.setData({ selectd_stock: that.data.stock[e.detail.value]});
+      type = true;
     }else{
-      select_id = id;
-      that.setData({ select_id: id });
-      that.loadGoods(that.data.type,null,id);
-      that.loadallGoods(id);
+      that.loadGoods(false, null, select_id);
+      that.setData({ selectd_stock: that.data.stock[e.detail.value] });
+      type = false;
     }
   },
 
-  //tab改变事件
-  handleChange({ detail }) {
-    this.setData({
-      current: detail.key,
-      type:true
-    });
-    if (detail.key == 1) {
-      that.loadGoods(true,null,select_id);
-      this.setData({
-        type: true
-      });
-    } else {
-      that.loadGoods(false,null,select_id);
-      this.setData({
-        type: false
-      });
-    }
+  //选择产品类别
+  bindclass_Change:function(e){
+    var index = e.detail.value;
+    select_id = class_array[index].objectId;
+    that.setData({ selectd_class: class_array[index].class_text});
+    that.loadGoods(type,null,select_id);
+    that.loadallGoods(id);
   },
 
   // 搜索
@@ -125,7 +68,7 @@ Page({
       inputVal: ""
     });
     this.handleResetData()
-    this.loadGoods(true)
+    this.loadGoods()
   },
   inputTyping: function (e) {
     this.setData({
@@ -136,7 +79,7 @@ Page({
   searchAction: function (e) {
     var that = this;
     var inputVal = this.data.inputVal
-    that.loadGoods(that.data.type, inputVal);
+    that.loadGoods(type, inputVal);
   },
 
   //产品点击
@@ -267,11 +210,11 @@ Page({
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
-    if(type){
+    if(type == true){
       query.greaterThan("reserve", 0);//库存充足
-    }else{
+    }else if(type == false){
       query.lessThanOrEqualTo("reserve", 0);//库存紧张
-    }
+    }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     if (class_id != null) query.equalTo("goodsClass", class_id);
@@ -282,6 +225,13 @@ Page({
     query.include("goodsClass");
     query.find({
       success: function (res) {
+        that.setData({length: res.length });
+        if (res.length == 0) {
+          that.setData({ contentEmpty: true })
+        } else {
+          that.setData({ contentEmpty: false })
+        }
+
         var tempGoodsArr = new Array();
         for (var i = 0; i < res.length; i++) {
           var tempGoods = {}
@@ -303,14 +253,6 @@ Page({
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
-        that.setData({ type: type, length: res.length});
-
-        if(res.length == 0)
-        {
-          that.setData({ contentEmpty:true})
-        }else{
-          that.setData({ contentEmpty: false })
-        }
       }
     })
   },
@@ -327,6 +269,8 @@ Page({
     if (class_id != null) query.equalTo("goodsClass", class_id);
     query.find({
       success: function (res) {
+        that.getclass_list();
+        
         for (var i = 0; i < res.length; i++) {
           total_reserve = total_reserve + res[i].get("reserve");
           total_money = total_money + res[i].get("reserve") * res[i].get("retailPrice");
@@ -360,7 +304,7 @@ Page({
       })
     }else{
       that.setData({ limitPage: that.data.limitPage + that.data.limitPage,})
-      that.loadGoods(that.data.type);
+      that.loadGoods(type, null, select_id);
     }
     
   },
@@ -377,23 +321,42 @@ Page({
       inputShowed:false,
       spinShow: true,
       current: '1',
+      selectd_stock:"库存情况",
+      stock:["库存充足","库存不足"],
+      selectd_class:"产品类别"
     })
   },
 
   handleRefresh:function(){
     this.handleResetData()
-    this.loadGoods(true,null,select_id)
+    this.loadGoods(null,null,null)
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  //得到类别列表
+  getclass_list: function () {
+    wx.showLoading({ title: '加载中...' })
+    const query = Bmob_new.Query("class_user");
+    query.equalTo("parent", "==", userid);
+    query.find().then(res => {
+      wx.setStorageSync("class", res);
+
+      var all = {};
+      all.class_text = "全部";
+      all.objectId = null;
+
+      res.push(all);
+      wx.hideLoading();
+      that.setData({ all_class: res });
+      class_array = res;
+    });
+  },
+
+  /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
     this.handleRefresh();
     that = this;
     that.loadallGoods();
-    that.getclass_list();
   },
 
   /**
