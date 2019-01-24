@@ -28,8 +28,8 @@ Page({
         url: '/pages/producer/producer',
       },*/
       {
-        name: '财务报表', icon: '../../images/index/finance.png',
-        url: '/pages/finance/finance'
+        name: '盈收记录', icon: '../../images/index/stock.png',
+        url: '/pages/detail_finance/detail_finance'
       },
       {
         name: '操作记录', icon: '../../images/index/order_history.png',
@@ -37,6 +37,10 @@ Page({
       },
     ],
     secondaryModules: [
+      {
+        name: '财务报表', icon: '../../images/index/finance.png',
+        url: '/pages/finance/finance'
+      },
       {
         name: '协同管理', icon: '../../images/index/mine.png',
         url: '/pages/friends/friends'

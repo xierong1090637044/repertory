@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "库存助手-详细报表",
+  "usingComponents": {
+    "i-panel": "../../component/panel/index",
+    "i-grid": "../../component/grid/index",
+    "i-grid-item": "../../component/grid-item/index",
+    "i-grid-icon": "../../component/grid-icon/index",
+    "i-grid-label": "../../component/grid-label/index",
+    "i-icon": "../../component/icon/index",
+    "i-spin": "../../component/spin/index",
+    "i-cell": "../../component/cell/index",
+    "i-tabs": "../../component/tabs/index",
+    "i-tab": "../../component/tab/index"
+  }
+}

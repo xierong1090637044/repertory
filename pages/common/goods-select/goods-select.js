@@ -32,15 +32,24 @@ Page({
     var that = this;
     this.setData({
       currenttab: detail.key,
-      type: true
+      type: true,
+      current: [],
+      currGoods: [],
+      goods: [],
+      totalGoods: [],
+      isEmpty: false,
+      // 搜索
+      inputShowed: false,
+      inputVal: "",
+      length: null,
     });
     if (detail.key == 1) {
-      that.loadGoods(true,select_id);
+      that.loadGoods(true,null,select_id);
       this.setData({
         type: true
       });
     } else {
-      that.loadGoods(false, select_id);
+      that.loadGoods(false, null,select_id);
       this.setData({
         type: false
       });
@@ -60,15 +69,37 @@ Page({
   //点击得到该商品类别的产品
   getclass_pro: function (e) {
     var id = e.currentTarget.dataset.id;
-    console.log(id);
     if (id == null || id == '') {
       select_id = null;
-      that.setData({ select_id: null, current: '1', });
+      that.setData({ 
+        select_id: null, 
+        currenttab: '1', 
+        current: [],
+        currGoods: [],
+        goods: [],
+        totalGoods: [],
+        isEmpty: false,
+        // 搜索
+        inputShowed: false,
+        inputVal: "",
+        length: null,
+        });
       that.loadGoods(true);
       //that.loadallGoods();
     } else {
       select_id = id;
-      that.setData({ select_id: id });
+      that.setData({ 
+        select_id: id,
+        current: [],
+        currGoods: [],
+        goods: [],
+        totalGoods: [],
+        isEmpty: false,
+        // 搜索
+        inputShowed: false,
+        inputVal: "",
+        length: null,
+        });
       that.loadGoods(that.data.type, null, id);
       //that.loadallGoods(id);
     }
@@ -106,14 +137,14 @@ Page({
   },
   // /.搜索
   link2page: function () {
-    if (this.data.currGoods.length < 1) {
+    if (that.data.currGoods.length < 1) {
       $Message({
         content: '未选择产品，请确认',
         type: 'warning',
         duration: 5
       });
     } else {
-      wx.setStorageSync('currGoods', this.data.currGoods)
+      wx.setStorageSync('currGoods', that.data.currGoods)
       var url = ''
       if (curModule =='entering'){
         url = '/pages/entering/entering'
@@ -138,13 +169,13 @@ Page({
       })
       .first()
       .value();
-    var currIdx = this.data.current.indexOf(detail.value);
-    var currGoodsIdx = _.findIndex(this.data.currGoods, checkGoods);
-    currIdx === -1 ? this.data.current.push(detail.value) : this.data.current.splice(currIdx, 1);
-    currGoodsIdx === -1 ? this.data.currGoods.push(checkGoods) : this.data.currGoods.splice(currGoodsIdx, 1);
-    this.setData({
-      current: this.data.current,
-      currGoods: this.data.currGoods
+    var currIdx = that.data.current.indexOf(detail.value);
+    var currGoodsIdx = _.findIndex(that.data.currGoods, checkGoods);
+    currIdx === -1 ? that.data.current.push(detail.value) : that.data.current.splice(currIdx, 1);
+    currGoodsIdx === -1 ? that.data.currGoods.push(checkGoods) : that.data.currGoods.splice(currGoodsIdx, 1);
+    that.setData({
+      current: that.data.current,
+      currGoods: that.data.currGoods
     });
   },
 

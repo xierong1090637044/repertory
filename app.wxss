@@ -688,7 +688,7 @@ page{
 }
 .right_item
 {
-  width: 80%;
+  width: 100%;
 }
 .add_class
 {
@@ -709,4 +709,23 @@ page{
 .normal
 {
   border-bottom: 1px solid#ddd;
+}
+
+
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #000;
+  line-height: 35px;
+  font-size: 16px;
+  
+}
+
+.section {
+  width: 50%;
+  text-align: center;
+  font-size: 14px;
+  background-color: #f6f6f6;
+  background: #fff;
 }

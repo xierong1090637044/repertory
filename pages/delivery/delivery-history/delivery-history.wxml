@@ -8,7 +8,7 @@
           </view>
           <view class='pro_list'>
                <view>实际卖出价：￥{{item.modify_retailPrice}}（X{{item.num}}）</view>
-               <view>总价：￥{{item.total_money}}</view>
+               <view>合计：￥{{item.total_money}}</view>
           </view>
        </view>
     </view>
