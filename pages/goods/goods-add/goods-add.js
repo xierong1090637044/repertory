@@ -81,9 +81,13 @@ Page({
               success: function (res) {
                 var Goods = Bmob.Object.extend("Goods");
                 var goods = new Goods();
-                var Class_User = Bmob.Object.extend("class_user");
-                var class_user = new Class_User();
-                class_user.id = that.data.goodsClass;
+
+                if (that.data.goodsClass !='')
+                {
+                  var Class_User = Bmob.Object.extend("class_user");
+                  var class_user = new Class_User();
+                  class_user.id = that.data.goodsClass;
+                }
 
                 var user = new Bmob.User();
                 user.id = res.data;
@@ -106,7 +110,7 @@ Page({
                     }else{
                       // 添加产品
                           goods.set("userId", user);
-                          goods.set("goodsClass", class_user);
+                          if (that.data.goodsClass != '') { goods.set("goodsClass", class_user);}
                           goods.set("goodsName", goodsForm.goodsName);
                           goods.set("regNumber", goodsForm.regNumber);
                           goods.set("producer", goodsForm.producer);
