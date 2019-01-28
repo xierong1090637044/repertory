@@ -75,12 +75,11 @@ Page({
         //单据
         var tempBills = new Bills();
         var user = new Bmob.User();
-        user.id = wx.getStorageSync('userid');
+        user.id = wx.getStorageSync('friendId');
         tempBills.set('goodsName', that.data.goods[i].goodsName);
         tempBills.set('retailPrice', that.data.goods[i].retailPrice);
         tempBills.set('num', that.data.goods[i].num)
         tempBills.set('total_money', that.data.goods[i].total_money);
-        tempBills.set('goodsName', that.data.goods[i].goodsName);
         tempBills.set('goodsId', tempGoods);
         tempBills.set('userId', user);
         tempBills.set('type', 1);
@@ -107,6 +106,7 @@ Page({
             const poiID1 = pointer.set(wx.getStorageSync("friendId"));
 
             const query = Bmob_new.Query('order_opreations');
+            query.set('goodsName', that.data.goods[0].goodsName);
             query.set("relations", relID);
             query.set("beizhu", that.data.beizhu_text);
             query.set("type", 1);

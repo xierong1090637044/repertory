@@ -190,7 +190,7 @@ Page({
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.modify_retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.single_code = res[i].get("single_code") || '';
+          tempGoods.modify_retailcostPrice = res[i].get("costPrice") || 0;
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);

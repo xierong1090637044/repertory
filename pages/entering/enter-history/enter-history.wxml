@@ -7,8 +7,8 @@
                <view>零售价：￥{{item.retailPrice}}</view>
           </view>
           <view class='pro_list'>
-               <view>实际进货价：￥{{item.modify_retailPrice}}（X{{item.num}}）</view>
-               <view>总价：￥{{item.total_money}}</view>
+               <view>实际进货价：￥{{item.modify_retailcostPrice}}（X{{item.num}}）</view>
+               <view>总进货价：￥{{item.total_money}}</view>
           </view>
        </view>
     </view>

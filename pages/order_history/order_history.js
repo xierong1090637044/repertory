@@ -50,19 +50,6 @@ Page({
   onLoad: function (options) {
     that = this;
     custom_id = options.custom_id;
-    if (custom_id == null){
-      that.get_list("month");
-      that.getallpage("month");
-    }else{
-      that.get_list("month", custom_id);
-      that.getallpage("month", custom_id);
-    }
-
-    var today = new Date();
-    var tYear = today.getFullYear();
-    var tMonth = today.getMonth() + 1;
-    var tDate = today.getDate();
-    that.setData({ now_data: tYear + '-' + '-' + tDate, start_data: "请选择", end_data: "请选择"});
   },
 
   /*** 生命周期函数--监听页面初次渲染完成*/
@@ -72,7 +59,19 @@ Page({
 
   /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-    
+    if (custom_id == null) {
+      that.get_list("month");
+      that.getallpage("month");
+    } else {
+      that.get_list("month", custom_id);
+      that.getallpage("month", custom_id);
+    }
+
+    var today = new Date();
+    var tYear = today.getFullYear();
+    var tMonth = today.getMonth() + 1;
+    var tDate = today.getDate();
+    that.setData({ now_data: tYear + '-' + '-' + tDate, start_data: "请选择", end_data: "请选择" });
   },
 
 

@@ -92,7 +92,7 @@ Page({
     var really_money = e.detail.value;
     var idx = e.target.dataset.idx;
     var tempGoods = that.data.goods;
-    tempGoods[idx].modify_retailPrice = really_money;
+    tempGoods[idx].modify_retailcostPrice = really_money;
     tempGoods[idx].total_money = tempGoods[idx].num * really_money;
     that.setData({
       goods: tempGoods,

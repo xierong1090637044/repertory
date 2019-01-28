@@ -39,7 +39,8 @@
     "pages/friends/goods_select_fri/goods_select_fri",
     "pages/friends/order_history_fri/order_history_fri",
     "pages/friends/goods-fri/goods-fri",
-    "pages/friends/delivery-history-fri/delivery-history-fri"
+    "pages/friends/delivery-history-fri/delivery-history-fri",
+    "pages/second/custom/debt_history/debt_history"
   ],
   "window": {
     "navigationBarTextStyle": "white",

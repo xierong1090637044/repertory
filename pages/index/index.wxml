@@ -2,7 +2,7 @@
 <!-- <view hidden='{{!noticeShow}}'> -->
 <view bindtap='skip'>
     <i-notice-bar icon="systemprompt" loop>
-      网页端正在完善，大家想导出表格数据的，可以联系我，微信号xierong1090637044
+      你的人生不会辜负你的。那些转错的弯，那些流下的泪水，那些滴下的汗水，全都让你成为独一无二的自己。大家新年快乐，感谢你们的陪伴和宝贵的意见！
     </i-notice-bar>
 </view>
 <!-- </view> -->
