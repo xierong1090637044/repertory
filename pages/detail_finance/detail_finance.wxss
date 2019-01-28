@@ -12,6 +12,12 @@
   display: flex;
   justify-content: space-between
 }
+.second_content
+{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
 .text_desicbe
 {
   padding: 10px 15px;

@@ -47,6 +47,20 @@
   </view>
 </view>
 
+<view class='second_content'>
+  <view style='width:50%'>
+    <i-cell-group >
+      <i-cell title="当日应收" value="￥{{should_get_money}}"></i-cell>
+    </i-cell-group>
+  </view>
+
+  <view style='width:50%'>
+    <i-cell-group >
+      <i-cell title="实际收款" value="￥{{real_get_money}}"></i-cell>
+    </i-cell-group>
+  </view>
+</view>
+
 <i-tabs current="{{ current }}" bindchange="handleChange">
   <i-tab key="1" title="入库记录"></i-tab>
   <i-tab key="2" title="出库记录"></i-tab>

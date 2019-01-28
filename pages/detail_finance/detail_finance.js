@@ -99,6 +99,27 @@ Page({
         });
 
        that.get_operation_detail(1);
+
+       //查询当日应收和实际收款
+      var should_get_money = 0;
+      var real_get_money = 0;
+      const query = Bmob.Query("order_opreations");
+      query.equalTo("master", "==", wx.getStorageSync("userid"));
+      query.equalTo("createdAt", ">=", selectd_start_data);
+      query.equalTo("type", "==", -1);
+      query.equalTo("createdAt", "<=", selectd_end_data);
+      query.find().then(res => {
+        console.log(res);
+        for(var i=0;i<res.length;i++)
+        {
+          should_get_money = should_get_money + res[i].all_money;
+          real_get_money = real_get_money + res[i].real_money;
+        }
+        that.setData({
+          should_get_money: should_get_money,
+          real_get_money: real_get_money
+        })
+      });
     });
   },
 
