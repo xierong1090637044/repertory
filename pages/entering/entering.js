@@ -80,9 +80,22 @@ Page({
     var idx = e.currentTarget.dataset.idx
     var tempGoods = that.data.goods
     tempGoods[idx].num = e.detail.value
-    tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].retailPrice;
+    tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].modify_retailPrice;
     that.setData({
       goods: tempGoods
+    })
+  },
+
+  //修改了真实进价
+  getrealprice: function (e) {
+    var that = this;
+    var really_money = e.detail.value;
+    var idx = e.target.dataset.idx;
+    var tempGoods = that.data.goods;
+    tempGoods[idx].modify_retailPrice = really_money;
+    tempGoods[idx].total_money = tempGoods[idx].num * really_money;
+    that.setData({
+      goods: tempGoods,
     })
   },
 

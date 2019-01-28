@@ -77,7 +77,7 @@ Page({
         var user = new Bmob.User();
         user.id = wx.getStorageSync('userid');
         tempBills.set('goodsName', that.data.goods[i].goodsName);
-        tempBills.set('retailPrice', that.data.goods[i].retailPrice);
+        tempBills.set('retailPrice', that.data.goods[i].modify_retailPrice);
         tempBills.set('num', that.data.goods[i].num)
         tempBills.set('total_money', that.data.goods[i].total_money);
         tempBills.set('goodsId', tempGoods);
@@ -89,14 +89,14 @@ Page({
     }
     Bmob.Object.saveAll(objects).then(function (objects) {
       // 批量更新成功
-      console.log("批量更新成功", objects);
+      //console.log("批量更新成功", objects);
       //插入单据
       Bmob.Object.saveAll(billsObj).then(function (res) {
-        console.log("批量新增单据成功", res);
+        //console.log("批量新增单据成功", res);
         for (var i = 0; i < res.length; i++) {
           operation_ids.push(res[i].id);
           if (i == (res.length - 1)) {
-            console.log("批量新增单据成功", res);
+            //console.log("批量新增单据成功", res);
             var currentUser = Bmob.User.current();
             const relation = Bmob_new.Relation('Bills'); // 需要关联的表
             const relID = relation.add(operation_ids);
@@ -113,7 +113,7 @@ Page({
             query.set("all_money", that.data.all_money);
             query.set('goodsName', that.data.goods[0].goodsName);
             query.save().then(res => {
-              console.log("添加操作历史记录成功", res);
+              //console.log("添加操作历史记录成功", res);
               wx.showToast({
                 title: '产品入库成功',
                 icon: 'success',

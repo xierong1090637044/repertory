@@ -6,8 +6,12 @@
       <view slot="content">
         <view>产品规格：{{item.packageContent}}/{{item.packingUnit}}</view>
         <view>进货价格：{{item.costPrice}}(元)</view>
+        <view class='input_withlabel'>
+            <view>实际进货价（可修改）：</view>
+            <view><input placeholder='{{item.costPrice}}' bindinput='getrealprice' placeholder-class='input_label' class='input_label' data-idx="{{index}}"  type='digit'/></view>
+        </view>
         <view class='margin-t-5'>
-        入库量：<i-input-number i-class="number" data-idx="{{index}}" value="{{ item.num }}" min="1" max="10000" bindchange="handleNumChange" />
+        入库量：<i-input-number i-class="number" data-idx="{{index}}" value="{{ item.num }}" min="1" max="10000" bindchange="handleNumChange"/>
         <view class='del' bindtap='handleDel' data-idx="{{index}}">
           <i-icon type="close" />删除
         </view>

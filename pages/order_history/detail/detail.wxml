@@ -10,7 +10,7 @@
           </view>
           <view class='pro_list'>
                <view wx:if="{{item.type == -1}}">实际卖出价：￥{{item.retailPrice}}（X{{item.num}}）</view>
-              <view wx:else>数量：X{{item.num}}</view>
+               <view wx:else>实际进货价：￥{{item.retailPrice}}（X{{item.num}}）</view>
                <view>总价：￥{{item.total_money}}</view>
           </view>
        </view>
