@@ -1,0 +1,16 @@
+<view style='display:flex;' class='header_item'>
+   <view>总收款：￥{{real_should_get}}</view>
+   <view>总欠款：{{real_have_get}}</view>
+</view>
+
+<view class='all_list' wx:if="{{detail !=''}}">
+          <view  wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
+              <view>
+                  <view>{{item.createdAt}}</view>
+                  <view>收款金额：￥{{item.debt_number}}</view>
+              </view>
+              <view class='order_out'>收款</view>
+          </view>
+      </view>
+<view wx:else class='no_operations'>暂无收款记录</view>
+

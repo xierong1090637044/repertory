@@ -1879,7 +1879,6 @@ list.menu.no-padding>item.arrow {
 }
 
 list.menu>item .content {
-  line-height: 1.6em;
   flex: 1;
 }
 

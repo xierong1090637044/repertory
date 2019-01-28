@@ -27,6 +27,10 @@
           <view class='text-gray text-sm' wx:else>
             联系电话：{{item.custom_phone}}
           </view>
+
+          <view class='text-gray text-sm' wx:if="{{item.debt != null}}">
+             <text style='color:#f30'>欠款：{{item.debt}}</text>
+          </view>
         </view>
       </item>
     </list>
@@ -34,3 +38,7 @@
 </scroll-view>
 
 </view>
+
+<i-modal title="收款" visible="{{visible}}" bind:ok="handlegetId" bind:cancel="handleClose">
+    <i-input placeholder="请输入收款金额" bind:change="getmoney_number"/>
+</i-modal>
