@@ -18,7 +18,7 @@ Page({
     selectd_start_data = e.detail.value + " 00:00:00";
     that.setData({ selectd_start_data: e.detail.value, current: '1', spinShow: true});
     that.gettoday_detail();
-    that.get_operation_detail(1);
+    //that.get_operation_detail(1);
   },
 
   //选择结束日期
@@ -26,11 +26,11 @@ Page({
     selectd_end_data = e.detail.value + " 00:00:00";
     that.setData({ selectd_end_data: e.detail.value, current: '1', spinShow: true});
     that.gettoday_detail();
-    that.get_operation_detail(1);
+    //that.get_operation_detail(1);
   },
 
   //tab改变
-  handleChange({ detail }) {
+  /*handleChange({ detail }) {
     this.setData({
       current: detail.key,
     });
@@ -39,7 +39,7 @@ Page({
     } else {
       that.get_operation_detail(-1);
     }
-  },
+  },*/
 
   //得到总库存数和总金额
   loadallGoods: function () {
@@ -98,7 +98,7 @@ Page({
         out_reserve_get_num: out_reserve_num - out_reserve_real_money,
         });
 
-       that.get_operation_detail(1);
+      // that.get_operation_detail(1);
 
        //查询当日应收和实际收款
       var should_get_money = 0;
@@ -117,14 +117,15 @@ Page({
         }
         that.setData({
           should_get_money: should_get_money,
-          real_get_money: real_get_money
+          real_get_money: real_get_money,
+          spinShow: false
         })
       });
     });
   },
 
   //得到操作记录
-  get_operation_detail: function (term) {
+  /*get_operation_detail: function (term) {
     wx.showLoading({ title: '加载中...' })
     const query = Bmob.Query("Bills");
     query.equalTo("userId", "==", wx.getStorageSync("userid"));
@@ -137,7 +138,7 @@ Page({
       that.setData({ bill_his: res, spinShow: false });
       wx.hideLoading();
     });
-  },
+  },*/
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {

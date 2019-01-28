@@ -29,3 +29,10 @@
   color: #999;
   padding: 0 15px;
 }
+.item_beizhu
+{
+  max-width: calc(100% - 60px);
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}

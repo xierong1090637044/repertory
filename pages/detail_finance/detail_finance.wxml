@@ -56,12 +56,12 @@
 
   <view style='width:50%'>
     <i-cell-group >
-      <i-cell title="实际收款" value="￥{{real_get_money}}"></i-cell>
+      <i-cell title="当日实收" value="￥{{real_get_money}}"></i-cell>
     </i-cell-group>
   </view>
 </view>
 
-<i-tabs current="{{ current }}" bindchange="handleChange">
+<!--<i-tabs current="{{ current }}" bindchange="handleChange">
   <i-tab key="1" title="入库记录"></i-tab>
   <i-tab key="2" title="出库记录"></i-tab>
 </i-tabs>
@@ -90,13 +90,10 @@
           ￥{{item.retailPrice}}
           <text>(成本价：￥{{item.goodsId.costPrice}})</text>
         </view>
-
-        <view wx:if="{{item.type == 1}}"><text class='text_color'>入库总额：</text>￥{{item.total_money}}</view>
-        <view wx:else><text class='text_color'>出库总额：</text>￥{{item.total_money}}</view>
       </view>
 
    </view>
-</view>
+</view>-->
 
 
 

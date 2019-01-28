@@ -229,7 +229,9 @@ Page({
     this.loadGoods(null, null, null);
     this.setData({
       current: [],
-      currGoods: []
+      currGoods: [],
+      selectd_stock: "库存情况",
+      selectd_class: "产品类别"
     });
   },
 
