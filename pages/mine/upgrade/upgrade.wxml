@@ -30,7 +30,8 @@
         <text class="desc-list-item">增加我的客户可以查看收款明细</text>
         <text class="desc-list-item">增加进货价可以修改功能和显示</text>
         <text class="desc-list-item">修改盈收记录的协同操作异常</text>
-        <text class="desc-list-item">编辑图片上传图片问题</text>
+        <text class="desc-list-item">编辑我的商品上传图片问题</text>
+        <text class="desc-list-item">修改盈收记录显示</text>
       </view>
     </view>
 

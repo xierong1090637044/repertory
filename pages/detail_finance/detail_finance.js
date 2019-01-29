@@ -18,7 +18,7 @@ Page({
     selectd_start_data = e.detail.value + " 00:00:00";
     that.setData({ selectd_start_data: e.detail.value, current: '1', spinShow: true});
     that.gettoday_detail();
-    //that.get_operation_detail(1);
+    that.get_operation_detail(1);
   },
 
   //选择结束日期
@@ -26,11 +26,11 @@ Page({
     selectd_end_data = e.detail.value + " 00:00:00";
     that.setData({ selectd_end_data: e.detail.value, current: '1', spinShow: true});
     that.gettoday_detail();
-    //that.get_operation_detail(1);
+    that.get_operation_detail(1);
   },
 
   //tab改变
-  /*handleChange({ detail }) {
+  handleChange({ detail }) {
     this.setData({
       current: detail.key,
     });
@@ -39,7 +39,7 @@ Page({
     } else {
       that.get_operation_detail(-1);
     }
-  },*/
+  },
 
   //得到总库存数和总金额
   loadallGoods: function () {
@@ -78,7 +78,7 @@ Page({
         for (var i = 0; i < res.length; i++) {
           if (res[i].type == 1) {
             get_reserve = get_reserve + res[i].num;
-            get_reserve_real_money = get_reserve_real_money + res[i].num * res[i].goodsId.costPrice;
+            get_reserve_real_money = get_reserve_real_money + res[i].num * res[i].goodsId.retailPrice;
             get_reserve_num = get_reserve_num + res[i].total_money;
           } else if (res[i].type == -1) {
             out_reserve = out_reserve + res[i].num;
@@ -92,13 +92,13 @@ Page({
         out_reserve: out_reserve,
         get_reserve_real_money: get_reserve_real_money,
         out_reserve_real_money: out_reserve_real_money,
-        get_reserve_num: get_reserve_num,
+        get_reserve_num: get_reserve_num.toFixed(2),
         out_reserve_num: out_reserve_num,
-        get_reserve_get_num: get_reserve_num - get_reserve_real_money,
+        get_reserve_get_num: (get_reserve_real_money - get_reserve_num).toFixed(2),
         out_reserve_get_num: out_reserve_num - out_reserve_real_money,
         });
 
-      // that.get_operation_detail(1);
+      that.get_operation_detail(1);
 
        //查询当日应收和实际收款
       var should_get_money = 0;
@@ -109,7 +109,7 @@ Page({
       query.equalTo("type", "==", -1);
       query.equalTo("createdAt", "<=", selectd_end_data);
       query.find().then(res => {
-        console.log(res);
+        //console.log(res);
         for(var i=0;i<res.length;i++)
         {
           should_get_money = should_get_money + res[i].all_money;
@@ -125,7 +125,7 @@ Page({
   },
 
   //得到操作记录
-  /*get_operation_detail: function (term) {
+  get_operation_detail: function (term) {
     wx.showLoading({ title: '加载中...' })
     const query = Bmob.Query("Bills");
     query.equalTo("userId", "==", wx.getStorageSync("userid"));
@@ -138,7 +138,7 @@ Page({
       that.setData({ bill_his: res, spinShow: false });
       wx.hideLoading();
     });
-  },*/
+  },
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
