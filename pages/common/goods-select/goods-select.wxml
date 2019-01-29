@@ -72,7 +72,7 @@
   <view class='right_item' wx:else>
   <i-panel i-class="wrap_overflow">
     <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
-      <i-checkbox wx:for="{{goods}}" another_value="产品名称：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
+      <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
       </i-checkbox>
     </i-checkbox-group>
   </i-panel>

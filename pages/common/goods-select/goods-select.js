@@ -158,7 +158,7 @@ Page({
     }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
-    query.ascending("goodsName"); //按照货物名字
+    query.descending("goodsName"); //按照货物名字
     query.include("userId");
     query.find({
       success: function (res) {

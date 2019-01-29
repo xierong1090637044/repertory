@@ -19,6 +19,7 @@ Page({
     productCode:'',//产品条码
     packageContent:'',//包装含量
     packingUnit: '',//包装单位
+    packModel:'',//产品型号
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
     goodsClass:'',//产品类别
@@ -48,6 +49,8 @@ Page({
   handleAddGoods:function(e){
     var that = this
     var goodsForm = e.detail.value
+    var packModel = goodsForm.packModel.trim();
+    var packModel_arr = packModel.split(" ");
     //先进行表单非空验证
     if (goodsForm.goodsName == "") {
       $Message({
@@ -67,51 +70,188 @@ Page({
         type: 'warning',
         duration: 5
       });
-    }else{
-      wx.showModal({
-        title: '提示',
-        content: '是否确认新增产品',
-        success: function (res) {
-          if (res.confirm) {
-            that.setData({
-              loading: true
-            })
-            wx.getStorage({
-              key: 'userid',
-              success: function (res) {
-                var Goods = Bmob.Object.extend("Goods");
-                var goods = new Goods();
+    } else {
+      if (packModel_arr.length == 1) {
+        wx.showModal({
+          title: '提示',
+          content: '是否确认新增产品',
+          success: function (res) {
+            if (res.confirm) {
+              that.setData({
+                loading: true
+              })
+              wx.getStorage({
+                key: 'userid',
+                success: function (res) {
+                  var Goods = Bmob.Object.extend("Goods");
+                  var goods = new Goods();
 
-                if (that.data.goodsClass !='')
-                {
-                  var Class_User = Bmob.Object.extend("class_user");
-                  var class_user = new Class_User();
-                  class_user.id = that.data.goodsClass;
+                  if (that.data.goodsClass != '') {
+                    var Class_User = Bmob.Object.extend("class_user");
+                    var class_user = new Class_User();
+                    class_user.id = that.data.goodsClass;
+                  }
+
+                  var user = new Bmob.User();
+                  user.id = res.data;
+                  //判断产品是否已存在
+                  var query = new Bmob.Query(Goods);
+                  query.equalTo("goodsName", goodsForm.goodsName);
+                  query.equalTo("userId", user);
+                  query.find({
+                    success: function (results) {
+                      if (results.length > 0) {
+                        $Message({
+                          content: '该产品已存在，请确认',
+                          type: 'warning',
+                          duration: 5
+                        });
+                        that.setData({
+                          loading: false
+                        })
+                        return
+                      } else {
+                        // 添加产品
+                        goods.set("userId", user);
+                        if (that.data.goodsClass != '') { goods.set("goodsClass", class_user); }
+                        goods.set("goodsName", goodsForm.goodsName);
+                        goods.set("regNumber", goodsForm.regNumber);
+                        goods.set("producer", goodsForm.producer);
+                        goods.set("productCode", goodsForm.productCode);
+                        goods.set("packageContent", goodsForm.packageContent);
+                        goods.set("costPrice", goodsForm.costPrice);
+                        goods.set("retailPrice", goodsForm.retailPrice);
+                        goods.set("packingUnit", goodsForm.packingUnit);
+                        goods.set("packModel", goodsForm.packModel);
+                        goods.set("reserve", Number(goodsForm.reserve));
+                        goods.save(null, {
+                          success: function (result) {
+                            wx.setStorageSync("is_add", true);
+                            if (that.data.is_choose) {
+                              var file;
+                              var tempFilePaths = temppath;
+                              for (let item of tempFilePaths) {
+                                console.log('itemn', item)
+                                file = Bmob_new.File(goodsForm.goodsName + '.jpg', item);
+                              }
+                              file.save().then(res => {
+                                const query = Bmob_new.Query('Goods');
+                                query.set('id', result.id) //需要修改的objectId
+                                query.set('goodsIcon', JSON.parse(res[0]).url);
+                                query.save().then(res => {
+                                  console.log(res)
+                                  wx.showToast({
+                                    title: '新增产品成功',
+                                    icon: 'success',
+                                    success: function () {
+                                      that.setData({
+                                        goodsName: "",
+                                        regNumber: "",
+                                        producer: "",
+                                        productCode: "",
+                                        packageContent: "",
+                                        packModel: "",
+                                        packingUnit: "",
+                                        costPrice: '',
+                                        retailPrice: '',
+                                        reserve: 0,
+                                        loading: false
+                                      })
+                                    }
+                                  })
+                                }).catch(err => {
+                                  console.log(err)
+                                })
+                              })
+                            } else {
+                              wx.showToast({
+                                title: '新增产品成功',
+                                icon: 'success',
+                                success: function () {
+                                  that.setData({
+                                    goodsName: "",
+                                    regNumber: "",
+                                    producer: "",
+                                    productCode: "",
+                                    packageContent: "",
+                                    packModel: "",
+                                    packingUnit: "",
+                                    costPrice: '',
+                                    retailPrice: '',
+                                    reserve: 0,
+                                    loading: false
+                                  })
+                                }
+                              })
+                            }
+                          },
+                          error: function (result, error) {
+                            //添加失败
+                            console.log(error);
+                          }
+                        })
+                      }
+                    },
+                    error: function (error) {
+                      console.log(error.code + " " + error.message);
+                    }
+                  });
                 }
+              })
+            }
+          }
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '是否批量新增产品',
+          success: function (res) {
+            if (res.confirm) {
+              that.setData({
+                loading: true
+              })
+              wx.getStorage({
+                key: 'userid',
+                success: function (res) {
+                  var Goods = Bmob.Object.extend("Goods");
+                  var goods = new Goods();
 
-                var user = new Bmob.User();
-                user.id = res.data;
-                //判断产品是否已存在
-                var query = new Bmob.Query(Goods);
-                query.equalTo("goodsName", goodsForm.goodsName);
-                query.equalTo("userId", user);
-                query.find({
-                  success: function (results) {
-                    if(results.length>0){
-                      $Message({
-                        content: '该产品已存在，请确认',
-                        type: 'warning',
-                        duration: 5
-                      });
-                      that.setData({
-                        loading: false
-                      })
-                      return
-                    }else{
-                      // 添加产品
+                  if (that.data.goodsClass != '') {
+                    var Class_User = Bmob.Object.extend("class_user");
+                    var class_user = new Class_User();
+                    class_user.id = that.data.goodsClass;
+                  }
+
+                  var user = new Bmob.User();
+                  user.id = res.data;
+                  //判断产品是否已存在
+                  var query = new Bmob.Query(Goods);
+                  query.equalTo("goodsName", goodsForm.goodsName);
+                  query.equalTo("userId", user);
+                  query.find({
+                    success: function (results) {
+                      if (results.length > 0) {
+                        $Message({
+                          content: '该产品已存在，请确认',
+                          type: 'warning',
+                          duration: 5
+                        });
+                        that.setData({
+                          loading: false
+                        })
+                        return
+                      } else {
+                        // 添加产品
+                        var packModel = goodsForm.packModel.trim();
+                        var packModel_arr = packModel.split(" ");
+                        for (var i = 0; i < packModel_arr.length; i++) {
+                          console.log(packModel_arr.length);
+                          console.log(packModel_arr[i]);
+                          var Goods = Bmob.Object.extend("Goods");
+                          var goods = new Goods();
                           goods.set("userId", user);
-                          if (that.data.goodsClass != '') { goods.set("goodsClass", class_user);}
-                          goods.set("goodsName", goodsForm.goodsName);
+                          if (that.data.goodsClass != '') { goods.set("goodsClass", class_user); }
+                          goods.set("goodsName", goodsForm.goodsName + packModel_arr[i]);
                           goods.set("regNumber", goodsForm.regNumber);
                           goods.set("producer", goodsForm.producer);
                           goods.set("productCode", goodsForm.productCode);
@@ -119,6 +259,7 @@ Page({
                           goods.set("costPrice", goodsForm.costPrice);
                           goods.set("retailPrice", goodsForm.retailPrice);
                           goods.set("packingUnit", goodsForm.packingUnit);
+                          goods.set("packModel", packModel_arr[i]);
                           goods.set("reserve", Number(goodsForm.reserve));
                           goods.save(null, {
                             success: function (result) {
@@ -146,6 +287,7 @@ Page({
                                           producer: "",
                                           productCode: "",
                                           packageContent: "",
+                                          packModel: "",
                                           packingUnit: "",
                                           costPrice: '',
                                           retailPrice: '',
@@ -169,6 +311,7 @@ Page({
                                       producer: "",
                                       productCode: "",
                                       packageContent: "",
+                                      packModel: "",
                                       packingUnit: "",
                                       costPrice: '',
                                       retailPrice: '',
@@ -184,17 +327,20 @@ Page({
                               console.log(error);
                             }
                           })
+                        }
+                        
+                      }
+                    },
+                    error: function (error) {
+                      console.log(error.code + " " + error.message);
                     }
-                  },
-                  error: function (error) {
-                    console.log(error.code + " " + error.message);
-                  }
-                });
-              }
-            })
+                  });
+                }
+              })
+            }
           }
-        }
-      })
+        })
+      }
     }
   },
 

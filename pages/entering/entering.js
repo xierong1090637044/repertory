@@ -80,7 +80,7 @@ Page({
     var idx = e.currentTarget.dataset.idx
     var tempGoods = that.data.goods
     tempGoods[idx].num = e.detail.value
-    tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].modify_retailPrice;
+    tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].modify_retailcostPrice;
     that.setData({
       goods: tempGoods
     })

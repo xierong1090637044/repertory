@@ -1,5 +1,6 @@
 <!--pages/common/goods-select/goods-select.wxml-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+<i-message id="message" />
 <!--搜索-->
 
 <view class='no-data' wx:if="{{isEmpty}}">
@@ -28,30 +29,61 @@
 </view>
 <!--/.搜索-->
 
-<i-tabs current="{{ currenttab }}" bindchange="handleChange">
+<!--<i-tabs current="{{ currenttab }}" bindchange="handleChange">
       <i-tab key="1" title="库存有余"></i-tab>
       <i-tab key="2" title="库存紧缺"></i-tab>
-</i-tabs>
+</i-tabs>-->
 
+<!--*筛选器*-->
+  <view class='select'>
+    <view class="section">
+      <picker bindchange="bindclass_Change" range-key	="class_text" range="{{all_class}}">
+        <view class="picker">
+          <text>{{selectd_class}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+        </view>
+      </picker>
+    </view>
 
-<view class='no-data' wx:if="{{contentEmpty}}">
-  <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
+    <view class="section">
+      <picker bindchange="bindstock_Change" value="{{index}}" range="{{stock}}">
+        <view class="picker">
+          <text>{{selectd_stock}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+<view style='display:flex'>
+
+  <!--<view class='left_item'>
+     <view class='class_items'>
+        <view class="{{select_id == null ? 'select':'normal'}}" bindtap='getclass_pro' data-id=''>全部</view>
+        <view wx:for = "{{class_text}}" class="{{item.objectId == select_id ? 'select':'normal'}}" data-id='{{item.objectId}}' wx:key="{{index}}" bindtap='getclass_pro'>{{item.class_text}}</view>
+     </view>
+  </view>-->
+
+  <view class='no-data' wx:if="{{contentEmpty}}" style='height:calc(100vh - 158px)'>
+    <image src='/images/common/no-data.png'></image>
+    <text>暂无数据</text>
+  </view>
+
+  <view class='right_item' wx:else>
+  <i-panel i-class="wrap_overflow">
+    <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
+      <i-checkbox wx:for="{{goods}}" another_value="产品名称：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
+      </i-checkbox>
+    </i-checkbox-group>
+  </i-panel>
+  </view>
+
 </view>
 
-<view  wx:else>
-<i-panel i-class="wrap_overflow">
-  <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
-    <i-checkbox wx:for="{{goods}}" another_value="产品名称：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
-    </i-checkbox>
-  </i-checkbox-group>
-</i-panel>
-
-<view class='btn-group' bindtap='link2page'>
+  <view class='btn-group' bindtap='link2page'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
       确认选择
     </button>
-</view>
-</view>
+  </view>
 
 </view>

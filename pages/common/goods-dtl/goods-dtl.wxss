@@ -24,3 +24,9 @@
   overflow:scroll;
   line-height: 46px;
 }
+
+.content_model
+{
+  display: flex;
+  justify-content: space-between;
+}

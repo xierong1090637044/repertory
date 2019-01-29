@@ -5,7 +5,10 @@
           extra="当前库存：{{goodsReserve.reserve}}"
           full="true" thumb="{{goodsReserve.goodsIcon}}">
       <view slot="content">
-        <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
+        <view class='content_model'>
+           <view wx:if="{{goodsReserve.packModel !=''}}">产品型号：{{goodsReserve.packModel}}</view>
+           <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
+        </view>
         <view>进货价格：{{goodsReserve.costPrice}} (元)</view>
         <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
       </view>

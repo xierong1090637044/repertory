@@ -1,10 +1,15 @@
 // pages/common/goods-select/goods-select.js
-const Bmob = require('../../../utils/bmob.js')
+const Bmob = require('../../../utils/bmob.js');
+const Bmob_new = require('../../../utils/bmob_new.js')
 var config = require('../../../utils/config.js')
 var _ = require('../../../utils/we-lodash.js');
 var { $Message } = require('../../../component/base/index');
 var userid = '';
-var curModule = ''
+var curModule = '';
+var that;
+var type;//库存情况
+var class_array;//产品类别
+var select_id;//产品类别id
 Page({
 
   /**
@@ -22,26 +27,49 @@ Page({
     inputVal: "",
     currenttab: '1',
     length: null,
+    selectd_stock: "库存情况",
+    stock: ["库存充足", "库存不足"],
+    selectd_class: "产品类别"
   },
 
-  //tab改变事件
-  handleChange({ detail }) {
-    var that = this;
-    this.setData({
-      currenttab: detail.key,
-      type: true
-    });
-    if (detail.key == 1) {
-      that.loadGoods(true);
-      this.setData({
-        type: true
+  //选择产品类别
+  bindclass_Change: function (e) {
+    var index = e.detail.value;
+    select_id = class_array[index].objectId;
+    that.setData({ selectd_class: class_array[index].class_text, current: [], currGoods: [] });
+    that.loadGoods(type, null, select_id);
+  },
+
+  //选择库存情况
+  bindstock_Change: function (e) {
+    if (e.detail.value == "0") {
+      that.loadGoods(true, null, select_id);
+      that.setData({
+        selectd_stock: that.data.stock[e.detail.value], current: [], currGoods: []
       });
+      type = true;
     } else {
-      that.loadGoods(false);
-      this.setData({
-        type: false
-      });
+      that.loadGoods(false, null, select_id);
+      that.setData({ selectd_stock: that.data.stock[e.detail.value], current: [], currGoods: [] });
+      type = false;
     }
+  },
+
+  //得到类别列表
+  getclass_list: function () {
+    const query = Bmob_new.Query("class_user");
+    query.equalTo("parent", "==", userid);
+    query.find().then(res => {
+      wx.setStorageSync("class", res);
+
+      var all = {};
+      all.class_text = "全部";
+      all.objectId = null;
+
+      res.push(all);
+      that.setData({ all_class: res });
+      class_array = res;
+    });
   },
 
   // 搜索
@@ -71,24 +99,24 @@ Page({
   searchAction: function (e) {
     var that = this;
     var inputVal = this.data.inputVal
-    that.loadGoods(that.data.type, inputVal);
+    that.loadGoods(type, inputVal, select_id);
   },
   // /.搜索
   link2page: function () {
-    if (this.data.currGoods.length < 1) {
+    if (that.data.currGoods.length < 1) {
       $Message({
         content: '未选择产品，请确认',
         type: 'warning',
         duration: 5
       });
     } else {
-      wx.setStorageSync('currGoods', this.data.currGoods)
+      wx.setStorageSync('currGoods', that.data.currGoods)
       var url = ''
       if (curModule == 'entering') {
-        url = '/pages/entering/entering?type=friend'
+        url = '/pages/entering/entering'
       }
       else if (curModule == 'delivery') {
-        url = '/pages/delivery/delivery?type=friend'
+        url = '/pages/delivery/delivery'
       }
       wx.navigateTo({
         url: url
@@ -107,33 +135,44 @@ Page({
       })
       .first()
       .value();
-    var currIdx = this.data.current.indexOf(detail.value);
-    var currGoodsIdx = _.findIndex(this.data.currGoods, checkGoods);
-    currIdx === -1 ? this.data.current.push(detail.value) : this.data.current.splice(currIdx, 1);
-    currGoodsIdx === -1 ? this.data.currGoods.push(checkGoods) : this.data.currGoods.splice(currGoodsIdx, 1);
-    this.setData({
-      current: this.data.current,
-      currGoods: this.data.currGoods
+    var currIdx = that.data.current.indexOf(detail.value);
+    var currGoodsIdx = _.findIndex(that.data.currGoods, checkGoods);
+    currIdx === -1 ? that.data.current.push(detail.value) : that.data.current.splice(currIdx, 1);
+    currGoodsIdx === -1 ? that.data.currGoods.push(checkGoods) : that.data.currGoods.splice(currGoodsIdx, 1);
+    that.setData({
+      current: that.data.current,
+      currGoods: that.data.currGoods
     });
   },
 
-  loadGoods: function (type, content) {
+  loadGoods: function (type, content, class_id) {
     var that = this;
     that.setData({ spinShow: true });
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
-    if (type) {
+    if (class_id != null) query.equalTo("goodsClass", class_id);
+    if (type == true) {
       query.greaterThan("reserve", 0);//库存充足
-    } else {
+    } else if (type == false) {
       query.lessThanOrEqualTo("reserve", 0);//库存紧张
-    }
+    } else { }
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     query.ascending("goodsName"); //按照货物名字
     query.include("userId");
     query.find({
       success: function (res) {
+
+        that.setData({ length: res.length });
+        if (res.length == 0) {
+          that.setData({ contentEmpty: true })
+        } else {
+          that.setData({ contentEmpty: false })
+        }
+
+        that.getclass_list();
+
         var tempGoodsArr = new Array();
         for (var i = 0; i < res.length; i++) {
           var tempGoods = {}
@@ -152,17 +191,10 @@ Page({
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.modify_retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.single_code = res[i].get("single_code") || '';
+          tempGoods.modify_retailcostPrice = res[i].get("costPrice") || 0;
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
-        that.setData({ type: type, length: res.length });
-
-        if (res.length == 0) {
-          that.setData({ contentEmpty: true })
-        } else {
-          that.setData({ contentEmpty: false })
-        }
       }
     })
   },
@@ -174,15 +206,16 @@ Page({
     this.setData({
       goods: data,
       totalGoods: data,
-      spinShow: false
+      spinShow: false,
     });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    that = this;
     userid = wx.getStorageSync("friendId");
-    curModule = options.type
+    curModule = options.type;
   },
 
   /**
@@ -192,18 +225,14 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-    this.setData({
-      currenttab: "1",
-      type: true
-    });
-    this.loadGoods(true);
+    this.loadGoods(null, null, null);
     this.setData({
       current: [],
-      currGoods: []
+      currGoods: [],
+      selectd_stock: "库存情况",
+      selectd_class: "产品类别"
     });
   },
 
@@ -211,14 +240,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
+  /*** 生命周期函数--监听页面卸载*/
   onUnload: function () {
-
+    type = null;//库存情况
+    select_id = null;//类别选择的id
   },
 
   /**

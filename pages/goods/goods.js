@@ -220,7 +220,7 @@ Page({
     if (class_id != null) query.equalTo("goodsClass", class_id);
     
     query.limit(that.data.limitPage);
-    query.ascending("goodsName"); //按照时间降序
+    query.descending("goodsName"); //按照时间降序
     query.include("userId");
     query.include("goodsClass");
     query.find({
@@ -246,6 +246,7 @@ Page({
           tempGoods.productCode = res[i].get("productCode") || '';
           tempGoods.packageContent = res[i].get("packageContent") || '';
           tempGoods.packingUnit = res[i].get("packingUnit") || '';
+          tempGoods.packModel = res[i].get("packModel") || '';
           tempGoods.reserve = res[i].get("reserve") || 0;
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;

@@ -26,10 +26,12 @@
      </picker>
     </i-panel>
 
-    <i-panel title="产品规格">
+    <i-panel title="产品规格(产品型号适用于不同型号同价的商品，如多种型号可用空格隔开，来进行批量添加)">
       <i-input title="包装含量" type="number" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
-      <i-input title="包装单位" placeholder="请选择包装单位" value="{{packingUnit}}" 
+      <i-input title="包装单位" placeholder="请填写包装单位" value="{{packingUnit}}" 
 name="packingUnit"/>
+      <i-input title="型号" placeholder="请填写产品型号" value="{{packModel}}" 
+name="packModel"/>
     </i-panel>
 
     <i-panel title="产品价格（必填）（都为0为自用产品）">
