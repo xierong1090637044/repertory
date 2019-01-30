@@ -14,7 +14,7 @@
     <i-panel title="基本信息">
       <input value="{{goodsId}}" name="goodsId" hidden />
       <i-input title="产品名称" value="{{goodsName}}" name="goodsName" placeholder="请输入产品名称" />
-      <i-input title="登记证号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记证号" />
+      <!--<i-input title="登记证号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记证号" />-->
       <i-input title="生产厂家" value="{{producer}}" name="producer" placeholder="请输入生产厂家" />
       <i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="请输入产品条码" />
     </i-panel>
@@ -33,6 +33,11 @@
       <i-input title="进货价格" type="digit" value="{{costPrice}}" name="costPrice" placeholder="请输入进货价格" />
       <i-input title="零售价格" type="digit" value="{{retailPrice}}" name="retailPrice" placeholder="请选择零售价格" />
     </i-panel>
+
+    <i-panel title="现有库存">
+      <i-input title="现有库存" type="digit" value="{{reserve}}" name="reserve" placeholder="请输入现有库存" />
+    </i-panel>
+
     </view>
 
     <view class='btn-group'>

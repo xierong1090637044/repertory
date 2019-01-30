@@ -32,6 +32,7 @@
         <text class="desc-list-item">修改盈收记录的协同操作异常</text>
         <text class="desc-list-item">编辑我的商品上传图片问题</text>
         <text class="desc-list-item">修改盈收记录显示</text>
+        <text class="desc-list-item">可以批量上传同型号的产品</text>
       </view>
     </view>
 

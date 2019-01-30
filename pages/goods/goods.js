@@ -335,7 +335,6 @@ Page({
 
   //得到类别列表
   getclass_list: function () {
-    wx.showLoading({ title: '加载中...' })
     const query = Bmob_new.Query("class_user");
     query.equalTo("parent", "==", userid);
     query.find().then(res => {
@@ -344,9 +343,7 @@ Page({
       var all = {};
       all.class_text = "全部";
       all.objectId = null;
-
       res.push(all);
-      wx.hideLoading();
       that.setData({ all_class: res });
       class_array = res;
     });

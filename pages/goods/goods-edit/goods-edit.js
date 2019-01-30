@@ -23,6 +23,7 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
+    reserve:null,
     loading: false,
     is_choose:false,
   },
@@ -56,6 +57,7 @@ Page({
       packingUnit: goods.packingUnit,
       costPrice: goods.costPrice,
       retailPrice: goods.retailPrice,
+      reserve: goods.reserve,
       class_select_text: (goods.class_text.class_text == null) ? null : goods.class_text.class_text,
     })
   },
@@ -118,7 +120,7 @@ Page({
                     results.set("costPrice", goodsForm.costPrice);
                     results.set("retailPrice", goodsForm.retailPrice);
                     results.set("packingUnit", goodsForm.packingUnit);
-                    results.set("reserve", results.get('reserve'));
+                    results.set("reserve", Number(goodsForm.reserve));
                     results.save(null, {
                       success: function (result) {
                         console.log("修改产品成功");
@@ -141,15 +143,6 @@ Page({
                                 icon: 'success',
                                 success: function () {
                                   that.setData({
-                                    goodsName: "",
-                                    regNumber: "",
-                                    producer: "",
-                                    productCode: "",
-                                    packageContent: "",
-                                    packingUnit: "",
-                                    costPrice: '',
-                                    retailPrice: '',
-                                    reserve: 0,
                                     loading: false
                                   })
                                 }
@@ -182,7 +175,7 @@ Page({
                       },
                       error: function (result, error) {
                         //修改失败
-                        console.log("修改失败:" + error);
+                        console.log(error);
                       }
                     })
                   },
