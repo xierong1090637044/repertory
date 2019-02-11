@@ -49,8 +49,8 @@ Page({
   handleAddGoods:function(e){
     var that = this
     var goodsForm = e.detail.value
-    var packModel = goodsForm.packModel.trim();
-    var packModel_arr = packModel.split(" ");
+    //var packModel = goodsForm.packModel.trim();
+    //var packModel_arr = packModel.split(" ");
     //先进行表单非空验证
     if (goodsForm.goodsName == "") {
       $Message({
@@ -71,7 +71,6 @@ Page({
         duration: 5
       });
     } else {
-      if (packModel_arr.length == 1) {
         wx.showModal({
           title: '提示',
           content: '是否确认新增产品',
@@ -122,7 +121,7 @@ Page({
                         goods.set("costPrice", goodsForm.costPrice);
                         goods.set("retailPrice", goodsForm.retailPrice);
                         goods.set("packingUnit", goodsForm.packingUnit);
-                        goods.set("packModel", goodsForm.packModel);
+                        //goods.set("packModel", goodsForm.packModel);
                         goods.set("reserve", Number(goodsForm.reserve));
                         goods.save(null, {
                           success: function (result) {
@@ -150,7 +149,7 @@ Page({
                                         producer: "",
                                         productCode: "",
                                         packageContent: "",
-                                        packModel: "",
+                                       // packModel: "",
                                         packingUnit: "",
                                         costPrice: '',
                                         retailPrice: '',
@@ -174,7 +173,7 @@ Page({
                                     producer: "",
                                     productCode: "",
                                     packageContent: "",
-                                    packModel: "",
+                                    //packModel: "",
                                     packingUnit: "",
                                     costPrice: '',
                                     retailPrice: '',
@@ -201,7 +200,7 @@ Page({
             }
           }
         })
-      } else {
+         /*else {
         wx.showModal({
           title: '提示',
           content: '是否批量新增产品',
@@ -340,7 +339,7 @@ Page({
             }
           }
         })
-      }
+      }*/
     }
   },
 

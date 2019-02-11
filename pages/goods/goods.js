@@ -48,7 +48,7 @@ Page({
     select_id = class_array[index].objectId;
     that.setData({ selectd_class: class_array[index].class_text});
     that.loadGoods(type,null,select_id);
-    that.loadallGoods(select_id);
+    
   },
 
   // 搜索
@@ -354,7 +354,7 @@ Page({
     userid = wx.getStorageSync("userid");
     this.handleRefresh();
     that = this;
-    that.loadallGoods();
+    //that.loadallGoods();
   },
 
   /**
@@ -374,6 +374,8 @@ Page({
       this.handleRefresh();
       wx.setStorageSync("is_add", false);
     }
+
+    that.getclass_list();
   },
 
   /**

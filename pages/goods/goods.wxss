@@ -27,7 +27,7 @@
 }
 
 .goods_wrap{
-  height: calc(100vh - 202px);
+  height: calc(100vh - 152px);
   overflow: scroll;
   background: #fff;
 }

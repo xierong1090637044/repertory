@@ -4,7 +4,7 @@ Page({
 
   /*** 页面的初始数据*/
   data: {
-
+    web_address: "https://hello.ysld.me/stockpro/test/index.php"
   },
 
   /*** 生命周期函数--监听页面加载*/

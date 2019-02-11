@@ -113,10 +113,10 @@ Page({
       wx.setStorageSync('currGoods', that.data.currGoods)
       var url = ''
       if (curModule == 'entering') {
-        url = '/pages/entering/entering'
+        url = '/pages/entering/entering?type=friend'
       }
       else if (curModule == 'delivery') {
-        url = '/pages/delivery/delivery'
+        url = '/pages/delivery/delivery?type=friend'
       }
       wx.navigateTo({
         url: url

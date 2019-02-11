@@ -2,10 +2,10 @@
 <!--搜索-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 
-<view class="fristcontent">
+<!--<view class="fristcontent">
   <view>总库存：{{total_reserve}}</view>
   <view>库存总金额：￥{{total_money}}</view>
-</view>
+</view>-->
 
 <view class="search-view" >
   <view class="search-bar">
