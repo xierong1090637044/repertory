@@ -126,7 +126,6 @@ Page({
 
   //得到操作记录
   get_operation_detail: function (term) {
-    wx.showLoading({ title: '加载中...' })
     const query = Bmob.Query("Bills");
     query.equalTo("userId", "==", wx.getStorageSync("userid"));
     query.equalTo("createdAt", ">=", selectd_start_data);
@@ -136,7 +135,6 @@ Page({
     query.find().then(res => {
       //console.log(res);
       that.setData({ bill_his: res, spinShow: false });
-      wx.hideLoading();
     });
   },
 

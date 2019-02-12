@@ -2,7 +2,7 @@
 <!-- <view hidden='{{!noticeShow}}'> -->
 <view bindtap='skip'>
     <i-notice-bar icon="systemprompt" loop>
-      各位，新年好！网页版导出数据功能已经上线啦，大家可以去我的账号里面查看，不会操作的可以添加本人微信xierong1090637044。
+      各位，新年好！一些bug已经修复。网页版导出数据功能已经上线啦，大家可以去我的账号里面查看，不会操作的可以添加本人微信xierong1090637044。
     </i-notice-bar>
 </view>
 <!-- </view> -->
