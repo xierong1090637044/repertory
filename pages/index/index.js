@@ -77,7 +77,6 @@ Page({
   scan:function(type)
   {
     wx.scanCode({
-      onlyFromCamera: true,
       success(res) {
         console.log(res)
         var result = res.result;

@@ -113,6 +113,7 @@ Page({
     query.get(id).then(res => {
       res.total_money = res.retailPrice;
       res.modify_retailPrice = res.retailPrice;
+      res.goodsId = res.objectId;
       code_product.push(res);
       that.setData({
         goods: code_product,

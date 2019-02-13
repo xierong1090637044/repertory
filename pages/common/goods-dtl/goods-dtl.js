@@ -59,33 +59,21 @@ Page({
     if(options.id !=null )
     {
       const query = Bmob_new.Query('Goods');
-      const query1 = query.equalTo("productCode", "==", options.id);
-      const query2 = query.equalTo("objectId", "==", options.id);
-      query.or(query1, query2);
+      //const query1 = query.equalTo("productCode", "==", options.id);
+      query.equalTo("objectId", "==", options.id);
+      //query.or(query1, query2);
       query.find().then(res => {
         console.log(res)
-        if (res.length > 1) {
-          wx.showModal({
-            title: '提示',
-            content: '您当前条形码有多个商品绑定',
-            success(result) {
-              if (result.confirm) {
-                that.setData({ goodsReserve: res[0] });
-                that.get_opera_detail(res[0].objectId);
-              }
-            }
-          })
-        } else {
-          that.setData({ goodsReserve: res[0] });
-          that.get_opera_detail(res[0].objectId);
-        }
+        that.setData({ goodsReserve: res[0] });
+        that.get_opera_detail(res[0].objectId);
       })
-    }
+    }else{
       var item = JSON.parse(wx.getStorageSync('item'));
       this.setData({
         goodsReserve: item
       })
       that.get_opera_detail(item.goodsId);
+    }
   },
 
   /**

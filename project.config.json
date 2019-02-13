@@ -14,7 +14,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.1",
+	"libVersion": "2.5.2",
 	"appid": "wxeda1947acb39aab6",
 	"projectname": "respertory",
 	"isGameTourist": false,

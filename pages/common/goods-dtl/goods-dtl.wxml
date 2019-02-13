@@ -6,7 +6,6 @@
           full="true" thumb="{{goodsReserve.goodsIcon}}">
       <view slot="content">
         <view class='content_model'>
-           <view wx:if="{{goodsReserve.packModel !=''}}">产品型号：{{goodsReserve.packModel}}</view>
            <view wx:if="{{goodsReserve.regNumber !=''}}">登记编号：{{goodsReserve.regNumber}}</view>
            <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
         </view>
