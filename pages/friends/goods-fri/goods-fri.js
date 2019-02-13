@@ -182,6 +182,7 @@ Page({
           tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
           tempGoods.goodsId = res[i].id || '';
           tempGoods.goodsName = res[i].get("goodsName") || '';
+          tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
           tempGoods.regNumber = res[i].get("regNumber") || '';
           tempGoods.producer = res[i].get("producer") || '';
           tempGoods.productCode = res[i].get("productCode") || '';
