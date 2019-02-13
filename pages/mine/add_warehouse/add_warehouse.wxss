@@ -1,0 +1,36 @@
+/* pages/mine/add_class/add_class.wxss */
+.all_list_view
+{
+  height: calc(100vh - 120px);
+}
+.add_class
+{
+  background: #118fff;
+  margin: 15px;
+  width: calc(100% - 30px);
+  padding: 15px 0;
+  text-align: center;
+  border-radius: 4px;
+}
+.all_class_text
+{
+  width: 100%;
+}
+.class_text
+{
+  display: inline-block;
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 10px 10px 10px 0;
+}
+.display1
+{
+  display: inline-block;
+  line-height: 21px;
+}
+.display2
+{
+  display: inline-block;
+  line-height: 21px;
+}

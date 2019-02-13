@@ -1,0 +1,24 @@
+<view style='padding:15px;' class='all_list_view'>
+   <view>我的仓库：</view>
+   <view class='no-data' wx:if="{{isEmpty}}">
+      <image src='/images/common/no-data.png'></image>
+      <text>暂无数据</text>
+   </view>
+   <view class='all_class_text' wx:else>
+      <view wx:for="{{class_text}}" wx:key='{{index}}' data-id='{{item.objectId}}' class='class_text' bindtap='show_operation' data-value='{{item.class_text}}'>
+         <view class='display1'>{{item.class_text}}</view>
+         <view class='display2'><i-icon type="brush" size="18" color="#80848f" /></view>
+      </view>
+   </view>
+</view>
+
+<view class='add_class' bindtap='add_class'>添加仓库</view>
+
+
+<i-modal title="我的仓库" visible="{{visible}}" bind:ok="getclass_text_confrim" bind:cancel="handleClose">
+    <i-input placeholder="请输入仓库名称" bind:change="getclass_text" maxlength='10'/>
+</i-modal>
+
+<i-modal title="我的仓库" visible="{{edit_visible}}" bind:ok="getclass_text_edit" bind:cancel="handleClose">
+    <i-input value="{{get_class_text}}" bind:change="editclass_text" maxlength='10'/>
+</i-modal>

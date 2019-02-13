@@ -32,13 +32,13 @@ Page({
     const query = Bmob.Query('order_opreations');
     query.include("opreater", "custom");
     query.get(id).then(res => {
-      console.log(res);
+      //console.log(res);
       that.setData({detail:res});
       const query = Bmob.Query('order_opreations');
       query.include("goodsId");
       query.field('relations',res.objectId);
       query.relation('Bills').then(res => {
-        console.log(res);
+        //console.log(res);
         that.setData({ products: res.results, spinShow:false });
       })
     }).catch(err => {
@@ -46,6 +46,7 @@ Page({
     })
   },
 
+  //数据撤销点击
   revoke:function()
   {
     wx.showModal({
@@ -57,28 +58,7 @@ Page({
           const query = Bmob.Query('order_opreations');
           query.destroy(that.data.detail.objectId).then(res => {
             for (var i = 0; i < that.data.products.length; i++) {
-              var product = that.data.products[i];
-              console.log(product);
-              const query = Bmob.Query('Bills');
-              query.destroy(product.objectId).then(res => {
-                console.log(res)
-              });
-
-              const query1 = Bmob.Query('Goods');
-              query1.set('id', product.goodsId.objectId);
-              if (product.type == 1) {
-                query1.set('reserve', product.goodsId.reserve -product.num);
-              } else if (product.type == -1) {
-                query1.set('reserve', product.goodsId.reserve + product.num);
-              }
-              query1.save().then(res => {
-                wx.hideLoading();
-                wx.navigateBack({delta:1})
-                setTimeout(function(){
-                  wx.showToast({title: '撤销成功'})
-                },1000);
-              })
-
+              that.delete_bill(i);
             }
           }).catch(err => {
             console.log(err)
@@ -88,5 +68,31 @@ Page({
     })
     
   },
+
+  delete_bill:function(i)
+  {
+    var product = that.data.products[i];
+
+    const query = Bmob.Query('Bills');
+    query.destroy(product.objectId).then(res => {
+      const query1 = Bmob.Query('Goods');
+      query1.set('id', product.goodsId.objectId);
+      if (product.type == 1) {
+        query1.set('reserve', product.goodsId.reserve - product.num);
+      } else if (product.type == -1) {
+        query1.set('reserve', product.goodsId.reserve + product.num);
+      }
+      query1.save().then(res => {
+        if (i == (that.data.products.length - 1))
+        {
+          wx.hideLoading();
+          wx.navigateBack({ delta: 1 })
+          setTimeout(function () {
+            wx.showToast({ title: '撤销成功' })
+          }, 1000);
+        }
+      })
+    });
+  }
 
 })
