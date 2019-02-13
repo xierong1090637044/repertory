@@ -2,7 +2,7 @@
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <!--搜索-->
 <i-notice-bar icon="systemprompt" loop>
-    左滑可以显示好友的操作菜单哦！您可以跟您的员工一起进行库存管理！
+    左滑可以显示员工的操作菜单哦！您可以跟您的员工一起进行库存管理！
 </i-notice-bar>
 <view class="search-view" style='top:36px !important'>
   <view class="search-bar">
@@ -32,17 +32,17 @@
 </view>
 
 <i-cell-group i-class="wrap-2" wx:else>
-  <block wx:for="{{friends}}" wx:key="unique" >
-    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}" data-friendid="{{item.friendId}}">
+  <block wx:for="{{staff}}" wx:key="unique" >
+    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}" data-friendid="{{item.objectId}}">
     <view slot="content">
-     <i-cell data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}">
+     <i-cell data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.nickName}}">
       <image src='{{item.avatarUrl}}' style='width:40px;height:40px;margin-top:5px' slot="icon"></image>
      </i-cell>
     </view>
     <view slot="button" class="i-swipeout-button-group">
-      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendAuth" >协同管理
+      <view class="i-swipeout-button bg-info" data-friendid="{{item.objectId}}" bindtap="handleFriendAuth" >协同管理
       </view>
-      <view class="i-swipeout-button bg-danger" data-friendid="{{item.friendId}}" bindtap="handleFriendDtl" >权限设置
+      <view class="i-swipeout-button bg-danger" data-friendid="{{item.objectId}}" bindtap="handleFriendDtl" >权限设置
       </view>
       <!--<view class="i-swipeout-button bg-danger" data-item="{{item}}" bindtap="handleFriendDel" style='width:68px'>删除
       </view>-->
@@ -53,10 +53,10 @@
 
 <view class='btn-group' bindtap='handleAddFriend'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      添加好友
+      添加员工
     </button>
 </view>
 
-<i-modal title="好友账号Id" visible="{{visible}}" bind:ok="handlegetId" bind:cancel="handleClose">
+<i-modal title="员工账号Id" visible="{{visible}}" bind:ok="handlegetId" bind:cancel="handleClose">
     <i-input placeholder="请输入账号id" bind:change="getstaffId"/>
 </i-modal>

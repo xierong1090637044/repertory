@@ -2,8 +2,8 @@
 var config = require('utils/config.js')
 var Bmob = require('utils/bmob.js');
 var Bmob_new = require('utils/bmob_new.js');
-Bmob.initialize(config.appId, config.apiKey);
-Bmob_new.initialize(config.appId, config.apiKey);
+Bmob.initialize(config.appId, config.apiKey, "47f76baf4ee4d90630d7b2bc17f7505c");
+Bmob_new.initialize(config.appId, config.apiKey,"47f76baf4ee4d90630d7b2bc17f7505c");
 App({
   version: 'v1.1.5', //版本号
   onLaunch: function () {

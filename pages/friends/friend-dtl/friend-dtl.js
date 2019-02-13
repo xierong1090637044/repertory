@@ -67,7 +67,7 @@ Page({
   add_auth:function(type)
   {
     var that = this;
-    var Diary = Bmob.Object.extend("Friends");
+    var Diary = Bmob.Object.extend("_User");
     var query = new Bmob.Query(Diary);
     query.get(objectId, {
       success: function (result) {
@@ -94,12 +94,10 @@ Page({
   {
     var that = this;
     var user = wx.getStorageSync("userid");
-    var friend = wx.getStorageSync("friendId");
     
-    var Diary = Bmob.Object.extend("Friends");
+    var Diary = Bmob.Object.extend("_User");
     var query = new Bmob.Query(Diary);
-    query.equalTo("userId", user);
-    query.equalTo("friendId", friend);
+    query.equalTo("masterId", user);
     // 查询所有数据
     query.find({
       success: function (results) {

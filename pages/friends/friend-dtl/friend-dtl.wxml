@@ -10,7 +10,7 @@
   <view class='follow text-warning' wx:if="{{flag==-1}}"
         bindtap='handleAddFriend' data-friendId='{{friend.id}}'>
     <i-icon type="like" size='23'/>
-    <text>添加好友</text>
+    <text>添加该员工</text>
   </view>
   <view class='follow text-danger' wx:if="{{flag==0}}">
     <i-icon type="send" size='23'/>
@@ -19,7 +19,7 @@
   <view class='follow text-danger' wx:if="{{flag==1}}"
         data-item='{{friend}}' bindtap='handleFriendDel'>
     <i-icon type="like_fill" size='23'/>
-    <text wx:if="{{flag==1}}">删除好友</text>
+    <text wx:if="{{flag==1}}">删除员工</text>
   </view>
   <view wx:if="{{flag==1}}">
   <i-panel title="授权内容">

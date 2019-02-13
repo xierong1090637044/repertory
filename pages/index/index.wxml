@@ -1,11 +1,10 @@
-<!--pages/index/index.wxml-->
-<!-- <view hidden='{{!noticeShow}}'> -->
-<view bindtap='skip'>
+
+<!--<view bindtap='skip'>
     <i-notice-bar icon="systemprompt" loop>
       有时候服务器会卡顿，会出现一直加载的情况，大家等几分钟重进就好了。请大家见谅，没钱买好的服务器，哈哈。不会操作的可以添加本人微信xierong1090637044。
     </i-notice-bar>
-</view>
-<!-- </view> -->
+</view>-->
+
 <view class='index-container'>
   <view class='instruction'>
     <view bindtap='handleInstruction'>

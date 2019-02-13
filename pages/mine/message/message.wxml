@@ -33,8 +33,8 @@
         <button class="btn-add" data-friendid='{{item.friendId}}'
               data-id='{{item.id}}'
               bindtap='handleAddFriend' wx:if="{{item.status==0&&item.from==1}}">添加</button>
-        <text wx:if="{{item.status==0&&item.from==0}}">已发送</text>
-        <text wx:if="{{item.status==1}}">已添加</text>
+        <text wx:if="{{item.status==0&&item.from==0}}">待确认</text>
+        <text wx:if="{{item.status==1}}">已确认</text>
       </view>
     </i-cell>
   </block>

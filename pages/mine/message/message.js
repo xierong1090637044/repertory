@@ -74,60 +74,48 @@ Page({
     var that = this
     var id = e.currentTarget.dataset.id
     var friendId = e.currentTarget.dataset.friendid
-    var Friends = Bmob.Object.extend("Friends");
-    var FriendUser = Bmob.Object.extend("User");
-    var friends = new Friends();
-    var user = new Bmob.User();
-    var friend = new FriendUser();
-    user.id = userid;
-    friend.id = friendId;
-    friends.set("userId", user);
-    friends.set("friendId", friend);
-    friends.set("stockSee", 1);
-    friends.set("stockManager", 1);
-    friends.save(null, {
+
+    var FriendsTemp = Bmob.Object.extend("FriendsTemp");
+    var query = new Bmob.Query(FriendsTemp);
+    query.get(id, {
       success: function (result) {
-        var FriendsTemp = Bmob.Object.extend("FriendsTemp");
-        var query = new Bmob.Query(FriendsTemp);
-        query.get(id, {
+        result.set('status', 1);
+        result.save();
+        
+        var Diary = Bmob.Object.extend("_User");
+        var query = new Bmob.Query(Diary);
+
+        var post = new Diary();
+        post.id = friendId;
+
+        query.get(userid, {
           success: function (result) {
-            result.set('status', 1);
+            result.set('matserId', post);
+            result.set("stockSee", 1);
+            result.set("stockManager", 1)
             result.save();
+
+            wx.showToast({
+              title: '添加成功',
+              icon: "none",
+              success: function () {
+                that.loadFriendsTempAll()
+                that.loadFriendsTemp()
+              }
+            })
           },
           error: function (object, error) {
-            console.log(error)
+            console.log(object, error)
           }
         });
+
       },
-      error: function (result, error) {
-        console.log("添加好友失败:" + JSON.stringify(error));
+      error: function (object, error) {
+        console.log(error)
       }
     });
-
-    setTimeout(function(){
-      var friendId = e.currentTarget.dataset.friendid
-      var Friends = Bmob.Object.extend("Friends");
-      var FriendUser = Bmob.Object.extend("User");
-      var friends = new Friends();
-      var user = new Bmob.User();
-      var friend = new FriendUser();
-      user.id = userid;
-      friend.id = friendId;
-      friends.set("userId", friend);
-      friends.set("friendId", user);
-      friends.set("stockSee", 1);
-      friends.set("stockManager", 1);
-      friends.save();
-      wx.showToast({
-        title: '添加成功',
-        icon: "none",
-        success: function () {
-          that.loadFriendsTempAll()
-          that.loadFriendsTemp()
-        }
-      })
-    },1000)
   },
+
   handleDetial:function(e){
     var item = e.target.dataset.item
   },
