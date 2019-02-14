@@ -85,6 +85,7 @@ Page({
     friends.set("friendId", friend);
     friends.set("stockSee", 1);
     friends.set("stockManager", 1);
+    friends.set("customList", 1);
     friends.save(null, {
       success: function (result) {
         var FriendsTemp = Bmob.Object.extend("FriendsTemp");
@@ -117,6 +118,7 @@ Page({
       friends.set("friendId", user);
       friends.set("stockSee", 1);
       friends.set("stockManager", 1);
+      friends.set("customList", 1);
       friends.save();
       wx.showToast({
         title: '添加成功',

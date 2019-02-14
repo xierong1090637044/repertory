@@ -22,6 +22,8 @@
       <view class="desc-list">
         <text class="desc-list-item">操作记录优化</text>
         <text class="desc-list-item">扫码操作优化</text>
+        <text class="desc-list-item">协同操作看不到产品图片优化</text>
+        <text class="desc-list-item">协同操作新增查看客户授权功能</text>
       </view>
     </view>
 

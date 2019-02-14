@@ -15,7 +15,7 @@ Page({
   //选择客户点击
   choose_custom: function () {
     wx.navigateTo({
-      url: '../../second/choose_custom/choose_custom',
+      url: '../../second/choose_custom/choose_custom?friendId=' + wx.getStorageSync("friendId"),
     })
   },
 

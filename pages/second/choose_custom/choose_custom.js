@@ -1,6 +1,7 @@
 const app = getApp();
 const Bmob = require('../../../utils/bmob_new.js');
 var that;
+var friendId;
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -11,11 +12,11 @@ Page({
   },
 
   //得到客户列表
-  getcustom_list: function () {
+  getcustom_list: function (id) {
     wx.showLoading({ title: '加载中...' })
-    var userid = wx.getStorageSync("userid");
+
     const query = Bmob.Query("customs");
-    query.equalTo("parent", "==", userid);
+    query.equalTo("parent", "==", id);
     query.find().then(res => {
       console.log(res);
       if (res.length == 0) {
@@ -58,7 +59,6 @@ Page({
 
   //点击得到详情
   getdetail: function (e) {
-    console.log(e);
     var id = e.currentTarget.dataset.id;
     const query = Bmob.Query('customs');
     query.get(id).then(res => {
@@ -69,9 +69,16 @@ Page({
     })
   },
 
-  onLoad() {
+  onLoad(options) {
     that = this;
-    that.getcustom_list();
+
+    friendId = options.friendId;
+    if (friendId != null) {
+      that.getcustom_list(friendId);
+    } else {
+      var userid = wx.getStorageSync("userid");
+      that.getcustom_list(userid);
+    }
   },
 
   onReady() {

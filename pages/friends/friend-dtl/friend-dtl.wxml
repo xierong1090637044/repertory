@@ -35,6 +35,12 @@
             <view slot="close">关闭</view>
         </i-switch>
     </i-cell>
+    <i-cell title="客户管理">
+        <i-switch value="{{switchcustomList}}" size="large" bind:change="handleswitchcustomList" slot="footer">
+            <view slot="open">授权</view>
+            <view slot="close">关闭</view>
+        </i-switch>
+    </i-cell>
   </i-panel>
   </view>
   <view class='content' wx:else>

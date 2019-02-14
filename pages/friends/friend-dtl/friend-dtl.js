@@ -63,6 +63,15 @@ Page({
     that.add_auth('manager');
   },
 
+  handleswitchcustomList:function()
+  {
+    var that = this;
+    this.setData({
+      switchcustomList: !this.data.switchcustomList
+    });
+    that.add_auth('custom');
+  },
+
   //添加权限功能
   add_auth:function(type)
   {
@@ -77,11 +86,17 @@ Page({
           } else {
             result.set('stockManager', 1);
           }
-        } else {
+        } else if (type == "see"){
           if (!that.data.switchSee) {
             result.set('stockSee', 0);
           } else {
             result.set('stockSee', 1);
+          }
+        } else if (type == "custom"){
+          if (!that.data.switchcustomList) {
+            result.set('customList', 0);
+          } else {
+            result.set('customList', 1);
           }
         }
         result.save();
@@ -108,11 +123,12 @@ Page({
         objectId = results[0].id;
         var stockManager = results[0].get("stockManager");
         var stockSee = results[0].get("stockSee");
-        console.log(stockManager, stockSee);
+        var customList = results[0].get("customList");
 
         (stockManager == 0)?that.setData({ switchManager: false }):that.setData({ switchManager: true });
 
         (stockSee == 0)?that.setData({ switchSee: false }):that.setData({ switchSee: true });
+        (customList == 0 || customList == null) ? that.setData({ switchcustomList: false }) : that.setData({ switchcustomList: true });
       }
     });
   },

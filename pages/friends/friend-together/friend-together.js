@@ -48,6 +48,7 @@ Page({
         console.log(results);
         var stockManager = results[0].get("stockManager");
         var stockSee = results[0].get("stockSee");
+        var customList = results[0].get("customList");
 
         if (stockManager == 1)
         {
@@ -59,11 +60,18 @@ Page({
               name: '协作出库', icon: '../../../images/index/delivery.png',
               url: '/pages/friends/goods_select_fri/goods_select_fri?type=delivery'
             });
-        } 
+        }
         if (stockSee == 1)
         {
           auths.push({name: '他/她的产品', icon: '../../../images/index/goods.png',
           url: '/pages/friends/goods-fri/goods-fri'
+          });
+        }
+        if (customList == 1)
+        {
+          auths.push({
+            name: '她/他的客户', icon: '../../../images/index/customs.png',
+            url: '/pages/second/custom/custom?friendId=' + wx.getStorageSync("friendId")
           });
         }
 

@@ -3,6 +3,7 @@ const Bmob = require('../../../utils/bmob_new.js');
 var that;
 var input_money;
 var custom_id;
+var friendId;
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -14,12 +15,11 @@ Page({
   },
 
   //得到客户列表
-  getcustom_list:function()
+  getcustom_list:function(id)
   {
-    var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("customs");
     query.order("custom_type");
-    query.equalTo("parent", "==", userid);
+    query.equalTo("parent", "==", id);
     query.find().then(res => {
       console.log(res);
       if(res.length == 0)
@@ -69,31 +69,32 @@ Page({
   //点击查看详情
   getdetail:function(e)
   {
-    console.log(e);
-    var id = e.currentTarget.dataset.id;
-    wx.showActionSheet({
-      itemList: ['查看详情', '收款',"收款记录"],
-      success(res) {
-        console.log(res.tapIndex)
-        if (res.tapIndex == 0)
-        {
-          wx.navigateTo({
-            url: 'custom_add/custom_add?id=' + id,
-          })
-        } else if (res.tapIndex == 1){
-          custom_id = id;
-          that.setData({ visible:true})
-        }else if(res.tapIndex == 2)
-        {
-          wx.navigateTo({
-            url: 'debt_history/debt_history?id=' + id,
-          })
+    if(friendId == null)
+    {
+      var id = e.currentTarget.dataset.id;
+      wx.showActionSheet({
+        itemList: ['查看详情', '收款', "收款记录"],
+        success(res) {
+          console.log(res.tapIndex)
+          if (res.tapIndex == 0) {
+            wx.navigateTo({
+              url: 'custom_add/custom_add?id=' + id,
+            })
+          } else if (res.tapIndex == 1) {
+            custom_id = id;
+            that.setData({ visible: true })
+          } else if (res.tapIndex == 2) {
+            wx.navigateTo({
+              url: 'debt_history/debt_history?id=' + id,
+            })
+          }
+        },
+        fail(res) {
+          console.log(res.errMsg)
         }
-      },
-      fail(res) {
-        console.log(res.errMsg)
-      }
-    })
+      })
+    }
+    
   },
   
   //输入收款金额事件
@@ -163,9 +164,17 @@ Page({
     that.setData({ visible: false })
   },
 
-  onLoad() {
+  onLoad(options) {
     that = this;
-    that.getcustom_list();
+
+    friendId = options.friendId;
+    if(friendId != null)
+    {
+      that.getcustom_list(friendId);
+    }else{
+      var userid = wx.getStorageSync("userid");
+      that.getcustom_list(userid);
+    }
   },
 
   onReady() {
@@ -184,8 +193,17 @@ Page({
 
   goto_add:function()
   {
-    wx.navigateTo({
-      url: 'custom_add/custom_add',
-    })
+    if(friendId == null)
+    {
+      wx.navigateTo({
+        url: 'custom_add/custom_add',
+      })
+    }else{
+      wx.showToast({
+        title: '您无权添加',
+        icon:"none"
+      })
+    }
+    
   },
 });
