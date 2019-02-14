@@ -25,3 +25,18 @@
     color:#fff;
     align-items:center;
 }
+
+.goods_wrap{
+  height: calc(100vh - 102px);
+  overflow: scroll;
+  background: #fff;
+}
+
+.fristcontent
+{
+  display:flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  color:#f76a24;
+  background-color:#fefcec;
+}
