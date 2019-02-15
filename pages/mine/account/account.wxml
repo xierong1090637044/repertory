@@ -1,8 +1,14 @@
 <i-panel i-class="account_title" title="您的PC端账号信息：（点击可复制）">
     <i-cell title="账号" value="{{id}}" i-class="border" bind:click="copy" data-id="{{id}}"></i-cell>
-    <i-cell title="密码" value="{{password}}" data-id="{{password}}" bind:click="copy" i-class="border"></i-cell>
+    <view>
+      <i-cell title="密码" value="{{password}}" data-id="{{password}}" bind:click="copy" i-class="border1"></i-cell>
+      <view class='modify_password'>修改密码</view>
+    </view>
     <i-cell title="登录网站" value="{{web_address}}" data-id="{{web_address}}" bind:click="copy" i-class="border"></i-cell>
     <i-cell title="是否具有此功能" value="{{is_computer}}"></i-cell>
     
 </i-panel>
 
+<i-modal title="产品分类" visible="{{visible}}" bind:ok="getclass_text_confrim"bind:cancel="handleClose">
+    <i-input placeholder="请输入产品类别" bind:change="getclass_text" maxlength='10'/>
+</i-modal>

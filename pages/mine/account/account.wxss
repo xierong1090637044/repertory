@@ -3,7 +3,21 @@
   font-size: 16px;
   color: #4d4d4d;
 }
+.border1
+{
+  border-bottom: unset !important;
+  border-right: unset !important;
+}
 .border
 {
+  border-bottom: .5px solid#ddd;
+  border-right: unset !important;
+}
+.modify_password
+{
+  text-align: right;
+  font-size: 12px;
+  padding: 0 15px;
+  color: #118fff;
   border-bottom: .5px solid#ddd;
 }

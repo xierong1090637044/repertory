@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/mine/account/account",
     "pages/index/index",
     "pages/detail_finance/detail_finance",
     "pages/producer/producer",
     "pages/friends/friends",
-    "pages/mine/account/account",
+    
     "pages/authorize/authorize",
     "pages/common/goods-select/goods-select",
     "pages/common/goods-dtl/goods-dtl",
