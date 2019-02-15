@@ -29,14 +29,20 @@
             <view slot="close">关闭</view>
         </i-switch>
     </i-cell>
-    <i-cell title="库存管理">
+    <i-cell title="库存管理" i-class="border-b">
         <i-switch value="{{switchManager}}" size="large" bind:change="handleSwitchManager" slot="footer">
             <view slot="open">授权</view>
             <view slot="close">关闭</view>
         </i-switch>
     </i-cell>
-    <i-cell title="客户管理">
+    <i-cell title="客户管理" i-class="border-b">
         <i-switch value="{{switchcustomList}}" size="large" bind:change="handleswitchcustomList" slot="footer">
+            <view slot="open">授权</view>
+            <view slot="close">关闭</view>
+        </i-switch>
+    </i-cell>
+    <i-cell title="添加商品" i-class="border-b">
+        <i-switch value="{{switchaddProducts}}" size="large" bind:change="handleswitchaddProducts" slot="footer">
             <view slot="open">授权</view>
             <view slot="close">关闭</view>
         </i-switch>

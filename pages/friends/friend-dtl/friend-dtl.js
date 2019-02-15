@@ -72,6 +72,14 @@ Page({
     that.add_auth('custom');
   },
 
+  handleswitchaddProducts: function () {
+    var that = this;
+    this.setData({
+      switchaddProducts: !this.data.switchaddProducts
+    });
+    that.add_auth('addProducts');
+  },
+
   //添加权限功能
   add_auth:function(type)
   {
@@ -97,6 +105,12 @@ Page({
             result.set('customList', 0);
           } else {
             result.set('customList', 1);
+          }
+        } else if (type == "addProducts") {
+          if (!that.data.switchaddProducts) {
+            result.set('add_product', 0);
+          } else {
+            result.set('add_product', 1);
           }
         }
         result.save();
@@ -124,11 +138,13 @@ Page({
         var stockManager = results[0].get("stockManager");
         var stockSee = results[0].get("stockSee");
         var customList = results[0].get("customList");
+        var add_product = results[0].get("add_product");
 
         (stockManager == 0)?that.setData({ switchManager: false }):that.setData({ switchManager: true });
 
         (stockSee == 0)?that.setData({ switchSee: false }):that.setData({ switchSee: true });
         (customList == 0 || customList == null) ? that.setData({ switchcustomList: false }) : that.setData({ switchcustomList: true });
+        (add_product == 0 || add_product == null) ? that.setData({ switchaddProducts: false }) : that.setData({ switchaddProducts: true });
       }
     });
   },

@@ -1,0 +1,56 @@
+<!--pages/goods/goods-add/goods-add.wxml-->
+<i-message id="message" />
+<view class='goods-container'>
+  <form bindsubmit='handleAddGoods'>
+  <view class='content_scroll'>
+    <view class='list'>
+      <view class='list-text'>产品图片</view>
+      <view class='list-add-up' bindtap='choose_image' style='display:{{icon}}'>
+         <i class="iconfont icon-fenxiang-copy icon-upload"></i>
+      </view>
+      <view class='list-add' style='display:{{image}}'>
+         <image src='{{temppath}}' style='width:50px;height:50px' bindtap='choose_image'></image>
+      </view>
+    </view>
+    
+    <i-panel title="基本信息（产品名称必填）">
+      <i-input title="产品名称" value="{{goodsName}}" name="goodsName" placeholder="请输入产品名称" />
+      <i-input title="登记编号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记编号" />
+      <i-input title="生产厂家" value="{{producer}}" name="producer" placeholder="请输入生产厂家" />
+      <!--<i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="已知产品条码输入已知的，未知则自动生成" />-->
+    </i-panel>
+
+    <i-panel title="产品类别（可在 我的->产品类别 里添加）">
+     <picker bindchange="bindPickerChange" value="{{index}}" range="{{class_text}}" range-key="class_text">
+        <i-input title="产品类别" value="{{class_select_text}}" name="goodsClass" placeholder="请选择产品类别" disabled='true'/>
+     </picker>
+    </i-panel>
+
+    <i-panel title="产品规格">
+      <i-input title="包装含量" type="number" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
+      <i-input title="包装单位" placeholder="请填写包装单位" value="{{packingUnit}}" 
+name="packingUnit"/>
+      <!--<i-input title="型号" placeholder="请填写产品型号" value="{{packModel}}" 
+name="packModel"/>-->
+    </i-panel>
+
+    <i-panel title="产品价格（必填，可以为0）">
+      <i-input title="进货价格" type="digit" value="{{costPrice}}" name="costPrice" placeholder="请输入进货价格" />
+      <i-input title="零售价格" type="digit" value="{{retailPrice}}" name="retailPrice" placeholder="请选择零售价格" />
+    </i-panel>
+
+    <i-panel title="现有库存">
+      <i-input title="现有库存" type="digit" value="{{reserve}}" name="reserve" placeholder="请输入现有库存" />
+    </i-panel>
+
+   </view>
+    <view class='btn-group'>
+      <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+        <i-icon type="add" /> 确认新增
+      </button>
+      <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">
+        上传中
+      </i-button>
+    </view>
+  </form>
+</view>

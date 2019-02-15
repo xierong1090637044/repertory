@@ -49,6 +49,7 @@ Page({
         var stockManager = results[0].get("stockManager");
         var stockSee = results[0].get("stockSee");
         var customList = results[0].get("customList");
+        var add_product = results[0].get("add_product");
 
         if (stockManager == 1)
         {
@@ -73,6 +74,12 @@ Page({
             name: '她/他的客户', icon: '../../../images/index/customs.png',
             url: '/pages/second/custom/custom?friendId=' + wx.getStorageSync("friendId")
           });
+        }
+        if (add_product ==1)
+        {
+          wx.setStorageSync("friend_addproUrl", "../goods-add/goods-add")
+        }else{
+          wx.removeStorageSync("friend_addproUrl")
         }
 
         that.setData({

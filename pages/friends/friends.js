@@ -44,65 +44,6 @@ Page({
     wx.hideLoading();
   },
 
-  /*handleFriendDel: function (e) {
-    var that = this;
-    var item = e.currentTarget.dataset.item;
-    wx.showModal({
-      title: '提示',
-      content: '是否删除该好友',
-      success(res) {
-        if (res.confirm) {
-          var Friends = Bmob.Object.extend("Friends");
-          var query = new Bmob.Query(Friends);
-          query.get(item.id, {
-            success: function (object) {
-              object.destroy({
-                success: function (deleteObject) {
-                  var FriendsTemp = Bmob.Object.extend("FriendsTemp");
-                  var query1 = new Bmob.Query(FriendsTemp);
-                  query1.equalTo("userId", userid);
-                  query1.equalTo("friendId", item.friendId);
-                  var query2 = new Bmob.Query(FriendsTemp);
-                  query2.equalTo("userId", item.friendId);
-                  query2.equalTo("friendId", userid);
-                  var mainQuery = Bmob.Query.or(query1, query2);
-                  mainQuery.first({
-                    success: function (object) {
-                      console.log(object)
-                      object.destroy({
-                        success: function (deleteObject) {
-                          wx.showToast({
-                            title: '删除好友成功',
-                            icon: 'success',
-                            success: function () {
-                              that.handleRefresh()
-                            }
-                          })
-                        },
-                        error: function (object, error) {
-                          console.log('删除失败');
-                        }
-                      });
-                    },
-                    error: function (error) {
-                      console.log("查询失败: " + error.code + " " + error.message);
-                    }
-                  });
-                },
-                error: function (object, error) {
-                  console.log('删除失败');
-                }
-              });
-            },
-            error: function (object, error) {
-              console.log("query object fail");
-            }
-          });
-        }
-      }
-    })
-  },*/
-
   handleAddFriend:function(){
     wx.showActionSheet({
       itemList: ['搜索账号添加', '扫码添加'],
@@ -278,7 +219,7 @@ Page({
     query1.include("friendId");
     query1.find({
       success: function (res) {
-        console.log(res)
+        //console.log(res)
         var count = res.length;
         var totalPage = 0;
         var endPage = 0;
@@ -365,6 +306,7 @@ Page({
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
     that = this;
+    this.handleRefresh();
   },
 
   /**
@@ -378,7 +320,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.handleRefresh();
+    
   },
 
   /**

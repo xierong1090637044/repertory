@@ -137,7 +137,8 @@ Page({
     } else {
       if (options.type == "friend") {
         that.setData({
-          url: "../friends/enter-history-fri/enter-history-fri"
+          url: "../friends/enter-history-fri/enter-history-fri",
+          is_showing_price:"none",
         });
       }
       wx.getStorage({

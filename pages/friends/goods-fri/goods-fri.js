@@ -319,12 +319,30 @@ Page({
     });
   },
 
+  //点击新增产品
+  goto_addPro:function()
+  {
+    var friend_addproUrl = wx.getStorageSync("friend_addproUrl");
+    if(friend_addproUrl == "")
+    {
+      wx.showToast({
+        title: '请联系对方授权',
+        icon:"none",
+      })
+    }else{
+      wx.navigateTo({
+        url: friend_addproUrl,
+      })
+    }
+  },
+
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     userid = wx.getStorageSync("friendId");
     this.handleRefresh();
     that = this;
     //that.loadallGoods();
+    
   },
 
   /**

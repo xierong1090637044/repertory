@@ -61,13 +61,6 @@
 <view wx:else>
 
 <view style='display:flex'>
-  <!--<view class='left_item'>
-     <view class='class_items'>
-        <view class="{{select_id == null ? 'select':'normal'}}" bindtap='getclass_pro' data-id=''>全部</view>
-        <view wx:for = "{{class_text}}" class="{{item.objectId == select_id ? 'select':'normal'}}" data-id='{{item.objectId}}' wx:key="{{index}}" bindtap='getclass_pro'>{{item.class_text}}</view>
-     </view>
-     <view class='add_class' bindtap='add_class'>添加类别</view>
-  </view>-->
 
   <view class='no-data' wx:if="{{contentEmpty}}" style='height:calc(100vh - 202px)'>
     <image src='/images/common/no-data.png'></image>
@@ -92,4 +85,10 @@
 
 </view>
 
+</view>
+
+<view class='btn-group' bindtap='goto_addPro'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      <i-icon type="add" /> 新增产品
+    </button>
 </view>
