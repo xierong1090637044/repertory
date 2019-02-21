@@ -59,6 +59,7 @@ Page({
       retailPrice: goods.retailPrice,
       reserve: goods.reserve,
       class_select_text: (goods.class_text.class_text == null) ? null : goods.class_text.class_text,
+      goodsClass:goods.class_text.objectId
     })
   },
 
@@ -70,18 +71,6 @@ Page({
     if (goodsForm.goodsName == "") {
       $Message({
         content: '请输入产品名称',
-        type: 'warning',
-        duration: 5
-      });
-    } else if (goodsForm.costPrice == "" || goodsForm.costPrice == 0) {
-      $Message({
-        content: '请输入进货价格',
-        type: 'warning',
-        duration: 5
-      });
-    } else if (goodsForm.retailPrice == "" || goodsForm.retailPrice == 0) {
-      $Message({
-        content: '请输入零售价格',
         type: 'warning',
         duration: 5
       });
@@ -155,20 +144,6 @@ Page({
                           wx.showToast({
                             title: '修改产品成功',
                             icon: 'success',
-                            success: function () {
-                              that.setData({
-                                goodsName: "",
-                                regNumber: "",
-                                producer: "",
-                                productCode: "",
-                                packageContent: "",
-                                packingUnit: "",
-                                costPrice: '',
-                                retailPrice: '',
-                                reserve: 0,
-                                loading: false
-                              })
-                            }
                           })
                         }
                        

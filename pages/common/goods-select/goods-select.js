@@ -12,9 +12,7 @@ var class_array;//产品类别
 var select_id;//产品类别id
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+  /*** 页面的初始数据*/
   data: {
     spinShow: true,
     current: [],
@@ -24,6 +22,7 @@ Page({
     isEmpty: false,
     // 搜索
     inputShowed: false,
+    limitPage:50,//限制条数
     inputVal: "",
     currenttab: '1',
     length: null,
@@ -158,11 +157,11 @@ Page({
     }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
+    query.limit(that.data.limitPage);
     query.descending("goodsName"); //按照货物名字
     query.include("userId");
     query.find({
       success: function (res) {
-
         that.setData({ length: res.length });
         if (res.length == 0) {
           that.setData({ contentEmpty: true })
@@ -208,9 +207,23 @@ Page({
       spinShow: false,
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  
+
+  //滚动加载更多
+  loadMore: function () {
+    var that = this;
+    if (that.data.length < that.data.limitPage) {
+      wx.showToast({
+        icon: 'none',
+        title: '到底啦',
+      })
+    } else {
+      that.setData({ limitPage: that.data.limitPage + that.data.limitPage, })
+      that.loadGoods(type, null, select_id);
+    }
+  },
+
+  /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
     userid = wx.getStorageSync("userid");

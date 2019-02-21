@@ -20,8 +20,8 @@ Page({
     packageContent:'',//包装含量
     packingUnit: '',//包装单位
     packModel:'',//产品型号
-    costPrice: '',//进货价格
-    retailPrice: '',//零售价格
+    costPrice: '0',//进货价格
+    retailPrice: '0',//零售价格
     goodsClass:'',//产品类别
     reserve:0,
     loading:false,
@@ -58,19 +58,7 @@ Page({
         type: 'warning',
         duration: 5
       });
-    } else if (goodsForm.costPrice == "") {
-      $Message({
-        content: '请输入进货价格',
-        type: 'warning',
-        duration: 5
-      });
-    } else if (goodsForm.retailPrice == "") {
-      $Message({
-        content: '请输入零售价格',
-        type: 'warning',
-        duration: 5
-      });
-    } else {
+    }else {
         wx.showModal({
           title: '提示',
           content: '是否确认新增产品',
@@ -155,8 +143,8 @@ Page({
                                         packageContent: "",
                                        // packModel: "",
                                         packingUnit: "",
-                                        costPrice: '',
-                                        retailPrice: '',
+                                        costPrice: '0',
+                                        retailPrice: '0',
                                         reserve: 0,
                                         loading: false
                                       })

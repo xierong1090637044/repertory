@@ -27,6 +27,8 @@
         <text class="desc-list-item">协同操作进货价不对外显示</text>
         <text class="desc-list-item">协同操作入库操作显示更新以及入库金额bug修复</text>
         <text class="desc-list-item">协同操作准许授权用户进行添加商品的操作</text>
+        <text class="desc-list-item">用户可以修改自己的登陆密码</text>
+        <text class="desc-list-item">产品编辑bug修复</text>
       </view>
     </view>
 

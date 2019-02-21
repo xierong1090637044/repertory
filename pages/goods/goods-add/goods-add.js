@@ -20,8 +20,8 @@ Page({
     packageContent:'',//包装含量
     packingUnit: '',//包装单位
     packModel:'',//产品型号
-    costPrice: '',//进货价格
-    retailPrice: '',//零售价格
+    costPrice: '0',//进货价格
+    retailPrice: '0',//零售价格
     goodsClass:'',//产品类别
     reserve:0,
     loading:false,
@@ -151,8 +151,8 @@ Page({
                                         packageContent: "",
                                        // packModel: "",
                                         packingUnit: "",
-                                        costPrice: '',
-                                        retailPrice: '',
+                                        costPrice: '0',
+                                        retailPrice: '0',
                                         reserve: 0,
                                         loading: false
                                       })
@@ -175,8 +175,8 @@ Page({
                                     packageContent: "",
                                     //packModel: "",
                                     packingUnit: "",
-                                    costPrice: '',
-                                    retailPrice: '',
+                                    costPrice: '0',
+                                    retailPrice: '0',
                                     reserve: 0,
                                     loading: false
                                   })

@@ -1,11 +1,9 @@
 {
   "pages": [
-    "pages/mine/account/account",
     "pages/index/index",
     "pages/detail_finance/detail_finance",
     "pages/producer/producer",
     "pages/friends/friends",
-    
     "pages/authorize/authorize",
     "pages/common/goods-select/goods-select",
     "pages/common/goods-dtl/goods-dtl",
@@ -19,6 +17,7 @@
     "pages/goods/goods",
     "pages/goods/goods-add/goods-add",
     "pages/mine/mine",
+    "pages/mine/account/account",
     "pages/mine/about-us/about-us",
     "pages/mine/propose/propose",
     "pages/mine/message/message",

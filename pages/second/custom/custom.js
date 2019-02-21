@@ -186,7 +186,7 @@ Page({
     var is_add = wx.getStorageSync("is_add");
     if(is_add)
     {
-      that.getcustom_list();
+      that.getcustom_list(wx.getStorageSync("userid"));
       wx.removeStorageSync("is_add");
     }
   },

@@ -50,7 +50,7 @@ Page({
     query.find().then(res => {
       for (var i = 0; i < res.length; i++) {
         total_reserve = total_reserve + res[i].reserve;
-        total_money = total_money + res[i].reserve * res[i].retailPrice;
+        total_money = total_money + res[i].reserve * res[i].costPrice;
       }
       that.setData({ total_reserve: total_reserve, total_money: total_money, spinShow: true });
 
