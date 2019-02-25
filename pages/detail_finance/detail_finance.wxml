@@ -1,6 +1,7 @@
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 
 <view class="fristcontent">
+  <view>库存商品：{{total_products}}</view>
   <view>总库存：{{total_reserve}}</view>
   <view>库存总金额：￥{{total_money}}</view>
 </view>
@@ -26,49 +27,52 @@
     </view>
   </view>
 
-<view class='text_desicbe'>概况：</view>
-<view class='frist_content'>
-  <view style='width:50%'>
-    <i-cell-group >
-      <i-cell title="入库数量" value="{{get_reserve}}"></i-cell>
-      <!--<i-cell title="入库成本总额" value="{{get_reserve_real_money}}" ></i-cell>-->
-      <i-cell title="入库支出总额" value="{{get_reserve_num}}" ></i-cell>
-      <!--<i-cell title="预计可获盈利" value="{{get_reserve_get_num}}" ></i-cell>-->
-    </i-cell-group>
+  <i-tabs current="{{ current }}" bindchange="handleChange">
+      <i-tab key="1" title="详情"></i-tab>
+      <i-tab key="2" title="当天出入库记录"></i-tab>
+  </i-tabs>
+
+  <view style='display:{{view1}}'>
+  <view class='text_desicbe'>概况：</view>
+  <view class='frist_content'>
+    <view style='width:50%'>
+      <i-cell-group >
+        <i-cell title="入库数量" value="{{get_reserve}}"></i-cell>
+        <i-cell title="入库成本总额" value="{{get_reserve_real_money}}" ></i-cell>
+        <i-cell title="入库支出总额" value="{{get_reserve_num}}" ></i-cell>
+        <i-cell title="预计可获盈利" value="{{get_reserve_get_num}}" ></i-cell>
+      </i-cell-group>
+    </view>
+
+    <view style='width:50%'>
+      <i-cell-group >
+        <i-cell title="出库数量" value="{{out_reserve}}"></i-cell>
+        <i-cell title="出库成本总额" value="{{out_reserve_real_money}}" ></i-cell>
+        <i-cell title="出库应收总额" value="{{out_reserve_num}}" ></i-cell>
+        <i-cell title="毛利润" value="{{out_reserve_get_num}}" ></i-cell>
+      </i-cell-group>
+    </view>
   </view>
 
-  <view style='width:50%'>
-    <i-cell-group >
-      <i-cell title="出库数量" value="{{out_reserve}}"></i-cell>
-      <!--<i-cell title="出库成本总额" value="{{out_reserve_real_money}}" ></i-cell>-->
-      <i-cell title="出库应收总额" value="{{out_reserve_num}}" ></i-cell>
-      <!--<i-cell title="净赚" value="{{out_reserve_get_num}}" ></i-cell>-->
-    </i-cell-group>
-  </view>
-</view>
+  <view class='second_content'>
+    <view style='width:50%'>
+      <i-cell-group >
+        <i-cell title="当日应收" value="￥{{should_get_money}}"></i-cell>
+      </i-cell-group>
+    </view>
 
-<view class='second_content'>
-  <view style='width:50%'>
-    <i-cell-group >
-      <i-cell title="当日应收" value="￥{{should_get_money}}"></i-cell>
-    </i-cell-group>
+    <view style='width:50%'>
+      <i-cell-group >
+        <i-cell title="当日实收" value="￥{{real_get_money}}"></i-cell>
+      </i-cell-group>
+    </view>
+  </view>
   </view>
 
-  <view style='width:50%'>
-    <i-cell-group >
-      <i-cell title="当日实收" value="￥{{real_get_money}}"></i-cell>
-    </i-cell-group>
-  </view>
-</view>
 
-<i-tabs current="{{ current }}" bindchange="handleChange">
-  <i-tab key="1" title="入库记录"></i-tab>
-  <i-tab key="2" title="出库记录"></i-tab>
-</i-tabs>
-
-<view class='all_list'>
+<view class='all_list' style='display:{{view2}}'>
    <view wx:for="{{bill_his}}" wx:key="{{index}}" class='list_item'>
-      <view class='list_style'> 
+      <view class='list_style'>
         <view wx:if="{{item.type == 1}}"><text class='text_color'>入库商品：</text>{{item.goodsName}}</view>
         <view wx:else>
            <text class='text_color'>出库商品：</text>
@@ -79,7 +83,7 @@
         <view wx:else><text class='text_color'>出库数量：</text>{{item.num}}</view>
       </view>
 
-      <view class='list_style'> 
+      <view class='list_style'>
         <view wx:if="{{item.type == 1}}">
             <text class='text_color'>入库单价：</text>
             ￥{{item.retailPrice}}
@@ -94,6 +98,3 @@
 
    </view>
 </view>
-
-
-

@@ -14,6 +14,7 @@
     </view>
      <view class='pro_allmoney'>总计：￥{{all_money}}</view>
 
+    <form bindsubmit="formSubmit" report-submit="true">
     <i-panel title="开单明细（用于记录客户是否有无欠款）">
       <i-input title="客户姓名" value="{{custom.custom_name}}" placeholder="选择客户" disabled="true" bindtap='choose_custom'/>
       <i-input title="实际应收" value="{{all_money}}" placeholder="选择客户" disabled="true"/>
@@ -25,7 +26,8 @@
     </view>
 
     <view>
-        <button class='confrim_button' bindtap='confrim_delivery' disabled='{{button}}'>确认出库</button>
+        <button class='confrim_button' bindtap='confrim_delivery' disabled='{{button}}' form-type="submit">确认出库</button>
     </view>
+    </form>
 
 </view>

@@ -9,7 +9,7 @@
 {
   background-color: #fff;
   padding: 0 15px;
-  max-height:60vh;
+  max-height:calc(100vh - 42px);
   overflow:scroll;
 }
 .header_content

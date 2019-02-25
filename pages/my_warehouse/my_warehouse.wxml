@@ -1,0 +1,101 @@
+<!--pages/goods/goods.wxml-->
+<!--搜索-->
+<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
+
+<!--<view class="fristcontent">
+  <view>总库存：{{total_reserve}}</view>
+  <view>库存总金额：￥{{total_money}}</view>
+</view>-->
+
+<view class="search-view" >
+  <view class="search-bar">
+    <view class="search-bar-form">
+      <view class="search-bar-box">
+        <icon class="icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="search-bar-input" placeholder="请输入关键字查询" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchAction"/>
+        <view class="icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="search-bar-label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="icon-search" type="search" size="14"></icon>
+        <view class="search-bar-text">搜索</view>
+      </label>
+    </view>
+    <view class="search-bar-cancel-btn" hidden="{{!inputShowed}}" bindtap="searchAction">搜索</view>
+  </view>
+</view>
+<!--/.搜索-->
+
+<!--<i-tabs current="{{ current }}" bindchange="handleChange">
+      <i-tab key="1" title="库存有余"></i-tab>
+      <i-tab key="2" title="库存紧缺"></i-tab>
+</i-tabs>-->
+
+<!--*筛选器*-->
+  <view class='select'>
+    <view class="section">
+      <picker bindchange="bindclass_Change" range-key	="class_text" range="{{all_class}}">
+        <view class="picker">
+          <text>{{selectd_class}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <picker bindchange="bindstock_Change" value="{{index}}" range="{{stock}}">
+        <view class="picker">
+          <text>{{selectd_stock}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+<view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+
+<view wx:else>
+
+<view style='display:flex'>
+  <!--<view class='left_item'>
+     <view class='class_items'>
+        <view class="{{select_id == null ? 'select':'normal'}}" bindtap='getclass_pro' data-id=''>全部</view>
+        <view wx:for = "{{class_text}}" class="{{item.objectId == select_id ? 'select':'normal'}}" data-id='{{item.objectId}}' wx:key="{{index}}" bindtap='getclass_pro'>{{item.class_text}}</view>
+     </view>
+     <view class='add_class' bindtap='add_class'>添加类别</view>
+  </view>-->
+
+  <view class='no-data' wx:if="{{contentEmpty}}" style='height:calc(100vh - 202px)'>
+    <image src='/images/common/no-data.png'></image>
+    <text>暂无数据</text>
+  </view>
+
+  <view class='right_item' wx:else>
+  <i-cell-group i-class="goods_wrap" bindmyevent="loadMore">
+  <block wx:for="{{goods}}" wx:key="unique">
+    <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
+      <view slot="content">
+        <i-cell bind:click="handleDetial" data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="产品：{{item.goodsName}}" label="库存数量：{{item.reserve}}">
+              <image src='/images/common/goods-default.png' style='width:40px;height:40px;margin-top:5px' slot="icon" wx:if="{{item.goodsIcon ==''}}"></image>
+              <image src='{{item.goodsIcon}}' style='width:40px;height:40px;margin-top:5px' slot="icon" wx:else></image>
+            
+        </i-cell>
+      </view>
+    </i-swipeout>
+  </block>
+  </i-cell-group>
+  </view>
+
+</view>
+
+</view>
+
+<navigator url='/pages/goods/goods-add/goods-add' class='btn-group'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      <i-icon type="add" /> 新增产品
+    </button>
+</navigator>

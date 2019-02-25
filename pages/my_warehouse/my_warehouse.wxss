@@ -1,0 +1,42 @@
+/* pages/goods/goods.wxss */
+.item-oper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #f4f4f4;
+    display: flex;
+    justify-content: flex-end;
+}
+/*自定义按钮*/
+.i-swipeout-item view{padding: 0 0 0 5rpx}
+.i-swipeout-button-group{
+    height:100%;
+    width:100%;
+}
+.i-swipeout-button{
+    width:103px;
+    float:left;
+    display: flex;
+    height:100%;
+    justify-content: center;
+    color:#fff;
+    align-items:center;
+}
+
+.goods_wrap{
+  height: calc(100vh - 152px);
+  overflow: scroll;
+  background: #fff;
+}
+
+.fristcontent
+{
+  display:flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  color:#f76a24;
+  background-color:#fefcec;
+}

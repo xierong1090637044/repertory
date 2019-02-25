@@ -11,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    current: '1',
+    view2:"none",
     spinShow: true,
     packingUnits: config.units,
     goodsReserve: {},
@@ -18,16 +20,29 @@ Page({
     shareImage: ''
   },
 
+  //tab改变
+  handleChange({ detail }) {
+    this.setData({
+      current: detail.key,
+    });
+    if (detail.key == 1) {
+      that.setData({view1:"block",view2:"none"})
+    } else {
+      that.setData({ view1: "none", view2: "block" })
+    }
+  },
+
   //点击预览"条形码并下载"
   handlePreviewImage: function (e) {
     var single_code = e.target.dataset.qrcode;
+    var type = e.target.dataset.type;
     wx.showLoading({ title: '加载中...' })
     wx.request({
       url: 'https://route.showapi.com/1129-1',
       data: {
         showapi_appid: '84916',
         showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
-        content: single_code,
+        content: single_code+"-"+type,
         height: "40",
         width: "125"
       },

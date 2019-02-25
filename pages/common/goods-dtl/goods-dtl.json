@@ -9,6 +9,7 @@
     "i-icon": "../../../component/icon/index",
     "i-message": "../../../component/message/index",
     "i-spin": "../../../component/spin/index",
+    "i-tabs": "../../../component/tabs/index",
     "canvasdrawer": "../../../component/canvasdrawer/canvasdrawer"
   }
 }

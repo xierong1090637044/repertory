@@ -80,116 +80,166 @@ Page({
     that.setData({ beizhu_text: input_beizhu});
   },
 
-  //确认出库点击
-  confrim_delivery:function()
-  {
-    that.setData({ button: true });
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.formId)
+
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000; 
+    var n = timestamp * 1000;
+    var date = new Date(n);
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var h = date.getHours();
+    var m = date.getMinutes();
+
+    var formId = e.detail.formId;
     var operation_ids = [];
+
+    that.setData({ button: true });
 
     var Goods = Bmob.Object.extend("Goods");
     var Bills = Bmob.Object.extend("Bills");
     var objects = new Array();
     var billsObj = new Array();
-        for (var i = 0; i < that.data.goods.length; i++) {
-          if (that.data.goods[i].num > 0) {
-              var num = that.data.goods[i].reserve - that.data.goods[i].num
-              var tempGoods = new Goods();
-              tempGoods.set('objectId', that.data.goods[i].goodsId)
-              tempGoods.set('reserve', num)
-              objects.push(tempGoods)
-              //单据
-              var tempBills = new Bills();
-              var user = new Bmob.User();
-              user.id = wx.getStorageSync('userid');
-              tempBills.set('goodsName', that.data.goods[i].goodsName);
-              tempBills.set('retailPrice', that.data.goods[i].modify_retailPrice);
-              tempBills.set('num', that.data.goods[i].num);
-              tempBills.set('total_money', that.data.goods[i].total_money);
-              tempBills.set('goodsId', tempGoods);
-              tempBills.set('userId', user);
-              tempBills.set('type', -1);
-              
-              billsObj.push(tempBills)
-            }
-          }
-          Bmob.Object.saveAll(objects).then(function (objects) {
-            // 批量更新成功
-            console.log("批量更新成功", objects);
-            //插入单据
-            Bmob.Object.saveAll(billsObj).then(function (res) {
-              console.log("批量新增单据成功", res);
-              for (var i = 0;i< res.length;i++)
-              {
-                operation_ids.push(res[i].id);
-                if (i == (res.length-1))
-                {
-                  console.log("批量新增单据成功", res);
-                  var currentUser = Bmob.User.current();
-                  const relation = Bmob_new.Relation('Bills'); // 需要关联的表
-                  const relID = relation.add(operation_ids);
+    
+    for (var i = 0; i < that.data.goods.length; i++) {
+      if (that.data.goods[i].num > 0) {
 
-                  const pointer = Bmob_new.Pointer('_User')
-                  const poiID = pointer.set(currentUser.id);
+        var num = that.data.goods[i].reserve - that.data.goods[i].num;
+        var tempGoods = new Goods();
+        tempGoods.set('objectId', that.data.goods[i].goodsId)
+        tempGoods.set('reserve', num)
+        objects.push(tempGoods)
+        //单据
+        var tempBills = new Bills();
+        var user = new Bmob.User();
+        user.id = wx.getStorageSync('userid');
+        tempBills.set('goodsName', that.data.goods[i].goodsName);
+        tempBills.set('retailPrice', that.data.goods[i].modify_retailPrice);
+        tempBills.set('num', that.data.goods[i].num);
+        tempBills.set('total_money', that.data.goods[i].total_money);
+        tempBills.set('goodsId', tempGoods);
+        tempBills.set('userId', user);
+        tempBills.set('type', -1);
 
-                  const query = Bmob_new.Query('order_opreations');
-                  query.set("relations", relID);
-                  query.set("beizhu", that.data.beizhu_text);
-                  query.set("type", -1);
-                  query.set("opreater", poiID);
-                  query.set("master", poiID);
-                  query.set('goodsName', that.data.goods[0].goodsName);
-                  query.set('real_money', Number(that.data.real_money));
-                  query.set('debt', that.data.all_money - Number(that.data.real_money));
+        billsObj.push(tempBills)
 
-                  if (that.data.custom.objectId != null) {
-                    const custom = Bmob_new.Pointer('customs');
-                    const customID = custom.set(that.data.custom.objectId);
-                    query.set("custom", customID);
-
-                    //如果客户有欠款
-                    if ((that.data.all_money - Number(that.data.real_money)) > 0 )
-                    {
-                      const query = Bmob_new.Query('customs');
-                      query.get(that.data.custom.objectId).then(res => {
-                        var debt = (res.debt == null) ? 0 : res.debt;
-                        debt = debt + (that.data.all_money - Number(that.data.real_money));
-                        console.log(debt);
-                        const query = Bmob_new.Query('customs');
-                        query.get(that.data.custom.objectId).then(res => {
-                          res.set('debt', debt)
-                          res.save()
-                        })
-                      })
-                    }
-                  }
-
-                  query.set("all_money", that.data.all_money);
-                  query.save().then(res => {
-                    console.log("添加操作历史记录成功",res);
-                    wx.removeStorageSync("custom");//移除这个缓存
-                    wx.showToast({
-                      title: '产品出库成功',
-                      icon: 'success',
-                      success: function () {
-                        setTimeout(() => {
-                          wx.navigateBack({
-                            delta: 2
-                          })
-                        }, 1000)
-                      }
-                    })
-                  })
-                }
+        if (num <= wx.getStorageSync("setting").num_warning) {
+          let modelData = {
+            "touser": wx.getStorageSync("openid"),
+            "template_id": "o0i_R4TsEvYaJ2OFU0G9JhwKleSDnSp3auSCCg-lhe8",
+            "page": "pages/order_history/order_history",
+            "form_id": formId,
+            "data": {
+              "keyword1": {
+                "value": that.data.goods[i].goodsName,
+              },
+              "keyword2": {
+                "value": that.data.goods[i].reserve
+              },
+              "keyword3": {
+                "value": num
+              },
+              "keyword4": {
+                "value": "出库"
+              },
+              "keyword5": {
+                "value": Y +"-"+ M +"-"+ D+"-" + h + "-" + m
               }
-            },
-              function (error) {
-                // 批量新增异常处理
-                console.log("异常处理");
-              });
-          },
-            function (error) {
-              // 批量更新异常处理
-              console.log(error);
-            });
+            }
+            , "emphasis_keyword": ""
+          }
+
+          Bmob_new.sendWeAppMessage(modelData).then(function (response) {
+            console.log(response);
+          }).catch(function (error) {
+            console.log(error);
+          });
+        }
+      }
+    }
+    Bmob.Object.saveAll(objects).then(function (objects) {
+      // 批量更新成功
+      console.log("批量更新成功", objects);
+      //插入单据
+      Bmob.Object.saveAll(billsObj).then(function (res) {
+        console.log("批量新增单据成功", res);
+        for (var i = 0; i < res.length; i++) {
+          operation_ids.push(res[i].id);
+          if (i == (res.length - 1)) {
+            console.log("批量新增单据成功", res);
+            var currentUser = Bmob.User.current();
+            const relation = Bmob_new.Relation('Bills'); // 需要关联的表
+            const relID = relation.add(operation_ids);
+
+            const pointer = Bmob_new.Pointer('_User')
+            const poiID = pointer.set(currentUser.id);
+
+            const query = Bmob_new.Query('order_opreations');
+            query.set("relations", relID);
+            query.set("beizhu", that.data.beizhu_text);
+            query.set("type", -1);
+            query.set("opreater", poiID);
+            query.set("master", poiID);
+            query.set('goodsName', that.data.goods[0].goodsName);
+            query.set('real_money', Number(that.data.real_money));
+            query.set('debt', that.data.all_money - Number(that.data.real_money));
+
+            if (that.data.custom.objectId != null) {
+              const custom = Bmob_new.Pointer('customs');
+              const customID = custom.set(that.data.custom.objectId);
+              query.set("custom", customID);
+
+              //如果客户有欠款
+              if ((that.data.all_money - Number(that.data.real_money)) > 0) {
+                const query = Bmob_new.Query('customs');
+                query.get(that.data.custom.objectId).then(res => {
+                  var debt = (res.debt == null) ? 0 : res.debt;
+                  debt = debt + (that.data.all_money - Number(that.data.real_money));
+                  console.log(debt);
+                  const query = Bmob_new.Query('customs');
+                  query.get(that.data.custom.objectId).then(res => {
+                    res.set('debt', debt)
+                    res.save()
+                  })
+                })
+              }
+            }
+
+            query.set("all_money", that.data.all_money);
+            query.save().then(res => {
+              console.log("添加操作历史记录成功", res);
+              wx.removeStorageSync("custom");//移除这个缓存
+              wx.showToast({
+                title: '产品出库成功',
+                icon: 'success',
+                success: function () {
+                  setTimeout(() => {
+                    wx.navigateBack({
+                      delta: 2
+                    });
+                  }, 500)
+                }
+              })
+            })
+          }
+        }
+      },
+        function (error) {
+          // 批量新增异常处理
+          console.log("异常处理");
+        });
+    },
+      function (error) {
+        // 批量更新异常处理
+        console.log(error);
+      });
+  },
+
+  //确认出库点击
+  confrim_delivery:function()
+  {
+    
   }
 })

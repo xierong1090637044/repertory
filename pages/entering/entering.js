@@ -100,22 +100,29 @@ Page({
   },
 
   //通过二维码获取商品
-  getcode_product: function (id) {
+  getcode_product: function (id,type) {
     var code_product = [];
-    const query = Bmob_new.Query('Goods');
-    query.get(id).then(res => {
-      console.log(res);
-      res.total_money = res.costPrice;
-      res.modify_retailcostPrice = res.costPrice;
-      res.modify_retailPrice = res.costPrice;
-      res.goodsId = res.objectId;
-      code_product.push(res);
-      that.setData({
-        goods: code_product,
-      })
-    }).catch(err => {
+
+    if(type == "true")
+    {
+      const query = Bmob_new.Query('Goods');
+      query.get(id).then(res => {
+        console.log(res);
+        res.total_money = res.costPrice;
+        res.modify_retailcostPrice = res.costPrice;
+        res.modify_retailPrice = res.costPrice;
+        res.goodsId = res.objectId;
+        code_product.push(res);
+        that.setData({
+          goods: code_product,
+        })
+      }).catch(err => {
+
+      }) 
+    }else{
       const query = Bmob_new.Query("Goods");
       query.equalTo("productCode", "==", id);
+      query.equalTo("userId", "==", wx.getStorageSync("userid"));
       query.find().then(res => {
         console.log(res);
         res[0].total_money = res[0].retailPrice;
@@ -125,15 +132,14 @@ Page({
           goods: code_product,
         })
       });
-    })
-
+    }
   },
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
     if (options.id != null) {
-      that.getcode_product(options.id);
+      that.getcode_product(options.id,options.type);
     } else {
       if (options.type == "friend") {
         that.setData({

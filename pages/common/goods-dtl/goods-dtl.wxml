@@ -1,5 +1,11 @@
 <!--pages/common/goods-dtl/goods-dtl.wxml-->
 <view>
+  <i-tabs current="{{ current }}" bindchange="handleChange">
+    <i-tab key="1" title="产品详情"></i-tab>
+    <i-tab key="2" title="出入库记录"></i-tab>
+  </i-tabs>
+
+  <view style='display:{{view1}}'>
   <i-panel title="产品详情">
     <i-card title="产品名称：{{goodsReserve.goodsName}}" 
           extra="当前库存：{{goodsReserve.reserve}}"
@@ -9,6 +15,7 @@
            <view wx:if="{{goodsReserve.regNumber !=''}}">登记编号：{{goodsReserve.regNumber}}</view>
            <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
         </view>
+        <view wx:if = "{{goodsReserve.productCode != ''}}">产品条码：{{goodsReserve.productCode}}</view>
         <view>进货价格：{{goodsReserve.costPrice}} (元)</view>
         <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
       </view>
@@ -19,15 +26,15 @@
     <view class='text-center padded-b-10' style='padding-top: 0.5rem'>
       <view>产品：{{goodsReserve.goodsName}}</view>
       <button  wx:if = "{{goodsReserve.productCode != ''}}" class="more-button bg-info text-white" size="mini" 
-              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.productCode}}" >预览条形码并下载</button>
+              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.productCode}}"  data-type="true">预览条形码并下载</button>
       <button  wx:else class="more-button bg-info text-white" size="mini" 
-              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.goodsId}}" >预览条形码并下载</button>
+              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.goodsId}}" data-type="false">预览条形码并下载</button>
       <view style='font-size:10px;margin-top:5px;color:#999'>（您可以下载下来贴在商品上，下次扫一扫可以直接操作哦）</view>
     </view>
   </i-panel>
+  </view>
 
-  <view style='margin-bottom:15px;'>
-      <view class='header_content'>全部操作记录</view>
+  <view style='display:{{view2}}'>
       <view class='all_list' wx:if="{{detail !=''}}">
           <view  wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
               <view>

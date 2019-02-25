@@ -1,5 +1,5 @@
 {
-  "pages": [
+  "pages": [ 
     "pages/index/index",
     "pages/detail_finance/detail_finance",
     "pages/producer/producer",
@@ -17,6 +17,7 @@
     "pages/goods/goods",
     "pages/goods/goods-add/goods-add",
     "pages/mine/mine",
+    "pages/mine/my_setting/my_setting",
     "pages/mine/account/account",
     "pages/mine/about-us/about-us",
     "pages/mine/propose/propose",

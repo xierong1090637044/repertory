@@ -215,25 +215,21 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
     var class_text = wx.getStorageSync("class");
-    that.setData({ class_text: class_text })
+    that.setData({ class_text: class_text });
+
+    if(options.id != null){that.scan_by_id(options.id);}
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  /*** 生命周期函数--监听页面初次渲染完成*/
   onReady: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  /*** 生命周期函数--监听页面显示*/
   onShow: function () {
   
   },
@@ -245,17 +241,8 @@ Page({
   
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
+  /*** 生命周期函数--监听页面卸载*/
   onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
   
   },
 
@@ -266,10 +253,36 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
+  /*** 用户点击右上角分享*/
   onShareAppMessage: function () {
   
-  }
+  },
+
+  //通过条形码扫码得到商品信息
+  scan_by_id:function(id)
+  {
+    wx.showLoading({
+      title: '加载中...',
+    })
+    wx.request({
+      url: 'https://route.showapi.com/66-22',
+      data: {
+        showapi_appid: '84916',
+        showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+        code: id,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        wx.hideLoading();
+        var good = res.data.showapi_res_body;
+        that.setData({
+          goodsName: good.goodsName,
+          producer: good.manuName,
+          productCode:good.code
+          })
+      }
+    });
+  },
 })

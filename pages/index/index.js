@@ -1,5 +1,7 @@
 // pages/index/index.js
+const Bmob = require('../../utils/bmob_new.js');
 var that;
+var userid;
 Page({
 
   /**
@@ -63,9 +65,8 @@ Page({
   scan_code:function()
   {
     wx.showActionSheet({
-          itemList: ['扫码出库', '扫码入库', '查看详情'],
+          itemList: ['扫码出库', '扫码入库', '扫码添加产品','查看详情'],
           success(res) {
-            console.log(res.tapIndex)
             that.scan(res.tapIndex);
           },
           fail(res) {
@@ -78,23 +79,33 @@ Page({
   {
     wx.scanCode({
       success(res) {
-        console.log(res)
         var result = res.result;
         var array = result.split("-");
 
         if (type == 0) {
           wx.navigateTo({
-            url: '../delivery/delivery?id=' + array[0],
+            url: '../delivery/delivery?id=' + array[0]+"&type="+array[1],
           })
         } else if (type == 1) {
           wx.navigateTo({
-            url: '../entering/entering?id=' + array[0],
+            url: '../entering/entering?id=' + array[0] + "&type=" + array[1],
           })
         } else if (type == 2) {
+          wx.navigateTo({
+            url: '../goods/goods-add/goods-add?id=' + array[0],
+          })
+        }else if (type == 3) {
           wx.navigateTo({
             url: '../common/goods-dtl/goods-dtl?has_code=false&id=' + array[0],
           })
         }
+      },
+      fail(res)
+      {
+        wx.showToast({
+          title: '未识别到条形码',
+          icon:"none"
+        })
       }
     })
   },
@@ -102,64 +113,55 @@ Page({
   /** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
-    var noticeShow = wx.getStorageSync('noticeShow');
-    this.setData({
-      noticeShow: noticeShow === ''?true : false
-    })
+    userid = wx.getStorageSync("userid");
+    wx.setStorageSync("setting", { "num_enough": 0, "num_insufficient": 0,"num_warning":0});
+    that.getnum_from_bmob();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  /*** 生命周期函数--监听页面初次渲染完成*/
   onReady: function () {
-    var that = this;
-    setTimeout(function () {
-      that.setData({
-        spinShow: false
-      });
-    }, 1000);
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  /*** 生命周期函数--监听页面显示*/
   onShow: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
+  /*** 生命周期函数--监听页面隐藏*/
   onHide: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
+  /*** 生命周期函数--监听页面卸载*/
   onUnload: function () {
   
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  /*** 页面相关事件处理函数--监听用户下拉动作*/
   onPullDownRefresh: function () {
   
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  /*** 页面上拉触底事件的处理函数*/
   onReachBottom: function () {
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
+  /*** 用户点击右上角分享*/
   onShareAppMessage: function () {
   
+  },
+
+  //得到数据从Bmob
+  getnum_from_bmob: function () {
+    const query = Bmob.Query("setting");
+    query.equalTo("parent", "==", userid);
+    query.find().then(res => {
+      if(res.length == 1)
+      {
+        wx.setStorageSync("setting", res[0])
+      }
+    });
   },
 
   skip:function()
@@ -167,5 +169,5 @@ Page({
     wx.navigateTo({
       url: '../mine/upgrade/upgrade',
     })
-  }
+  },
 })

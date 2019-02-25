@@ -17,7 +17,7 @@
       <i-input title="产品名称" value="{{goodsName}}" name="goodsName" placeholder="请输入产品名称" />
       <i-input title="登记编号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记编号" />
       <i-input title="生产厂家" value="{{producer}}" name="producer" placeholder="请输入生产厂家" />
-      <!--<i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="已知产品条码输入已知的，未知则自动生成" />-->
+      <i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="已知产品条码输入已知的，未知则自动生成" />
     </i-panel>
 
     <i-panel title="产品类别（可在 我的->产品类别 里添加）">
@@ -27,7 +27,7 @@
     </i-panel>
 
     <i-panel title="产品规格">
-      <i-input title="包装含量" type="number" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
+      <i-input title="包装含量" type="digit" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
       <i-input title="包装单位" placeholder="请填写包装单位" value="{{packingUnit}}" 
 name="packingUnit"/>
       <!--<i-input title="型号" placeholder="请填写产品型号" value="{{packModel}}" 

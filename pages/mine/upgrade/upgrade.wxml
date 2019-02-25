@@ -15,11 +15,29 @@
 
     <view class="describe">
       <view class="desc-title">
+        <text class="desc-v">v1.1.7 公测版</text>
+        <text class="desc-time">2019.01.15</text>
+      </view>
+      <text class="desc-content">优化升级</text>
+      <view class="desc-list">
+        <text class="desc-list-item">增加输入产品条码以及支持产品自带条形码操作</text>
+        <text class="desc-list-item">营收纪录显示优化</text>
+        <text class="desc-list-item">产品详情显示优化</text>
+        <text class="desc-list-item">扫码操作优化</text>
+        <text class="desc-list-item">支持产品预警发送模板消息</text>
+      </view>
+    </view>
+
+    <view class="describe">
+      <view class="desc-title">
         <text class="desc-v">v1.1.6 公测版</text>
         <text class="desc-time">2019.02.13</text>
       </view>
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
+        <text class="desc-list-item">新增我的设置页面</text>
+        <text class="desc-list-item">支持自定义产品充足和库存不足数量</text>
+        <text class="desc-list-item">增加扫码添加商品选项</text>
         <text class="desc-list-item">操作记录优化</text>
         <text class="desc-list-item">扫码操作优化</text>
         <text class="desc-list-item">协同操作看不到产品图片优化</text>

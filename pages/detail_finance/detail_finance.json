@@ -9,7 +9,6 @@
     "i-icon": "../../component/icon/index",
     "i-spin": "../../component/spin/index",
     "i-cell": "../../component/cell/index",
-    "i-tabs": "../../component/tabs/index",
-    "i-tab": "../../component/tab/index"
+    "i-tabs": "../../component/tabs/index"
   }
 }

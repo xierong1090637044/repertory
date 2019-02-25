@@ -91,7 +91,6 @@ Page({
     wx.showActionSheet({
       itemList: ['查看详情', '编辑产品', '删除产品','取消'],
       success(res) {
-        console.log(res.tapIndex)
         if (res.tapIndex == 0)
         {
           wx.navigateTo({
@@ -211,9 +210,11 @@ Page({
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
     if(type == true){
-      query.greaterThan("reserve", 0);//库存充足
+      var num_enough = wx.getStorageSync("setting").num_enough;
+      query.greaterThan("reserve", num_enough);//库存充足
     }else if(type == false){
-      query.lessThanOrEqualTo("reserve", 0);//库存紧张
+      var num_insufficient = wx.getStorageSync("setting").num_insufficient;
+      query.lessThanOrEqualTo("reserve", num_insufficient);//库存紧张
     }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });

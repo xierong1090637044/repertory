@@ -16,17 +16,17 @@ Page({
   //选择开始日期
   bindDateChange(e) {
     selectd_start_data = e.detail.value + " 00:00:00";
-    that.setData({ selectd_start_data: e.detail.value, current: '1', spinShow: true});
+    that.setData({ selectd_start_data: e.detail.value,  spinShow: true});
     that.gettoday_detail();
-    that.get_operation_detail(1);
+    that.get_operation_detail();
   },
 
   //选择结束日期
   bindDate_endChange(e) {
     selectd_end_data = e.detail.value + " 00:00:00";
-    that.setData({ selectd_end_data: e.detail.value, current: '1', spinShow: true});
+    that.setData({ selectd_end_data: e.detail.value,  spinShow: true});
     that.gettoday_detail();
-    that.get_operation_detail(1);
+    that.get_operation_detail();
   },
 
   //tab改变
@@ -35,9 +35,9 @@ Page({
       current: detail.key,
     });
     if (detail.key == 1) {
-      that.get_operation_detail(1);
+      that.setData({view1:"block",view2:"none"})
     } else {
-      that.get_operation_detail(-1);
+      that.setData({ view1: "none", view2: "block" })
     }
   },
 
@@ -52,7 +52,7 @@ Page({
         total_reserve = total_reserve + res[i].reserve;
         total_money = total_money + res[i].reserve * res[i].costPrice;
       }
-      that.setData({ total_reserve: total_reserve, total_money: total_money, spinShow: true });
+      that.setData({ total_reserve: total_reserve, total_money: total_money, total_products:res.length, spinShow: true });
 
       that.gettoday_detail();
     });
@@ -125,12 +125,11 @@ Page({
   },
 
   //得到操作记录
-  get_operation_detail: function (term) {
+  get_operation_detail: function () {
     const query = Bmob.Query("Bills");
     query.equalTo("userId", "==", wx.getStorageSync("userid"));
     query.equalTo("createdAt", ">=", selectd_start_data);
     query.equalTo("createdAt", "<", selectd_end_data);
-    query.equalTo("type", "==", term);
     query.include("goodsId");
     query.find().then(res => {
       //console.log(res);
@@ -148,6 +147,8 @@ Page({
     that.setData({
       selectd_start_data: selectd_start_data,
       selectd_end_data: selectd_end_data,
+      view1: "block",
+      view2: "none"
     })
   },
 

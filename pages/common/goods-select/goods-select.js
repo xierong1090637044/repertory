@@ -151,9 +151,11 @@ Page({
     query.equalTo("userId", userid);
     if (class_id != null) query.equalTo("goodsClass", class_id);
     if (type == true) {
-      query.greaterThan("reserve", 0);//库存充足
+      var num_enough = wx.getStorageSync("setting").num_enough;
+      query.greaterThan("reserve", num_enough);//库存充足
     } else if(type == false) {
-      query.lessThanOrEqualTo("reserve", 0);//库存紧张
+      var num_insufficient = wx.getStorageSync("setting").num_insufficient;
+      query.lessThanOrEqualTo("reserve", num_insufficient);//库存紧张
     }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
