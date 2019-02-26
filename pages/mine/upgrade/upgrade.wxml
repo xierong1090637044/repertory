@@ -25,6 +25,7 @@
         <text class="desc-list-item">产品详情显示优化</text>
         <text class="desc-list-item">扫码操作优化</text>
         <text class="desc-list-item">支持产品预警发送模板消息</text>
+        <text class="desc-list-item">扫码操作bug修复</text>
       </view>
     </view>
 

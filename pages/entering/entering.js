@@ -127,6 +127,8 @@ Page({
         console.log(res);
         res[0].total_money = res[0].retailPrice;
         res[0].modify_retailPrice = res[0].retailPrice;
+        res[0].modify_retailcostPrice = res[0].costPrice;
+        res[0].goodsId = res[0].objectId;
         code_product.push(res[0]);
         that.setData({
           goods: code_product,
