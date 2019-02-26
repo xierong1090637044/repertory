@@ -1,4 +1,14 @@
 /* pages/goods/goods.wxss */
+.border-bottom
+{
+  border-bottom:0.5px solid#ddd;
+  padding: 0 15px;
+}
+.position_cell
+{
+  position: unset !important;
+  width:100%;
+}
 .item-oper{
     position: absolute;
     top: 0;

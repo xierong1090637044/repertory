@@ -29,6 +29,24 @@ Page({
     length:null,
   },
 
+  //点击预览产品图片
+  show_bigimage:function(e)
+  {
+    var img_path = e.currentTarget.dataset.path;
+    if(img_path == "")
+    {
+      wx.showToast({
+        title: '未上传产品图片',
+        icon:"none"
+      })
+    }else{
+      wx.previewImage({
+        current: img_path, // 当前显示图片的http链接
+        urls: [img_path] // 需要预览的图片http链接列表
+      })
+    }
+  },
+
   //选择库存情况
   bindstock_Change: function (e) {
     if (e.detail.value == "0") {

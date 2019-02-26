@@ -1,5 +1,5 @@
-<i-panel title="我的设置">
+<i-panel title="我的设置（当库存低于预警数值将发送消息通知）">
     <i-input value="{{ value.num_enough }}" type="digit" title="库存充足数量" placeholder="请输入库存充足数量" bind:blur = "set_num_enough"/>
     <i-input value="{{ value.num_insufficient }}" type="digit" title="库存不足数量" placeholder="请输入不足数量" bind:blur = "set_num_insufficient"/>
-    <i-input value="{{ value.num_warning }}" type="digit" title="库存预警数量（当库存低于此数值将发送消息通知）" placeholder="请输入库存预警数量" bind:blur = "set_num_warning"/>
+    <i-input value="{{ value.num_warning }}" type="digit" title="库存预警数量" placeholder="请输入库存预警数量" bind:blur = "set_num_warning"/>
 </i-panel>
