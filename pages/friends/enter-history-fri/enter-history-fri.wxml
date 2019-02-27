@@ -7,10 +7,12 @@
                <view>零售价：￥{{item.retailPrice}}</view>
           </view>
           <view class='pro_list'>
-               <view>数量：X{{item.num}}</view>
+               <view>实际进货价：￥{{item.modify_retailcostPrice}}（X{{item.num}}）</view>
+               <view>总进货价：￥{{item.total_money}}</view>
           </view>
        </view>
     </view>
+    <view class='pro_allmoney'>总计：￥{{all_money}}</view>
 
     <view style='margin-top:20px'>
          <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>

@@ -18,7 +18,7 @@ Page({
   data: {
     spinShow: true,
     goods: [],
-    limitPage: 200,//限制显示条数
+    limitPage: 50,//限制显示条数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了
     totalGoods: [],
@@ -227,9 +227,11 @@ Page({
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
     if (type == true) {
-      query.greaterThan("reserve", 0);//库存充足
+      var num_enough = wx.getStorageSync("setting").num_enough;
+      query.greaterThan("reserve", num_enough);//库存充足
     } else if (type == false) {
-      query.lessThanOrEqualTo("reserve", 0);//库存紧张
+      var num_insufficient = wx.getStorageSync("setting").num_insufficient;
+      query.lessThanOrEqualTo("reserve", num_insufficient);//库存紧张
     } else { }
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
@@ -274,29 +276,6 @@ Page({
     })
   },
 
-  //得到总库存数和总金额
-  loadallGoods: function (class_id) {
-    var that = this;
-    var total_reserve = 0;
-    var total_money = 0;
-    var Goods = Bmob.Object.extend("Goods");
-    var query = new Bmob.Query(Goods);
-    query.equalTo("userId", userid);
-    if (class_id != null) query.equalTo("goodsClass", class_id);
-    query.find({
-      success: function (res) {
-        that.getclass_list();
-
-        for (var i = 0; i < res.length; i++) {
-          total_reserve = total_reserve + res[i].get("reserve");
-          total_money = total_money + res[i].get("reserve") * res[i].get("retailPrice");
-        }
-        that.setData({ total_reserve: total_reserve, total_money: total_money });
-        console.log(total_reserve, total_money);
-      }
-    })
-  },
-
   //数据存储
   handleData: function (data) {
     let page = this.data.currentPage + 1;
@@ -320,14 +299,13 @@ Page({
       that.setData({ limitPage: that.data.limitPage + that.data.limitPage, })
       that.loadGoods(type, null, select_id);
     }
-
   },
 
   //重置
   handleResetData: function () {
     this.setData({
       currentPage: 0,
-      limitPage: 200,
+      limitPage: 50,
       goods: [],
       isEnd: false,
       isEmpty: false,
@@ -363,16 +341,14 @@ Page({
   },
 
   //点击新增产品
-  goto_addPro:function()
-  {
+  goto_addPro: function () {
     var friend_addproUrl = wx.getStorageSync("friend_addproUrl");
-    if(friend_addproUrl == "")
-    {
+    if (friend_addproUrl == "") {
       wx.showToast({
         title: '请联系对方授权',
-        icon:"none",
+        icon: "none",
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: friend_addproUrl,
       })
@@ -384,8 +360,6 @@ Page({
     userid = wx.getStorageSync("friendId");
     this.handleRefresh();
     that = this;
-    //that.loadallGoods();
-    
   },
 
   /**

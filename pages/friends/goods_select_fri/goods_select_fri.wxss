@@ -2,4 +2,5 @@
 {
   height:calc(100vh - 158px);
   overflow-y:scroll !important;
+  background-color: #fff;
 }
