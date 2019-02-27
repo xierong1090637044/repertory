@@ -84,6 +84,49 @@ Page({
 
   //产品点击
   handleDetial: function (e) {
+    var friend_addproUrl = wx.getStorageSync("friend_addproUrl");
+    if (friend_addproUrl == "") {
+      wx.showToast({
+        title: '请联系对方授权',
+        icon: "none",
+      })
+    } else {
+      var item = e.target.dataset.item;
+      now_product = item;
+      wx.setStorageSync('item', JSON.stringify(item));
+
+      wx.showActionSheet({
+        itemList: ['查看详情', '查看产品图', '编辑产品', '删除产品', '取消'],
+        success(res) {
+          if (res.tapIndex == 0) {
+            wx.navigateTo({
+              url: '/pages/common/goods-dtl/goods-dtl?type=1'
+            });
+          } else if (res.tapIndex == 1) {
+            if (item.goodsIcon == "") {
+              wx.showToast({
+                title: '未上传产品图',
+                icon: "none"
+              })
+            } else {
+              wx.previewImage({
+                current: item.goodsIcon, // 当前显示图片的http链接
+                urls: [item.goodsIcon] // 需要预览的图片http链接列表
+              })
+            }
+          } else if (res.tapIndex == 2) {
+            that.handleEditGoods();
+          } else if (res.tapIndex == 3) {
+            that.handleDelGoods();
+          } else if (res.tapIndex == 4) {
+
+          }
+        },
+        fail(res) {
+          console.log(res.errMsg)
+        }
+      })
+    }
   },
 
   handleEditGoods: function (e) {

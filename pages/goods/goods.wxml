@@ -27,11 +27,6 @@
 </view>
 <!--/.搜索-->
 
-<!--<i-tabs current="{{ current }}" bindchange="handleChange">
-      <i-tab key="1" title="库存有余"></i-tab>
-      <i-tab key="2" title="库存紧缺"></i-tab>
-</i-tabs>-->
-
 <!--*筛选器*-->
   <view class='select'>
     <view class="section">
