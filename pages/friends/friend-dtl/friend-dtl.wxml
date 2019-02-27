@@ -41,7 +41,7 @@
             <view slot="close">关闭</view>
         </i-switch>
     </i-cell>
-    <i-cell title="添加商品" i-class="border-b">
+    <i-cell title="商品管理" i-class="border-b">
         <i-switch value="{{switchaddProducts}}" size="large" bind:change="handleswitchaddProducts" slot="footer">
             <view slot="open">授权</view>
             <view slot="close">关闭</view>

@@ -4,6 +4,7 @@ var that;
 var input_money;
 var custom_id;
 var friendId;
+var userId = wx.getStorageSync("userid");
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -21,7 +22,6 @@ Page({
     query.order("custom_type");
     query.equalTo("parent", "==", id);
     query.find().then(res => {
-      console.log(res);
       if(res.length == 0)
       {
         that.setData({
@@ -44,7 +44,7 @@ Page({
     var name = e.detail.value;
     if(name == '')
     {
-      that.getcustom_list();
+      that.getcustom_list(userId);
     }else{
       const query = Bmob.Query("customs");
       query.equalTo("custom_name", "==", name);
@@ -144,7 +144,7 @@ Page({
           query.save().then(res => {
             console.log(res)
             wx.hideLoading();
-            that.getcustom_list();
+            that.getcustom_list(userId);
             wx.showToast({
               title: '收款成功',
             });

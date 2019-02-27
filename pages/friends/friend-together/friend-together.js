@@ -1,7 +1,7 @@
 // pages/common/friend-dtl/friend-dtl.js
 const Bmob = require('../../../utils/bmob.js')
 var config = require('../../../utils/config.js')
-var userid = '';
+var userid = wx.getStorageSync("userid");
 var friend = {}
 Page({
   /**
@@ -94,7 +94,6 @@ Page({
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
-    userid = wx.getStorageSync("userid");
     this.fetchFriendInfo();
     this.getauth();
   },

@@ -57,6 +57,6 @@
     </button>
 </view>
 
-<i-modal title="好友账号Id" visible="{{visible}}" bind:ok="handlegetId" bind:cancel="handleClose">
+<i-modal title="好友账号Id（我的->我的账号）" visible="{{visible}}" bind:ok="handlegetId" bind:cancel="handleClose">
     <i-input placeholder="请输入账号id" bind:change="getstaffId"/>
 </i-modal>
