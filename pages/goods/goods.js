@@ -89,7 +89,7 @@ Page({
     wx.setStorageSync('item', JSON.stringify(item));
 
     wx.showActionSheet({
-      itemList: ['查看详情', '编辑产品', '删除产品','取消'],
+      itemList: ['查看详情', '查看产品图','编辑产品', '删除产品','取消'],
       success(res) {
         if (res.tapIndex == 0)
         {
@@ -98,11 +98,24 @@ Page({
           });
         } else if (res.tapIndex == 1)
         {
-          that.handleEditGoods();
+          if (item.goodsIcon == "")
+          {
+            wx.showToast({
+              title: '未上传产品图',
+              icon:"none"
+            })
+          }else{
+            wx.previewImage({
+              current: item.goodsIcon, // 当前显示图片的http链接
+              urls: [item.goodsIcon] // 需要预览的图片http链接列表
+            })
+          }
         } else if (res.tapIndex == 2) {
-          that.handleDelGoods();
+          that.handleEditGoods();
         } else if (res.tapIndex == 3) {
-          
+          that.handleDelGoods();
+        } else if (res.tapIndex == 4){
+
         }
       },
       fail(res) {
