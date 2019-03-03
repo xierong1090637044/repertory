@@ -23,6 +23,7 @@ Page({
     costPrice: '0',//进货价格
     retailPrice: '0',//零售价格
     goodsClass:'',//产品类别
+    product_info:'',//商品简介
     reserve:0,
     loading:false,
     image:"none",
@@ -121,6 +122,7 @@ Page({
                         goods.set("costPrice", goodsForm.costPrice);
                         goods.set("retailPrice", goodsForm.retailPrice);
                         goods.set("packingUnit", goodsForm.packingUnit);
+                        goods.set("product_info", goodsForm.product_info);
                         //goods.set("packModel", goodsForm.packModel);
                         goods.set("reserve", Number(goodsForm.reserve));
                         goods.save(null, {
@@ -153,6 +155,7 @@ Page({
                                         packingUnit: "",
                                         costPrice: '0',
                                         retailPrice: '0',
+                                        product_info: '',//商品简介
                                         reserve: 0,
                                         loading: false
                                       })
@@ -177,6 +180,7 @@ Page({
                                     packingUnit: "",
                                     costPrice: '0',
                                     retailPrice: '0',
+                                    product_info: '',//商品简介
                                     reserve: 0,
                                     loading: false
                                   })

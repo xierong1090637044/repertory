@@ -103,7 +103,7 @@ Page({
   getcode_product: function (id,type) {
     var code_product = [];
 
-    if(type == "true")
+    if(type == "false")
     {
       const query = Bmob_new.Query('Goods');
       query.get(id).then(res => {

@@ -15,8 +15,20 @@
 
     <view class="describe">
       <view class="desc-title">
+        <text class="desc-v">v1.1.8 公测版</text>
+        <text class="desc-time">2019.03.03</text>
+      </view>
+      <text class="desc-content">优化升级</text>
+      <view class="desc-list">
+        <text>扫码bug修复</text>
+        <text>增加产品简介选项</text>
+      </view>
+    </view>
+
+    <view class="describe">
+      <view class="desc-title">
         <text class="desc-v">v1.1.7 公测版</text>
-        <text class="desc-time">2019.01.15</text>
+        <text class="desc-time">2019.02.15</text>
       </view>
       <text class="desc-content">优化升级</text>
       <view class="desc-list">

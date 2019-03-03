@@ -11,6 +11,7 @@
           extra="当前库存：{{goodsReserve.reserve}}"
           full="true" thumb="{{goodsReserve.goodsIcon}}">
       <view slot="content">
+        <view wx:if="{{goodsReserve.product_info !=''}}">商品简介：{{goodsReserve.product_info}}</view>
         <view class='content_model'>
            <view wx:if="{{goodsReserve.regNumber !=''}}">登记编号：{{goodsReserve.regNumber}}</view>
            <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
