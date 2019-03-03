@@ -1,5 +1,6 @@
 {
-  "pages": [ 
+  "pages": [
+    "pages/goods/goods-add/goods-add",
     "pages/index/index",
     "pages/detail_finance/detail_finance",
     "pages/producer/producer",
@@ -15,7 +16,7 @@
     "pages/entering/enter-history/enter-history",
     "pages/goods/goods-edit/goods-edit",
     "pages/goods/goods",
-    "pages/goods/goods-add/goods-add",
+    
     "pages/mine/mine",
     "pages/mine/my_setting/my_setting",
     "pages/mine/account/account",

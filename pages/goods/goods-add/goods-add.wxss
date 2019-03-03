@@ -52,3 +52,9 @@
   height: calc(100vh - 80px);
   overflow-y: scroll;
 }
+.collapse-item-title
+{
+  line-height: 44px;
+  color: #f30;
+  font-weight: bold；
+}

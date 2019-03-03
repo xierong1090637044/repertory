@@ -23,6 +23,8 @@ Page({
     costPrice: '0',//进货价格
     retailPrice: '0',//零售价格
     goodsClass:'',//产品类别
+    reduced_Unit: "",//换算单位
+    conversion_Ratio: "",//换算比例
     reserve:0,
     loading:false,
     image:"none",
@@ -121,6 +123,8 @@ Page({
                         goods.set("costPrice", goodsForm.costPrice);
                         goods.set("retailPrice", goodsForm.retailPrice);
                         goods.set("packingUnit", goodsForm.packingUnit);
+                        goods.set("reduced_Unit", goodsForm.reduced_Unit);
+                        goods.set("conversion_Ratio", Number(goodsForm.conversion_Ratio));
                         //goods.set("packModel", goodsForm.packModel);
                         goods.set("reserve", Number(goodsForm.reserve));
                         goods.save(null, {
@@ -153,6 +157,8 @@ Page({
                                         packingUnit: "",
                                         costPrice: '0',
                                         retailPrice: '0',
+                                        reduced_Unit: "",//换算单位
+                                        conversion_Ratio: "",//换算比例
                                         reserve: 0,
                                         loading: false
                                       })
@@ -177,6 +183,8 @@ Page({
                                     packingUnit: "",
                                     costPrice: '0',
                                     retailPrice: '0',
+                                    reduced_Unit: "",//换算单位
+                                    conversion_Ratio: "",//换算比例
                                     reserve: 0,
                                     loading: false
                                   })

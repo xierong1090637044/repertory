@@ -43,6 +43,18 @@ name="packModel"/>-->
       <i-input title="现有库存" type="digit" value="{{reserve}}" name="reserve" placeholder="请输入现有库存" />
     </i-panel>
 
+    <view class="caption-wrap">
+
+      <i-collapse name="{{name}}">
+        <i-collapse-item title="更多信息(换算单位用于出入库单位不一致的情况)" name="name1" i-class-title="collapse-item-title">
+            <view slot="content">
+                <i-input title="换算单位" type="text" value="{{reduced_Unit}}" name="reduced_Unit" placeholder="请输入换算单位" />
+                <i-input title="换算比例" type="digit" value="{{conversion_Ratio}}" name="conversion_Ratio" placeholder="请输入换算比例" />
+            </view>
+        </i-collapse-item>
+      </i-collapse>  
+    </view>
+
    </view>
     <view class='btn-group'>
       <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
