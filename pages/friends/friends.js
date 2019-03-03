@@ -37,7 +37,8 @@ Page({
   handleFriendAuth: function (e) {
     wx.showLoading({ title: '加载中...' })
     var friendId = e.currentTarget.dataset.friendid
-    wx.setStorageSync('friendId', friendId)
+    wx.setStorageSync('friendId', friendId);
+    wx.setStorageSync('friendopenid', e.currentTarget.dataset.openid)
     wx.navigateTo({
       url: '/pages/friends/friend-together/friend-together'
     });
@@ -173,6 +174,7 @@ Page({
         for (var i = 0; i < res.length; i++) {
           var tempFriend = {}
           tempFriend.friendId = res[i].get("friendId").objectId;
+          tempFriend.openid = res[i].get("friendId").openid;
           tempFriend.userName = res[i].get("friendId").username;
           tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
           tempFriend.id = res[i].id || '';
@@ -257,6 +259,7 @@ Page({
           var tempFriend = {}
           tempFriend.friendId = res[i].get("friendId").objectId;
           tempFriend.userName = res[i].get("friendId").username;
+          tempFriend.openid = res[i].get("friendId").openid;
           tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
           tempFriend.id = res[i].id || '';
           tempFriend.status = res[i].get("status") || 0;

@@ -40,7 +40,7 @@
      </i-cell>
     </view>
     <view slot="button" class="i-swipeout-button-group">
-      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}" bindtap="handleFriendAuth" >协同管理
+      <view class="i-swipeout-button bg-info" data-friendid="{{item.friendId}}"  data-openid="{{item.openid}}" bindtap="handleFriendAuth" >协同管理
       </view>
       <view class="i-swipeout-button bg-danger" data-friendid="{{item.friendId}}" bindtap="handleFriendDtl" >权限设置
       </view>

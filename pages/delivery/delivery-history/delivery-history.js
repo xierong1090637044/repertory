@@ -81,8 +81,6 @@ Page({
   },
 
   formSubmit(e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.formId)
-
     var timestamp = Date.parse(new Date());
     timestamp = timestamp / 1000; 
     var n = timestamp * 1000;
@@ -144,7 +142,7 @@ Page({
               "value": "出库"
             },
             "keyword5": {
-              "value": Y + "-" + M + "-" + D + "-" + h + "-" + m
+              "value": Y + "-" + M + "-" + D + " " + h + ":" + m
             }
           }
           , "emphasis_keyword": ""

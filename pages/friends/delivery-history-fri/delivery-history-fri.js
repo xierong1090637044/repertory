@@ -76,7 +76,19 @@ Page({
   },
 
   //确认出库点击
-  confrim_delivery: function () {
+  formSubmit(e) {
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    var n = timestamp * 1000;
+    var date = new Date(n);
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var h = date.getHours();
+    var m = date.getMinutes();
+
+    var formId = e.detail.formId;
+    
     that.setData({ button: true });
     var operation_ids = [];
 
@@ -104,6 +116,66 @@ Page({
         tempBills.set('type', -1);
 
         billsObj.push(tempBills)
+
+        let modelData = {
+          "touser": wx.getStorageSync("openid"),
+          "template_id": "o0i_R4TsEvYaJ2OFU0G9JhwKleSDnSp3auSCCg-lhe8",
+          "page": "pages/order_history/order_history",
+          "form_id": formId,
+          "data": {
+            "keyword1": {
+              "value": that.data.goods[i].goodsName,
+            },
+            "keyword2": {
+              "value": that.data.goods[i].reserve
+            },
+            "keyword3": {
+              "value": num
+            },
+            "keyword4": {
+              "value": "出库"
+            },
+            "keyword5": {
+              "value": Y + "-" + M + "-" + D + "-" + h + "-" + m
+            }
+          }
+          , "emphasis_keyword": ""
+        }
+
+        Bmob_new.sendWeAppMessage(modelData).then(function (response) {
+          let modelData = {
+            "touser": wx.getStorageSync("friendopenid"),
+            "template_id": "o0i_R4TsEvYaJ2OFU0G9JhwKleSDnSp3auSCCg-lhe8",
+            "page": "pages/order_history/order_history",
+            "form_id": formId,
+            "data": {
+              "keyword1": {
+                "value": that.data.goods[i].goodsName,
+              },
+              "keyword2": {
+                "value": that.data.goods[i].reserve
+              },
+              "keyword3": {
+                "value": num
+              },
+              "keyword4": {
+                "value": "出库"
+              },
+              "keyword5": {
+                "value": Y + "-" + M + "-" + D + " " + h + ":" + m
+              }
+            }
+            , "emphasis_keyword": ""
+          }
+
+          Bmob_new.sendWeAppMessage(modelData).then(function (response) {
+            console.log(response);
+          }).catch(function (error) {
+            console.log(error);
+          });
+        }).catch(function (error) {
+          console.log(error);
+        });
       }
     }
     Bmob.Object.saveAll(objects).then(function (objects) {
