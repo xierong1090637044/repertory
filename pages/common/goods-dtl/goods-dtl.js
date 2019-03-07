@@ -5,6 +5,8 @@ const Bmob_new = require('../../../utils/bmob_new.js')
 var _ = require('../../../utils/we-lodash.js');
 var config = require('../../../utils/config.js');
 var that;
+
+var product_id;
 Page({
 
   /**
@@ -13,6 +15,7 @@ Page({
   data: {
     current: '1',
     view2:"none",
+    view3: "none",
     spinShow: true,
     packingUnits: config.units,
     goodsReserve: {},
@@ -27,8 +30,13 @@ Page({
     });
     if (detail.key == 1) {
       that.setData({view1:"block",view2:"none"})
-    } else {
-      that.setData({ view1: "none", view2: "block" })
+    } else if(detail.key == 2) {
+      that.setData({ view1: "none", view2: "block",view3:"none" });
+      that.get_opera_detail(product_id, false);
+      
+    } else if (detail.key == 3) {
+      that.setData({ view1: "none", view2: "block" });
+      that.get_opera_detail(product_id, true);
     }
   },
 
@@ -63,7 +71,6 @@ Page({
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
-    console.log(options);
     that = this;
     var flag = options.type;
     var title = flag==1?'产品详情':'库存详情';
@@ -73,6 +80,7 @@ Page({
 
     if(options.id !=null )
     {
+      product_id = options.id;
       const query = Bmob_new.Query('Goods');
       //const query1 = query.equalTo("productCode", "==", options.id);
       query.equalTo("objectId", "==", options.id);
@@ -80,14 +88,15 @@ Page({
       query.find().then(res => {
         console.log(res)
         that.setData({ goodsReserve: res[0] });
-        that.get_opera_detail(res[0].objectId);
+        
       })
     }else{
       var item = JSON.parse(wx.getStorageSync('item'));
+      product_id = item.goodsId;
+
       this.setData({
         goodsReserve: item
       })
-      that.get_opera_detail(item.goodsId);
     }
   },
 
@@ -105,28 +114,33 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  //得到产品条形码
-  getsinglecode:function(content)
-  {
-    
-  },
-
   //得到该产品的操作详情
-  get_opera_detail:function(id)
+  get_opera_detail:function(id,is_today)
   {
     const query = Bmob_new.Query("Bills");
     query.order("-createdAt");
     query.equalTo("goodsId", "==", id);
+    if (is_today) query.equalTo("createdAt", ">=", that.getDay(0));
     query.find().then(res => {
-      console.log(res);
       that.setData({ detail: res});
+
+      if(is_today)
+      {
+        var in_reserve_num = 0;
+        var out_reserve_num = 0;
+
+        for (let item of res) {
+          if(item.type == 1)
+          {
+            in_reserve_num = item.num + in_reserve_num;
+          }else{
+            out_reserve_num = item.num + out_reserve_num;
+          }
+        }
+
+        that.setData({ in_reserve_num: in_reserve_num, out_reserve_num: out_reserve_num,view3:"flex"})
+      }
+      
     });
   },
 

@@ -26,7 +26,7 @@
     </i-panel>
     
     <i-panel title="产品规格" style="flex:1">
-      <i-input title="包装含量" type="number" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
+      <i-input title="包装含量" type="digit" value="{{packageContent}}" name="packageContent" placeholder="请输入包装含量" />
         <i-input title="包装单位" placeholder="请输入包装单位" name="packingUnit" value="{{packingUnit}}"  />
     </i-panel>
     <i-panel title="产品价格">

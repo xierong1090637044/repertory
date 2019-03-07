@@ -6,6 +6,8 @@
     "i-cell": "../../../component/cell/index",
     "i-button": "../../../component/button/index",
     "i-icon": "../../../component/icon/index",
-    "i-message": "../../../component/message/index"
+    "i-message": "../../../component/message/index",
+    "i-collapse": "../../../component/collapse/index",
+    "i-collapse-item": "../../../component/collapse-item/index"
   }
 }

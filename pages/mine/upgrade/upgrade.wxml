@@ -22,6 +22,7 @@
       <view class="desc-list">
         <text>扫码bug修复</text>
         <text>增加产品简介选项</text>
+        <text>产品详情新增当日出入库新增详情</text>
       </view>
     </view>
 

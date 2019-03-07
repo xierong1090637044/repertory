@@ -2,7 +2,8 @@
 <view>
   <i-tabs current="{{ current }}" bindchange="handleChange">
     <i-tab key="1" title="产品详情"></i-tab>
-    <i-tab key="2" title="出入库记录"></i-tab>
+    <i-tab key="2" title="全部"></i-tab>
+    <i-tab key="3" title="当日"></i-tab>
   </i-tabs>
 
   <view style='display:{{view1}}'>
@@ -37,6 +38,10 @@
 
   <view style='display:{{view2}}'>
       <view class='all_list' wx:if="{{detail !=''}}">
+          <view class='today_reserve_detail' style='display:{{view3}}'>
+              <view>当日出库数量：{{out_reserve_num}}</view>
+              <view>当日入库数量：{{in_reserve_num}}</view>
+          </view>
           <view  wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
               <view>
                   <view>{{item.createdAt}}</view>
