@@ -59,7 +59,8 @@ Page({
       retailPrice: goods.retailPrice,
       reserve: goods.reserve,
       class_select_text: (goods.class_text.class_text == null) ? null : goods.class_text.class_text,
-      goodsClass:goods.class_text.objectId
+      goodsClass:goods.class_text.objectId,
+      product_info:goods.product_info
     })
   },
 
@@ -110,6 +111,7 @@ Page({
                     results.set("retailPrice", goodsForm.retailPrice);
                     results.set("packingUnit", goodsForm.packingUnit);
                     results.set("reserve", Number(goodsForm.reserve));
+                    results.set("product_info", goodsForm.product_info);
                     results.save(null, {
                       success: function (result) {
                         console.log("修改产品成功");

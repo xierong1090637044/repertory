@@ -1,4 +1,9 @@
 /* pages/goods/goods-edit/goods-edit.wxss */
+.collapse-item-title
+{
+  line-height: 45px;
+  color: #f30;
+}
 .goods-container{
   position: relative;
   flex: 1;

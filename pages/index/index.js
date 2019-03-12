@@ -18,6 +18,14 @@ Page({
         url: '/pages/common/goods-select/goods-select?type=delivery'
       },
       {
+        name: '退货入库', icon: '../../images/index/return_goods.png',
+        url: '/pages/common/goods-select/goods-select?type=returing'
+      },
+      {
+        name: '库存盘点', icon: '../../images/index/stocking.png',
+        url: '/pages/goods/goods'
+      },
+      {
         name: '我的产品', icon: '../../images/index/goods.png',
         url: '/pages/goods/goods'
       },
@@ -29,6 +37,9 @@ Page({
         name: '供货商', icon: '../../images/index/mine.png',
         url: '/pages/producer/producer',
       },*/
+      
+    ],
+    secondaryModules: [
       {
         name: '盈收记录', icon: '../../images/index/stock.png',
         url: '/pages/detail_finance/detail_finance'
@@ -37,8 +48,6 @@ Page({
         name: '操作记录', icon: '../../images/index/order_history.png',
         url: '/pages/order_history/order_history'
       },
-    ],
-    secondaryModules: [
       {
         name: '财务报表', icon: '../../images/index/finance.png',
         url: '/pages/finance/finance'

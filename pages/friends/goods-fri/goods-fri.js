@@ -269,6 +269,7 @@ Page({
           tempGoods.costPrice = res[i].get("costPrice") || 0;
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.class_text = res[i].get("goodsClass") || '';
+          tempGoods.product_info = res[i].get("product_info") || '';
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);

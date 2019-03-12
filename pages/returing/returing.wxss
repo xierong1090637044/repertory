@@ -1,0 +1,28 @@
+/* pages/delivery/delivery.wxss */
+.del{
+  display:inline-block;
+  float:right;
+  padding:1px 5px;
+  border-radius: 3px;
+  background: #ed3f14;
+  color: #fff;
+}
+.extra
+{
+  height: calc(100vh - 80px);
+  overflow: scroll;
+}
+.number{
+  display: inline-block
+}
+.number view {
+  line-height: 10px!important;
+  min-width: 30px!important
+}
+.number input {
+  height: 20px!important;
+}
+.confrim_button
+{
+  width: 60%;
+}

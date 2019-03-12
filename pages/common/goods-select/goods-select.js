@@ -115,6 +115,8 @@ Page({
       }
       else if (curModule == 'delivery'){
         url = '/pages/delivery/delivery'
+      } else if (curModule == 'returing') {
+        url = '/pages/returing/returing'
       }
       wx.navigateTo({
         url: url

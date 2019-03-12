@@ -43,3 +43,12 @@
   display: flex;
   justify-content: space-between;
 }
+
+.color1
+{
+  color: #f30;
+}
+.color2
+{
+  color: #2ca879;
+}

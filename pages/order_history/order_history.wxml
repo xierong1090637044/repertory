@@ -26,6 +26,7 @@
           </view>
        </view>
        <view wx:if='{{item.type == -1}}' class='order_out'>出库</view>
+       <view wx:elif='{{item.type == 2}}' class='order_out'>退货</view>
        <view wx:else class='order_get' >入库</view>
       </view>
    </view>

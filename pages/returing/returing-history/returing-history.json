@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "退货入库操作记录",
+  "usingComponents": {
+    "i-panel": "../../../component/panel/index",
+    "i-input": "../../../component/input/index"
+  }
+}

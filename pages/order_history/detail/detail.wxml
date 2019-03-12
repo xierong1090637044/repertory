@@ -24,6 +24,12 @@
         <i-input title="欠款" value="{{detail.debt}}" i-class='real_color' disabled="true" wx:if="{{detail.debt > 0}}"/>
       </i-panel>
     </view>
+    <view wx:elif="{{detail.type == 2}}">
+      <i-panel title="退货明细">
+        <i-input  wx:if="{{detail.custom !=null}}" title="客户姓名：" value="{{detail.custom.custom_name}}" disabled="true"/>
+        <i-input title="实际付款" value="{{detail.real_money == null ?'未填写':detail.real_money}}" i-class='real_color' disabled="true"/>
+      </i-panel>
+    </view>
 
     <view style='margin-top:20px' class='detail_bottom'>
          <view style='display:flex;border-bottom:1px solid#ddd'>
