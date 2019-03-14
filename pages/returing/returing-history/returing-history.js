@@ -129,11 +129,11 @@ Page({
       console.log("批量更新成功", objects);
       //插入单据
       Bmob.Object.saveAll(billsObj).then(function (res) {
-        console.log("批量新增单据成功", res);
+        //console.log("批量新增单据成功", res);
         for (var i = 0; i < res.length; i++) {
           operation_ids.push(res[i].id);
           if (i == (res.length - 1)) {
-            console.log("批量新增单据成功", res);
+            //console.log("批量新增单据成功", res);
             var currentUser = Bmob.User.current();
             const relation = Bmob_new.Relation('Bills'); // 需要关联的表
             const relID = relation.add(operation_ids);
@@ -149,32 +149,16 @@ Page({
             query.set("master", poiID);
             query.set('goodsName', that.data.goods[0].goodsName);
             query.set('real_money', Number(that.data.real_money));
-            query.set('debt', that.data.all_money - Number(that.data.real_money));
 
             if (that.data.custom.objectId != null) {
               const custom = Bmob_new.Pointer('customs');
               const customID = custom.set(that.data.custom.objectId);
               query.set("custom", customID);
-
-              //如果客户有欠款
-              if ((that.data.all_money - Number(that.data.real_money)) > 0) {
-                const query = Bmob_new.Query('customs');
-                query.get(that.data.custom.objectId).then(res => {
-                  var debt = (res.debt == null) ? 0 : res.debt;
-                  debt = debt + (that.data.all_money - Number(that.data.real_money));
-                  console.log(debt);
-                  const query = Bmob_new.Query('customs');
-                  query.get(that.data.custom.objectId).then(res => {
-                    res.set('debt', debt)
-                    res.save()
-                  })
-                })
-              }
             }
 
             query.set("all_money", that.data.all_money);
             query.save().then(res => {
-              console.log("添加操作历史记录成功", res);
+              //console.log("添加操作历史记录成功", res);
               wx.removeStorageSync("custom");//移除这个缓存
               wx.showToast({
                 title: '产品退货成功',

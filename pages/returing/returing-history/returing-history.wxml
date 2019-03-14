@@ -15,10 +15,8 @@
      <view class='pro_allmoney'>总计：￥{{all_money}}</view>
 
     <form bindsubmit="formSubmit" report-submit="true">
-    <i-panel title="退货明细（用于记录客户退货有没有退款的情况）">
+    <i-panel title="退货明细（用于记录客户退货的情况）">
       <i-input title="客户姓名" value="{{custom.custom_name}}" placeholder="选择客户" disabled="true" bindtap='choose_custom'/>
-      <i-input title="实际应付" value="{{all_money}}"  disabled="true"/>
-      <i-input title="实际付款（可修改）" value="{{real_money}}" bindchange='getreal_money'/>
     </i-panel>
 
     <view style='margin-top:20px'>
