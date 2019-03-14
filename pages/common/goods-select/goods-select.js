@@ -14,7 +14,7 @@ Page({
 
   /*** 页面的初始数据*/
   data: {
-    spinShow: true,
+    spinShow: false,
     current: [],
     currGoods: [],
     goods: [],
@@ -22,7 +22,7 @@ Page({
     isEmpty: false,
     // 搜索
     inputShowed: false,
-    limitPage:50,//限制条数
+    limitPage:200,//限制条数
     inputVal: "",
     currenttab: '1',
     length: null,
@@ -147,7 +147,7 @@ Page({
 
   loadGoods: function (type, content, class_id) {
     var that = this;
-    that.setData({ spinShow: true });
+    that.setData({ spinShow: false });
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);

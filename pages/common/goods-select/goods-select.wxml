@@ -57,7 +57,7 @@
     <text>暂无数据</text>
   </view>
 
-  <scroll-view wx:else class='wrap_overflow' scroll-y="true" bindscrolltolower = "loadMore" lower-threshold="20px">
+  <scroll-view wx:else class='wrap_overflow' scroll-y="true" bindscrolltolower = "loadMore" lower-threshold="0">
     <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
       <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
       </i-checkbox>

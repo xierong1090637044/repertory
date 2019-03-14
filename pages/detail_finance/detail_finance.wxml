@@ -100,7 +100,7 @@
           <text>(成本价：￥{{item.goodsId.costPrice}})</text>
         </view>
 
-        <view wx:if="{{item.type == 1}}">操作类型：<text class='color2'>入库{{item.num}}</text></view>
+        <view wx:if="{{item.type == 1}}">操作类型：<text class='color2'>入库</text></view>
         <view wx:elif="{{item.type == -1}}">操作类型：<text class='color2'>出库</text></view>
         <view wx:elif="{{item.type == 2}}">操作类型：<text class='color1'>退货</text></view>
       </view>

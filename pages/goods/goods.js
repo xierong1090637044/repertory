@@ -10,15 +10,17 @@ var that;
 var type;//库存情况
 var class_array;//产品类别
 var select_id = null;//类别选择的id
+var bad_num = null;//货损数量
+var beizhu_text = null;//备注信息
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    spinShow:true,
+    spinShow:false,
     goods:[],
-    limitPage: 50,//限制显示条数
+    limitPage: 200,//限制显示条数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了
     totalGoods: [],
@@ -27,6 +29,8 @@ Page({
     inputVal: "",
     current: '1',
     length:null,
+    visible: false,
+    now_goodsName:""
   },
 
   //选择库存情况
@@ -89,14 +93,16 @@ Page({
     wx.setStorageSync('item', JSON.stringify(item));
 
     wx.showActionSheet({
-      itemList: ['查看详情', '查看产品图','编辑产品', '删除产品','取消'],
+      itemList: ['查看详情', '货损','查看产品图','编辑产品', '删除产品','取消'],
       success(res) {
         if (res.tapIndex == 0)
         {
           wx.navigateTo({
             url: '/pages/common/goods-dtl/goods-dtl?type=1'
           });
-        } else if (res.tapIndex == 1)
+        } else if (res.tapIndex == 1) {
+          that.setData({ visible: true, now_goodsName: now_product.goodsName})
+        } else if (res.tapIndex == 2)
         {
           if (item.goodsIcon == "")
           {
@@ -110,11 +116,11 @@ Page({
               urls: [item.goodsIcon] // 需要预览的图片http链接列表
             })
           }
-        } else if (res.tapIndex == 2) {
-          that.handleEditGoods();
         } else if (res.tapIndex == 3) {
+          that.handleEditGoods();
+        } else if (res.tapIndex == 4) {
           that.handleDelGoods();
-        } else if (res.tapIndex == 4){
+        } else if (res.tapIndex == 5){
 
         }
       },
@@ -218,7 +224,7 @@ Page({
 
   loadGoods:function(type,content,class_id){
     var that = this;
-    that.setData({spinShow:true});
+    that.setData({spinShow:false});
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
@@ -304,13 +310,13 @@ Page({
   handleResetData:function(){
     this.setData({
       currentPage: 0,
-      limitPage: 50,
+      limitPage: 200,
       goods: [],
       isEnd: false,
       isEmpty: false,
       inputVal:'',
       inputShowed:false,
-      spinShow: true,
+      spinShow: false,
       current: '1',
       selectd_stock:"库存情况",
       stock:["库存充足","库存不足"],
@@ -402,4 +408,26 @@ Page({
   onShareAppMessage: function () {
   
   },
+
+  handleClose:function()
+  {
+    that.setData({visible:false})
+  },
+
+  //得到货损数量
+  get_badnum:function(e)
+  {
+    bad_num = e.detail.detail.value;
+  },
+
+  //得到备注信息
+  get_beizhu:function(e)
+  {
+    beizhu_text = e.detail.detail.value;
+  },
+
+  handleadd_badnum:function()
+  {
+    console.log(bad_num,beizhu_text)
+  }
 })
