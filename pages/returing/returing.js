@@ -43,7 +43,7 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '确认将商品出库？',
+        content: '确认将商品退货入库？',
         confirmText: '确认',
         success: function (res) {
           if (res.confirm) {

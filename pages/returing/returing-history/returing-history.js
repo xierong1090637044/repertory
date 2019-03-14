@@ -177,7 +177,7 @@ Page({
               console.log("添加操作历史记录成功", res);
               wx.removeStorageSync("custom");//移除这个缓存
               wx.showToast({
-                title: '产品出库成功',
+                title: '产品退货成功',
                 icon: 'success',
                 success: function () {
                   setTimeout(() => {

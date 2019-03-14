@@ -22,6 +22,6 @@
 
 <view class='btn-group' bindtap='handleDelivery'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      确认入库
+      确认退货入库
     </button>
 </view>
