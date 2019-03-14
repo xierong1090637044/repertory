@@ -10,34 +10,13 @@ Page({
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
-    var real_should_get = 0;
-    var real_have_get = 0;
-
-    console.log(options.id);
 
     const query = Bmob.Query("bad_goods");
     query.equalTo("goods", "==", options.id);
+    query.order("-createdAt");
     query.find().then(res => {
       console.log(res)
-      for(var i=0;i<res.length;i++)
-      {
-        real_should_get = real_should_get+res[i].debt_number;
-      }
-      
-      that.setData({ detail: res, real_should_get: real_should_get});
-
-      const query = Bmob.Query("order_opreations");
-      query.equalTo("master", "==", wx.getStorageSync("userid"));
-      query.equalTo("custom", "==", options.id);
-      query.equalTo("debt", ">", 0);
-      query.find().then(res => {
-        for(var i =0;i<res.length;i++)
-        {
-          real_have_get = real_have_get+res[i].debt;
-        }
-        that.setData({ real_have_get: real_have_get})
-      });
-
+      that.setData({ detail: res});
     });
   },
 

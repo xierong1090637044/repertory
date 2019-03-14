@@ -90,5 +90,5 @@
 
 <i-modal title="{{now_goodsName}}的货损记录" visible="{{visible}}" bind:ok="handleadd_badnum" bind:cancel="handleClose">
   <i-input type="digit" name="bad_goods" bindchange="get_badnum" value='0'/>
-  <i-input placeholder="请输入备注" type="textarea" name="beizhu" bindchange="get_beizhu"/>
+  <i-input placeholder="请输入备注" name="beizhu" bindchange="get_beizhu" />
 </i-modal>
