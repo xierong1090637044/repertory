@@ -20,6 +20,10 @@
         <view wx:if = "{{goodsReserve.productCode != ''}}">产品条码：{{goodsReserve.productCode}}</view>
         <view>进货价格：{{goodsReserve.costPrice}} (元)</view>
         <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
+        <view style='display:flex;justify-content: space-between'>
+           <view>货损数量：<text style='color:#f30'>{{goodsReserve.bad_num}}</text></view>
+           <navigator url='../../goods/bad_history/bad_history' style='margin-left:20px;color:#f30'>查看详情 >></navigator>
+        </view>
       </view>
     </i-card>
   </i-panel>

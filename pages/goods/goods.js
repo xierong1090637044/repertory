@@ -11,7 +11,7 @@ var type;//库存情况
 var class_array;//产品类别
 var select_id = null;//类别选择的id
 var bad_num = null;//货损数量
-var beizhu_text = null;//备注信息
+var beizhu_text = '';//备注信息
 Page({
 
   /**
@@ -272,6 +272,7 @@ Page({
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.class_text = res[i].get("goodsClass") || '';
           tempGoods.product_info = res[i].get("product_info") || '';
+          tempGoods.bad_num = res[i].get("bad_num") || 0;
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
@@ -426,8 +427,42 @@ Page({
     beizhu_text = e.detail.detail.value;
   },
 
+  //货损记录按钮点击
   handleadd_badnum:function()
   {
-    console.log(bad_num,beizhu_text)
+    const product_id = now_product.goodsId;
+    const last_bad_num = Number(now_product.bad_num);
+    const pointer = Bmob_new.Pointer('_User');
+    const poiID = pointer.set(userid);
+
+    const now_bad_num = last_bad_num + Number(bad_num);
+    if(bad_num <=0)
+    {
+      wx.showToast({
+        title: '货损数量不能为0',
+        icon:"none"
+      })
+    }else{
+      const query = Bmob_new.Query('bad_goods');
+      query.set("bad_num", bad_num);
+      query.set("beizhu_text", beizhu_text);
+      query.set("operater", poiID);
+      query.set("goods", product_id);
+      query.save().then(res => {
+        
+        const query = Bmob_new.Query('Goods');
+        query.set('id', product_id) //需要修改的objectId
+        query.set('bad_num', now_bad_num)
+        query.save().then(res => {
+          that.setData({ visible: false });
+          that.onLoad();
+          wx.showToast({
+            title: '记录成功',
+          });
+        })
+
+      })
+    }
+    
   }
 })
