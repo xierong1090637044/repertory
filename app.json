@@ -11,6 +11,8 @@
     "pages/finance/finance",
     "pages/delivery/delivery",
     "pages/delivery/delivery-history/delivery-history",
+    "pages/counting/counting",
+    "pages/counting/counting-history/counting-history",
     "pages/returing/returing",
     "pages/returing/returing-history/returing-history",
     "pages/entering/entering",

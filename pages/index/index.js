@@ -23,7 +23,7 @@ Page({
       },
       {
         name: '库存盘点', icon: '../../images/index/stocking.png',
-        url: '/pages/goods/goods'
+        url: '/pages/common/goods-select/goods-select?type=counting'
       },
       {
         name: '我的产品', icon: '../../images/index/goods.png',

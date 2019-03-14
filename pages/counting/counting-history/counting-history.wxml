@@ -1,0 +1,22 @@
+<view class='page'>
+    <view style='line-height:35px;padding: 0 10px;'>已选产品</view>
+    <view style='max-height:25vh;overflow-x:scroll'>
+       <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
+          <view class='pro_list' style='color:#000'>
+               <view>产品：{{item.goodsName}}</view>
+               <view>盘点后库存：￥{{item.reserve}}</view>
+          </view>
+       </view>
+    </view>
+    <form bindsubmit="formSubmit" report-submit="true">
+
+    <view style='margin-top:20px'>
+         <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>
+    </view>
+
+    <view>
+        <button class='confrim_button' disabled='{{button}}' form-type="submit">确认盘点</button>
+    </view>
+    </form>
+
+</view>
