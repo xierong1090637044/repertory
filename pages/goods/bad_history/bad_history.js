@@ -13,9 +13,10 @@ Page({
     var real_should_get = 0;
     var real_have_get = 0;
 
-    const query = Bmob.Query("debt_history");
-    query.equalTo("master", "==", wx.getStorageSync("userid"));
-    query.equalTo("custom", "==", options.id);
+    console.log(options.id);
+
+    const query = Bmob.Query("bad_goods");
+    query.equalTo("goods", "==", options.id);
     query.find().then(res => {
       console.log(res)
       for(var i=0;i<res.length;i++)

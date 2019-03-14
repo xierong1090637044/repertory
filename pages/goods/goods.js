@@ -432,8 +432,11 @@ Page({
   {
     const product_id = now_product.goodsId;
     const last_bad_num = Number(now_product.bad_num);
+
     const pointer = Bmob_new.Pointer('_User');
     const poiID = pointer.set(userid);
+    const pointer1 = Bmob_new.Pointer('Goods');
+    const poiID1 = pointer1.set(product_id);
 
     const now_bad_num = last_bad_num + Number(bad_num);
     if(bad_num <=0)
@@ -447,7 +450,7 @@ Page({
       query.set("bad_num", bad_num);
       query.set("beizhu_text", beizhu_text);
       query.set("operater", poiID);
-      query.set("goods", product_id);
+      query.set("goods", poiID1);
       query.save().then(res => {
         
         const query = Bmob_new.Query('Goods');
