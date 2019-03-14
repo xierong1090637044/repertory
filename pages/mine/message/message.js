@@ -87,6 +87,7 @@ Page({
     friends.set("stockManager", 1);
     friends.set("customList", 1);
     friends.set("add_product", 0);
+    friends.set("finance", 0);
     friends.save(null, {
       success: function (result) {
         var FriendsTemp = Bmob.Object.extend("FriendsTemp");
@@ -121,6 +122,7 @@ Page({
       friends.set("stockManager", 1);
       friends.set("customList", 1);
       friends.set("add_product", 0);
+      friends.set("finance", 0);
       friends.save();
       wx.showToast({
         title: '添加成功',
