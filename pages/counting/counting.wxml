@@ -9,6 +9,7 @@
         <view style='display:flex;'>盘点后数量：
           <i-input i-class="counting_number" data-idx="{{index}}" placeholder='{{item.reserve}}' bind:change="handleNumChange" type='digit'/>
         </view>
+        
         <view class='del' bindtap='handleDel' data-idx="{{index}}">
           <i-icon type="close" />删除</view>
         </view>
@@ -23,6 +24,6 @@
 
 <view class='btn-group' bindtap='handleDelivery'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      确认退货入库
+      确认盘点数目
     </button>
 </view>

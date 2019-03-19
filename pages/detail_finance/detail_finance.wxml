@@ -74,14 +74,15 @@
    <view wx:for="{{bill_his}}" wx:key="{{index}}" class='list_item'>
       <view class='list_style'>
         <view wx:if="{{item.type == 1}}"><text class='text_color'>入库商品：</text>{{item.goodsName}}</view>
-        <view wx:elif="{{item.type == 2}}"><text class='text_color'>入库数量：</text>{{item.num}}</view>
+        <view wx:elif="{{item.type == 2}}"><text class='text_color'>退货商品：</text>{{item.goodsName}}</view>
+        <view wx:elif="{{item.type == 3}}"><text class='text_color'>盘点商品：</text>{{item.goodsName}}</view>
         <view wx:else>
-           <text class='text_color'>出库商品：</text>
-           {{item.goodsName}}
+           <text class='text_color'>出库商品：</text>{{item.goodsName}}
         </view>
 
         <view wx:if="{{item.type == 1}}"><text class='text_color'>入库数量：</text>{{item.num}}</view>
         <view wx:elif="{{item.type == 2}}"><text class='text_color'>入库数量：</text>{{item.num}}</view>
+        <view wx:elif="{{item.type == 3}}"><text class='text_color'>盘点后数量：</text>{{item.now_reserve}}</view>
         <view wx:else><text class='text_color'>出库数量：</text>{{item.num}}</view>
       </view>
 
@@ -94,6 +95,7 @@
         <view wx:elif="{{item.type == 2}}">
             <text class='text_color'>成本价：</text>￥{{item.goodsId.costPrice}}
         </view>
+        <view wx:elif="{{item.type == 3}}"></view>
         <view wx:else>
           <text class='text_color'>出库单价：</text>
           ￥{{item.retailPrice}}
@@ -103,6 +105,7 @@
         <view wx:if="{{item.type == 1}}">操作类型：<text class='color2'>入库</text></view>
         <view wx:elif="{{item.type == -1}}">操作类型：<text class='color2'>出库</text></view>
         <view wx:elif="{{item.type == 2}}">操作类型：<text class='color1'>退货</text></view>
+        <view wx:elif="{{item.type == 3}}">操作类型：<text class='color1'>盘点</text></view>
       </view>
 
    </view>

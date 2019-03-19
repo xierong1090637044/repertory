@@ -22,7 +22,11 @@
         <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
         <view style='display:flex;justify-content: space-between'>
            <view>总货损数量：<text style='color:#f30'>{{goodsReserve.bad_num}}</text></view>
-           <navigator url='../../goods/bad_history/bad_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#f30'>查看详情 >></navigator>
+           <navigator url='../../goods/bad_history/bad_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#f30'>查看货损记录 >></navigator>
+        </view>
+        <view style='display:flex;justify-content: space-between'>
+           <view>总库存：<text style='color:#0600ff'>{{goodsReserve.reserve}}</text></view>
+           <navigator url='../../goods/counting_history/counting_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#0600ff'>查看盘点记录 >></navigator>
         </view>
       </view>
     </i-card>

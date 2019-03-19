@@ -36,3 +36,24 @@
   text-overflow:ellipsis;
   white-space: nowrap;
 }
+.order_counting
+{
+   padding: 0px 15px;
+  color: #000;
+  border:1px solid#000;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 7px;
+  border-radius: 4px;
+}
+
+.order_returning
+{
+   padding: 0px 15px;
+  color: #ffd800;
+  border:1px solid#ffd800;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 7px;
+  border-radius: 4px;
+}

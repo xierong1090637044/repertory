@@ -20,6 +20,7 @@
     "pages/goods/goods-edit/goods-edit",
     "pages/goods/goods",
     "pages/goods/bad_history/bad_history",
+    "pages/goods/counting_history/counting_history",
     "pages/goods/goods-add/goods-add",
     "pages/mine/mine",
     "pages/mine/my_setting/my_setting",

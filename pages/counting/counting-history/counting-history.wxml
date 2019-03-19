@@ -4,8 +4,9 @@
        <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
                <view>产品：{{item.goodsName}}</view>
-               <view>盘点后库存：￥{{item.reserve}}</view>
+               <view>现有库存:{{item.reserve}}</view>
           </view>
+          <view>盘点后库存：{{item.now_reserve}}</view>
        </view>
     </view>
     <form bindsubmit="formSubmit" report-submit="true">

@@ -58,7 +58,6 @@ Page({
     })
   },
   handleNumChange: function (e) {
-    console.log(e);
     var that = this
     var idx = e.currentTarget.dataset.idx
     var tempGoods = that.data.goods

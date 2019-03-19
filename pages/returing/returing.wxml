@@ -7,7 +7,7 @@
         <view>产品规格：{{item.packageContent}}/{{item.packingUnit}}</view>
         <view>建议零售价格：{{item.retailPrice}}(元)</view>
         <view class='margin-t-5'>
-        入库量：<i-input-number i-class="number" data-idx="{{index}}" value="{{ item.num }}" min="0" max="10000" bindchange="handleNumChange" />
+        退货数量：<i-input-number i-class="number" data-idx="{{index}}" value="{{ item.num }}" min="0" max="10000" bindchange="handleNumChange" />
         <view class='del' bindtap='handleDel' data-idx="{{index}}">
           <i-icon type="close" />删除</view>
         </view>

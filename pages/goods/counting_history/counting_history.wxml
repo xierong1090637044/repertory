@@ -1,0 +1,12 @@
+<view class='all_list' wx:if="{{detail !=''}}">
+          <view  wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
+              <view>
+                  <view>{{item.createdAt}}</view>
+                  <view>盘点前数量：{{item.reserve}}</view>
+                  <view>盘点后数量：{{item.now_reserve}}</view>
+                  <view wx:if="{{item.beizhu != ''}}">备注：{{item.beizhu}}</view>
+              </view>
+          </view>
+      </view>
+<view wx:else class='no_operations'>暂无收货损记录</view>
+
