@@ -16,7 +16,7 @@
       <i-input title="产品名称" value="{{goodsName}}" name="goodsName" placeholder="请输入产品名称" />
       <i-input title="登记证号" value="{{regNumber}}" name="regNumber" placeholder="请输入登记证号" />
       <i-input title="生产厂家" value="{{producer}}" name="producer" placeholder="请输入生产厂家" />
-      <!--<i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="请输入产品条码" />-->
+      <i-input title="产品条码" value="{{productCode}}" name="productCode" placeholder="请输入产品条码" />
     </i-panel>
 
     <i-panel title="产品类别">
@@ -40,7 +40,7 @@
 
     <view class="caption-wrap">
       <i-collapse name="{{name}}">
-        <i-collapse-item title="更多信息(换算单位用于出入库单位不一致的情况)" name="name1" i-class-title="collapse-item-title">
+        <i-collapse-item title="更多信息" name="name1" i-class-title="collapse-item-title">
             <view slot="content">
                 <i-input title="商品简介" type="text" value="{{product_info}}" name="product_info" placeholder="请输入商品简介" maxlength='100'/>
             </view>

@@ -22,7 +22,7 @@ Page({
     isEmpty: false,
     // 搜索
     inputShowed: false,
-    limitPage:200,//限制条数
+    limitPage:50,//限制条数
     inputVal: "",
     currenttab: '1',
     length: null,
