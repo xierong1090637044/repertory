@@ -27,10 +27,10 @@
     </view>
   </view>
 
-  <i-tabs current="{{ current }}" bindchange="handleChange">
+  <!--<i-tabs current="{{ current }}" bindchange="handleChange">
       <i-tab key="1" title="详情"></i-tab>
       <i-tab key="2" title="当天记录"></i-tab>
-  </i-tabs>
+  </i-tabs>-->
 
   <view style='display:{{view1}}'>
   <view class='text_desicbe'>概况：</view>
@@ -70,7 +70,7 @@
   </view>
 
 
-<view class='all_list' style='display:{{view2}}'>
+<!--<view class='all_list' style='display:{{view2}}'>
    <view wx:for="{{bill_his}}" wx:key="{{index}}" class='list_item'>
       <view class='list_style'>
         <view wx:if="{{item.type == 1}}"><text class='text_color'>入库商品：</text>{{item.goodsName}}</view>
@@ -109,4 +109,4 @@
       </view>
 
    </view>
-</view>
+</view>-->

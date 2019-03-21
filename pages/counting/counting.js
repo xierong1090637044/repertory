@@ -78,8 +78,7 @@ Page({
     {
       const query = Bmob_new.Query('Goods');
       query.get(id).then(res => {
-        res.total_money = res.retailPrice;
-        res.modify_retailPrice = res.retailPrice;
+        res.now_reserve = res.now_reserve;
         res.goodsId = res.objectId;
         code_product.push(res);
         that.setData({
@@ -94,9 +93,7 @@ Page({
       query.equalTo("userId", "==", wx.getStorageSync("userid"));
       query.find().then(res => {
         console.log(res);
-        res[0].total_money = res[0].retailPrice;
-        res[0].modify_retailPrice = res[0].retailPrice;
-        res[0].modify_retailcostPrice = res[0].costPrice;
+        res[0].now_reserve = res[0].now_reserve;
         res[0].goodsId = res[0].objectId;
         code_product.push(res[0]);
         that.setData({

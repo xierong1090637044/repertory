@@ -118,8 +118,11 @@ Page({
   get_opera_detail:function(id,is_today)
   {
     const query = Bmob_new.Query("Bills");
+    const query1 = query.equalTo("type", '==', 1);
+    const query2 = query.equalTo("type", '==', -1);
     query.order("-createdAt");
     query.equalTo("goodsId", "==", id);
+    query.or(query1, query2);
     if (is_today) query.equalTo("createdAt", ">=", that.getDay(0));
     query.find().then(res => {
       that.setData({ detail: res});

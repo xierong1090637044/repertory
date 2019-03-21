@@ -74,7 +74,7 @@ Page({
   scan_code:function()
   {
     wx.showActionSheet({
-          itemList: ['扫码出库', '扫码入库', '扫码添加产品','查看详情'],
+          itemList: ['扫码出库', '扫码入库', '扫码盘点','扫码添加产品','查看详情'],
           success(res) {
             that.scan(res.tapIndex);
           },
@@ -101,9 +101,13 @@ Page({
           })
         } else if (type == 2) {
           wx.navigateTo({
-            url: '../goods/goods-add/goods-add?id=' + array[0],
+            url: '../counting/counting?id=' + array[0] + "&type=" + array[1],
           })
         }else if (type == 3) {
+          wx.navigateTo({
+            url: '../goods/goods-add/goods-add?id=' + array[0],
+          })
+        }else if (type == 4) {
           wx.navigateTo({
             url: '../common/goods-dtl/goods-dtl?has_code=false&id=' + array[0],
           })

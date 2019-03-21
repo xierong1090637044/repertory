@@ -16,7 +16,6 @@ Page({
     query.equalTo("type", "==", 3);
     query.order("-createdAt");
     query.find().then(res => {
-      console.log(res)
       that.setData({ detail: res });
     });
   },

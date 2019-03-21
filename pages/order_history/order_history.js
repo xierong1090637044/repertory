@@ -102,6 +102,9 @@ Page({
     that.setData({ spinShow:true});
     var userid = wx.getStorageSync("userid");
     const query = Bmob.Query("order_opreations");
+    const query1 = query.equalTo("type", '==', 1);
+    const query2 = query.equalTo("type", '==', -1);
+    query.or(query1, query2);
     query.equalTo("master", "==", userid);
     query.equalTo("custom", "==", custom);
     if (start_data != null) query.equalTo("createdAt", ">", start_data);
