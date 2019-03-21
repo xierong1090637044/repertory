@@ -82,13 +82,15 @@ Page({
     {
       product_id = options.id;
       const query = Bmob_new.Query('Goods');
-      //const query1 = query.equalTo("productCode", "==", options.id);
-      query.equalTo("objectId", "==", options.id);
-      //query.or(query1, query2);
+      if(options.type)
+      {
+        query.equalTo("productCode", "==", options.id)
+      }else{
+        query.equalTo("objectId", "==", options.id);
+      }
       query.find().then(res => {
         console.log(res)
         that.setData({ goodsReserve: res[0] });
-        
       })
     }else{
       var item = JSON.parse(wx.getStorageSync('item'));

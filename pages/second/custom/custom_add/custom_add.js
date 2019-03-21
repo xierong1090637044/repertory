@@ -2,6 +2,7 @@
 var { $Message } = require('../../../../component/base/index');
 const Bmob = require('../../../../utils/bmob_new.js');
 var that;
+let friendId;
 Page({
 
   /*** 页面的初始数*/
@@ -10,7 +11,7 @@ Page({
   },
 
   handleAddCustoms: function (e) {
-    console.log(that.data.custom);
+    //console.log(that.data.custom);
     var goodsForm = e.detail.value
     //先进行表单非空验证
     if (goodsForm.custom_type == null) {
@@ -29,8 +30,11 @@ Page({
       that.setData({ loading: true });
       const userid = wx.getStorageSync("userid");
       const pointer = Bmob.Pointer('_User');
-      const poiID = pointer.set(userid);
-
+      var poiID;
+      
+      if (friendId == null) {poiID = pointer.set(userid);}else{
+        poiID = pointer.set(friendId);
+      }
       const query = Bmob.Query('customs');
       query.set("custom_type", that.daxie(goodsForm.custom_type));
       query.set("custom_name", goodsForm.custom_name);
@@ -115,6 +119,7 @@ Page({
     console.log(options);
     that = this;
     var id = options.id;
+    friendId = options.friendId;
     if(id !=null)
     {
       const query = Bmob.Query('customs');

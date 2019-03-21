@@ -109,7 +109,7 @@ Page({
           })
         }else if (type == 4) {
           wx.navigateTo({
-            url: '../common/goods-dtl/goods-dtl?has_code=false&id=' + array[0],
+            url: '../common/goods-dtl/goods-dtl?id=' + array[0] + "&type=" + array[1],
           })
         }
       },

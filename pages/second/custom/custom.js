@@ -186,7 +186,11 @@ Page({
     var is_add = wx.getStorageSync("is_add");
     if(is_add)
     {
-      that.getcustom_list(wx.getStorageSync("userid"));
+      if (friendId != null) {
+        that.getcustom_list(friendId);
+      } else {
+        that.getcustom_list(wx.getStorageSync("userid"));
+      }
       wx.removeStorageSync("is_add");
     }
   },
@@ -199,9 +203,8 @@ Page({
         url: 'custom_add/custom_add',
       })
     }else{
-      wx.showToast({
-        title: '您无权添加',
-        icon:"none"
+      wx.navigateTo({
+        url: 'custom_add/custom_add?friendId=' + friendId,
       })
     }
     
