@@ -123,6 +123,7 @@ Page({
                         goods.set("retailPrice", goodsForm.retailPrice);
                         goods.set("packingUnit", goodsForm.packingUnit);
                         goods.set("product_info", goodsForm.product_info);
+                        goods.set("warning_num", goodsForm.warning_num);
                         //goods.set("packModel", goodsForm.packModel);
                         goods.set("reserve", Number(goodsForm.reserve));
                         goods.save(null, {

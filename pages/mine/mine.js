@@ -12,7 +12,7 @@ Page({
     modules: [
       { name: '我的账号', icon: 'mine', url: '/pages/mine/account/account' },
       //{ name: '我的仓库', icon: 'shop_fill', url: '/pages/mine/add_warehouse/add_warehouse' },
-      { name: '我的设置', icon: 'setup', url: '/pages/mine/my_setting/my_setting' },
+      //{ name: '我的设置', icon: 'setup', url: '/pages/mine/my_setting/my_setting' },
       { name: '产品类别', icon: 'task', url: '/pages/mine/add_class/add_class' },
       { name: '我的申请', icon: 'message', url: '/pages/mine/message/message' },
       { name: '升级日志', icon: 'activity', url: '/pages/mine/upgrade/upgrade' },

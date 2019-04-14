@@ -1,6 +1,6 @@
 module.exports = {
-  appId:"afaa8342776ad99ff0d49bca224de9b2",
-  apiKey:"9eed865dc5914f2ecedcd63be31e33e9",
+  appId:"ed3988458b639c5999dd87e4d1fd3b14",
+  apiKey:"f5e29fcbcc059d661ec54d73066850a4",
   pageSize:30,
   api:{
     fetchQRCode:'https://www.kuaizhan.com/common/encode-png?large=true&data='

@@ -47,6 +47,7 @@ Page({
     var total_money = 0;
     const query = Bmob.Query("Goods");
     query.equalTo("userId", "==", wx.getStorageSync("userid"));
+    query.limit(1000);
     query.find().then(res => {
       for (var i = 0; i < res.length; i++) {
         total_reserve = total_reserve + res[i].reserve;

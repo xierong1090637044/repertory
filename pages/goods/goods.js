@@ -273,6 +273,7 @@ Page({
           tempGoods.class_text = res[i].get("goodsClass") || '';
           tempGoods.product_info = res[i].get("product_info") || '';
           tempGoods.bad_num = res[i].get("bad_num") || 0;
+          tempGoods.warning_num = res[i].get("warning_num") || 0;
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);
