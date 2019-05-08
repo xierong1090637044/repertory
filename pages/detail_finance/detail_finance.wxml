@@ -1,11 +1,5 @@
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 
-<view class="fristcontent">
-  <view>库存商品：{{total_products}}</view>
-  <view>总库存：{{total_reserve}}</view>
-  <view>库存总金额：￥{{total_money}}</view>
-</view>
-
 <!--*筛选器*-->
   <view class='select'>
     <view class="section">

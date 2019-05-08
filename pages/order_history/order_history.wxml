@@ -1,19 +1,11 @@
-    <view class='select_time'>
-        <picker mode="date" value="{{start_data}}" bindchange="bindStartDateChange">
-         <view >开始时间：{{start_data}}</view>
-        </picker>
-        <picker mode="date" value="{{end_data}}" bindchange="bindEndDateChange" end="{{now_data}}">
-         <view >结束时间：{{end_data}}</view>
-        </picker>
-      </view>
-   <view class='page' wx:if="{{list !=''}}">
 
+<view class='page' wx:if="{{list !=''}}">
    <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
-
-   <i-tabs current="{{ current }}" bindchange="handleChange">
+   <!--<i-tabs current="{{ current }}" bindchange="handleChange">
       <i-tab key="1" title="近一个月记录"></i-tab>
       <i-tab key="2" title="全部记录"></i-tab>
-   </i-tabs>
+   </i-tabs>-->
+
    <view class='list-item'>
       <view wx:for="{{list}}" wx:key="{{index}}" class='item' bindtap='get_detail' data-id='{{item.objectId}}'>
      <view style='display:flex;width:calc(100% - 60px);'>
@@ -36,8 +28,8 @@
     <view slot="prev">上一页</view>
     <view slot="next">下一页</view>
 </i-page>
-
 </view>
+
 <view class='no-data' wx:else>
   <image src='/images/common/no-data.png'></image>
   <text>暂无数据</text>

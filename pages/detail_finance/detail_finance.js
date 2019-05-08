@@ -41,23 +41,6 @@ Page({
     }
   },
 
-  //得到总库存数和总金额
-  loadallGoods: function () {
-    var total_reserve = 0;
-    var total_money = 0;
-    const query = Bmob.Query("Goods");
-    query.equalTo("userId", "==", wx.getStorageSync("userid"));
-    query.find().then(res => {
-      for (var i = 0; i < res.length; i++) {
-        total_reserve = total_reserve + res[i].reserve;
-        total_money = total_money + res[i].reserve * res[i].costPrice;
-      }
-      that.setData({ total_reserve: total_reserve, total_money: total_money, total_products:res.length, spinShow: true });
-
-      that.gettoday_detail();
-    });
-  },
-
   //得到今日概况
   gettoday_detail: function ()
   {
@@ -142,7 +125,6 @@ Page({
     that = this;
     selectd_start_data = that.getDay(0);
     selectd_end_data = that.getDay(1);
-    that.loadallGoods();
 
     that.setData({
       selectd_start_data: selectd_start_data,

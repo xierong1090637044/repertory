@@ -2,7 +2,39 @@
     <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
     
     <view style='line-height:35px;padding: 0 10px;'>操作产品</view>
-    <view style='max-height:30vh;overflow-x:scroll'>
+
+    <view wx:if="{{detail.type == 3}}">
+    <view style='max-height:50vh;overflow-x:scroll'>
+       <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
+          <view class='pro_list' style='color:#000'>
+               <view >产品：{{item.goodsName}}</view>
+          </view>
+          <view class='pro_list'>
+            <view>盘点前库存：{{item.reserve}}</view>
+            <view>盘点后库存：{{item.now_reserve}}</view>
+          </view>
+       </view>
+    </view>
+    </view>
+
+    <view wx:elif="{{detail.type == 2}}">
+    <view style='max-height:50vh;overflow-x:scroll'>
+       <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
+          <view class='pro_list' style='color:#000'>
+               <view>产品：{{item.goodsName}}（成本价：￥{{item.goodsId.costPrice}}）</view>
+               <view >建议零售价：￥{{item.goodsId.retailPrice}}</view>
+          </view>
+          <view class='pro_list'>
+               <view>退货数量：X{{item.num}}</view>
+               <view>总价：￥{{item.total_money}}</view>
+          </view>
+       </view>
+    </view>
+    <view class='pro_allmoney'>总计：￥{{detail.all_money}}</view>
+    </view>
+
+    <view wx:else>
+    <view style='max-height:50vh;overflow-x:scroll'>
        <view wx:for="{{products}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
                <view>产品：{{item.goodsName}}（成本价：￥{{item.goodsId.costPrice}}）</view>
@@ -16,6 +48,7 @@
        </view>
     </view>
     <view class='pro_allmoney'>总计：￥{{detail.all_money}}</view>
+    </view>
 
     <view wx:if="{{detail.type == -1}}">
       <i-panel title="开单明细">
@@ -24,10 +57,19 @@
         <i-input title="欠款" value="{{detail.debt}}" i-class='real_color' disabled="true" wx:if="{{detail.debt > 0}}"/>
       </i-panel>
     </view>
+
+    <view wx:elif="{{detail.type == 1}}">
+      <i-panel title="开单明细">
+        <i-input  wx:if="{{detail.producer !=null}}" title="供货商姓名：" value="{{detail.producer.producer_name}}" disabled="true"/>
+        <i-input title="实际付款" value="{{detail.real_money == null ?'未填写':detail.real_money}}" i-class='real_color' disabled="true"/>
+        <i-input title="欠款" value="{{detail.debt}}" i-class='real_color' disabled="true" wx:if="{{detail.debt > 0}}"/>
+      </i-panel>
+    </view>
+
     <view wx:elif="{{detail.type == 2}}">
       <i-panel title="退货明细">
         <i-input  wx:if="{{detail.custom !=null}}" title="客户姓名：" value="{{detail.custom.custom_name}}" disabled="true"/>
-        <i-input title="实际付款" value="{{detail.real_money == null ?'未填写':detail.real_money}}" i-class='real_color' disabled="true"/>
+        <i-input  wx:else title="未记录客户" disabled="true"/>
       </i-panel>
     </view>
 
@@ -44,7 +86,7 @@
          </view>
     </view>
 
-    <view>
+    <view wx:if="{{detail.type == -1 || detail.type == 1}}">
       <button class='confrim_button' bindtap='revoke'>此操作有误，撤销</button>
     </view>
 
