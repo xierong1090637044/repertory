@@ -60,7 +60,8 @@ Page({
       reserve: goods.reserve,
       class_select_text: (goods.class_text.class_text == null) ? null : goods.class_text.class_text,
       goodsClass:goods.class_text.objectId,
-      product_info:goods.product_info
+      product_info:goods.product_info,
+      warning_num: goods.warning_num
     })
   },
 
@@ -112,6 +113,7 @@ Page({
                     results.set("packingUnit", goodsForm.packingUnit);
                     results.set("reserve", Number(goodsForm.reserve));
                     results.set("product_info", goodsForm.product_info);
+                    goods.set("stocktype", (Number(goodsForm.reserve) > Number(goodsForm.warning_num)) ? 1 : 0);
                     results.save(null, {
                       success: function (result) {
                         console.log("修改产品成功");

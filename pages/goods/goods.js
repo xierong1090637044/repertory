@@ -36,6 +36,7 @@ Page({
   //选择库存情况
   bindstock_Change: function (e) {
     if (e.detail.value == "0") {
+      
       that.loadGoods(true, null, select_id);
       that.setData({ selectd_stock: that.data.stock[e.detail.value]});
       type = true;
@@ -140,6 +141,7 @@ Page({
     })
   },
 
+  //删除产品点击
   handleDelGoods: function (){
     var that = this
     var item = now_product;
@@ -222,6 +224,7 @@ Page({
     })
   },
 
+  //加载产品
   loadGoods:function(type,content,class_id){
     var that = this;
     that.setData({spinShow:false});
@@ -229,11 +232,9 @@ Page({
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
     if(type == true){
-      var num_enough = wx.getStorageSync("setting").num_enough;
-      query.greaterThan("reserve", num_enough);//库存充足
+      query.equalTo("stocktype", 1);
     }else if(type == false){
-      var num_insufficient = wx.getStorageSync("setting").num_insufficient;
-      query.lessThanOrEqualTo("reserve", num_insufficient);//库存紧张
+      query.equalTo("stocktype", 0);
     }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
@@ -273,6 +274,7 @@ Page({
           tempGoods.class_text = res[i].get("goodsClass") || '';
           tempGoods.product_info = res[i].get("product_info") || '';
           tempGoods.bad_num = res[i].get("bad_num") || 0;
+          tempGoods.warning_num = res[i].get("warning_num") || 0;
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);

@@ -155,12 +155,10 @@ Page({
     query.equalTo("userId", userid);
     if (class_id != null) query.equalTo("goodsClass", class_id);
     if (type == true) {
-      var num_enough = wx.getStorageSync("setting").num_enough;
-      query.greaterThan("reserve", num_enough);//库存充足
-    } else if(type == false) {
-      var num_insufficient = wx.getStorageSync("setting").num_insufficient;
-      query.lessThanOrEqualTo("reserve", num_insufficient);//库存紧张
-    }else{}
+      query.equalTo("stocktype", 1);
+    } else if (type == false) {
+      query.equalTo("stocktype", 0);
+    } else { }
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     query.limit(that.data.limitPage);
@@ -196,6 +194,7 @@ Page({
           tempGoods.retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.modify_retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.modify_retailcostPrice = res[i].get("costPrice") || 0;
+          tempGoods.warning_num = res[i].get("warning_num") || 0;
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);

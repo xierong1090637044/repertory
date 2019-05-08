@@ -24,6 +24,7 @@ Page({
     retailPrice: '0',//零售价格
     goodsClass:'',//产品类别
     product_info:'',//商品简介
+    warning_num:0,//库存预警数量
     reserve:0,
     loading:false,
     image:"none",
@@ -123,8 +124,10 @@ Page({
                         goods.set("retailPrice", goodsForm.retailPrice);
                         goods.set("packingUnit", goodsForm.packingUnit);
                         goods.set("product_info", goodsForm.product_info);
+                        goods.set("warning_num", Number(goodsForm.warning_num));
                         //goods.set("packModel", goodsForm.packModel);
                         goods.set("reserve", Number(goodsForm.reserve));
+                        goods.set("stocktype", (Number(goodsForm.reserve) > Number(goodsForm.warning_num))?1:0);
                         goods.save(null, {
                           success: function (result) {
                             wx.setStorageSync("is_add", true);
@@ -156,6 +159,7 @@ Page({
                                         costPrice: '0',
                                         retailPrice: '0',
                                         product_info: '',//商品简介
+                                        warning_num: 0,//库存预警数量
                                         reserve: 0,
                                         loading: false
                                       })

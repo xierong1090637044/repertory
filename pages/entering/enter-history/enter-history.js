@@ -95,6 +95,7 @@ Page({
         var tempGoods = new Goods();
         tempGoods.set('objectId', that.data.goods[i].goodsId)
         tempGoods.set('reserve', num)
+        tempGoods.set('stocktype', (num > that.data.goods[i].warning_num)?1:0 )
         objects.push(tempGoods)
         //单据
         var tempBills = new Bills();
