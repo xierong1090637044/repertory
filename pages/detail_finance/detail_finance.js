@@ -71,6 +71,7 @@ Page({
         }
       
       that.setData({
+        spinShow: true,
         get_reserve: get_reserve, 
         out_reserve: out_reserve,
         get_reserve_real_money: get_reserve_real_money,
@@ -125,6 +126,8 @@ Page({
     that = this;
     selectd_start_data = that.getDay(0);
     selectd_end_data = that.getDay(1);
+
+    that.gettoday_detail();
 
     that.setData({
       selectd_start_data: selectd_start_data,

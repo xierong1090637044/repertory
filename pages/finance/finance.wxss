@@ -82,8 +82,8 @@
   height: 20px;
   background: transparent;
   border-radius: 50%;
-  border: 2px solid #2d8cf0;
-  border-color: #2d8cf0 #2d8cf0 #2d8cf0 transparent;
+  border: 2px solid #426ab3;
+  border-color: #426ab3 #426ab3 #426ab3 transparent;
   animation: loading-spin 0.6s linear;
   animation-iteration-count: infinite;
 }

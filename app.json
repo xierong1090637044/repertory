@@ -58,14 +58,14 @@
     "borderStyle": "white",
     "list": [
       {
-        "iconPath": "images/index/index.png",
-        "selectedIconPath": "images/index/index_s.png",
+        "iconPath": "images/index/chuan.png",
+        "selectedIconPath": "images/index/chuan.png",
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "iconPath": "images/index/personcenter.png",
-        "selectedIconPath": "images/index/personcenter_s.png",
+        "iconPath": "images/index/person.png",
+        "selectedIconPath": "images/index/person.png",
         "pagePath": "pages/mine/mine",
         "text": "我的"
       }
