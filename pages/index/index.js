@@ -14,7 +14,7 @@ Page({
     { name: '库存盘点', icon: '../../images/index/stocking.png', url: '/pages/common/goods-select/goods-select?type=counting' },
     {name: '我的产品', icon: '../../images/index/goods.png',url: '/pages/goods/goods'},
     {name: '我的客户', icon: '../../images/index/customs.png',url: '/pages/second/custom/custom'},
-    {name: '我的供货商', icon: '../../images/index/mine.png',url: '/pages/producer/producer'},
+    { name: '我的供货商', icon: '../../images/index/mine.png', url: '/pages/second/producer/producer'},
     {name: '我的协同', icon: '../../images/index/togeter.png', url: '/pages/friends/friends' },
     {name: '盈收记录', icon: '../../images/index/stock.png',url: '/pages/detail_finance/detail_finance'},
     {name: '操作记录', icon: '../../images/index/order_history.png',url: '/pages/order_history/order_history'},
@@ -29,13 +29,27 @@ Page({
     var total_money = 0;
     const query = Bmob.Query("Goods");
     query.equalTo("userId", "==", wx.getStorageSync("userid"));
-    query.limit(1000);
+    query.limit(500);
     query.find().then(res => {
       for (var i = 0; i < res.length; i++) {
         total_reserve = total_reserve + res[i].reserve;
         total_money = total_money + res[i].reserve * res[i].costPrice;
+        if(i == (res.length - 1))
+        {
+          const query = Bmob.Query("Goods");
+          query.equalTo("userId", "==", wx.getStorageSync("userid"));
+          query.skip(500);
+          query.limit(500);
+          query.find().then(res => {
+            for (var i = 0; i < res.length; i++) {
+              total_reserve = total_reserve + res[i].reserve;
+              total_money = total_money + res[i].reserve * res[i].costPrice;
+            }
+          })
+          that.setData({ total_reserve: total_reserve, total_money: total_money, total_products: res.length });
+        }
       }
-      that.setData({ total_reserve: total_reserve, total_money: total_money, total_products: res.length });
+      
     });
   },
 

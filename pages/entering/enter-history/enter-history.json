@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "库存助手-产品入库记录"
+  "navigationBarTitleText": "库存助手-产品入库记录",
+  "usingComponents": {
+    "i-panel": "../../../component/panel/index",
+    "i-input": "../../../component/input/index"
+  }
 }

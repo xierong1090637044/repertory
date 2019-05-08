@@ -24,6 +24,40 @@ Page({
     visible:false
   },
 
+  //点击出现操作菜单
+  operation:function(e)
+  {
+    console.log(e)
+    wx.showActionSheet({
+      itemList: ['协同管理', '权限设置'],
+      success(res) {
+        console.log(res.tapIndex)
+        if (res.tapIndex == 0)
+        {
+          wx.showLoading({ title: '加载中...' })
+          var friendId = e.currentTarget.dataset.friendid
+          wx.setStorageSync('friendId', friendId);
+          wx.setStorageSync('friendopenid', e.currentTarget.dataset.openid)
+          wx.navigateTo({
+            url: '/pages/friends/friend-together/friend-together'
+          });
+          wx.hideLoading();
+        } else if (res.tapIndex == 1){
+          wx.showLoading({ title: '加载中...' });
+          var friendId = e.currentTarget.dataset.friendid
+          wx.setStorageSync('friendId', friendId)
+          wx.navigateTo({
+            url: '/pages/friends/friend-dtl/friend-dtl'
+          });
+          wx.hideLoading();
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
+
   handleFriendDtl:function(e){
     wx.showLoading({title: '加载中...'});
     var friendId = e.currentTarget.dataset.friendid

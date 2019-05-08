@@ -1,25 +1,33 @@
 <view class='page'>
     <view style='line-height:35px;padding: 0 10px;'>已选产品</view>
-    <view style='max-height:30vh;overflow-x:scroll'>
+    <view style='max-height:25vh;overflow-x:scroll'>
        <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
                <view>产品：{{item.goodsName}}</view>
-               <view>零售价：￥{{item.retailPrice}}</view>
+               <view>期初进货价：￥{{item.costPrice}}</view>
           </view>
           <view class='pro_list'>
                <view>实际进货价：￥{{item.modify_retailcostPrice}}（X{{item.num}}）</view>
-               <view>总进货价：￥{{item.total_money}}</view>
+               <view>合计：￥{{item.total_money}}</view>
           </view>
        </view>
     </view>
-    <view class='pro_allmoney'>总计：￥{{all_money}}</view>
+     <view class='pro_allmoney'>总计：￥{{all_money}}</view>
+
+    <form bindsubmit="formSubmit" report-submit="true">
+    <i-panel title="开单明细（用于记录是否有无欠款）">
+      <i-input title="供应商姓名" value="{{producer.producer_name}}" placeholder="选择供货商" disabled="true" bindtap='choose_producer'/>
+      <i-input title="实际应付" value="{{all_money}}" placeholder="选择供货商" disabled="true"/>
+      <i-input title="实际付款（可修改）" value="{{real_money}}" placeholder="输入实际付款金额" bindchange='getreal_money'/>
+    </i-panel>
 
     <view style='margin-top:20px'>
          <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>
     </view>
 
     <view>
-        <button class='confrim_button' bindtap='confrim_delivery' disabled='{{button}}'>确认入库</button>
+        <button class='confrim_button' bindtap='confrim_delivery' disabled='{{button}}' form-type="submit">确认入库</button>
     </view>
+    </form>
 
 </view>

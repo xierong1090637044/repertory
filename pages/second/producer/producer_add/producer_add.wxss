@@ -1,0 +1,52 @@
+/* pages/goods/goods-add/goods-add.wxss */
+.goods-container{
+  position: relative;
+  flex: 1;
+  min-height: 100%;
+}
+.goods-container form{
+  display: block;
+  height: 100%
+}
+.btn-group{
+  bottom:0;
+  width:100%;
+}
+.i-btn{text-align:center;vertical-align:middle;touch-action:manipulation;cursor:pointer;background-image:none;white-space:nowrap;user-select:none;font-size:14px;border-radius:2px;border:0!important;position:relative;text-decoration:none;height:44px;line-height:44px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);color:#fff!important;background:#f7f7f7!important;margin:10px}
+.i-btn-primary{color:#fff!important;background:#426ab3!important}
+.i-btn-ghost{background:#fff!important;color:#495060!important}
+.i-btn-error{color:#fff!important;background:#ed3f14!important}
+.i-btn-phone{color:#fff!important;background:#2ca879!important}
+.i-btn-small{height:40px;line-height:40px}
+
+.icon-upload
+{
+  font-size: 50px;
+  color: #999;
+}
+
+.list
+{
+  padding: 15px 15px 0;
+}
+.list-text
+{
+  line-height: 30px;
+}
+.list-add
+{
+  background-color: #fff;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 10px
+}
+.list-add-up
+{
+  background-color: #fff;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+}
