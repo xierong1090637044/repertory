@@ -46,7 +46,7 @@
 {
   text-align: right;
   margin-top: -5px;
-  color: #118fff;
+  color: #426ab3;
   font-weight: bold;
 }
 .product_item_name

@@ -1,100 +1,54 @@
-/* pages/index/index.wxss */
-
-.index-container {
-  position: relative;
-  flex: 1;
-  background: #efefef;
-  align-items: stretch; 
-  padding: 0;
-  min-height: 100%;
-  overflow: hidden;
-}
-.instruction{
-  display: flex;
-  align-items: center;
-  justify-content:flex-end;
-  align-content: center;
-  padding-right: 30rpx;
+/* pages/home/index/index.wxss */
+.swiper
+{
+  background: #426ab3;
   color: #fff;
-  background-color: #118fff;
+  height: 20vh;
 }
-.instruction view{
+.item
+{
   display: flex;
+  justify-content:space-between;
   align-items: center;
-  justify-content:flex-end;
-  align-content: center;
-  color: #fff;
 }
-.content{
-  display: flex;
-  position: fixed;
-  top:30%;
-  z-index: 10;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  width: 100%;
-}
-.title{
-  width: 100%;
-  height: 24vh;
-  background-color: #118fff;
+.every_item
+{
+  width: 50%;
   text-align: center;
+  line-height: 30px;
+  font-size: 14px;
 }
-.title-image
+.s_num
 {
-  width: 100%;
-  height: 90%;
-}
-
-.smalltitle{
-  position: absolute;
-  top: 50rpx;
-  left: 50%;
-  width: 600rpx;
-  height: 200rpx;
-  margin-left: -300rpx;
-  opacity: 0;
-}
-
-.bd {
-  position: relative;
-  /* flex: 1; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.label-style
-{
+  font-size: 16px;
   font-weight: bold;
 }
 
-.module{
-  width: calc(90% - 20px);
-  bottom: 0;
-  background:#fff;
-  padding: 0 10px;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.2);
-  height: 220px;
-  overflow: scroll;
+.o_list
+{
+  background: #fff;
+  padding: 15px 15px 0;
 }
-
-.module-grid:active { 
-  background: rgba(0,0,0,.1)!important; 
-  border-radius: .2rem;
-}
-.module-grid-item{
-  padding: 10px!important;
-}
-.module-grid-icon{
-  height: 2.5rem!important;
-  width: 2.5rem!important;
+.o_image
+{
+  width:40px;
+  height:40px;
   border-radius: 50%;
-  border:4px solid#ddd;
+  border: 3px solid#e2e2e2;
+  padding: 3px 3px 0;
 }
-.view-hidden{
-  display: none;
+.o_item
+{
+  width: 25%;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.o_text
+{
+  color: #000;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .scan_code
@@ -104,7 +58,7 @@
   left: 15px;
   right: 15px;
   bottom: 10%;
-  background: linear-gradient(to right, #118fff , #11c4ff);
+  background: linear-gradient(to right, #426ab3 , #118fff);
   line-height: 40px;
   text-align: center;
   border-radius: 4px;
@@ -114,14 +68,4 @@
 .icon-scan
 {
   margin-right: 10px;
-}
-
-.scan_notice
-{
-  width: 100%;
-  position: fixed;
-  bottom: 5%;
-  text-align: center;
-  color: #999;
-  font-size: 12px;
 }

@@ -32,7 +32,7 @@
 .confrim_button
 {
   width: 60%;
-  background: #118fff;
+  background: #426ab3;
   color: #fff;
   font-size: 16px;
   margin-top: 10%;

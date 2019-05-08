@@ -50,7 +50,7 @@ page{
 .round-click{
     height: 110rpx;
     width: 110rpx;
-    background-color: #118fff;
+    background-color: #426ab3;
     border-radius: 100%;
     position: fixed;
     bottom: 300rpx;
@@ -150,7 +150,7 @@ page{
 .search-bar-cancel-btn {
   margin-left: 10px;
   line-height: 28px;
-  color: #118fff;
+  color: #426ab3;
   white-space: nowrap;
 }
 .icon-clear {
@@ -307,7 +307,7 @@ page{
 	font-size: 1.1rem !important;
 }
 .text-default {
-	color: #118fff !important;
+	color: #426ab3 !important;
 }
 .text-white {
 	color: #ffffff !important;
@@ -653,7 +653,7 @@ page{
 .confrim_button
 {
   width: 60%;
-  background: #118fff;
+  background: #426ab3;
   color: #fff;
   font-size: 16px;
   margin-top: 10%;
@@ -702,7 +702,7 @@ page{
 }
 .select
 {
-  background: #118fff;
+  background: #426ab3;
   border-bottom: 1px solid#ddd;
   color: #fff;
 }

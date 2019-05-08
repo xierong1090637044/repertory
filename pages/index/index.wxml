@@ -1,68 +1,34 @@
-<!--pages/index/index.wxml-->
-<!-- <view hidden='{{!noticeShow}}'> -->
-<view bindtap='skip'>
-    <i-notice-bar icon="systemprompt">
-      不会操作的可以添加本人微信xierong1090637044。
-    </i-notice-bar>
+<!--当月详情-->
+<view>
+  <swiper indicator-dots="true" indicator-active-color="#fff" class='swiper' autoplay='true'>
+  <block>
+    <swiper-item class="item">
+      <view class='every_item'>
+        <view class='s_num'>{{total_reserve}}</view>
+        <view>库存总量</view>
+      </view>
+      <view class='every_item'>
+        <view class='s_num'>{{total_money}}</view>
+        <view>库存成本</view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper> 
 </view>
-<!-- </view> -->
-<view class='index-container'>
-  <view class='instruction'>
-    <view bindtap='handleInstruction'>
-      <i-icon type="feedback" size="17"/>使用说明
-    </view>
-  </view>
-  <view class='title'>
-     <image class="title-image" src="/images/authorize/title.png"></image>
-  </view>
-  <view class='content'>
-    <view class='bd'>
-      <swiper class='module' indicator-dots="true" circular="true" indicator-active-color="#118fff">
-        <swiper-item>
-          <i-row>
-            <i-col span="8" i-class="padded-5" wx:for="{{firstlyModules}}" wx:key="unique">
-              <navigator url='{{item.url}}'>
-                <i-grid i-class="module-grid">
-                  <i-grid-item>
-                      <i-grid-icon i-class='module-grid-icon'>
-                        <image src="{{item.icon}}" />
-                      </i-grid-icon>
-                      <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
-                  </i-grid-item>
-                </i-grid>
-              </navigator>
-            </i-col>
-          </i-row>
-        </swiper-item>
 
-        <swiper-item>
-          <i-row>
-            <i-col span="8" i-class="padded-5" wx:for="{{secondaryModules}}" wx:key="unique">
-              <navigator url='{{item.url}}'>
-                <i-grid i-class="module-grid">
-                  <i-grid-item>
-                      <i-grid-icon i-class='module-grid-icon'>
-                        <image src="{{item.icon}}" />
-                      </i-grid-icon>
-                      <i-grid-label class='label-style'>{{item.name}}</i-grid-label>
-                  </i-grid-item>
-                </i-grid>
-              </navigator>
-            </i-col>
-          </i-row>
-          </swiper-item>
+<i-notice-bar icon="systemprompt" loop>
+    系统正在改版中。。。有好的建议可以联系微信xierong1090637044
+</i-notice-bar>
 
-      </swiper>
-    </view>
-  </view>
+<!--操作列表-->
+<view class='o_list'>
+  <navigator wx:for="{{optionsLists}}" wx:key="{{index}}" class='o_item' url="{{item.url}}">
+    <view style='width:100%'><image src='{{item.icon}}' class='o_image'/></view>
+    <view class='o_text'>{{item.name}}</view>
+  </navigator>
+</view>
 
-  <view class='scan_code' bindtap='scan_code'>
+<view class='scan_code' bindtap='scan_code'>
      <i class="iconfont icon-saomiao icon-scan"></i>
      <text>扫描产品条形码</text>
   </view>
-
-  <view class='scan_notice'>（不可以从相册选取）</view>
-
-</view>
-<view class='every' style='height:{{height}}'></view>
-<!--<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>-->

@@ -1,5 +1,5 @@
 {
-  "pages": [ 
+  "pages": [
     "pages/index/index",
     "pages/detail_finance/detail_finance",
     "pages/producer/producer",
@@ -47,13 +47,13 @@
   ],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#118fff",
+    "navigationBarBackgroundColor": "#426ab3",
     "navigationBarTitleText": "库存助手",
     "backgroundColor": "#fff"
   },
   "tabBar": {
     "color": "#000",
-    "selectedColor": "#118fff",
+    "selectedColor": "#426ab3",
     "backgroundColor": "#fff",
     "borderStyle": "white",
     "list": [
@@ -84,5 +84,6 @@
     "i-icon": "component/icon/index",
     "i-tab": "component/tab/index",
     "i-tabs": "component/tabs/index"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

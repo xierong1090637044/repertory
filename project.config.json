@@ -18,6 +18,8 @@
 	"appid": "wxeda1947acb39aab6",
 	"projectname": "respertory",
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

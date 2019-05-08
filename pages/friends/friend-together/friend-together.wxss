@@ -27,7 +27,7 @@
   width: 170rpx;
   height: 170rpx;
   border-radius: 50%;
-  border: 1px solid #118FFF;/*描边*/
+  border: 1px solid #426ab3;/*描边*/
 }
 
 .sex{
@@ -42,7 +42,7 @@
   right: 290rpx;
   margin-top: 70rpx;
   border-radius: 50%;
-  border: 1px solid #118FFF;/*描边*/
+  border: 1px solid #426ab3;/*描边*/
 }
 
 .username{

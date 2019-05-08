@@ -5,7 +5,7 @@
 }
 .add_class
 {
-  background: #118fff;
+  background: #426ab3;
   margin: 15px;
   width: calc(100% - 30px);
   padding: 15px 0;

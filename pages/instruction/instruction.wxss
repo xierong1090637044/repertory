@@ -29,8 +29,8 @@
 .version-text{
     font-size: 10pt;
     line-height: 100%;
-    color: #118fff;
-    border: 1px solid #118fff;
+    color: #426ab3;
+    border: 1px solid #426ab3;
     padding: 5rpx 10rpx;
     border-radius: 5rpx;
     margin-left: 10rpx;
@@ -39,7 +39,7 @@
 .version-log-link{
     position: relative;
     font-size: 12pt;
-    color: #118fff;
+    color: #426ab3;
 }
 .version-log-link:active{
     opacity: .8;
