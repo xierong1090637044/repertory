@@ -1,4 +1,4 @@
-// pages/second/producer/producer_add/producerm_add.js
+// pages/second/producer/producer_add.js
 Page({
 
   /**

@@ -50,6 +50,7 @@ Page({
   onLoad: function (options) {
     that = this;
     custom_id = options.custom_id;
+    //console.log(custom_id)
   },
 
   /*** 生命周期函数--监听页面初次渲染完成*/
