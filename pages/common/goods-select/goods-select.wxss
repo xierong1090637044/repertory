@@ -1,6 +1,21 @@
 .wrap_overflow
 {
-  height:calc(100vh - 158px);
+  height:calc(100vh - 132px);
   overflow-y:scroll !important;
   background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.display_flex
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 10px 0 10px 10px;
+  border-bottom: 1px solid#ddd;
+}
+.btn-group
+{
+  width: 120px;
 }

@@ -3,7 +3,7 @@
         <i-button i-class="i-page-button" type="ghost" bindclick="handlePrev" disabled="{{ current === 1 }}"><slot name="prev"></slot></i-button>
     </view>
     <view class="i-page-number" wx:if="{{ mode !== 'pointer' && !simple }}">
-        <view class="i-page-number-current">{{ current }}</view>/{{total}}
+        <view class="i-page-number-current">{{ current }}</view><span wx:if="{{total !=''}}">/{{total}}</span>
     </view>
     <view class="i-page-pointer" wx:if="{{ mode === 'pointer' }}">
         <view class="i-page-pointer-dot {{ (index + 1) === current ? 'current' : '' }}" wx:for="{{ total }}" wx:key="index"></view>

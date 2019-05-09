@@ -33,6 +33,27 @@ Page({
     page: 1,//限制的页数
   },
 
+  //页码改变
+  handlePageChange({ detail }) {
+    let type = detail.type;
+    if (type === 'next') {
+      if (that.data.length < that.data.limitPage) {
+        wx.showToast({ icon: 'none', title: '最后一页了', })
+      } else {
+        that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1, current: [], currGoods: [] })
+        that.loadGoods(type, null, select_id);
+      }
+    } else if (type === 'prev') {
+
+      this.setData({
+        page: this.data.page - 1,
+        current: [], currGoods: []
+      });
+      
+      that.loadGoods(type, null, select_id);
+    }
+  },
+
   //选择产品类别
   bindclass_Change: function (e) {
     var index = e.detail.value;
@@ -165,6 +186,7 @@ Page({
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     query.limit(that.data.limitPage);
+    query.skip(that.data.limitPage * (that.data.page - 1));
     query.descending("goodsName"); //按照货物名字
     query.include("userId");
     query.find({
@@ -210,26 +232,12 @@ Page({
     //设置数据
     data = data || [];
     this.setData({
-      goods: this.data.goods.concat(data),
+      goods: data,
       totalGoods: data,
       spinShow: false,
     });
   },
   
-
-  //滚动加载更多
-  loadMore: function () {
-    var that = this;
-    if (that.data.length < that.data.limitPage) {
-      wx.showToast({
-        icon: 'none',
-        title: '到底啦',
-      })
-    } else {
-      that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1 })
-      that.loadGoods(type, null, select_id);
-    }
-  },
 
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {

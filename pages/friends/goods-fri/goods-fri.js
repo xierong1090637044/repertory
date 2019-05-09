@@ -31,6 +31,24 @@ Page({
     page: 1,//限制的页数
   },
 
+  //页码改变
+  handlePageChange({ detail }) {
+    const type = detail.type;
+    if (type === 'next') {
+      if (that.data.length < that.data.limitPage) {
+        wx.showToast({ icon: 'none', title: '最后一页了', })
+      } else {
+        that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1 })
+        that.loadGoods(type, null, select_id);
+      }
+    } else if (type === 'prev') {
+      this.setData({
+        page: this.data.page - 1
+      });
+      that.loadGoods(type, null, select_id);
+    }
+  },
+
   //选择库存情况
   bindstock_Change: function (e) {
     if (e.detail.value == "0") {
@@ -240,6 +258,7 @@ Page({
     if (class_id != null) query.equalTo("goodsClass", class_id);
 
     query.limit(that.data.limitPage);
+    query.skip(that.data.limitPage * (that.data.page - 1));
     query.descending("goodsName"); //按照时间降序
     query.include("userId");
     query.include("goodsClass");
@@ -271,6 +290,7 @@ Page({
             tempGoods.retailPrice = res[i].get("retailPrice") || 0;
             tempGoods.class_text = res[i].get("goodsClass") || '';
             tempGoods.product_info = res[i].get("product_info") || '';
+            tempGoods.warning_num = res[i].get("warning_num") || 0;
             tempGoodsArr.push(tempGoods);
           }
           that.handleData(tempGoodsArr);
@@ -284,24 +304,11 @@ Page({
     //设置数据
     data = data || [];
     this.setData({
-      goods: this.data.goods.concat(data),
+      goods:data,
       spinShow: false
     });
   },
 
-  //滚动加载更多
-  loadMore: function () {
-    var that = this;
-    if (that.data.length < that.data.limitPage) {
-      wx.showToast({
-        icon: 'none',
-        title: '到底啦',
-      })
-    } else {
-      that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1 })
-      that.loadGoods(type, null, select_id);
-    }
-  },
 
   //重置
   handleResetData: function () {

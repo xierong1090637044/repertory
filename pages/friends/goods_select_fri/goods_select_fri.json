@@ -6,6 +6,7 @@
     "i-panel": "../../../component/panel/index",
     "i-spin": "../../../component/spin/index",
     "i-message": "../../../component/message/index",
-    "i-tabs": "../../../component/tabs/index"
+    "i-tabs": "../../../component/tabs/index",
+    "i-page": "../../../component/page/index"
   }
 }

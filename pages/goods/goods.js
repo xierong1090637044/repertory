@@ -34,6 +34,24 @@ Page({
     now_goodsName:""
   },
 
+  //页码改变
+  handlePageChange({ detail }) {
+    const type = detail.type;
+    if (type === 'next') {
+      if (that.data.length < that.data.limitPage) {
+        wx.showToast({icon: 'none',title: '最后一页了',})
+      } else {
+        that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1 })
+        that.loadGoods(type, null, select_id);
+      }
+    } else if (type === 'prev') {
+      this.setData({
+        page: this.data.page - 1
+      });
+      that.loadGoods(type, null, select_id);
+    }
+  },
+
   //选择库存情况
   bindstock_Change: function (e) {
     if (e.detail.value == "0") {
@@ -288,7 +306,7 @@ Page({
   handleData: function (data) {
     //console.log(data)
     this.setData({
-      goods:this.data.goods.concat(data),
+      goods:data,
       spinShow: false
     });
   },

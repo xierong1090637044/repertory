@@ -9,6 +9,7 @@
 </view>
 
 <view wx:else>
+<view class='display_flex'>
 <view class="search-view">
   <view class="search-bar">
     <view class="search-bar-form">
@@ -28,6 +29,13 @@
   </view>
 </view>
 <!--/.搜索-->
+  <view class='btn-group' bindtap='link2page'>
+    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+      确认选择
+    </button>
+  </view>
+</view>
+
 
 <!--*筛选器*-->
   <view class='select'>
@@ -57,19 +65,20 @@
     <text>暂无数据</text>
   </view>
 
-  <scroll-view wx:else class='wrap_overflow' scroll-y="true" bindscrolltolower = "loadMore" lower-threshold="20px">
-    <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
-      <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
-      </i-checkbox>
-    </i-checkbox-group>
-  </scroll-view>
+  <view wx:else style='width:100%'>
+    <scroll-view class='wrap_overflow' scroll-y="true" lower-threshold="0">
+      <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
+        <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
+        </i-checkbox>
+      </i-checkbox-group>
+    </scroll-view>
+    <i-page current="{{ page }}" bind:change="handlePageChange">
+      <view slot="prev">上一页</view>
+      <view slot="next">下一页</view>
+    </i-page>
+  </view>
+  
 
 </view>
-
-  <view class='btn-group' bindtap='link2page'>
-    <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      确认选择
-    </button>
-  </view>
 
 </view>
