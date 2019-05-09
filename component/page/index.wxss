@@ -1,9 +1,9 @@
-.i-page{display:block;width:74%;height:22px;overflow:hidden;box-sizing:border-box;position:relative;margin:0 13%}
+.i-page{display:block;width:74%;height:24px;overflow:hidden;box-sizing:border-box;position:relative;margin:0 13%}
 .i-page-prev{position:absolute;left:10px;top:0}
 .i-page-next{position:absolute;right:10px;top:0}
-.i-page-number{width:100%;height:22px;line-height:22px;margin:0 auto;text-align:center}
+.i-page-number{width:100%;height:24px;line-height:24px;margin:0 auto;text-align:center}
 .i-page-number-current{display:inline;color:#426ab3}
-.i-page-pointer{width:100%;height:22px;line-height:22px;margin:0 auto;text-align:center}
+.i-page-pointer{width:100%;height:24px;line-height:24px;margin:0 auto;text-align:center}
 .i-page-pointer-dot{display:inline-block;width:8px;height:8px;margin:0 2px;border-radius:50%;background:#bbbec4}
 .i-page-pointer-dot.current{background:#80848f}
-.i-page-button{display:inline-block;margin:0!important;height:22px !important;line-height:22px !important;font-size: 12px !important;}
+.i-page-button{display:inline-block;margin:0!important;height:24px !important;line-height:24px !important;font-size: 15px !important;}

@@ -1,6 +1,6 @@
 .wrap_overflow
 {
-  height:calc(100vh - 132px);
+  height:calc(100vh - 142px);
   overflow-y:scroll !important;
   background-color: #fff;
   margin-bottom: 10px;
