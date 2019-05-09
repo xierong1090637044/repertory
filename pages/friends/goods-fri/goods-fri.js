@@ -18,7 +18,6 @@ Page({
   data: {
     spinShow: true,
     goods: [],
-    limitPage: 50,//限制显示条数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了
     totalGoods: [],
@@ -27,6 +26,9 @@ Page({
     inputVal: "",
     current: '1',
     length: null,
+
+    limitPage: 50,//限制条数
+    page: 1,//限制的页数
   },
 
   //选择库存情况
@@ -248,42 +250,41 @@ Page({
           that.setData({ contentEmpty: true })
         } else {
           that.setData({ contentEmpty: false })
-        }
 
-        var tempGoodsArr = new Array();
-        for (var i = 0; i < res.length; i++) {
-          var tempGoods = {}
-          tempGoods.userid = userid || '';
-          tempGoods.userName = res[i].get("userId").username || '';
-          tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
-          tempGoods.goodsId = res[i].id || '';
-          tempGoods.goodsName = res[i].get("goodsName") || '';
-          tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
-          tempGoods.regNumber = res[i].get("regNumber") || '';
-          tempGoods.producer = res[i].get("producer") || '';
-          tempGoods.productCode = res[i].get("productCode") || '';
-          tempGoods.packageContent = res[i].get("packageContent") || '';
-          tempGoods.packingUnit = res[i].get("packingUnit") || '';
-          tempGoods.packModel = res[i].get("packModel") || '';
-          tempGoods.reserve = res[i].get("reserve") || 0;
-          tempGoods.costPrice = res[i].get("costPrice") || 0;
-          tempGoods.retailPrice = res[i].get("retailPrice") || 0;
-          tempGoods.class_text = res[i].get("goodsClass") || '';
-          tempGoods.product_info = res[i].get("product_info") || '';
-          tempGoodsArr.push(tempGoods);
+          var tempGoodsArr = new Array();
+          for (var i = 0; i < res.length; i++) {
+            var tempGoods = {}
+            tempGoods.userid = userid || '';
+            tempGoods.userName = res[i].get("userId").username || '';
+            tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
+            tempGoods.goodsId = res[i].id || '';
+            tempGoods.goodsName = res[i].get("goodsName") || '';
+            tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
+            tempGoods.regNumber = res[i].get("regNumber") || '';
+            tempGoods.producer = res[i].get("producer") || '';
+            tempGoods.productCode = res[i].get("productCode") || '';
+            tempGoods.packageContent = res[i].get("packageContent") || '';
+            tempGoods.packingUnit = res[i].get("packingUnit") || '';
+            tempGoods.packModel = res[i].get("packModel") || '';
+            tempGoods.reserve = res[i].get("reserve") || 0;
+            tempGoods.costPrice = res[i].get("costPrice") || 0;
+            tempGoods.retailPrice = res[i].get("retailPrice") || 0;
+            tempGoods.class_text = res[i].get("goodsClass") || '';
+            tempGoods.product_info = res[i].get("product_info") || '';
+            tempGoodsArr.push(tempGoods);
+          }
+          that.handleData(tempGoodsArr);
         }
-        that.handleData(tempGoodsArr);
       }
     })
   },
 
   //数据存储
   handleData: function (data) {
-    let page = this.data.currentPage + 1;
     //设置数据
     data = data || [];
     this.setData({
-      goods: page === 1 || page === undefined ? data : this.data.goods.concat(data),
+      goods: this.data.goods.concat(data),
       spinShow: false
     });
   },
@@ -297,7 +298,7 @@ Page({
         title: '到底啦',
       })
     } else {
-      that.setData({ limitPage: that.data.limitPage + that.data.limitPage, })
+      that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1 })
       that.loadGoods(type, null, select_id);
     }
   },
