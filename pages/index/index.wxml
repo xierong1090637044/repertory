@@ -4,12 +4,30 @@
   <block>
     <swiper-item class="item">
       <view class='every_item'>
+        <view class='s_num'>{{get_reserve}}</view>
+        <view>今日入库</view>
+      </view>
+      <view class='every_item'>
+        <view class='s_num'>{{out_reserve}}</view>
+        <view>今日出库</view>
+      </view>
+    </swiper-item>
+
+    <swiper-item class="item">
+      <view class='every_item'>
         <view class='s_num'>{{total_reserve}}</view>
         <view>库存总量</view>
       </view>
       <view class='every_item'>
         <view class='s_num'>{{total_money}}</view>
         <view>库存成本</view>
+      </view>
+    </swiper-item>
+
+    <swiper-item class="item">
+      <view class='every_item'>
+        <view class='s_num'>{{total_products}}</view>
+        <view>库存种类</view>
       </view>
     </swiper-item>
   </block>
