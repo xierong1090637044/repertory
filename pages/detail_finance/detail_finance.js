@@ -1,8 +1,10 @@
 // pages/detail_finance/detail_finance.js
-const Bmob = require('../../utils/bmob_new.js');
-var that;
-var selectd_start_data;
-var selectd_end_data;
+let Bmob = require('../../utils/bmob_new.js');
+var charts = require('../../utils/charts.js');
+let that;
+let selectd_start_data;
+let selectd_end_data;
+let finChart;
 Page({
 
   /*** 页面的初始数据*/
@@ -16,29 +18,15 @@ Page({
   //选择开始日期
   bindDateChange(e) {
     selectd_start_data = e.detail.value + " 00:00:00";
-    that.setData({ selectd_start_data: e.detail.value,  spinShow: true});
+    that.setData({ selectd_start_data: e.detail.value, show_start_data: e.detail.value,spinShow: true});
     that.gettoday_detail();
-    that.get_operation_detail();
   },
 
   //选择结束日期
   bindDate_endChange(e) {
     selectd_end_data = e.detail.value + " 00:00:00";
-    that.setData({ selectd_end_data: e.detail.value,  spinShow: true});
+    that.setData({ selectd_end_data: e.detail.value, show_end_data: e.detail.value,spinShow: true});
     that.gettoday_detail();
-    that.get_operation_detail();
-  },
-
-  //tab改变
-  handleChange({ detail }) {
-    this.setData({
-      current: detail.key,
-    });
-    if (detail.key == 1) {
-      that.setData({view1:"block",view2:"none"})
-    } else {
-      that.setData({ view1: "none", view2: "block" })
-    }
   },
 
   //得到今日概况
@@ -82,8 +70,6 @@ Page({
         out_reserve_get_num: out_reserve_num - out_reserve_real_money,
         });
 
-      that.get_operation_detail(1);
-
        //查询当日应收和实际收款
       var should_get_money = 0;
       var real_get_money = 0;
@@ -108,22 +94,10 @@ Page({
     });
   },
 
-  //得到操作记录
-  get_operation_detail: function () {
-    const query = Bmob.Query("Bills");
-    query.equalTo("userId", "==", wx.getStorageSync("userid"));
-    query.equalTo("createdAt", ">=", selectd_start_data);
-    query.equalTo("createdAt", "<", selectd_end_data);
-    query.include("goodsId");
-    query.find().then(res => {
-      //console.log(res);
-      that.setData({ bill_his: res, spinShow: false });
-    });
-  },
-
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
+
     selectd_start_data = that.getDay(0);
     selectd_end_data = that.getDay(1);
 
@@ -132,6 +106,8 @@ Page({
     that.setData({
       selectd_start_data: selectd_start_data,
       selectd_end_data: selectd_end_data,
+      show_start_data : that.getshowDay(0),
+      show_end_data : that.getshowDay(1),
       view1: "block",
       view2: "none"
     })
@@ -144,7 +120,7 @@ Page({
 
   /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-
+    
   },
 
   getDay: function (day) {
@@ -158,6 +134,19 @@ Page({
     tMonth = that.handleMonth(tMonth + 1);
     tDate = that.handleMonth(tDate);
     return tYear + "-" + tMonth + "-" + tDate + " " + "00:00:00";
+  },
+
+  getshowDay: function (day) {
+    var that = this;
+    var today = new Date();
+    var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+    today.setTime(targetday_milliseconds);
+    var tYear = today.getFullYear();
+    var tMonth = today.getMonth();
+    var tDate = today.getDate();
+    tMonth = that.handleMonth(tMonth + 1);
+    tDate = that.handleMonth(tDate);
+    return tYear + "-" + tMonth + "-" + tDate;
   },
 
   handleMonth: function (month) {

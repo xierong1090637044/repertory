@@ -5,7 +5,7 @@
     <view class="section">
       <picker bindchange="bindDateChange" value="{{index}}" range-key="name" range="{{array}}" mode = "date">
         <view class="picker">
-          <text>{{selectd_start_data}}</text>
+          <text>{{show_start_data}}</text>
           <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
         </view>
       </picker>
@@ -14,17 +14,12 @@
     <view class="section">
       <picker bindchange="bindDate_endChange" value="{{index}}" range-key="name" range="{{array}}" mode = "date">
         <view class="picker">
-          <text>{{selectd_end_data}}</text>
+          <text>{{show_end_data}}</text>
           <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
         </view>
       </picker>
     </view>
   </view>
-
-  <!--<i-tabs current="{{ current }}" bindchange="handleChange">
-      <i-tab key="1" title="详情"></i-tab>
-      <i-tab key="2" title="当天记录"></i-tab>
-  </i-tabs>-->
 
   <view style='display:{{view1}}'>
   <view class='text_desicbe'>概况：</view>
@@ -63,44 +58,3 @@
   </view>
   </view>
 
-
-<!--<view class='all_list' style='display:{{view2}}'>
-   <view wx:for="{{bill_his}}" wx:key="{{index}}" class='list_item'>
-      <view class='list_style'>
-        <view wx:if="{{item.type == 1}}"><text class='text_color'>入库商品：</text>{{item.goodsName}}</view>
-        <view wx:elif="{{item.type == 2}}"><text class='text_color'>退货商品：</text>{{item.goodsName}}</view>
-        <view wx:elif="{{item.type == 3}}"><text class='text_color'>盘点商品：</text>{{item.goodsName}}</view>
-        <view wx:else>
-           <text class='text_color'>出库商品：</text>{{item.goodsName}}
-        </view>
-
-        <view wx:if="{{item.type == 1}}"><text class='text_color'>入库数量：</text>{{item.num}}</view>
-        <view wx:elif="{{item.type == 2}}"><text class='text_color'>入库数量：</text>{{item.num}}</view>
-        <view wx:elif="{{item.type == 3}}"><text class='text_color'>盘点后数量：</text>{{item.now_reserve}}</view>
-        <view wx:else><text class='text_color'>出库数量：</text>{{item.num}}</view>
-      </view>
-
-      <view class='list_style'>
-        <view wx:if="{{item.type == 1}}">
-            <text class='text_color'>入库单价：</text>
-            ￥{{item.retailPrice}}
-            <text>(成本价：￥{{item.goodsId.costPrice}})</text>
-        </view>
-        <view wx:elif="{{item.type == 2}}">
-            <text class='text_color'>成本价：</text>￥{{item.goodsId.costPrice}}
-        </view>
-        <view wx:elif="{{item.type == 3}}"></view>
-        <view wx:else>
-          <text class='text_color'>出库单价：</text>
-          ￥{{item.retailPrice}}
-          <text>(成本价：￥{{item.goodsId.costPrice}})</text>
-        </view>
-
-        <view wx:if="{{item.type == 1}}">操作类型：<text class='color2'>入库</text></view>
-        <view wx:elif="{{item.type == -1}}">操作类型：<text class='color2'>出库</text></view>
-        <view wx:elif="{{item.type == 2}}">操作类型：<text class='color1'>退货</text></view>
-        <view wx:elif="{{item.type == 3}}">操作类型：<text class='color1'>盘点</text></view>
-      </view>
-
-   </view>
-</view>-->
