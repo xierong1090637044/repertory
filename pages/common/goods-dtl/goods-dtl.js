@@ -44,29 +44,37 @@ Page({
   handlePreviewImage: function (e) {
     var single_code = e.target.dataset.qrcode;
     var type = e.target.dataset.type;
-    wx.showLoading({ title: '加载中...' })
-    wx.request({
-      url: 'https://route.showapi.com/1129-1',
-      data: {
-        showapi_appid: '84916',
-        showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
-        content: single_code+"-"+type,
-        height: "40",
-        width: "125"
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
+
+    wx.showActionSheet({
+      itemList: ['二维码', '条形码'],
       success(res) {
-        wx.hideLoading();
-        wx.previewImage({
-          current: res.data.showapi_res_body.imgUrl,
-          urls: [res.data.showapi_res_body.imgUrl]
-        })
+        console.log(res.tapIndex)
+ 
+          wx.showLoading({ title: '加载中...' })
+          wx.request({
+            url: (res.tapIndex == 0) ? 'https://route.showapi.com/887-1' : 'https://route.showapi.com/1129-1',
+            data: {
+              showapi_appid: '84916',
+              showapi_sign: 'ad4b63369c834759b411a9d7fcb07ed7',
+              content: single_code + "-" + type,
+              height: "80",
+            },
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success(res) {
+              wx.hideLoading();
+              wx.previewImage({
+                current: res.data.showapi_res_body.imgUrl,
+                urls: [res.data.showapi_res_body.imgUrl]
+              })
+            }
+          });
+      },
+      fail(res) {
+        console.log(res.errMsg)
       }
-    });
-   
-    
+    })
   },
 
   /*** 生命周期函数--监听页面加载*/
