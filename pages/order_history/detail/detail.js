@@ -32,7 +32,7 @@ Page({
     const query = Bmob.Query('order_opreations');
     query.include("opreater", "custom","producer");
     query.get(id).then(res => {
-      //console.log(res);
+      console.log(res);
       that.setData({detail:res});
       const query = Bmob.Query('order_opreations');
       query.include("goodsId");
@@ -57,6 +57,10 @@ Page({
           wx.showLoading({ title: '撤销中...'})
           const query = Bmob.Query('order_opreations');
           query.destroy(that.data.detail.objectId).then(res => {
+            if (that.data.detail.debt > 0) {
+              that.delete_custom();
+            }
+           
             for (var i = 0; i < that.data.products.length; i++) {
               that.delete_bill(i);
             }
@@ -69,6 +73,7 @@ Page({
     
   },
 
+  //删除单据
   delete_bill:function(i)
   {
     var product = that.data.products[i];
@@ -93,6 +98,16 @@ Page({
         }
       })
     });
+  },
+
+  //如果客户有欠款则删除欠款
+  delete_custom: function ()
+  {
+    console.log(that.data.detail.custom.objectId)
+    const query1 = Bmob.Query('customs');
+    query1.set('id', that.data.detail.custom.objectId);
+    query1.set('debt', that.data.detail.custom.debt - that.data.detail.debt);
+    query1.save();
   }
 
 })
