@@ -1,17 +1,17 @@
 // pages/goods/goods.js
-const Bmob = require('../../utils/bmob.js');
-const Bmob_new = require('../../utils/bmob_new.js')
-var config = require('../../utils/config.js')
-var _ = require('../../utils/we-lodash.js');
-var userid = '';
-var now_product;
-var class_text;
-var that;
-var type;//库存情况
-var class_array;//产品类别
-var select_id = null;//类别选择的id
-var bad_num = null;//货损数量
-var beizhu_text = '';//备注信息
+let Bmob = require('../../utils/bmob.js');
+let Bmob_new = require('../../utils/bmob_new.js')
+let config = require('../../utils/config.js')
+let _ = require('../../utils/we-lodash.js');
+let userid = '';
+let now_product;
+let class_text;
+let that;
+let type;//库存情况
+let class_array;//产品类别
+let select_id = null;//类别选择的id
+let bad_num = null;//货损数量
+let beizhu_text = '';//备注信息
 Page({
 
   /**

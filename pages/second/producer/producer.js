@@ -41,7 +41,8 @@ Page({
 
     var name = e.detail.value;
     const query = Bmob.Query("producers");
-    (name == '') ? that.getproducer_list() : query.equalTo("producer_name", "==", name);
+    (name == '') ? that.getproducer_list() : query.equalTo("producer_name", "==", { "$regex": "" + name + ".*" });
+    query.equalTo("parent", "==", userId);
     query.find().then(res => {
       if (res.length == 0) {
         that.setData({

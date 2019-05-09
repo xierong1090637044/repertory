@@ -34,7 +34,7 @@ Page({
       for (var i = 0; i < res.length; i++) {
         total_reserve = total_reserve + res[i].reserve;
         total_money = total_money + res[i].reserve * res[i].costPrice;
-        if(i == (res.length - 1))
+        if (i == (res.length - 1) && res.length == 500)
         {
           const query = Bmob.Query("Goods");
           query.equalTo("userId", "==", wx.getStorageSync("userid"));
@@ -47,7 +47,7 @@ Page({
             }
           })
           that.setData({ total_reserve: total_reserve, total_money: total_money, total_products: res.length });
-        }
+        } else { that.setData({ total_reserve: total_reserve, total_money: total_money, total_products: res.length });}
       }
       
     });

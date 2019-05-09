@@ -47,7 +47,8 @@ Page({
       that.getcustom_list(userId);
     }else{
       const query = Bmob.Query("customs");
-      query.equalTo("custom_name", "==", name);
+      query.equalTo("custom_name", "==", { "$regex": "" + name + ".*" });
+      query.equalTo("parent", "==", userId);
       query.order("custom_type");
       query.find().then(res => {
         if (res.length == 0) {
