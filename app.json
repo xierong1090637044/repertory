@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/common/goods-dtl/goods-dtl",
     "pages/index/index",
     "pages/detail_finance/detail_finance",
     "pages/producer/producer",
     "pages/friends/friends",
     "pages/authorize/authorize",
     "pages/common/goods-select/goods-select",
-    "pages/common/goods-dtl/goods-dtl",
+    
     "pages/instruction/instruction",
     "pages/finance/finance",
     "pages/delivery/delivery",

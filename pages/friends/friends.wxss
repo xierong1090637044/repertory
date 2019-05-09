@@ -27,6 +27,16 @@
 }
 .wrap-2
 {
-  height:calc(100vh - 184px);
+  height:calc(100vh - 194px);
   overflow:scroll;
+}
+.no-data
+{
+  flex: unset !important;
+  height:calc(100vh - 194px);
+}
+
+.btn-group
+{
+  margin-top:10px;
 }
