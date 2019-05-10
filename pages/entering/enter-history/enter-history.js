@@ -1,7 +1,8 @@
 // pages/delivery/delivery-history/delivery-history.js
-var Bmob = require('../../../utils/bmob.js');
-var Bmob_new = require('../../../utils/bmob_new.js');
-var that;
+let Bmob = require('../../../utils/bmob.js');
+let Bmob_new = require('../../../utils/bmob_new.js');
+let config = require('../../../utils/config.js');
+let that;
 
 let masterid = wx.getStorageSync("userid");
 let userid = wx.getStorageSync("userid");
@@ -55,12 +56,12 @@ Page({
 
   /** 生命周期函数--监听页面隐藏 */
   onHide: function () {
-
+    
   },
 
   /*** 生命周期函数--监听页面卸载*/
   onUnload: function () {
-
+    config.record_data(that.data.goods, 1);
   },
 
   /*** 页面相关事件处理函数--监听用户下拉动作*/
@@ -196,8 +197,4 @@ Page({
       });
   },
 
-  //确认入库点击
-  confrim_delivery: function () {
-
-  }
 })

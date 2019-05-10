@@ -1,7 +1,8 @@
 // pages/delivery/delivery-history/delivery-history.js
-var Bmob = require('../../../utils/bmob.js');
-var Bmob_new = require('../../../utils/bmob_new.js');
-var that;
+let Bmob = require('../../../utils/bmob.js');
+let Bmob_new = require('../../../utils/bmob_new.js');
+let config = require('../../../utils/config.js');
+let that;
 Page({
 
   /*** 页面的初始数据*/
@@ -61,7 +62,7 @@ Page({
 
   /*** 生命周期函数--监听页面卸载*/
   onUnload: function () {
-
+    config.record_data(that.data.goods,-1);
   },
 
   /*** 页面相关事件处理函数--监听用户下拉动作*/
@@ -238,5 +239,7 @@ Page({
   confrim_delivery:function()
   {
     
-  }
+  },
+
+  
 })
