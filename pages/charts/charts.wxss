@@ -16,4 +16,11 @@ ff-canvas {
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  padding-bottom:unset !important;
+
 } 
+.chart
+{
+  height: 50%;
+  background: #fff;
+}

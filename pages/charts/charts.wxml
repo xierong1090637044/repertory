@@ -1,4 +1,4 @@
 <!--index.wxml-->
 <view class="container">
-  <ff-canvas id="area" canvas-id="area" opts="{{ opts }}"></ff-canvas>
+  <ff-canvas id="area" canvas-id="area" opts="{{ opts }}" class='chart'></ff-canvas>
 </view>
