@@ -113,6 +113,7 @@ Page({
                     results.set("packingUnit", goodsForm.packingUnit);
                     results.set("reserve", Number(goodsForm.reserve));
                     results.set("product_info", goodsForm.product_info);
+                    results.set("warning_num", Number(goodsForm.warning_num));
                     results.set("stocktype", (Number(goodsForm.reserve) > Number(goodsForm.warning_num)) ? 1 : 0);
                     results.save(null, {
                       success: function (result) {
@@ -130,15 +131,11 @@ Page({
                             query.set('id', result.id) //需要修改的objectId
                             query.set('goodsIcon', JSON.parse(res[0]).url);
                             query.save().then(res => {
-                              console.log(res)
+                              //console.log(res)
+                              that.setData({loading: false})
                               wx.showToast({
                                 title: '修改产品成功',
                                 icon: 'success',
-                                success: function () {
-                                  that.setData({
-                                    loading: false
-                                  })
-                                }
                               })
                             }).catch(err => {
                               console.log(err)

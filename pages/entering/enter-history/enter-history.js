@@ -125,23 +125,20 @@ Page({
         for (var i = 0; i < res.length; i++) {
           operation_ids.push(res[i].id);
           if (i == (res.length - 1)) {
+            var currentUser = Bmob.User.current();
             //console.log("批量新增单据成功", res);
             const relation = Bmob_new.Relation('Bills'); // 需要关联的表
             const relID = relation.add(operation_ids);
 
             const pointer = Bmob_new.Pointer('_User')
-            const poiID = pointer.set(userid);
-            const pointer1 = Bmob_new.Pointer('_User')
-            const masterID = pointer1.set(masterid);
-
-            console.log(poiID, masterID);
+            const poiID = pointer.set(currentUser.id);
 
             const query = Bmob_new.Query('order_opreations');
             query.set("relations", relID);
             query.set("beizhu", that.data.beizhu_text);
             query.set("type", 1);
             query.set("opreater", poiID);
-            query.set("master", masterID);
+            query.set("master", poiID);
             query.set('goodsName', that.data.goods[0].goodsName);
             query.set('real_money', Number(that.data.real_money));
             query.set('debt', that.data.all_money - Number(that.data.real_money));
