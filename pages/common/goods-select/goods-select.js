@@ -10,6 +10,7 @@ var that;
 var type;//库存情况
 var class_array;//产品类别
 var select_id;//产品类别id
+let stockposition;//仓库选择
 Page({
 
   /*** 页面的初始数据*/
@@ -20,6 +21,7 @@ Page({
     goods: [],
     totalGoods: [],
     isEmpty: false,
+    selectd_stockposition: "存放位置",//存放位置
     // 搜索
     inputShowed: false,
     inputVal: "",
@@ -178,6 +180,7 @@ Page({
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
     if (class_id != null) query.equalTo("goodsClass", class_id);
+    if (stockposition != null) query.equalTo("stocks", stockposition.objectId);
     if (type == true) {
       query.equalTo("stocktype", 1);
     } else if (type == false) {
@@ -262,6 +265,15 @@ Page({
       selectd_stock: "库存情况",
       selectd_class: "产品类别"
     });
+
+    wx.getStorage({
+      key: 'stock',
+      success(res) {
+        stockposition = res.data
+        that.setData({ selectd_stockposition: res.data.stock_name })
+        that.loadGoods(type, null, select_id);
+      }
+    })
   },
 
   /**
@@ -274,6 +286,8 @@ Page({
   onUnload: function () {
     type = null;//库存情况
     select_id = null;//类别选择的id
+    stockposition = null;//选择的仓库
+    wx.removeStorageSync("stock");
   },
 
   /**

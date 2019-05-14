@@ -12,6 +12,7 @@ let class_array;//产品类别
 let select_id = null;//类别选择的id
 let bad_num = null;//货损数量
 let beizhu_text = '';//备注信息
+let stockposition;//仓库选择
 Page({
 
   /**
@@ -23,7 +24,8 @@ Page({
     limitPage: 50,//限制显示条数
     page:1,//限制的页数
     isEmpty: false, //当前查询出来的数据是否为空
-    isEnd: false, //是否到底了
+    isEnd: false, //是否到底了4
+    selectd_stockposition: "存放位置",//存放位置
     totalGoods: [],
     // 搜索
     inputShowed: false,
@@ -258,6 +260,7 @@ Page({
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     if (class_id != null) query.equalTo("goodsClass", class_id);
+    if (stockposition != null) query.equalTo("stocks", stockposition.objectId);
     
     query.limit(that.data.limitPage);
     query.skip(that.data.limitPage *(that.data.page - 1));
@@ -395,6 +398,15 @@ Page({
     }
 
     that.getclass_list();
+
+    wx.getStorage({
+      key: 'stock',
+      success(res) {
+        stockposition = res.data
+        that.setData({ selectd_stockposition: res.data.stock_name })
+        that.loadGoods(type, null, select_id);
+      }
+    })
   },
 
   /**
@@ -410,6 +422,8 @@ Page({
   onUnload: function () {
     type = null;//库存情况
     select_id = null;//类别选择的id
+    stockposition = null;//选择的仓库
+    wx.removeStorageSync("stock");
   },
 
   /**
