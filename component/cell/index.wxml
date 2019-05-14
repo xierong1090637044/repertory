@@ -5,7 +5,7 @@
     <view class="i-cell-bd">
         <view wx:if="{{ title }}" class="i-cell-text">{{ title }}</view>
         <view wx:if="{{ label }}" class="i-cell-desc">{{ label }}</view>
-        <slot></slot>
+        <slot name="extra"></slot>
     </view>
     <view catchtap="navigateTo" class="i-cell-ft">
         <block wx:if="{{value}}">{{ value }}</block>
