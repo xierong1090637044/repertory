@@ -65,7 +65,7 @@
         </view>
       </navigator>
     </view>
-    
+
   </view>
 
 <view style='display:flex'>
@@ -78,7 +78,7 @@
   <view wx:else style='width:100%'>
     <scroll-view class='wrap_overflow' scroll-y="true" lower-threshold="0">
       <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
-        <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
+        <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="库存：{{item.reserve}}" value="{{item.goodsName}}{{item.stocks.stock_name}}" wx:key="{{item.goodsId}}" extra_stock_value="存放位置：{{item.stocks.stock_name}}">
         </i-checkbox>
       </i-checkbox-group>
     </scroll-view>

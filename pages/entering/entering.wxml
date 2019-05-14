@@ -2,7 +2,7 @@
 <i-message id="message" />
 <view class='padded-t-10 extra' wx:if="{{!isEmpty}}">
   <view class='margin-b-10' wx:for="{{goods}}" wx:key="{{item.goodsId}}">
-    <i-card title="产品名称：{{item.goodsName}}" extra="当前库存：{{item.reserve}}">
+    <i-card title="产品名称：{{item.goodsName}}" extra="库存：{{item.reserve}}">
       <view slot="content">
         <view>产品规格：{{item.packageContent}}/{{item.packingUnit}}</view>
         <view style='display:{{is_showing_price}}'>进货价格：{{item.costPrice}}(元)</view>
@@ -10,6 +10,7 @@
             <view>实际进货价（可修改）：</view>
             <view><input placeholder='{{item.costPrice}}' bindinput='getrealprice' placeholder-class='input_label' class='input_label' data-idx="{{index}}"  type='digit'/></view>
         </view>
+        <view wx:if="{{item.stocks.stock_name}}">存放位置：{{item.stocks.stock_name}}</view>
         <view class='margin-t-5'>
         入库量：<i-input-number i-class="number" data-idx="{{index}}" value="{{ item.num }}" min="1" max="10000" bindchange="handleNumChange"/>
         <view class='del' bindtap='handleDel' data-idx="{{index}}">

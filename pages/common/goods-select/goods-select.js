@@ -155,7 +155,12 @@ Page({
     //取到当前点击的值
     var checkGoods = _.chain(that.data.goods)
       .filter(function (res) {
-        return res.goodsName == detail.value;
+        if (res.stocks.stock_name == null){
+          return res.goodsName == detail.value;
+        }else{
+          return (res.goodsName) + (res.stocks.stock_name) == detail.value;
+        }
+        
       })
       .map(function (res) {
         return res;
@@ -192,6 +197,7 @@ Page({
     query.skip(that.data.limitPage * (that.data.page - 1));
     query.descending("goodsName"); //按照货物名字
     query.include("userId");
+    query.include("stocks");
     query.find({
       success: function (res) {
         that.setData({ length: res.length });
@@ -223,6 +229,7 @@ Page({
           tempGoods.modify_retailPrice = res[i].get("retailPrice") || 0;
           tempGoods.modify_retailcostPrice = res[i].get("costPrice") || 0;
           tempGoods.warning_num = res[i].get("warning_num") || 0;
+          tempGoods.stocks = res[i].get("stocks") || 0;
           tempGoodsArr.push(tempGoods);
         }
         that.handleData(tempGoodsArr);

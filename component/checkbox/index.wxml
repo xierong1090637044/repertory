@@ -5,5 +5,6 @@
       <view>
           <view class="i-checkbox-title">{{another_value}}</view>
           <view class="i-checkbox-title">{{extra_value}}</view>
+           <view class="i-checkbox-title" wx:if="{{extra_stock_value !='存放位置：'}}">{{extra_stock_value}}</view>
       </view>
 </view>

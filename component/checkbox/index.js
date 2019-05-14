@@ -16,6 +16,10 @@ Component({
           type: String,
           value: ''
         },
+      extra_stock_value: {
+        type: String,
+        value: null
+      },
       another_value: {
         type: String,
         value: ''
