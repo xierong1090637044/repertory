@@ -4,7 +4,8 @@ const Bmob = require('../../../utils/bmob.js');
 const Bmob_new = require('../../../utils/bmob_new.js');
 const config = require('../../../utils/config.js');
 var temppath;
-var class_text;
+var class_text;//类别
+let stock;//仓库
 var that;
 Page({
 
@@ -87,10 +88,16 @@ Page({
                   var Goods = Bmob.Object.extend("Goods");
                   var goods = new Goods();
 
-                  if (that.data.goodsClass != '') {
+                  if (that.data.goodsClass != '') { //产品类别
                     var Class_User = Bmob.Object.extend("class_user");
                     var class_user = new Class_User();
                     class_user.id = that.data.goodsClass;
+                  }
+
+                  if (stock != null) { //产品存放仓库
+                    var Stocks = Bmob.Object.extend("stocks");
+                    var stocks = new Stocks();
+                    stocks.id = stock.objectId;
                   }
 
                   var user = new Bmob.User();
@@ -98,6 +105,7 @@ Page({
                   //判断产品是否已存在
                   var query = new Bmob.Query(Goods);
                   query.equalTo("goodsName", goodsForm.goodsName);
+                  if (stock != null) query.equalTo("stocks", stock.objectId);
                   query.equalTo("userId", user);
                   query.find({
                     success: function (results) {
@@ -115,6 +123,7 @@ Page({
                         // 添加产品
                         goods.set("userId", user);
                         if (that.data.goodsClass != '') { goods.set("goodsClass", class_user); }
+                        goods.set("stocks", stocks);
                         goods.set("goodsName", goodsForm.goodsName);
                         goods.set("regNumber", goodsForm.regNumber);
                         goods.set("producer", goodsForm.producer);
@@ -239,7 +248,13 @@ Page({
 
   /*** 生命周期函数--监听页面显示*/
   onShow: function () {
-  
+    wx.getStorage({
+      key: 'stock',
+      success(res) {
+        stock = res.data
+        that.setData({ stock: res.data.stock_name})
+      }
+    })
   },
 
   /**
@@ -251,7 +266,7 @@ Page({
 
   /*** 生命周期函数--监听页面卸载*/
   onUnload: function () {
-  
+    wx.removeStorageSync("stock")
   },
 
   /**

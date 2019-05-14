@@ -1,13 +1,12 @@
 {
   "pages": [
-    "pages/common/goods-dtl/goods-dtl",
     "pages/index/index",
     "pages/detail_finance/detail_finance",
     "pages/producer/producer",
     "pages/friends/friends",
     "pages/authorize/authorize",
     "pages/common/goods-select/goods-select",
-    
+    "pages/common/goods-dtl/goods-dtl",
     "pages/instruction/instruction",
     "pages/finance/finance",
     "pages/delivery/delivery",
@@ -38,7 +37,6 @@
     "pages/second/custom/custom_add/custom_add",
     "pages/second/choose_custom/choose_custom",
     "pages/second/producer/producer",
-    "pages/second/producer/producer_add",
     "pages/second/choose_producer/choose_producer",
     "pages/friends/friend-together/friend-together",
     "pages/friends/friend-dtl/friend-dtl",
@@ -47,7 +45,10 @@
     "pages/friends/goods-fri/goods-fri",
     "pages/friends/order_history_fri/order_history_fri",
     "pages/friends/delivery-history-fri/delivery-history-fri",
-    "pages/second/custom/debt_history/debt_history"
+    "pages/second/custom/debt_history/debt_history",
+    "pages/second/stocks/stocks",
+    "pages/second/stocks/stocks_add/stocks_add",
+    "pages/second/choose_stock/choose_stock"
   ],
   "window": {
     "navigationBarTextStyle": "white",

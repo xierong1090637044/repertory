@@ -6,7 +6,8 @@ var _ = require('../../../utils/we-lodash.js');
 const Bmob_new = require('../../../utils/bmob_new.js');
 var temppath;
 var that;
-var class_text;
+var class_text;//类别
+let stock;//仓库
 Page({
 
   /**
@@ -23,6 +24,7 @@ Page({
     packingUnit: '',//包装单位
     costPrice: '',//进货价格
     retailPrice: '',//零售价格
+    goodsClass: '',//产品类别
     reserve:null,
     loading: false,
     is_choose:false,
@@ -59,9 +61,10 @@ Page({
       retailPrice: goods.retailPrice,
       reserve: goods.reserve,
       class_select_text: (goods.class_text.class_text == null) ? null : goods.class_text.class_text,
-      goodsClass:goods.class_text.objectId,
+      goodsClass: (goods.class_text.objectId == null) ? null : goods.class_text.objectId,
       product_info:goods.product_info,
-      warning_num: goods.warning_num
+      warning_num: goods.warning_num,
+      stock: goods.stocks.stock_name
     })
   },
 
@@ -91,10 +94,18 @@ Page({
                 var Goods = Bmob.Object.extend("Goods");
                 var user = new Bmob.User();
                 user.id = res.data;
+                
+                if (that.data.goodsClass != '') { //产品类别
+                  var Class_User = Bmob.Object.extend("class_user");
+                  var class_user = new Class_User();
+                  class_user.id = that.data.goodsClass;
+                }
 
-                var Class_User = Bmob.Object.extend("class_user");
-                var class_user = new Class_User();
-                class_user.id = that.data.goodsClass;
+                if (stock != null) { //产品存放仓库
+                  var Stocks = Bmob.Object.extend("stocks");
+                  var stocks = new Stocks();
+                  stocks.id = stock.objectId;
+                }
 
                 //判断产品是否已存在
                 var query = new Bmob.Query(Goods);
@@ -103,6 +114,7 @@ Page({
                     // 修改产品
                     results.set("goodsName", goodsForm.goodsName);
                     results.set("goodsClass", class_user);
+                    results.set("stocks", stocks);
                     results.set("goodsIcon", goodsForm.goodsIcon);
                     results.set("regNumber", goodsForm.regNumber);
                     results.set("producer", goodsForm.producer);
@@ -142,6 +154,7 @@ Page({
                             })
                           })
                         } else {
+                          that.setData({ loading: false })
                           wx.showToast({
                             title: '修改产品成功',
                             icon: 'success',
@@ -198,7 +211,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.getStorage({
+      key: 'stock',
+      success(res) {
+        stock = res.data
+        that.setData({ stock: res.data.stock_name })
+      }
+    })
   },
 
   /**
@@ -212,7 +231,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    wx.removeStorageSync("stock")
   },
 
   /**

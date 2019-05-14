@@ -263,7 +263,8 @@ Page({
     query.skip(that.data.limitPage *(that.data.page - 1));
     query.descending("goodsName"); //按照时间降序
     query.include("userId");
-    query.include("goodsClass");
+    query.include("goodsClass"); 
+    query.include("stocks");
     query.find({
       success: function (res) {
         that.setData({length: res.length });
@@ -294,6 +295,7 @@ Page({
             tempGoods.product_info = res[i].get("product_info") || '';
             tempGoods.bad_num = res[i].get("bad_num") || 0;
             tempGoods.warning_num = res[i].get("warning_num") || 0;
+            tempGoods.stocks = res[i].get("stocks") || 0;
             tempGoodsArr.push(tempGoods);
           }
           that.handleData(tempGoodsArr);

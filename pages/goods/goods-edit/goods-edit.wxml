@@ -34,6 +34,12 @@
       <i-input title="零售价格" type="digit" value="{{retailPrice}}" name="retailPrice" placeholder="请选择零售价格" />
     </i-panel>
 
+    <navigator open-type="navigate" url="/pages/second/choose_stock/choose_stock">
+    <i-panel title="存放仓库">
+      <i-input title="存放仓库" value="{{stock}}" name="stock" placeholder="请选择存放仓库" disabled='true'/>
+    </i-panel>
+    </navigator>
+
     <i-panel title="现有库存">
       <i-input title="现有库存" type="digit" value="{{reserve}}" name="reserve" placeholder="请输入现有库存" />
     </i-panel>

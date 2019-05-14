@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "库存助手-新增仓库",
+  "usingComponents": {
+    "i-panel": "../../../../component/panel/index",
+    "i-input": "../../../../component/input/index",
+    "i-cell": "../../../../component/cell/index",
+    "i-button": "../../../../component/button/index",
+    "i-icon": "../../../../component/icon/index",
+    "i-message": "../../../../component/message/index"
+  }
+}

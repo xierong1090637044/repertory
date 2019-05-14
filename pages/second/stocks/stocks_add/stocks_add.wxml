@@ -1,0 +1,43 @@
+<!--pages/goods/goods-add/goods-add.wxml-->
+<i-message id="message" />
+<view class='goods-container'>
+  <form bindsubmit='handleAddCustoms'>
+
+    <i-panel title="基本信息">
+      <i-input title="仓库编号" value="{{stock.stock_type}}" name="stock_type" placeholder="必填项，随意的一个编号" maxlength='1'/>
+      <i-input title="仓库名字" value="{{stock.stock_name}}" name="stock_name" placeholder="必填项，仓库名字" />
+      <i-input title="仓库地址" value="{{stock.stock_address}}" name="stock_address" placeholder="仓库地址" />
+      <i-input title="仓库负责人姓名" value="{{stock.stock_manage}}" name="stock_manage" placeholder="仓库负责人姓名" />
+    </i-panel>
+    
+    <view class='btn-group' wx:if="{{is_modify==false}}" style='margin-top:10%'>
+      <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+        <i-icon type="add" /> 确认
+      </button>
+      
+      <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">
+        上传中
+      </i-button>
+    </view>
+
+    <view class='btn-group' wx:else style='margin-top:10%'>
+      <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
+        <i-icon type="add" /> 修改
+      </button>
+
+      <button class='i-btn i-btn-error i-btn-small' wx:if="{{!loading}}" bindtap='_delete'>
+        <i-icon type="warning" /> 删除
+      </button>
+
+      <!--<button class='i-btn i-btn-ghost i-btn-small' bindtap='getmoney_detail'>
+        <i-icon type="activity" /> 查看来往记录
+      </button>-->
+      
+      <i-button type="primary" loading="true" size="small" wx:if="{{loading}}">
+        上传中
+      </i-button>
+    </view>
+
+
+  </form>
+</view>

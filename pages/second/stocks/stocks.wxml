@@ -1,0 +1,38 @@
+  <bar class="search fixed" style="top:0px;">
+  <view class='serach-form round'>
+    <input type="text" placeholder="输入仓库名字 进行搜索" confirm-type="search" bindconfirm="complete" bindblur='complete' style='padding-left:20px'/>
+  </view>
+  <view class='action'>
+    <button class='gradual-green shadow-blur round' bindtap='goto_add'>添加</button>
+  </view>
+</bar>
+
+<view class='no-data' wx:if="{{isEmpty}}">
+  <image src='/images/common/no-data.png'></image>
+  <text>暂无数据</text>
+</view>
+<view wx:else style='margin-top:50px'>
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh  - 50px)' scroll-with-animation="true" enable-back-to-top="true">
+  <block wx:for="{{stocks}}" wx:key>
+    <list class="menu menu-avatar no-padding" data-id='{{item.objectId}}' bindtap="getdetail">
+      <item>
+        <avatar class="round lg">{{item.stock_type}}</avatar>
+        <view class='content'>
+          <view class='text-grey'>{{item.stock_name}}</view>
+          <view class='text-gray text-sm' wx:if="{{item.stock_address == ''}}">
+            仓库地址：未填写
+          </view>
+          <view class='text-gray text-sm' wx:else>
+            仓库地址：{{item.stock_address}}
+          </view>
+          <view class='text-gray text-sm'>
+            仓库管理人员：{{item.stock_manage}}
+          </view>
+
+        </view>
+      </item>
+    </list>
+  </block>
+</scroll-view>
+
+</view>
