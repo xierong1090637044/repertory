@@ -37,7 +37,7 @@ Page({
 
     if (isAllZero == false) {
       $Message({
-        content: '入库量必须大于1',
+        content: '入库量必须大于0',
         type: 'warning',
         duration: 5
       });
@@ -80,6 +80,7 @@ Page({
     var idx = e.currentTarget.dataset.idx
     var tempGoods = that.data.goods
     tempGoods[idx].num = e.detail.value
+
     tempGoods[idx].total_money = tempGoods[idx].num * tempGoods[idx].modify_retailcostPrice;
     that.setData({
       goods: tempGoods

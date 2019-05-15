@@ -101,9 +101,9 @@ Page({
         }, 0);
 
         that.setData({
-          totalEntering: totalEntering,
+          totalEntering: totalEntering.toFixed(2),
           totalEnteringPrice: totalEnteringPrice.toFixed(2),
-          weekEntering: weekEntering,
+          weekEntering: weekEntering.toFixed(2),
           weekEnteringPrice: weekEnteringPrice.toFixed(2)
         })
         var groupEntering = _.groupBy(filterEntering, 'createdAt')
@@ -126,7 +126,7 @@ Page({
             //设置当日入库数量及金额
             if (i == 0) {
               that.setData({
-                dayEntering: count,
+                dayEntering: count.toFixed(2),
                 dayEnteringPrice: price.toFixed(2),
               })
             }
