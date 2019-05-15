@@ -2,6 +2,7 @@ const app = getApp();
 const Bmob = require('../../../utils/bmob_new.js');
 var that;
 var friendId;
+var userId = wx.getStorageSync("userid");
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -41,7 +42,8 @@ Page({
 
     var name = e.detail.value;
     const query = Bmob.Query("stocks");
-    (name == '') ? that.getstock_list() : query.equalTo("stock_name", "==", name);
+    query.equalTo("parent", "==", userId);
+    (name == '') ? null :query.equalTo("stock_name", "==", name);
     query.find().then(res => {
       if (res.length == 0) {
         that.setData({
@@ -89,7 +91,7 @@ Page({
   onShow: function () {
     var is_add = wx.getStorageSync("is_add");
     if (is_add) {
-      that.getstock_list();
+      that.getstock_list(userId);
       wx.removeStorageSync("is_add");
     }
   },

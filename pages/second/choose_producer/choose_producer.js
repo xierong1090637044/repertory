@@ -2,6 +2,7 @@ const app = getApp();
 const Bmob = require('../../../utils/bmob_new.js');
 var that;
 var friendId;
+var userId;
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -41,7 +42,8 @@ Page({
 
     var name = e.detail.value;
     const query = Bmob.Query("producers");
-    (name == '') ? that.getproducer_list() : query.equalTo("producer_name", "==", name);
+    query.equalTo("parent", "==", userId);
+    (name == '') ?null:query.equalTo("producer_name", "==", name);
     query.find().then(res => {
       if (res.length == 0) {
         that.setData({
@@ -74,6 +76,7 @@ Page({
     that = this;
 
     friendId = options.friendId;
+    userId = wx.getStorageSync("userid");
     if (friendId != null) {
       that.getproducer_list(friendId);
     } else {
@@ -89,7 +92,7 @@ Page({
   onShow: function () {
     var is_add = wx.getStorageSync("is_add");
     if (is_add) {
-      that.getproducer_list();
+      that.getproducer_list(userId);
       wx.removeStorageSync("is_add");
     }
   },

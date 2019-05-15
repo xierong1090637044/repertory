@@ -54,8 +54,8 @@ Page({
 
       that.setData({
         spinShow: true,
-        get_reserve: get_reserve,
-        out_reserve: out_reserve,
+        get_reserve: get_reserve.toFixed(2),
+        out_reserve: out_reserve.toFixed(2),
         get_reserve_real_money: get_reserve_real_money,
         out_reserve_real_money: out_reserve_real_money,
         get_reserve_num: get_reserve_num.toFixed(2),
@@ -91,7 +91,7 @@ Page({
             }
           })
           that.setData({ total_reserve: total_reserve, total_money: total_money, total_products: res.length });
-        } else { that.setData({ total_reserve: total_reserve, total_money: total_money, total_products: res.length });}
+        } else { that.setData({ total_reserve: total_reserve.toFixed(2), total_money: total_money.toFixed(2), total_products: res.length });}
       }
       
     });
