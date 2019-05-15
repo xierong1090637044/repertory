@@ -2,6 +2,7 @@ const app = getApp();
 const Bmob = require('../../../utils/bmob_new.js');
 let that;
 let userid;
+let userId = wx.getStorageSync("userid");
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -41,7 +42,7 @@ Page({
 
     var name = e.detail.value;
     const query = Bmob.Query("stocks");
-    (name == '') ? that.getstock_list() : query.equalTo("stock_name", "==", { "$regex": "" + name + ".*" });
+    (name == '') ? null : query.equalTo("stock_name", "==", { "$regex": "" + name + ".*" });
     query.equalTo("parent", "==", userId);
     query.find().then(res => {
       if (res.length == 0) {

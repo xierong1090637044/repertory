@@ -43,7 +43,7 @@ Page({
     var name = e.detail.value;
     const query = Bmob.Query("stocks");
     query.equalTo("parent", "==", userId);
-    (name == '') ? null :query.equalTo("stock_name", "==", name);
+    (name == '') ? null : query.equalTo("stock_name", "==", { "$regex": "" + name + ".*" });
     query.find().then(res => {
       if (res.length == 0) {
         that.setData({
