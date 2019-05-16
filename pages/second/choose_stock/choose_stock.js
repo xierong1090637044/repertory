@@ -12,7 +12,7 @@ Page({
     isEmpty: false
   },
 
-  //得到客户列表
+  //得到仓库列表
   getstock_list: function (id) {
     wx.showLoading({ title: '加载中...' })
 

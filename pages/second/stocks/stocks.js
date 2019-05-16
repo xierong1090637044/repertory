@@ -62,15 +62,21 @@ Page({
 
   //点击查看详情
   getdetail: function (e) {
-    var id = e.currentTarget.dataset.id;
+    let id = e.currentTarget.dataset.id;
+    let item = e.currentTarget.dataset.item;
     wx.showActionSheet({
-      itemList: ['查看详情'],
+      itemList: ['查看详情','查看库存'],
       success(res) {
         console.log(res.tapIndex)
         if (res.tapIndex == 0) {
           wx.navigateTo({
             url: 'stocks_add/stocks_add?id=' + id,
           })
+        } else if (res.tapIndex == 1){
+          wx.navigateTo({
+            url: "/pages/goods/goods"
+          })
+          wx.setStorageSync("stock", item);
         }
       },
       fail(res) {

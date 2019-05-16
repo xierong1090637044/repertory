@@ -14,7 +14,7 @@
 <view wx:else style='margin-top:50px'>
 <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh  - 50px)' scroll-with-animation="true" enable-back-to-top="true">
   <block wx:for="{{stocks}}" wx:key>
-    <list class="menu menu-avatar no-padding" data-id='{{item.objectId}}' bindtap="getdetail">
+    <list class="menu menu-avatar no-padding" data-id='{{item.objectId}}' data-item='{{item}}' bindtap="getdetail">
       <item>
         <avatar class="round lg">{{item.stock_type}}</avatar>
         <view class='content'>

@@ -19,11 +19,14 @@
         <avatar class="round lg">{{item.stock_type}}</avatar>
         <view class='content'>
           <view class='text-grey'>{{item.stock_name}}</view>
-          <view class='text-gray text-sm' wx:if="{{item.stock_manage == ''}}">
+          <view class='text-gray text-sm' wx:if="{{item.stock_address == ''}}">
             仓库地址：未填写
           </view>
           <view class='text-gray text-sm' wx:else>
-            仓库地址：{{item.stock_manage}}
+            仓库地址：{{item.stock_address}}
+          </view>
+          <view class='text-gray text-sm'>
+            仓库管理人员：{{item.stock_manage}}
           </view>
           
         </view>
