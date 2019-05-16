@@ -3,7 +3,7 @@
 {
   background: #426ab3;
   color: #fff;
-  height: 20vh;
+  height: 200rpx;
 }
 .item
 {
@@ -15,7 +15,7 @@
 {
   width: 50%;
   text-align: center;
-  line-height: 30px;
+  line-height: 60rpx;
   font-size: 14px;
 }
 .s_num
@@ -27,22 +27,22 @@
 .o_list
 {
   background: #fff;
-  padding: 15px 15px 0;
+  padding: 30rpx 30rpx 0;
 }
 .o_image
 {
-  width:40px;
-  height:40px;
+  width:80rpx;
+  height:80rpx;
   border-radius: 50%;
   border: 3px solid#e2e2e2;
-  padding: 3px 3px 0;
+  padding: 6rpx 6rpx 0;
 }
 .o_item
 {
   width: 25%;
   text-align: center;
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 20rpx;
 }
 .o_text
 {
@@ -54,12 +54,12 @@
 .scan_code
 {
   position: fixed;
-  width: calc(100% - 30px);
-  left: 15px;
-  right: 15px;
+  width: calc(100% - 60rpx);
+  left: 30rpx;
+  right: 30rpx;
   bottom: 10%;
   background: linear-gradient(to right, #426ab3 , #118fff);
-  line-height: 40px;
+  line-height: 80rpx;
   text-align: center;
   border-radius: 4px;
   color: #fff;
@@ -67,5 +67,5 @@
 }
 .icon-scan
 {
-  margin-right: 10px;
+  margin-right: 20rpx;
 }
