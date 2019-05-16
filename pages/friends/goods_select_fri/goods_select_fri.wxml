@@ -56,6 +56,16 @@
         </view>
       </picker>
     </view>
+
+    <view class="section">
+      <navigator open-type="navigate" url="/pages/second/choose_stock/choose_stock">
+        <view class="picker">
+          <text>{{selectd_stockposition}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+        </view>
+      </navigator>
+    </view>
+
   </view>
 
 <view style='display:flex'>
@@ -68,7 +78,7 @@
   <view wx:else style='width:100%'>
     <scroll-view class='wrap_overflow' scroll-y="true" lower-threshold="0">
       <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
-        <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="当前库存：{{item.reserve}}" value="{{item.goodsName}}" wx:key="{{item.goodsId}}">
+        <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="库存：{{item.reserve}}" value="{{item.goodsName}}{{item.stocks.stock_name}}" wx:key="{{item.goodsId}}" extra_stock_value="存放位置：{{item.stocks.stock_name}}">
         </i-checkbox>
       </i-checkbox-group>
     </scroll-view>
