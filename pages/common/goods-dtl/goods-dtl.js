@@ -90,11 +90,13 @@ Page({
     {
       product_id = options.id;
       const query = Bmob_new.Query('Goods');
-      if(options.type)
+      if(options.type == true)
       {
         query.equalTo("productCode", "==", options.id)
+        console.log("ssss", options.id)
       }else{
         query.equalTo("objectId", "==", options.id);
+        console.log("aaaa", options.id)
       }
       query.find().then(res => {
         console.log(res)

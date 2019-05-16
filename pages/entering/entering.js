@@ -29,7 +29,7 @@ Page({
     }
 
     for (var i = 0; i < that.data.goods.length; i++) {
-      console.log(that.data.goods[i].num);
+      //console.log(that.data.goods[i].num);
       if (that.data.goods[i].num == 0 || that.data.goods[i].num == null) {
         isAllZero = false
       }
