@@ -598,7 +598,7 @@ function getPieTextMaxLength(series) {
   series = getPieDataPoints(series);
   var maxLength = 0;
   series.forEach(function (item) {
-    var text = item.format ? item.format(+item._proportion_.toFixed(2)) : util.toFixed(item._proportion_ * 100) + '%';
+    var text = item.format ? item.format(+item._proportion_.toFixed(wx.getStorageSync("print_setting").show_float)) : util.toFixed(item._proportion_ * 100) + '%';
     maxLength = Math.max(maxLength, measureText(text));
   });
 
@@ -859,7 +859,7 @@ function drawPieText(series, opts, config, context, radius, center) {
 
   var seriesConvert = series.map(function (item) {
     var arc = 2 * Math.PI - (item._start_ + 2 * Math.PI * item._proportion_ / 2);
-    var text = item.format ? item.format(+item._proportion_.toFixed(2)) : util.toFixed(item._proportion_ * 100) + '%';
+    var text = item.format ? item.format(+item._proportion_.toFixed(wx.getStorageSync("print_setting").show_float)) : util.toFixed(item._proportion_ * 100) + '%';
     var color = item.color;
     return { arc: arc, text: text, color: color };
   });

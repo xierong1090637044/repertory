@@ -104,7 +104,7 @@ Page({
     for (var i = 0; i < that.data.goods.length; i++) {
       if (that.data.goods[i].num > 0) {
 
-        var num = that.data.goods[i].reserve + that.data.goods[i].num;
+        var num = Number(that.data.goods[i].reserve) + that.data.goods[i].num;
         var tempGoods = new Goods();
         tempGoods.set('objectId', that.data.goods[i].goodsId)
         tempGoods.set('reserve', num)
