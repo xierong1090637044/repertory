@@ -152,6 +152,8 @@ Page({
   onLoad: function (options) {
     that = this;
     userid = wx.getStorageSync("userid");
+
+    that.getnum_from_bmob()
   },
 
   /*** 生命周期函数--监听页面初次渲染完成*/
@@ -215,5 +217,19 @@ Page({
     wx.navigateTo({
       url: '../mine/upgrade/upgrade',
     })
+  },
+
+  //得到数据从Bmob
+  getnum_from_bmob: function () {
+    const query = Bmob.Query("setting");
+    query.equalTo("parent", "==", userid);
+    query.find().then(res => {
+      if (res.length == 1) {
+        wx.setStorageSync("print_setting", res[0])
+        that.setData({
+          value: res[0],
+        })
+      }
+    });
   },
 })
