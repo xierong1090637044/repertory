@@ -24,7 +24,7 @@ Page({
   //输入实际得到的钱款
   getreal_money:function(e)
   {
-    var real_money = e.detail.detail.value;
+    var real_money = e.detail.detail.value.toFixed(wx.getStorageSync("print_setting").show_float);
     that.setData({real_money:real_money});
   },
 

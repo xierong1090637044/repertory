@@ -2,6 +2,7 @@
 const Bmob = require('../../../utils/bmob_new.js');
 var that;
 var userid;
+
 Page({
 
   /*** 页面的初始数据*/
@@ -27,34 +28,30 @@ Page({
 
   },
 
-  set_num_enough:function(e)
+  //设置库存跟金额精度
+  set_show_float:function(e)
   {
-    var num_enough = Number(e.detail.detail.value);
-    var setting = wx.getStorageSync("setting");
-    setting.num_enough = num_enough;
-    wx.setStorageSync("setting", setting);
-
-    that.setnum_in_bmob(num_enough,"num_enough");
+    var show_float = Number(e.detail.detail.value) > 2 ? 2 : Number(e.detail.detail.value);
+    that.setData({ show_float: show_float});
+    that.setnum_in_bmob(show_float, "show_float");
   },
 
-  set_num_insufficient:function(e)
+  set_USER:function(e)
   {
-    var num_insufficient = Number(e.detail.detail.value);
-    var setting = wx.getStorageSync("setting");
-    setting.num_insufficient = num_insufficient;
-    wx.setStorageSync("setting", setting);
-
-    that.setnum_in_bmob(num_insufficient, "num_insufficient");
+    var USER = e.detail.detail.value;
+    that.setnum_in_bmob(USER,"USER");
   },
 
-  set_num_warning:function(e)
+  set_UKEY:function(e)
   {
-    var num_warning = Number(e.detail.detail.value);
-    var setting = wx.getStorageSync("setting");
-    setting.num_warning = num_warning;
-    wx.setStorageSync("setting", setting);
+    var UKEY = e.detail.detail.value;
+    that.setnum_in_bmob(UKEY, "UKEY");
+  },
 
-    that.setnum_in_bmob(num_warning, "num_warning");
+  set_number:function(e)
+  {
+    var number =e.detail.detail.value;
+    that.setnum_in_bmob(number, "number");
   },
 
   //得到数据从Bmob
@@ -65,6 +62,7 @@ Page({
     query.find().then(res => {
       if(res.length == 1)
       {
+        wx.setStorageSync("print_setting", res[0])
         that.setData({
           value: res[0],
         })
@@ -72,14 +70,14 @@ Page({
     });
   },
 
-  //失去焦点设置库存充足和不足
+  //失去焦点设置
   setnum_in_bmob:function(data,type)
   {
     wx.showLoading({title: '加载中...'})
     const query = Bmob.Query("setting");
     query.equalTo("parent", "==", userid);
     query.find().then(res => {
-      console.log(res)
+      //console.log(res)
       if(res.length == 0)
       {
         const pointer = Bmob.Pointer('_User');
@@ -89,7 +87,8 @@ Page({
         query.set(type,data);
         query.set("parent",poiID);
         query.save().then(res => {
-          console.log(res)
+          //console.log(res)
+          that.getnum_from_bmob();
           wx.hideLoading();
           }).catch(err => {
             console.log(err)
@@ -100,12 +99,16 @@ Page({
         query.set(type, data)
         query.save().then(res => {
           wx.hideLoading();
-          console.log(res)
+          that.getnum_from_bmob();
+          wx.showToast({
+            title: '设置成功',
+          })
+          //console.log(res)
         }).catch(err => {
           console.log(err)
         })
       }
     });
-  }
+  },
 
 })

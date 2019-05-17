@@ -291,7 +291,7 @@ Page({
             tempGoods.packageContent = res[i].get("packageContent") || '';
             tempGoods.packingUnit = res[i].get("packingUnit") || '';
             tempGoods.packModel = res[i].get("packModel") || '';
-            tempGoods.reserve = res[i].get("reserve") || 0;
+            tempGoods.reserve = res[i].get("reserve").toFixed(wx.getStorageSync("print_setting").show_float) || 0;
             tempGoods.costPrice = res[i].get("costPrice") || 0;
             tempGoods.retailPrice = res[i].get("retailPrice") || 0;
             tempGoods.class_text = res[i].get("goodsClass") || '';

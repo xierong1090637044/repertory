@@ -73,7 +73,7 @@ Page({
     for (var i = 0; i < that.data.goods.length; i++) {
       if (that.data.goods[i].now_reserve > 0) {
 
-        var num = that.data.goods[i].reserve + that.data.goods[i].num;
+        var num = Number(that.data.goods[i].reserve) + that.data.goods[i].num;
         var tempGoods = new Goods();
         tempGoods.set('objectId', that.data.goods[i].goodsId)
         tempGoods.set('reserve', Number(that.data.goods[i].now_reserve))
@@ -84,7 +84,7 @@ Page({
         user.id = wx.getStorageSync('userid');
         tempBills.set('goodsName', that.data.goods[i].goodsName);
         tempBills.set('now_reserve', that.data.goods[i].now_reserve);
-        tempBills.set('reserve', that.data.goods[i].reserve);
+        tempBills.set('reserve', Number(that.data.goods[i].reserve));
         tempBills.set('goodsId', tempGoods);
         tempBills.set('userId', user);
         tempBills.set('type', 3);
@@ -137,7 +137,7 @@ Page({
       },
         function (error) {
           // 批量新增异常处理
-          console.log("异常处理");
+          console.log(error);
         });
     },
       function (error) {

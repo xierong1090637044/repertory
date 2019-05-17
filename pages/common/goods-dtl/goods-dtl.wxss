@@ -35,3 +35,7 @@
   display: flex;
   justify-content: space-between;
 }
+.card_title
+{
+  line-height:45rpx;
+}

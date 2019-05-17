@@ -60,14 +60,14 @@ Page({
       
       that.setData({
         spinShow: true,
-        get_reserve: get_reserve, 
-        out_reserve: out_reserve,
-        get_reserve_real_money: get_reserve_real_money,
-        out_reserve_real_money: out_reserve_real_money,
-        get_reserve_num: get_reserve_num.toFixed(2),
-        out_reserve_num: out_reserve_num,
-        get_reserve_get_num: (get_reserve_real_money - get_reserve_num).toFixed(2),
-        out_reserve_get_num: out_reserve_num - out_reserve_real_money,
+        get_reserve: get_reserve.toFixed(wx.getStorageSync("print_setting").show_float), 
+        out_reserve: out_reserve.toFixed(wx.getStorageSync("print_setting").show_float),
+        get_reserve_real_money: get_reserve_real_money.toFixed(wx.getStorageSync("print_setting").show_float),
+        out_reserve_real_money: out_reserve_real_money.toFixed(wx.getStorageSync("print_setting").show_float),
+        get_reserve_num: get_reserve_num.toFixed(wx.getStorageSync("print_setting").show_float),
+        out_reserve_num: out_reserve_num.toFixed(wx.getStorageSync("print_setting").show_float),
+        get_reserve_get_num: (get_reserve_real_money - get_reserve_num).toFixed(wx.getStorageSync("print_setting").show_float),
+        out_reserve_get_num: (out_reserve_num - out_reserve_real_money).toFixed(wx.getStorageSync("print_setting").show_float),
         });
 
        //查询当日应收和实际收款

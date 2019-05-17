@@ -9,8 +9,7 @@
   <view style='display:{{view1}}'>
   <i-panel title="产品详情">
     <i-card title="产品名称：{{goodsReserve.goodsName}}" 
-          extra="当前库存：{{goodsReserve.reserve}}"
-          full="true" thumb="{{goodsReserve.goodsIcon}}">
+          full="true" thumb="{{goodsReserve.goodsIcon}}" i-class="card_title">
       <view slot="content">
         <view wx:if="{{goodsReserve.product_info !=''}}">商品简介：{{goodsReserve.product_info}}</view>
         <view class='content_model'>
@@ -25,7 +24,7 @@
            <navigator url='../../goods/bad_history/bad_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#f30'>查看货损记录 >></navigator>
         </view>
         <view style='display:flex;justify-content: space-between'>
-           <view>总库存：<text style='color:#0600ff'>{{goodsReserve.reserve}}</text></view>
+           <view>当前库存：<text style='color:#0600ff'>{{goodsReserve.reserve}}</text></view>
            <navigator url='../../goods/counting_history/counting_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#0600ff'>查看盘点记录 >></navigator>
         </view>
       </view>

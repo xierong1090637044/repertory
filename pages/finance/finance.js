@@ -101,10 +101,10 @@ Page({
         }, 0);
 
         that.setData({
-          totalEntering: totalEntering.toFixed(2),
-          totalEnteringPrice: totalEnteringPrice.toFixed(2),
-          weekEntering: weekEntering.toFixed(2),
-          weekEnteringPrice: weekEnteringPrice.toFixed(2)
+          totalEntering: totalEntering.toFixed(wx.getStorageSync("print_setting").show_float),
+          totalEnteringPrice: totalEnteringPrice.toFixed(wx.getStorageSync("print_setting").show_float),
+          weekEntering: weekEntering.toFixed(wx.getStorageSync("print_setting").show_float),
+          weekEnteringPrice: weekEnteringPrice.toFixed(wx.getStorageSync("print_setting").show_float)
         })
         var groupEntering = _.groupBy(filterEntering, 'createdAt')
         
@@ -126,8 +126,8 @@ Page({
             //设置当日入库数量及金额
             if (i == 0) {
               that.setData({
-                dayEntering: count.toFixed(2),
-                dayEnteringPrice: price.toFixed(2),
+                dayEntering: count.toFixed(wx.getStorageSync("print_setting").show_float),
+                dayEnteringPrice: price.toFixed(wx.getStorageSync("print_setting").show_float),
               })
             }
           }
@@ -186,11 +186,11 @@ Page({
 
         that.setData({
           totalDelivery: totalDelivery,
-          totalDeliveryPrice: totalDeliveryPrice.toFixed(2),
-          totalProfit: totalProfit.toFixed(2),
+          totalDeliveryPrice: totalDeliveryPrice.toFixed(wx.getStorageSync("print_setting").show_float),
+          totalProfit: totalProfit.toFixed(wx.getStorageSync("print_setting").show_float),
           weekDelivery: weekDelivery,
-          weekDeliveryPrice: weekDeliveryPrice.toFixed(2),
-          weekProfit: weekProfit.toFixed(2)
+          weekDeliveryPrice: weekDeliveryPrice.toFixed(wx.getStorageSync("print_setting").show_float),
+          weekProfit: weekProfit.toFixed(wx.getStorageSync("print_setting").show_float)
         })
         var groupDelivery = _.groupBy(filterDelivery, 'createdAt')
         for (var i = 0; i >= -6; i--) {
@@ -218,8 +218,8 @@ Page({
             if (i == 0) {
               that.setData({
                 dayDelivery: count,
-                dayDeliveryPrice: price.toFixed(2),
-                dayProfit: profit.toFixed(2)
+                dayDeliveryPrice: price.toFixed(wx.getStorageSync("print_setting").show_float),
+                dayProfit: profit.toFixed(wx.getStorageSync("print_setting").show_float)
               })
             }
           }
