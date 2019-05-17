@@ -49,6 +49,41 @@ module.exports = {
     });
   },
 
+  //发送小程序服务通知
+  send_message: function (template_id, formId,info)
+  {
+    let modelData = {
+      "touser": wx.getStorageSync("openid"),
+      "template_id": "o0i_R4TsEvYaJ2OFU0G9JhwKleSDnSp3auSCCg-lhe8",
+      "page": "pages/order_history/order_history",
+      "form_id": formId,
+      "data": {
+        "keyword1": {
+          "value": info.keyword1//that.data.goods[i].goodsName,
+        },
+        "keyword2": {
+          "value": info.keyword2//that.data.goods[i].reserve
+        },
+        "keyword3": {
+          "value": info.keyword3
+        },
+        "keyword4": {
+          "value": info.keyword4//"出库"
+        },
+        "keyword5": {
+          "value": info.keyword4//Y + "-" + M + "-" + D + " " + h + ":" + m
+        }
+      }
+      , "emphasis_keyword": ""
+    }
+
+    Bmob_new.sendWeAppMessage(modelData).then(function (response) {
+      console.log(response);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  },
+
   //得到时间
   getDay: function (day) {
     var that = this;
