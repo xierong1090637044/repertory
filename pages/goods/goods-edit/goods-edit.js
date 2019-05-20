@@ -55,6 +55,7 @@ Page({
       regNumber: goods.regNumber,
       producer: goods.producer,
       productCode: goods.productCode,
+      position: goods.position,
       packageContent: goods.packageContent,
       packingUnit: goods.packingUnit,
       costPrice: goods.costPrice,
@@ -118,6 +119,7 @@ Page({
                     results.set("goodsIcon", goodsForm.goodsIcon);
                     results.set("regNumber", goodsForm.regNumber);
                     results.set("producer", goodsForm.producer);
+                    results.set("position", goodsForm.position);
                     results.set("productCode", goodsForm.productCode);
                     results.set("packageContent", goodsForm.packageContent);
                     results.set("costPrice", goodsForm.costPrice);
