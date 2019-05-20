@@ -128,6 +128,7 @@ Page({
                         goods.set("regNumber", goodsForm.regNumber);
                         goods.set("producer", goodsForm.producer);
                         goods.set("productCode", goodsForm.productCode);
+                        goods.set("position", goodsForm.position);
                         goods.set("packageContent", goodsForm.packageContent);
                         goods.set("costPrice", goodsForm.costPrice);
                         goods.set("retailPrice", goodsForm.retailPrice);

@@ -193,7 +193,6 @@ page{
   background-repeat: repeat-x;
   margin-top: 10rpx;
   min-width: 240rpx;
-  max-width: 320rpx;
   border-radius: 300rpx;
 }
 

@@ -93,10 +93,8 @@ Page({
       if(options.type == true)
       {
         query.equalTo("productCode", "==", options.id)
-        console.log("ssss", options.id)
       }else{
         query.equalTo("objectId", "==", options.id);
-        console.log("aaaa", options.id)
       }
       query.find().then(res => {
         console.log(res)
@@ -112,18 +110,25 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  /*** 生命周期函数--监听页面初次渲染完*/
   onReady: function () {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  /** 生命周期函数--监听页面显示*/
   onShow: function () {
 
+  },
+
+  onShareAppMessage(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: that.data.goodsReserve.goodsName,
+      path: '/pages/common/goods-dtl/goods-dtl?id=' + product_id
+    }
   },
 
   //得到该产品的操作详情

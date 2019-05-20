@@ -17,6 +17,7 @@
            <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
         </view>
         <view wx:if = "{{goodsReserve.productCode != ''}}">产品条码：{{goodsReserve.productCode}}</view>
+        <view wx:if = "{{goodsReserve.position != ''}}">货架位置：{{goodsReserve.position}}</view>
         <view>进货价格：{{goodsReserve.costPrice}} (元)</view>
         <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
         <view style='display:flex;justify-content: space-between'>

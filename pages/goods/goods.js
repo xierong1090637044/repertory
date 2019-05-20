@@ -287,6 +287,7 @@ Page({
             tempGoods.goodsIcon = res[i].get("goodsIcon") || '';
             tempGoods.regNumber = res[i].get("regNumber") || '';
             tempGoods.producer = res[i].get("producer") || '';
+            tempGoods.position = res[i].get("position") || '';
             tempGoods.productCode = res[i].get("productCode") || '';
             tempGoods.packageContent = res[i].get("packageContent") || '';
             tempGoods.packingUnit = res[i].get("packingUnit") || '';
