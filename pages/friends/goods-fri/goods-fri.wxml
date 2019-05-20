@@ -27,7 +27,7 @@
   </view>
 </view>
 
-  <navigator url='/pages/goods/goods-add/goods-add' class='btn-group'>
+  <navigator url='/pages/friends/goods-add/goods-add' class='btn-group'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
       <i-icon type="add" /> 新增产品
     </button>
