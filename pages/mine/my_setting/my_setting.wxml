@@ -1,8 +1,8 @@
-<i-panel title="设置显示精度（库存及金额）">
+<i-panel title="设置显示小数点的精度（库存及金额）">
     <i-input value="{{ value.show_float }}"  title="精度" placeholder="请输入库存及金额显示精度" bind:blur= "set_show_float"/>
 </i-panel>
 
-<i-panel title="打印机设置">
+<i-panel title="打印机设置(正在调试中)">
     <i-input value="{{ value.USER }}"  title="USER" placeholder="请输入USER账号" bind:blur = "set_USER"/>
     <i-input value="{{ value.UKEY }}" title="UKEY" placeholder="请输入UKEY账号" bind:blur = "set_UKEY"/>
     <i-input value="{{ value.number }}" type="text" title="打印机编号" placeholder="请输入打印机编号" bind:blur = "set_number"/>
