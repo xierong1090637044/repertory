@@ -139,8 +139,8 @@ Page({
                     results.set("packingUnit", goodsForm.packingUnit);
                     results.set("reserve", Number(goodsForm.reserve));
                     results.set("product_info", goodsForm.product_info);
-                    results.set("producttime", goodsForm.producttime);
-                    results.set("nousetime", goodsForm.nousetime);
+                    if (goodsForm.producttime != null) results.set("producttime", new Date(goodsForm.producttime + " 00:00:00"));
+                    if (goodsForm.nousetime != null) results.set("nousetime", new Date(goodsForm.nousetime + " 00:00:00"));
                     results.set("warning_num", Number(goodsForm.warning_num));
                     results.set("stocktype", (Number(goodsForm.reserve) > Number(goodsForm.warning_num)) ? 1 : 0);
                     results.save(null, {

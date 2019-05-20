@@ -55,5 +55,9 @@
 {
   width: 120px;
 }
+.section
+{
+  font-size: 26rpx;
+}
 
 .i-cell-desc{line-height:20px;font-size:12px;color:#3d3d3d;font-weight: bold}

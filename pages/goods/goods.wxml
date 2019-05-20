@@ -42,7 +42,7 @@
       <picker bindchange="bindclass_Change" range-key	="class_text" range="{{all_class}}">
         <view class="picker">
           <text>{{selectd_class}}</text>
-          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
         </view>
       </picker>
     </view>
@@ -51,7 +51,7 @@
       <picker bindchange="bindstock_Change" value="{{index}}" range="{{stock}}">
         <view class="picker">
           <text>{{selectd_stock}}</text>
-          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
         </view>
       </picker>
     </view>
@@ -60,9 +60,18 @@
       <navigator open-type="navigate" url="/pages/second/choose_stock/choose_stock">
         <view class="picker">
           <text>{{selectd_stockposition}}</text>
-          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
         </view>
       </navigator>
+    </view>
+
+    <view class="section">
+      <picker bindchange="bindtime_Change" value="{{index}}" range="{{time}}">
+        <view class="picker">
+          <text>{{selectd_time}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
+        </view>
+      </picker>
     </view>
 
   </view>

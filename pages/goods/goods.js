@@ -13,6 +13,7 @@ let select_id = null;//类别选择的id
 let bad_num = null;//货损数量
 let beizhu_text = '';//备注信息
 let stockposition;//仓库选择
+let time_flag;
 Page({
 
   /**
@@ -26,6 +27,7 @@ Page({
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了4
     selectd_stockposition: "存放位置",//存放位置
+    selectd_time: "是否失效",//是否失效
     totalGoods: [],
     // 搜索
     inputShowed: false,
@@ -75,6 +77,15 @@ Page({
     that.setData({ selectd_class: class_array[index].class_text});
     that.loadGoods(type,null,select_id);
     
+  },
+
+  //选择失效情况
+  bindtime_Change:function(e)
+  {
+    time_flag = e.detail.value;
+
+    that.setData({ selectd_time: that.data.time[time_flag] });
+    that.loadGoods(type, null, select_id);
   },
 
   // 搜索
@@ -258,6 +269,11 @@ Page({
       query.equalTo("stocktype", 0);
     }else{}
 
+    if (time_flag == "0")
+    {
+      query.equalTo("nousetime", { "$lte": { "__type": "Date", "iso": config.getDay(0) + " 00:00:00" } });
+    }else{}
+
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     if (class_id != null) query.equalTo("goodsClass", class_id);
     if (stockposition != null) query.equalTo("stocks", stockposition.objectId);
@@ -350,6 +366,7 @@ Page({
       current: '1',
       selectd_stock:"库存情况",
       stock:["库存充足","库存不足"],
+      time: ["已失效", "未失效"],
       selectd_class:"产品类别"
     })
   },
