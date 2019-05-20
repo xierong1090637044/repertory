@@ -55,7 +55,13 @@ name="packModel"/>-->
         <i-collapse-item title="更多信息" name="name1" i-class-title="collapse-item-title">
             <view slot="content">
               <i-input title="库存预警" type="number" value="{{warning_num}}" name="warning_num" placeholder="请输入库存预警数量" maxlength='100'/>
-              <i-input title="商品简介" type="text" value="{{product_info}}" name="product_info" placeholder="请输入商品简介" maxlength='100'/>  
+              <i-input title="商品简介" type="text" value="{{product_info}}" name="product_info" placeholder="请输入商品简介" maxlength='100'/>
+              <picker bindchange="select_producttime" mode = "date" fields="day">
+                <i-input title="生产日期" value="{{producttime}}" name="producttime" placeholder="请选择产品生产日期" disabled='true'/>
+              </picker>
+              <picker bindchange="select_nousetime"  mode = "date" fields="day">
+                <i-input title="失效日期" value="{{nousetime}}" name="nousetime" placeholder="请选择产品失效日期" disabled='true'/>
+              </picker>
             </view>
         </i-collapse-item>
       </i-collapse>  

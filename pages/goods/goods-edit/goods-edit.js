@@ -45,6 +45,16 @@ Page({
     })
   },
 
+  //生产日期选择
+  select_producttime(e) {
+    that.setData({ producttime: e.detail.value })
+  },
+
+  //失效日期选择
+  select_nousetime(e) {
+    that.setData({ nousetime: e.detail.value })
+  },
+
   initGoods:function(){
     var that = this
     var goods = wx.getStorageSync('editGoods')
@@ -65,7 +75,9 @@ Page({
       goodsClass: (goods.class_text.objectId == null) ? null : goods.class_text.objectId,
       product_info:goods.product_info,
       warning_num: goods.warning_num,
-      stock: goods.stocks.stock_name
+      stock: (goods.stocks =="")?"":goods.stocks.stock_name,
+      producttime: goods.producttime,
+      nousetime: goods.nousetime,
     })
   },
 
@@ -127,6 +139,8 @@ Page({
                     results.set("packingUnit", goodsForm.packingUnit);
                     results.set("reserve", Number(goodsForm.reserve));
                     results.set("product_info", goodsForm.product_info);
+                    results.set("producttime", goodsForm.producttime);
+                    results.set("nousetime", goodsForm.nousetime);
                     results.set("warning_num", Number(goodsForm.warning_num));
                     results.set("stocktype", (Number(goodsForm.reserve) > Number(goodsForm.warning_num)) ? 1 : 0);
                     results.save(null, {

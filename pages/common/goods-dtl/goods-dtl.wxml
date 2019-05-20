@@ -18,6 +18,8 @@
         </view>
         <view wx:if = "{{goodsReserve.productCode != ''}}">产品条码：{{goodsReserve.productCode}}</view>
         <view wx:if = "{{goodsReserve.position != ''}}">货架位置：{{goodsReserve.position}}</view>
+        <view wx:if = "{{goodsReserve.producttime != ''}}">生产日期：{{goodsReserve.producttime}}</view>
+        <view wx:if = "{{goodsReserve.nousetime != ''}}">失效日期：{{goodsReserve.nousetime}}</view>
         <view>进货价格：{{goodsReserve.costPrice}} (元)</view>
         <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
         <view style='display:flex;justify-content: space-between'>

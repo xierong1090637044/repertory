@@ -48,6 +48,16 @@ Page({
     })
   },
 
+  //生产日期选择
+  select_producttime(e)
+  {
+    that.setData({ producttime:e.detail.value})
+  },
+
+  //失效日期选择
+  select_nousetime(e) {
+    that.setData({ nousetime: e.detail.value })
+  },
 
   handleAddGoods:function(e){
     var that = this
@@ -135,6 +145,8 @@ Page({
                         goods.set("packingUnit", goodsForm.packingUnit);
                         goods.set("product_info", goodsForm.product_info);
                         goods.set("warning_num", Number(goodsForm.warning_num));
+                        goods.set("producttime",goodsForm.producttime);
+                        goods.set("nousetime", goodsForm.nousetime);
                         //goods.set("packModel", goodsForm.packModel);
                         goods.set("reserve", Number(goodsForm.reserve));
                         goods.set("stocktype", (Number(goodsForm.reserve) > Number(goodsForm.warning_num))?1:0);
