@@ -21,6 +21,7 @@
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
         <text>扫码bug修复</text>
+        <text>协同管理编辑产品bug修复</text>
         <text>客户欠款bug修复</text>
         <text>产品修改bug修复</text>
         <text>支持产品详情分享</text>
