@@ -21,8 +21,11 @@
       <text class="desc-content">优化升级</text>
       <view class="desc-list">
         <text>扫码bug修复</text>
+        <text>客户欠款bug修复</text>
+        <text>产品修改bug修复</text>
         <text>支持产品详情分享</text>
         <text>增加小票打印功能</text>
+        <text>操作记录无限显示</text>
         <text>增加货物存放货架显示</text>
       </view>
     </view>

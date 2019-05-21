@@ -22,11 +22,9 @@ Page({
     {
       c_type = "month";
       that.get_list("month", custom_id);
-      that.getallpage("month", custom_id);
     }else{
       c_type = "all";
       that.get_list("all", custom_id);
-      that.getallpage("all", custom_id);
     }
   },
 
@@ -62,10 +60,9 @@ Page({
   onShow: function () {
     if (custom_id == null) {
       that.get_list("month");
-      that.getallpage("month");
+      
     } else {
       that.get_list("month", custom_id);
-      that.getallpage("month", custom_id);
     }
 
     var today = new Date();
@@ -85,7 +82,6 @@ Page({
   bindStartDateChange(e) {
     select_start_data = e.detail.value + " 00:00:00";
     that.get_list(c_type, custom_id, select_start_data, select_end_data);
-    that.getallpage(c_type, custom_id, select_start_data, select_end_data);
     that.setData({ start_data: e.detail.value})
   },
 
@@ -93,7 +89,6 @@ Page({
   bindEndDateChange(e) {
     select_end_data = e.detail.value + " 00:00:00";
     that.get_list(c_type, custom_id, select_start_data,select_end_data);
-    that.getallpage(c_type, custom_id, select_start_data,select_end_data);
     that.setData({ end_data: e.detail.value })
   },
 
@@ -123,23 +118,6 @@ Page({
         list: goods,
         spinShow: false
       })   
-    });
-  },
-
-  getallpage: function (type,custom,data)
-  {
-    var userid = wx.getStorageSync("userid");
-    const query = Bmob.Query("order_opreations");
-    query.equalTo("master", "==", userid);
-    query.equalTo("custom", "==", custom);
-    if (data != null) query.equalTo("createdAt", ">", data);
-    if (type == "month") {
-      query.equalTo("createdAt", ">", that.getDay(-30));
-    }
-    query.find().then(res => {
-      that.setData({
-        all_page: Math.ceil(res.length / that.data.limit) ,
-      })
     });
   },
 

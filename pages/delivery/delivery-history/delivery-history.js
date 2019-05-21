@@ -24,8 +24,8 @@ Page({
   //输入实际得到的钱款
   getreal_money:function(e)
   {
-    var real_money = e.detail.detail.value.toFixed(wx.getStorageSync("print_setting").show_float);
-    that.setData({real_money:real_money});
+    var real_money = e.detail.detail.value;
+    that.setData({ real_money: real_money});
   },
 
   /*** 生命周期函数--监听页面加载*/
@@ -142,6 +142,8 @@ Page({
 
             const pointer = Bmob_new.Pointer('_User')
             const poiID = pointer.set(currentUser.id);
+
+            //console.log(that.data.all_money, Number(that.data.real_money))
 
             const query = Bmob_new.Query('order_opreations');
             query.set("relations", relID);

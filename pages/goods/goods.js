@@ -316,8 +316,8 @@ Page({
             tempGoods.bad_num = res[i].get("bad_num") || 0;
             tempGoods.warning_num = res[i].get("warning_num") || 0;
             tempGoods.stocks = res[i].get("stocks") || 0;
-            tempGoods.producttime = res[i].get("producttime") || 0;
-            tempGoods.nousetime = res[i].get("nousetime") || 0;
+            tempGoods.producttime = res[i].get("producttime") || "";
+            tempGoods.nousetime = res[i].get("nousetime") || "";
             tempGoodsArr.push(tempGoods);
           }
           that.handleData(tempGoodsArr);
