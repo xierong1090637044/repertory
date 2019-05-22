@@ -1,6 +1,4 @@
 <!--pages/goods/goods.wxml-->
-<!--搜索-->
-<i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 
 <!--<view class="fristcontent">
   <view>总库存：{{total_reserve}}</view>

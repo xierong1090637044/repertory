@@ -310,7 +310,6 @@ Page({
     data = data || [];
     this.setData({
       goods:data,
-      spinShow: false
     });
   },
 

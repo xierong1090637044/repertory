@@ -231,7 +231,6 @@ Page({
     this.setData({
       goods: data,
       totalGoods: data,
-      spinShow: false,
     });
   },
 

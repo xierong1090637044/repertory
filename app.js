@@ -22,10 +22,12 @@ App({
     //调用系统API获取设备的信息
     wx.getSystemInfo({
       success: function (res) {
+        //console.log(res)
         var kScreenW = res.windowWidth / 375
         var kScreenH = res.windowHeight / 603
         wx.setStorageSync('kScreenW', kScreenW)
         wx.setStorageSync('kScreenH', kScreenH)
+        wx.setStorageSync('language', res.language)
       }
     })
 

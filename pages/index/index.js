@@ -1,4 +1,5 @@
 // pages/index/index.js
+let langue = require('../../utils/langue.js');
 const Bmob = require('../../utils/bmob_new.js');
 let that;
 let userid;
@@ -8,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    optionsLists: [{ name: '产品入库', icon: '../../images/index/entering.png', url: '/pages/common/goods-select/goods-select?type=entering' },
+    optionsLists: [{ name:"产品入库", icon: '../../images/index/entering.png', url: '/pages/common/goods-select/goods-select?type=entering' },
     { name: '产品出库', icon: '../../images/index/delivery.png', url: '/pages/common/goods-select/goods-select?type=delivery' },
     { name: '退货入库', icon: '../../images/index/return_goods.png', url: '/pages/common/goods-select/goods-select?type=returing' },
     { name: '库存盘点', icon: '../../images/index/stocking.png', url: '/pages/common/goods-select/goods-select?type=counting' },
@@ -153,7 +154,9 @@ Page({
     that = this;
     userid = wx.getStorageSync("userid");
 
-    that.getnum_from_bmob()
+    that.getnum_from_bmob();
+
+    //console.log(langue)
   },
 
   /*** 生命周期函数--监听页面初次渲染完成*/
