@@ -37,7 +37,6 @@
   color: #fff;
   font-size: 16px;
   margin-top: 10%;
-  margin-bottom: 10%;
 }
 .detail_bottom
 {
@@ -61,4 +60,12 @@
 .real_color
 {
   color: #f30!important;
+}
+
+.display_flex
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40rpx;
 }

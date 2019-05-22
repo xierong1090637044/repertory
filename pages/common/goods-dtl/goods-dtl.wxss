@@ -39,3 +39,13 @@
 {
   line-height:45rpx;
 }
+
+.content1
+{
+  height: calc(100vh - 42px);
+  overflow: scroll;
+}
+
+.i-btn{text-align:center;vertical-align:middle;touch-action:manipulation;cursor:pointer;background-image:none;white-space:nowrap;user-select:none;font-size:14px;border-radius:2px;border:0!important;position:relative;text-decoration:none;height:44px;line-height:44px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);color:#fff!important;background:#f7f7f7!important;margin:10px}
+.i-btn-primary{color:#fff!important;background:#426ab3!important}.i-btn-ghost{color:#fff!important;background:#fff!important;}
+.i-btn-small{height:40px;line-height:40px;margin: 55px 10px 0 !important;}

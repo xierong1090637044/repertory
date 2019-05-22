@@ -89,5 +89,11 @@
     <view wx:if="{{detail.type == -1 || detail.type == 1}}">
       <button class='confrim_button' bindtap='revoke'>此操作有误，撤销</button>
     </view>
+    
+    <view style="margin:0 auto;margin-bottom:40rpx;">
+      <button class='confrim_button' bindtap='print_goodinfo'>打印</button>
+    </view>
+    
+    
 
 </view>

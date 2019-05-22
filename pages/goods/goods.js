@@ -307,7 +307,7 @@ Page({
             tempGoods.productCode = res[i].get("productCode") || '';
             tempGoods.packageContent = res[i].get("packageContent") || '';
             tempGoods.packingUnit = res[i].get("packingUnit") || '';
-            tempGoods.packModel = res[i].get("packModel") || '';
+            //tempGoods.packModel = res[i].get("packModel") || '';
             tempGoods.reserve = res[i].get("reserve").toFixed(wx.getStorageSync("print_setting").show_float) || 0;
             tempGoods.costPrice = res[i].get("costPrice") || 0;
             tempGoods.retailPrice = res[i].get("retailPrice") || 0;
@@ -315,7 +315,7 @@ Page({
             tempGoods.product_info = res[i].get("product_info") || '';
             tempGoods.bad_num = res[i].get("bad_num") || 0;
             tempGoods.warning_num = res[i].get("warning_num") || 0;
-            tempGoods.stocks = res[i].get("stocks") || 0;
+            tempGoods.stocks = res[i].get("stocks") || "";
             tempGoods.producttime = res[i].get("producttime") || "";
             tempGoods.nousetime = res[i].get("nousetime") || "";
             tempGoodsArr.push(tempGoods);

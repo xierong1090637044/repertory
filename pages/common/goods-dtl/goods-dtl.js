@@ -1,12 +1,13 @@
 // pages/common/goods-dtl/goods-dtl.js
-var { $Message } = require('../../../component/base/index');
+let { $Message } = require('../../../component/base/index');
 const Bmob = require('../../../utils/bmob.js');
 const Bmob_new = require('../../../utils/bmob_new.js')
-var _ = require('../../../utils/we-lodash.js');
-var config = require('../../../utils/config.js');
-var that;
+let _ = require('../../../utils/we-lodash.js');
+let config = require('../../../utils/config.js');
+let that;
 
-var product_id;
+let product_id;
+let good; //产品信息
 Page({
 
   /**
@@ -77,6 +78,33 @@ Page({
     })
   },
 
+  //打印点击功能
+  print_goodinfo: function () {
+    var orderInfo;
+    orderInfo = '<CB>商品信息</CB><BR>';
+    orderInfo += '--------------------------------<BR>';
+    orderInfo += '产品名称：　　 ' + good.goodsName + '<BR>';
+    if (good.stocks != null) orderInfo += '存放仓库：　　 ' + good.stocks.stock_name + '<BR>';
+
+    if (good.position) orderInfo += '货架位置：　　 ' + good.position + '<BR>';
+    if (good.producttime) orderInfo += '生产日期：　　 ' + good.producttime + '<BR>';
+    if (good.nousetime) orderInfo += '失效日期：　　 ' + good.nousetime + '<BR>';
+    orderInfo += '当前库存：　　 ' + good.reserve + '<BR>';
+    orderInfo += '产品规格:　　　' + good.packageContent * good.packingUnit + '<BR>';
+    orderInfo += '进货价格:      ' + good.costPrice + '<BR>';
+    orderInfo += '零售价格:      ' + good.retailPrice + '<BR>';
+    orderInfo += '货损数量:      ' + good.bad_num + '<BR>';
+    orderInfo += '--------------------------------<BR>';
+    orderInfo += '产品二维码：<BR>';
+    if (good.productCode == "") {
+      orderInfo += '<QR>' + good.goodsId + '-false</QR>';//把二维码字符串用标签套上即可自动生成二维码
+    } else {
+      orderInfo += '<QR>' + good.productCode + '-true</QR>';//把二维码字符串用标签套上即可自动生成二维码
+    }
+
+    config.print_by_code(orderInfo);
+  },
+
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     that = this;
@@ -99,9 +127,12 @@ Page({
       query.find().then(res => {
         console.log(res)
         that.setData({ goodsReserve: res[0] });
+
+        good = res[0];
       })
     }else{
       var item = JSON.parse(wx.getStorageSync('item'));
+      good = item;
       product_id = item.goodsId;
 
       this.setData({

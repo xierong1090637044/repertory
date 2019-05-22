@@ -44,6 +44,11 @@
       <view style='font-size:10px;margin-top:5px;color:#999'>（您可以下载下来贴在商品上，下次扫一扫可以直接操作哦）</view>
     </view>
   </i-panel>
+
+  <button class='i-btn i-btn-primary i-btn-small' bindtap='print_goodinfo'>
+    <i-icon type="add" /> 打印
+  </button>
+
   </view>
 
   <view style='display:{{view2}}'>
