@@ -74,7 +74,7 @@ Page({
                         var nickName = userInfo.nickName
                         var avatarUrl = userInfo.avatarUrl
                         var sex = userInfo.gender
-                        Bmob.User.logIn(nickName, userData.openid, {
+                        Bmob.User.logIn(userData.openid, userData.openid, {
                           success: function (user) {
                             try {
                               console.log("登录成功");
@@ -112,7 +112,7 @@ Page({
                                 success: function (object) {
                                   if (object == null){
                                     var user = new Bmob.User();//开始注册用户
-                                    user.set('username', nickName);
+                                    user.set('username', userData.openid);
                                     user.set('password', userData.openid);
                                     user.set('openid', userData.openid);
                                     user.set("nickName", nickName);
@@ -187,14 +187,14 @@ Page({
                                   }else{
                                     var user = Bmob.User.logIn(object.get("username"),userData.openid, {
                                       success: function (user) {
-                                        user.set("username", nickName);
+                                        user.set("username", userData.openid);
                                         user.set("nickName", nickName);
                                         user.save(null, {
                                           success: function (user) {
                                             var query = new Bmob.Query(Bmob.User);
                                             query.get(user.objectId, {
                                               success: function (userAgain) {
-                                                userAgain.set("username", nickName);
+                                                userAgain.set("username", userData.openid);
                                                 userAgain.save(null, {
                                                   error: function (userAgain, error) {
                                                     that.setData({
@@ -204,7 +204,7 @@ Page({
                                                     wx.setStorageSync('openid', user.get('userData').openid)
                                                     wx.setStorageSync('userid', user.id)
                                                     wx.setStorageSync('nickName', user.get("nickName"))
-                                                    wx.setStorageSync('username', user.get("username"))
+                                                    wx.setStorageSync('username', user.get('userData').openid)
                                                     wx.setStorageSync('sex', user.get("sex"))
                                                     wx.setStorageSync('avatarUrl', user.get("avatarUrl"))
                                                     wx.setStorageSync('country', userInfo.country)

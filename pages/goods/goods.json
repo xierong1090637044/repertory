@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-我的产品",
+  "navigationBarTitleText": "我的产品",
   "usingComponents": {
     "i-swipeout": "../../component/swipeout/index",
     "i-input": "../../component/input/index",

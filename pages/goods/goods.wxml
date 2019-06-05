@@ -38,6 +38,8 @@
 
 <!--*筛选器*-->
   <view class='select'>
+
+    <!--类别点击-->
     <view class="section">
       <picker bindchange="bindclass_Change" range-key	="class_text" range="{{all_class}}">
         <view class="picker">
@@ -47,6 +49,7 @@
       </picker>
     </view>
 
+    <!--库存点击-->
     <view class="section">
       <picker bindchange="bindstock_Change" value="{{index}}" range="{{stock}}">
         <view class="picker">
@@ -56,6 +59,7 @@
       </picker>
     </view>
 
+    <!--位置点击-->
     <view class="section">
       <navigator open-type="navigate" url="/pages/second/choose_stock/choose_stock">
         <view class="picker">
@@ -65,10 +69,21 @@
       </navigator>
     </view>
 
+    <!--失效点击-->
     <view class="section">
       <picker bindchange="bindtime_Change" value="{{index}}" range="{{time}}">
         <view class="picker">
           <text>{{selectd_time}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
+        </view>
+      </picker>
+    </view>
+
+    <!--排序点击-->
+    <view class="section">
+      <picker bindchange="bindclass_Change" value="{{index}}" range="{{classes}}">
+        <view class="picker">
+          <text>{{selectd_order}}</text>
           <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
         </view>
       </picker>

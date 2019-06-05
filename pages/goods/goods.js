@@ -14,6 +14,7 @@ let bad_num = null;//货损数量
 let beizhu_text = '';//备注信息
 let stockposition;//仓库选择
 let time_flag;
+let class_flag ="goodsName";
 Page({
 
   /**
@@ -26,8 +27,8 @@ Page({
     page:1,//限制的页数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了4
-    selectd_stockposition: "存放位置",//存放位置
-    selectd_time: "是否失效",//是否失效
+    selectd_stockposition: "位置",//存放位置
+    selectd_time: "失效",//是否失效
     totalGoods: [],
     // 搜索
     inputShowed: false,
@@ -85,6 +86,22 @@ Page({
     time_flag = e.detail.value;
 
     that.setData({ selectd_time: that.data.time[time_flag] });
+    that.loadGoods(type, null, select_id);
+  },
+
+  //选择类别情况
+  bindclass_Change: function (e) {
+    console.log(e.detail.value, that.data.classes[e.detail.value]);
+    that.setData({ selectd_order: that.data.classes[e.detail.value] });
+    if(e.detail.value == 0)
+    {
+      class_flag ="createdAt";
+    }
+    
+    if (e.detail.value == 1){
+      class_flag = "goodsName";
+    }
+    
     that.loadGoods(type, null, select_id);
   },
 
@@ -259,7 +276,7 @@ Page({
   //加载产品
   loadGoods:function(type,content,class_id){
     var that = this;
-    that.setData({spinShow:false});
+    wx.showLoading({title: '加载中...'})
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
@@ -280,7 +297,7 @@ Page({
     
     query.limit(that.data.limitPage);
     query.skip(that.data.limitPage *(that.data.page - 1));
-    query.descending("goodsName"); //按照时间降序
+    query.descending(class_flag); //降序
     query.include("userId");
     query.include("goodsClass"); 
     query.include("stocks");
@@ -329,9 +346,9 @@ Page({
   //数据存储
   handleData: function (data) {
     //console.log(data)
+    wx.hideLoading();
     this.setData({
       goods:data,
-      spinShow: false
     });
   },
 
@@ -364,10 +381,12 @@ Page({
       inputShowed:false,
       spinShow: false,
       current: '1',
-      selectd_stock:"库存情况",
+      selectd_stock:"库存",
       stock:["库存充足","库存不足"],
       time: ["已失效", "未失效"],
-      selectd_class:"产品类别"
+      classes:["创建时间","名字"],
+      selectd_class:"类别",
+      selectd_order:"排序",
     })
   },
 

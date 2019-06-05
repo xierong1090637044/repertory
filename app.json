@@ -53,7 +53,7 @@
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#426ab3",
-    "navigationBarTitleText": "库存助手",
+    "navigationBarTitleText": "库存表",
     "backgroundColor": "#fff"
   },
   "tabBar": {
