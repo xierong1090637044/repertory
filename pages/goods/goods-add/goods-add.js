@@ -1,12 +1,12 @@
 // pages/goods/goods-add/goods-add.js
-var { $Message } = require('../../../component/base/index');
+let { $Message } = require('../../../component/base/index');
 const Bmob = require('../../../utils/bmob.js');
 const Bmob_new = require('../../../utils/bmob_new.js');
 const config = require('../../../utils/config.js');
-var temppath;
-var class_text;//类别
+let temppath;
+let class_text;//类别
 let stock;//仓库
-var that;
+let that;
 Page({
 
   /**
@@ -23,29 +23,13 @@ Page({
     packModel:'',//产品型号
     costPrice: '0',//进货价格
     retailPrice: '0',//零售价格
-    goodsClass:'',//产品类别
+    goodsClass:null,//产品类别
     product_info:'',//商品简介
     warning_num:0,//库存预警数量
     reserve:0,
     loading:false,
     image:"none",
     is_choose: false,
-  },
-
-  //商品类别点击
-  add_class:function()
-  {
-    class_text = wx.getStorageSync("class");
-    that.setData({ class_text: class_text})
-  },
-
-  bindPickerChange(e) {
-    class_text = wx.getStorageSync("class");
-    var index = e.detail.value;
-    this.setData({
-      class_select_text: class_text[index].class_text,
-      goodsClass: class_text[index].objectId
-    })
   },
 
   //生产日期选择
@@ -98,7 +82,7 @@ Page({
                   var Goods = Bmob.Object.extend("Goods");
                   var goods = new Goods();
 
-                  if (that.data.goodsClass != '') { //产品类别
+                  if (that.data.goodsClass) { //产品类别
                     var Class_User = Bmob.Object.extend("class_user");
                     var class_user = new Class_User();
                     class_user.id = that.data.goodsClass;
@@ -132,7 +116,7 @@ Page({
                       } else {
                         // 添加产品
                         goods.set("userId", user);
-                        if (that.data.goodsClass != '') { goods.set("goodsClass", class_user); }
+                        if (that.data.goodsClass) { goods.set("goodsClass", class_user); }
                         goods.set("stocks", stocks);
                         goods.set("goodsName", goodsForm.goodsName);
                         goods.set("regNumber", goodsForm.regNumber);
@@ -266,6 +250,14 @@ Page({
       success(res) {
         stock = res.data
         that.setData({ stock: res.data.stock_name})
+      }
+    });
+
+    wx.getStorage({
+      key: 'class',
+      success(res) {
+        console.log(res)
+        that.setData({ class_select_text: res.data.class_text, goodsClass:res.data.objectId})
       }
     })
   },

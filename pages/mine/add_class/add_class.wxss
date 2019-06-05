@@ -1,36 +1,63 @@
 /* pages/mine/add_class/add_class.wxss */
 .all_list_view
 {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 160rpx);
 }
 .add_class
 {
   background: #426ab3;
-  margin: 15px;
-  width: calc(100% - 30px);
-  padding: 15px 0;
+  margin: 30rpx;
+  width: calc(100% - 60rpx);
+  padding: 20rpx 0;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 8rpx;
 }
 .all_class_text
 {
   width: 100%;
 }
+.notice_text
+{
+  padding: 30rpx;
+}
 .class_text
 {
-  display: inline-block;
+  padding: 16rpx 20rpx;
+  text-align: center;
+  border-bottom: 1rpx solid#ddd;
+  display: flex;
+  justify-content: space-between;
+}
+.class_content
+{
+  display: flex;
+  align-items: center;
   background: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin: 10px 10px 10px 0;
+  height: calc(100vh - 260rpx);
 }
-.display1
+.left_content
 {
-  display: inline-block;
-  line-height: 21px;
+  width: 50%;
+  border-right: 1rpx solid#ddd;
+  height: calc(100vh - 260rpx);
+  overflow: scroll;
 }
-.display2
+.right_content
 {
-  display: inline-block;
-  line-height: 21px;
+  width: 50%;
+ height: calc(100vh - 260rpx);
+  overflow: scroll;
+}
+.right_add
+{
+  color: #426ab3;
+  padding: 6rpx 4rpx;
+  justify-content: right;
+  border-bottom: 1rpx solid#ddd;
+}
+
+.selected_one
+{
+  background: #426ab3 !important;
+  color: #fff !important;
 }

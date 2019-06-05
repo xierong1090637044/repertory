@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-产品分类",
+  "navigationBarTitleText": "产品分类",
   "usingComponents": {
     "i-spin": "../../../component/spin/index",
     "i-cell-group": "../../../component/cell-group/index",

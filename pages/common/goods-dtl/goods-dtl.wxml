@@ -37,9 +37,9 @@
   <i-panel title="产品条形码">
     <view class='text-center padded-b-10' style='padding-top: 0.5rem'>
       <view>产品：{{goodsReserve.goodsName}}</view>
-      <button  wx:if = "{{goodsReserve.productCode != ''}}" class="more-button bg-info text-white" size="mini" 
+      <button  wx:if = "{{goodsReserve.productCode != ''}}" class="more-button bg-indigo text-white" size="mini" 
               bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.productCode}}"  data-type="true">预览条形码并下载</button>
-      <button  wx:else class="more-button bg-info text-white" size="mini" 
+      <button  wx:else class="more-button bg-indigo text-white" size="mini" 
               bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.goodsId}}" data-type="false">预览条形码并下载</button>
       <view style='font-size:10px;margin-top:5px;color:#999'>（您可以下载下来贴在商品上，下次扫一扫可以直接操作哦）</view>
     </view>

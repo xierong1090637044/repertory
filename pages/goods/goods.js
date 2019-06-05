@@ -71,37 +71,12 @@ Page({
     }
   },
 
-  //选择产品类别
-  bindclass_Change:function(e){
-    var index = e.detail.value;
-    select_id = class_array[index].objectId;
-    that.setData({ selectd_class: class_array[index].class_text});
-    that.loadGoods(type,null,select_id);
-    
-  },
-
   //选择失效情况
   bindtime_Change:function(e)
   {
     time_flag = e.detail.value;
 
     that.setData({ selectd_time: that.data.time[time_flag] });
-    that.loadGoods(type, null, select_id);
-  },
-
-  //选择类别情况
-  bindclass_Change: function (e) {
-    console.log(e.detail.value, that.data.classes[e.detail.value]);
-    that.setData({ selectd_order: that.data.classes[e.detail.value] });
-    if(e.detail.value == 0)
-    {
-      class_flag ="createdAt";
-    }
-    
-    if (e.detail.value == 1){
-      class_flag = "goodsName";
-    }
-    
     that.loadGoods(type, null, select_id);
   },
 
@@ -304,6 +279,7 @@ Page({
     query.find({
       success: function (res) {
         that.setData({length: res.length });
+        wx.hideLoading();
         if (res.length == 0) {
           that.setData({ contentEmpty: true })
         } else {
@@ -337,6 +313,7 @@ Page({
             tempGoods.nousetime = res[i].get("nousetime") || "";
             tempGoodsArr.push(tempGoods);
           }
+          
           that.handleData(tempGoodsArr);
         }
       }
@@ -346,7 +323,7 @@ Page({
   //数据存储
   handleData: function (data) {
     //console.log(data)
-    wx.hideLoading();
+    
     this.setData({
       goods:data,
     });
@@ -395,22 +372,6 @@ Page({
     this.loadGoods(null,null,null)
   },
 
-  //得到类别列表
-  getclass_list: function () {
-    const query = Bmob_new.Query("class_user");
-    query.equalTo("parent", "==", userid);
-    query.find().then(res => {
-      wx.setStorageSync("class", res);
-
-      var all = {};
-      all.class_text = "全部";
-      all.objectId = null;
-      res.push(all);
-      that.setData({ all_class: res });
-      class_array = res;
-    });
-  },
-
   /*** 生命周期函数--监听页面加载*/
   onLoad: function (options) {
     userid = wx.getStorageSync("userid");
@@ -434,9 +395,7 @@ Page({
     {
       this.handleRefresh();
       wx.setStorageSync("is_add", false);
-    }
-
-    that.getclass_list();
+    }else{}
 
     wx.getStorage({
       key: 'stock',
@@ -445,6 +404,15 @@ Page({
         that.setData({ selectd_stockposition: res.data.stock_name })
         that.loadGoods(type, null, select_id);
       }
+    });
+
+    wx.getStorage({
+      key: 'class',
+      success(res) {
+        console.log(res)
+        that.setData({ selectd_class: res.data.class_text})
+        that.loadGoods(type, null, res.data.objectId);
+      }
     })
   },
 
@@ -452,7 +420,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    wx.removeStorageSync("class");
   },
 
   /**
@@ -463,6 +431,7 @@ Page({
     select_id = null;//类别选择的id
     stockposition = null;//选择的仓库
     wx.removeStorageSync("stock");
+    wx.removeStorageSync("class");
   },
 
   /**

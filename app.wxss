@@ -6,6 +6,12 @@ width: 2px;
 height: 6px;
 background-color: transparent;
 }
+
+.display_flex
+{
+  display: flex;
+  align-items: center;
+}
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb
 {
@@ -718,6 +724,7 @@ page{
   color: #000;
   line-height: 35px;
   font-size: 16px;
+  width: 100vw;
   
 }
 

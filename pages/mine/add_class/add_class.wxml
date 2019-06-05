@@ -1,24 +1,51 @@
-<view style='padding:15px;' class='all_list_view'>
-   <view>我的分类：</view>
+<view class='all_list_view'>
    <view class='no-data' wx:if="{{isEmpty}}">
       <image src='/images/common/no-data.png'></image>
       <text>暂无数据</text>
    </view>
+
    <view class='all_class_text' wx:else>
-      <view wx:for="{{class_text}}" wx:key='{{index}}' data-id='{{item.objectId}}' class='class_text' bindtap='show_operation' data-value='{{item.class_text}}'>
-         <view class='display1'>{{item.class_text}}</view>
-         <view class='display2'><i-icon type="brush" size="18" color="#80848f" /></view>
-      </view>
+     <view class='notice_text'>我的分类：</view>
+
+     <view class='class_content'>
+       <view class='left_content'>
+         <view wx:for="{{class_text}}" wx:key='{{index}}' data-id='{{item.objectId}}' class='class_text {{selected_id==item.objectId?"selected_one":""}}' catchtap='selected_this_one'>
+           <view>{{item.class_text}}</view>
+           <view catchtap='show_operation' data-id='{{item.objectId}}' data-value='{{item.class_text}}' data-dbname='class_user' wx:if="{{type}}"><i-icon type="brush" size="18" color='{{selected_id==item.objectId?"#fff":"#80848f"}}' /></view>
+         </view>
+       </view>
+       <view class='right_content' wx:if="{{type}}">
+         <view class='right_add display_flex' catchtap='add_secclass'><i-icon type="add" size="16" color="#80848f" />添加二级分类</view>
+         <view wx:for="{{second_class}}" wx:key='{{index}}' data-id='{{item.objectId}}' class='class_text'>
+           <view>{{item.class_text}}</view>
+           <view catchtap='show_operation' data-id='{{item.objectId}}' data-value='{{item.class_text}}' data-dbname='second_class' ><i-icon type="brush" size="18" color='#80848f' /></view>
+         </view>
+       </view>
+
+       <view class='right_content' wx:else>
+         <view class='right_add display_flex' catchtap='add_secclass'><i-icon type="add" size="16" color="#80848f" />添加二级分类</view>
+         <view wx:for="{{second_class}}" wx:key='{{index}}' data-id='{{item.objectId}}' class='class_text' bindtap='goto_goods' data-item='{{item}}'>
+           <view>{{item.class_text}}</view>
+         </view>
+       </view>
+     </view>
+     
    </view>
 </view>
 
-<view class='add_class' bindtap='add_class'>添加类别</view>
+<view class='add_class' bindtap='add_class'>添加一级分类</view>
 
-
+<!--产品一级分类的modal-->
 <i-modal title="产品分类" visible="{{visible}}" bind:ok="getclass_text_confrim" bind:cancel="handleClose">
     <i-input placeholder="请输入产品类别" bind:change="getclass_text" maxlength='10'/>
 </i-modal>
 
+<!--产品二级分类的modal-->
+<i-modal title="产品二级分类" wx:if="{{one_click}}" bind:ok="getclass_text_confrim_second" bind:cancel="handleClose" visible="{{true}}">
+    <i-input placeholder="请输入二级类别" bind:change="getclass_secondtext" maxlength='10'/>
+</i-modal>
+
+<!--编辑的modal-->
 <i-modal title="产品分类" visible="{{edit_visible}}" bind:ok="getclass_text_edit" bind:cancel="handleClose">
     <i-input value="{{get_class_text}}" bind:change="editclass_text" maxlength='10'/>
 </i-modal>

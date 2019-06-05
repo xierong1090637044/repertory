@@ -2,10 +2,6 @@
 <!--搜索-->
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 
-<!--<view class="fristcontent">
-  <view>总库存：{{total_reserve}}</view>
-  <view>库存总金额：￥{{total_money}}</view>
-</view>-->
 <view class='display_flex'>
 <view class="search-view" >
   <view class="search-bar">
@@ -41,12 +37,12 @@
 
     <!--类别点击-->
     <view class="section">
-      <picker bindchange="bindclass_Change" range-key	="class_text" range="{{all_class}}">
+      <navigator open-type="navigate" url="/pages/mine/add_class/add_class?type=select" hover-class='none'>
         <view class="picker">
           <text>{{selectd_class}}</text>
           <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
         </view>
-      </picker>
+       </navigator>
     </view>
 
     <!--库存点击-->
@@ -61,7 +57,7 @@
 
     <!--位置点击-->
     <view class="section">
-      <navigator open-type="navigate" url="/pages/second/choose_stock/choose_stock">
+      <navigator open-type="navigate" url="/pages/second/choose_stock/choose_stock" hover-class='none'>
         <view class="picker">
           <text>{{selectd_stockposition}}</text>
           <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
