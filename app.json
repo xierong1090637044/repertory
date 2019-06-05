@@ -53,7 +53,7 @@
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#426ab3",
-    "navigationBarTitleText": "库存助手",
+    "navigationBarTitleText": "Inventory assistant",
     "backgroundColor": "#fff"
   },
   "tabBar": {
@@ -66,13 +66,13 @@
         "iconPath": "images/index/chuan.png",
         "selectedIconPath": "images/index/chuan.png",
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "Home page"
       },
       {
         "iconPath": "images/index/person.png",
         "selectedIconPath": "images/index/person.png",
         "pagePath": "pages/mine/mine",
-        "text": "我的"
+        "text": "Mine"
       }
     ]
   },

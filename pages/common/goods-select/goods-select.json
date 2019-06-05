@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-选择产品",
+  "navigationBarTitleText": "Product selection",
   "usingComponents": {
     "i-checkbox-group": "../../../component/checkbox-group/index",
     "i-checkbox": "../../../component/checkbox/index",

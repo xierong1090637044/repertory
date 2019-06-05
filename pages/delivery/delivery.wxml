@@ -2,19 +2,19 @@
 <i-message id="message" />
 <view class='padded-t-10 extra' wx:if="{{!isEmpty}}">
   <view class='margin-b-10' wx:for="{{goods}}" wx:key="{{item.goodsId}}">
-    <i-card title="产品名称：{{item.goodsName}}" extra="库存：{{item.reserve}}">
+    <i-card title="Product name:{{item.goodsName}}" extra="Inventory:{{item.reserve}}">
       <view slot="content">
-        <view>产品规格：{{item.packageContent}}/{{item.packingUnit}}</view>
-        <view>建议零售价格：{{item.retailPrice}}(元)</view>
+        <view>Specifications:{{item.packageContent}}/{{item.packingUnit}}</view>
+        <view>Suggested retail price:{{item.retailPrice}}(元)</view>
         <view class='input_withlabel'>
-            <view>实际价格（可修改）：</view>
+            <view>Actual price (modifiable):</view>
             <view><input placeholder='{{item.retailPrice}}' bindinput='getrealprice' placeholder-class='input_label' class='input_label' data-idx="{{index}}"  type='digit'/></view>
         </view>
-        <view wx:if="{{item.stocks.stock_name}}">存放位置：{{item.stocks.stock_name}}</view>
+        <view wx:if="{{item.stocks.stock_name}}">Location:{{item.stocks.stock_name}}</view>
         <view class='margin-t-5'>
-        出库量：<i-input-number i-class="number" data-idx="{{index}}" value="{{ item.num }}" min="0" max="10000" bindchange="handleNumChange" />
+        Outbound:<i-input-number i-class="number" data-idx="{{index}}" value="{{ item.num }}" min="0" max="10000" bindchange="handleNumChange" />
         <view class='del' bindtap='handleDel' data-idx="{{index}}">
-          <i-icon type="close" />删除</view>
+          <i-icon type="close" />delete</view>
         </view>
       </view>
     </i-card>
@@ -22,11 +22,11 @@
 </view>
 <view class='no-data' wx:else>
   <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
+  <text>Temporarily no data</text>
 </view>
 
 <view class='btn-group' bindtap='handleDelivery'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      确认出库
+      Confirm
     </button>
 </view>

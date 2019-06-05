@@ -1,28 +1,28 @@
 <view class='page'>
-    <view style='line-height:35px;padding: 0 10px;'>已选产品</view>
+    <view style='line-height:35px;padding: 0 10px;'>The selected product</view>
     <view style='max-height:25vh;overflow-x:scroll'>
        <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
-               <view>产品：{{item.goodsName}}</view>
+               <view>Products:{{item.goodsName}}</view>
           </view>
           <view class='pro_list'>
-               <view>退货数量：X{{item.num}}</view>
+               <view>Quantity:X{{item.num}}</view>
           </view>
        </view>
     </view>
-     <view class='pro_allmoney'>总计：￥{{all_money}}</view>
+     <view class='pro_allmoney'>Total:￥{{all_money}}</view>
 
     <form bindsubmit="formSubmit" report-submit="true">
-    <i-panel title="退货明细（用于记录客户退货的情况）">
-      <i-input title="客户姓名" value="{{custom.custom_name}}" placeholder="选择客户" disabled="true" bindtap='choose_custom'/>
+    <i-panel title="Return details (used to record customer returns)">
+      <i-input title="Customer name" value="{{custom.custom_name}}" placeholder="Select the customer" disabled="true" bindtap='choose_custom'/>
     </i-panel>
 
     <view style='margin-top:20px'>
-         <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>
+         <textarea placeholder='Please enter remarks' class='beizhu_style' bindinput="input_beizhu"></textarea>
     </view>
 
     <view>
-        <button class='confrim_button' disabled='{{button}}' form-type="submit">确认退货入库</button>
+        <button class='confrim_button' disabled='{{button}}' form-type="submit">Confirm</button>
     </view>
     </form>
 

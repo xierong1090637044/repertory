@@ -22,7 +22,7 @@ Page({
     var isAllZero = true
     if (that.data.goods.length < 1) {
       $Message({
-        content: '未选择产品，请确认',
+        content: 'Product not selected, please confirm',
         type: 'warning',
         duration: 5
       });
@@ -35,16 +35,16 @@ Page({
     }
     if (isAllZero== false) {
       $Message({
-        content: '出库量必须大于1',
+        content: 'The outbound quantity must be greater than 1',
         type: 'warning',
         duration: 5
       });
       return
     }else{
       wx.showModal({
-        title: '提示',
-        content: '确认将商品出库？',
-        confirmText: '确认',
+        title: 'prompt',
+        content: 'Confirm delivery of goods?',
+        confirmText: 'confirm',
         success: function (res) {
           if (res.confirm) {
             wx.setStorageSync("operate_goods", that.data.goods);
@@ -78,7 +78,7 @@ Page({
     var tempGoods = that.data.goods
     if (tempGoods[idx].reserve < e.detail.value) {
       wx.showToast({
-        title: '库存不足',
+        title: 'Insufficient',
         icon: 'none'
       })
       tempGoods[idx].num = tempGoods[idx].reserve;

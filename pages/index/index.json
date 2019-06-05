@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-首页",
+  "navigationBarTitleText": "Home Page",
   "usingComponents": {
     "i-card": "../../component/card/index",
     "i-row": "../../component/row/index",

@@ -5,7 +5,7 @@
 
 <view class='no-data' wx:if="{{isEmpty}}">
   <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
+  <text>No data</text>
 </view>
 
 <view wx:else>
@@ -15,23 +15,23 @@
     <view class="search-bar-form">
       <view class="search-bar-box">
         <icon class="icon-search_in-box" type="search" size="14"></icon>
-        <input type="text" class="search-bar-input" placeholder="请输入关键字查询" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchAction"/>
+        <input type="text" class="search-bar-input" placeholder="Please enter keyword query" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchAction"/>
         <view class="icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
           <icon type="clear" size="14"></icon>
         </view>
       </view>
       <label class="search-bar-label" hidden="{{inputShowed}}" bindtap="showInput">
         <icon class="icon-search" type="search" size="14"></icon>
-        <view class="search-bar-text">搜索</view>
+        <view class="search-bar-text">search</view>
       </label>
     </view>
-    <view class="search-bar-cancel-btn" hidden="{{!inputShowed}}" bindtap="searchAction">搜索</view>
+    <view class="search-bar-cancel-btn" hidden="{{!inputShowed}}" bindtap="searchAction">search</view>
   </view>
 </view>
 <!--/.搜索-->
   <view class='btn-group' bindtap='link2page'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      确认选择
+      Confirm
     </button>
   </view>
 </view>
@@ -72,19 +72,19 @@
 
   <view class='no-data' wx:if="{{contentEmpty}}" style='height:calc(100vh - 158px)'>
     <image src='/images/common/no-data.png'></image>
-    <text>暂无数据</text>
+    <text>No data</text>
   </view>
 
   <view wx:else style='width:100%'>
     <scroll-view class='wrap_overflow' scroll-y="true" lower-threshold="0">
       <i-checkbox-group current="{{current}}" bindchange="handleCheckChange">
-        <i-checkbox wx:for="{{goods}}" another_value="产品：{{item.goodsName}}" extra_value="库存：{{item.reserve}}" value="{{item.goodsName}}{{item.stocks.stock_name}}" wx:key="{{item.goodsId}}" extra_stock_value="存放位置：{{item.stocks.stock_name}}">
+        <i-checkbox wx:for="{{goods}}" another_value="Products:{{item.goodsName}}" extra_value="Stock:{{item.reserve}}" value="{{item.goodsName}}{{item.stocks.stock_name}}" wx:key="{{item.goodsId}}" extra_stock_value="Location:{{item.stocks.stock_name}}">
         </i-checkbox>
       </i-checkbox-group>
     </scroll-view>
     <i-page current="{{ page }}" bind:change="handlePageChange">
-      <view slot="prev">上一页</view>
-      <view slot="next">下一页</view>
+      <view slot="prev">Previous</view>
+      <view slot="next">Next</view>
     </i-page>
   </view>
   

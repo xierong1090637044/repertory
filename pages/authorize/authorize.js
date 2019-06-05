@@ -4,7 +4,7 @@ const app = getApp()
 const Bmob = require('../../utils/bmob.js')
 Page({
   data: {
-    remind: '加载中',
+    remind: 'Loading',
     angle: 0,
     userInfo: {},
     hasUserInfo: false,
@@ -47,16 +47,16 @@ Page({
     var that = this
     if (e.detail.errMsg == 'getUserInfo:fail auth deny'){
       wx.showToast({
-        title: '您取消了授权',
+        title: 'You cancelled the authorization',
         icon:'none'
       })
     }else{
       try {
         var value = wx.getStorageSync('openid')
         if (value) {
-          console.log("已登录")
+          console.log("Already logged in")
           wx.showToast({
-            title: '已登录',
+            title: 'Already logged in',
             icon: 'none'
           })
           that.setData({
@@ -77,9 +77,9 @@ Page({
                         Bmob.User.logIn(nickName, userData.openid, {
                           success: function (user) {
                             try {
-                              console.log("登录成功");
+                              console.log("Login successfully");
                               wx.showToast({
-                                title: '授权成功',
+                                title: 'Authorized success',
                                 icon: 'none'
                               })
                               that.setData({
@@ -96,9 +96,9 @@ Page({
                               wx.setStorageSync('province', userInfo.province)
                               wx.setStorageSync('city', userInfo.city)
                             } catch (e) {
-                              console.log("登录失败")
+                              console.log("Login fail")
                               wx.showToast({
-                                title: '授权失败',
+                                title: 'Authorized fail',
                                 icon: 'none'
                               })
                             }
@@ -122,9 +122,9 @@ Page({
                                     user.signUp(null, {
                                       success: function (result) {
                                         try {//将返回的3rd_session存储到缓存中
-                                          console.log('注册成功');
+                                          console.log('login was successful');
                                           wx.showToast({
-                                            title: '授权成功',
+                                            title: 'Authorized success',
                                             icon: 'none'
                                           })
                                           that.setData({
@@ -141,9 +141,9 @@ Page({
                                           wx.setStorageSync('province', userInfo.province)
                                           wx.setStorageSync('city', userInfo.city)
                                         } catch (e) {
-                                          console.log("注册失败")
+                                          console.log("login has failed")
                                           wx.showToast({
-                                            title: '授权失败',
+                                            title: 'privilege grant failed',
                                             icon: 'none'
                                           })
                                         }
@@ -152,9 +152,9 @@ Page({
                                         if(error.code == '202'){
                                           wx.getUserInfo({
                                             success: res => {
-                                              console.log("已登录")
+                                              console.log("Already logged in")
                                               wx.showToast({
-                                                title: '已登录',
+                                                title: 'Already logged in',
                                                 icon: 'none'
                                               })
                                               var query = new Bmob.Query(Bmob.User);
@@ -221,7 +221,7 @@ Page({
                                   }
                                 },
                                 error: function (error) {
-                                  console.log("查询失败: " + error.code + " " + error.message);
+                                  console.log("Query failed: " + error.code + " " + error.message);
                                 }
                               });
                             }

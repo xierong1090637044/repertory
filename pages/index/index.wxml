@@ -5,29 +5,29 @@
     <swiper-item class="item">
       <view class='every_item'>
         <view class='s_num'>{{get_reserve}}</view>
-        <view>今日入库</view>
+        <view>Warehousing today</view>
       </view>
       <view class='every_item'>
         <view class='s_num'>{{out_reserve}}</view>
-        <view>今日出库</view>
+        <view>Out of stock today</view>
       </view>
     </swiper-item>
 
     <swiper-item class="item">
       <view class='every_item'>
         <view class='s_num'>{{total_reserve}}</view>
-        <view>库存总量</view>
+        <view>Total inventory</view>
       </view>
       <view class='every_item'>
         <view class='s_num'>{{total_money}}</view>
-        <view>库存成本</view>
+        <view>Inventory cost</view>
       </view>
     </swiper-item>
 
     <swiper-item class="item">
       <view class='every_item'>
         <view class='s_num'>{{total_products}}</view>
-        <view>库存种类</view>
+        <view>Inventory type</view>
       </view>
     </swiper-item>
   </block>
@@ -35,7 +35,7 @@
 </view>
 
 <i-notice-bar icon="systemprompt" loop>
-    系统正在改版中。。。有好的建议可以联系微信xierong1090637044
+    The system is being revamped... There are good suggestions to contact Wechat xierong1090637044
 </i-notice-bar>
 
 <!--操作列表-->
@@ -48,5 +48,5 @@
 
 <view class='scan_code' bindtap='scan_code'>
      <i class="iconfont icon-saomiao icon-scan"></i>
-     <text>扫描产品条形码</text>
+     <text>Scanning product bar code</text>
   </view>

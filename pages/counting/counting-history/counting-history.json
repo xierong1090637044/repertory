@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存盘点操作记录",
+  "navigationBarTitleText": "Operation record of stock count",
   "usingComponents": {
     "i-panel": "../../../component/panel/index",
     "i-input": "../../../component/input/index"

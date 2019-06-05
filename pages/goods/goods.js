@@ -26,8 +26,8 @@ Page({
     page:1,//限制的页数
     isEmpty: false, //当前查询出来的数据是否为空
     isEnd: false, //是否到底了4
-    selectd_stockposition: "存放位置",//存放位置
-    selectd_time: "是否失效",//是否失效
+    selectd_stockposition: "Storage location",//存放位置
+    selectd_time: "Failure",//是否失效
     totalGoods: [],
     // 搜索
     inputShowed: false,
@@ -43,7 +43,7 @@ Page({
     const type = detail.type;
     if (type === 'next') {
       if (that.data.length < that.data.limitPage) {
-        wx.showToast({icon: 'none',title: '最后一页了',})
+        wx.showToast({ icon: 'none', title: 'Last page',})
       } else {
         that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1 })
         that.loadGoods(type, null, select_id);
@@ -126,7 +126,7 @@ Page({
     wx.setStorageSync('item', JSON.stringify(item));
 
     wx.showActionSheet({
-      itemList: ['查看详情', '货损','查看产品图','编辑产品', '删除产品','取消'],
+      itemList: ['View details', 'Cargo damage', 'View Product Diagram', 'Editing products', 'Delete product','cancel'],
       success(res) {
         if (res.tapIndex == 0)
         {
@@ -140,7 +140,7 @@ Page({
           if (item.goodsIcon == "")
           {
             wx.showToast({
-              title: '未上传产品图',
+              title: 'Unuploaded product map',
               icon:"none"
             })
           }else{
@@ -180,11 +180,11 @@ Page({
     console.log(now_product);
     var id = now_product.goodsId
     wx.showModal({
-      title: '提示',
-      content: '是否删除【'+item.goodsName+'】产品',
+      title: 'Tips',
+      content: 'Whether to delete【' + item.goodsName +'】Products',
       success: function (res) {
         if (res.confirm) {
-          wx.showLoading({title: '删除中...',});
+          wx.showLoading({ title: 'Deleting...',});
           var BillsTemp = Bmob.Object.extend("BillsTemp");
           var queryBillsTemp = new Bmob.Query(BillsTemp);
           queryBillsTemp.equalTo("goodsId", id);
@@ -223,7 +223,7 @@ Page({
                       success: function (res) {
                         wx.hideLoading();
                         wx.showToast({
-                          title: '删除成功',
+                          title: 'Delete successful',
                           icon: 'success'
                         })
                         that.onLoad();
@@ -236,7 +236,7 @@ Page({
                   error: function (result, error) {
                     console.log(error);
                     wx.showToast({
-                      title: '删除失败',
+                      title: 'Delete failed',
                       icon: 'none'
                     })
                   }
@@ -364,10 +364,10 @@ Page({
       inputShowed:false,
       spinShow: false,
       current: '1',
-      selectd_stock:"库存情况",
-      stock:["库存充足","库存不足"],
-      time: ["已失效", "未失效"],
-      selectd_class:"产品类别"
+      selectd_stock:"Inventory situation",
+      stock: ["large stock","Insufficient inventory"],
+      time: ["Failure", "No failure"],
+      selectd_class:"Product category"
     })
   },
 
@@ -384,7 +384,7 @@ Page({
       wx.setStorageSync("class", res);
 
       var all = {};
-      all.class_text = "全部";
+      all.class_text = "whole";
       all.objectId = null;
       res.push(all);
       that.setData({ all_class: res });
@@ -499,7 +499,7 @@ Page({
     if(bad_num <=0)
     {
       wx.showToast({
-        title: '货损数量不能为0',
+        title: 'The quantity of damage should not be 0.',
         icon:"none"
       })
     }else{
@@ -517,7 +517,7 @@ Page({
           that.setData({ visible: false });
           that.onLoad();
           wx.showToast({
-            title: '记录成功',
+            title: 'Record success',
           });
         })
 

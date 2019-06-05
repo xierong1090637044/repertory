@@ -1,28 +1,28 @@
 <view class='page'>
-    <view style='line-height:35px;padding: 0 10px;'>已选产品</view>
+    <view style='line-height:35px;padding: 0 10px;'>Selected products</view>
     <view style='max-height:25vh;overflow-x:scroll'>
        <view wx:for="{{goods}}" wx:key="{{index}}" class='pro_listitem'>
           <view class='pro_list' style='color:#000'>
-               <view>产品：{{item.goodsName}}</view>
-               <view>期初进货价：￥{{item.costPrice}}</view>
+               <view>Products:{{item.goodsName}}</view>
+               <view>Initial price:￥{{item.costPrice}}</view>
           </view>
           <view class='pro_list'>
-               <view>实际进货价：￥{{item.modify_retailcostPrice}}（X{{item.num}}）</view>
-               <view>合计：￥{{item.total_money}}</view>
+               <view>Actual price:￥{{item.modify_retailcostPrice}}（X{{item.num}}）</view>
+               <view>Total:￥{{item.total_money}}</view>
           </view>
        </view>
     </view>
-     <view class='pro_allmoney'>总计：￥{{all_money}}</view>
+     <view class='pro_allmoney'>All Money:￥{{all_money}}</view>
 
     <form bindsubmit="formSubmit" report-submit="true">
-    <i-panel title="开单明细（用于记录是否有无欠款）">
-      <i-input title="供应商姓名" value="{{producer.producer_name}}" placeholder="选择供货商" disabled="true" bindtap='choose_producer'/>
-      <i-input title="实际应付" value="{{all_money}}" placeholder="选择供货商" disabled="true"/>
-      <i-input title="实际付款（可修改）" value="{{real_money}}" placeholder="输入实际付款金额" bindchange='getreal_money'/>
+    <i-panel title="Details of invoicing (used to record whether there is any arrears)">
+      <i-input title="Name of supplier" value="{{producer.producer_name}}" placeholder="Selection of suppliers" disabled="true" bindtap='choose_producer'/>
+      <i-input title="Actual coping" value="{{all_money}}" placeholder="Selection of suppliers" disabled="true"/>
+      <i-input title="Actual payment (modifiable)" value="{{real_money}}" placeholder="Input actual payment amount" bindchange='getreal_money'/>
     </i-panel>
 
     <view style='margin-top:20px'>
-         <textarea placeholder='请输入备注' class='beizhu_style' bindinput="input_beizhu"></textarea>
+         <textarea placeholder='Please enter notes' class='beizhu_style' bindinput="input_beizhu"></textarea>
     </view>
 
     <view>

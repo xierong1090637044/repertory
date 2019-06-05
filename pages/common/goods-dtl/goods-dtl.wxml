@@ -1,52 +1,52 @@
 <!--pages/common/goods-dtl/goods-dtl.wxml-->
 <view>
   <i-tabs current="{{ current }}" bindchange="handleChange">
-    <i-tab key="1" title="产品详情"></i-tab>
-    <i-tab key="2" title="全部"></i-tab>
-    <i-tab key="3" title="当日"></i-tab>
+    <i-tab key="1" title="Product details"></i-tab>
+    <i-tab key="2" title="All"></i-tab>
+    <i-tab key="3" title="Today"></i-tab>
   </i-tabs>
 
   <view style='display:{{view1}}'>
-  <i-panel title="产品详情">
-    <i-card title="产品名称：{{goodsReserve.goodsName}}" 
+  <i-panel title="Product details">
+    <i-card title="Product name:{{goodsReserve.goodsName}}" 
           full="true" thumb="{{goodsReserve.goodsIcon}}" i-class="card_title">
       <view slot="content">
-        <view wx:if="{{goodsReserve.product_info !=''}}">商品简介：{{goodsReserve.product_info}}</view>
+        <view wx:if="{{goodsReserve.product_info !=''}}">Product description:{{goodsReserve.product_info}}</view>
         <view class='content_model'>
-           <view wx:if="{{goodsReserve.regNumber !=''}}">登记编号：{{goodsReserve.regNumber}}</view>
-           <view>产品规格：{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
+           <view wx:if="{{goodsReserve.regNumber !=''}}">Registration number:{{goodsReserve.regNumber}}</view>
+           <view>Product specifications:{{goodsReserve.packageContent}}*{{goodsReserve.packingUnit}}</view>
         </view>
-        <view wx:if = "{{goodsReserve.productCode != ''}}">产品条码：{{goodsReserve.productCode}}</view>
-        <view wx:if = "{{goodsReserve.position != ''}}">货架位置：{{goodsReserve.position}}</view>
-        <view wx:if = "{{goodsReserve.producttime != ''}}">生产日期：{{goodsReserve.producttime}}</view>
-        <view wx:if = "{{goodsReserve.nousetime != ''}}">失效日期：{{goodsReserve.nousetime}}</view>
-        <view>进货价格：{{goodsReserve.costPrice}} (元)</view>
-        <view>零售价格：{{goodsReserve.retailPrice}} (元)</view>
+        <view wx:if = "{{goodsReserve.productCode != ''}}">Product barcode:{{goodsReserve.productCode}}</view>
+        <view wx:if = "{{goodsReserve.position != ''}}">Shelf location:{{goodsReserve.position}}</view>
+        <view wx:if = "{{goodsReserve.producttime != ''}}">Production date:{{goodsReserve.producttime}}</view>
+        <view wx:if = "{{goodsReserve.nousetime != ''}}">Expiration date:{{goodsReserve.nousetime}}</view>
+        <view>Purchase price:{{goodsReserve.costPrice}}</view>
+        <view>Retail price:{{goodsReserve.retailPrice}}</view>
         <view style='display:flex;justify-content: space-between'>
-           <view>总货损数量：<text style='color:#f30'>{{goodsReserve.bad_num}}</text></view>
-           <navigator url='../../goods/bad_history/bad_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#f30'>查看货损记录 >></navigator>
+           <view>Total damage quantity:<text style='color:#f30'>{{goodsReserve.bad_num}}</text></view>
+           <navigator url='../../goods/bad_history/bad_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#f30'>Check the damage record >></navigator>
         </view>
         <view style='display:flex;justify-content: space-between'>
-           <view>当前库存：<text style='color:#0600ff'>{{goodsReserve.reserve}}</text></view>
-           <navigator url='../../goods/counting_history/counting_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#0600ff'>查看盘点记录 >></navigator>
+           <view>Current stock:<text style='color:#0600ff'>{{goodsReserve.reserve}}</text></view>
+           <navigator url='../../goods/counting_history/counting_history?id={{goodsReserve.goodsId}}' style='margin-left:20px;color:#0600ff'>Check the inventory record >></navigator>
         </view>
       </view>
     </i-card>
   </i-panel>
 
-  <i-panel title="产品条形码">
+  <i-panel title="Product barcode">
     <view class='text-center padded-b-10' style='padding-top: 0.5rem'>
-      <view>产品：{{goodsReserve.goodsName}}</view>
+      <view>Products:{{goodsReserve.goodsName}}</view>
       <button  wx:if = "{{goodsReserve.productCode != ''}}" class="more-button bg-info text-white" size="mini" 
-              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.productCode}}"  data-type="true">预览条形码并下载</button>
+              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.productCode}}"  data-type="true">Preview the barcode and download</button>
       <button  wx:else class="more-button bg-info text-white" size="mini" 
-              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.goodsId}}" data-type="false">预览条形码并下载</button>
+              bindtap='handlePreviewImage' data-qrcode="{{goodsReserve.goodsId}}" data-type="false">Preview the barcode and download</button>
       <view style='font-size:10px;margin-top:5px;color:#999'>（您可以下载下来贴在商品上，下次扫一扫可以直接操作哦）</view>
     </view>
   </i-panel>
 
   <button class='i-btn i-btn-primary i-btn-small' bindtap='print_goodinfo'>
-    <i-icon type="add" /> 打印
+    <i-icon type="add" /> print
   </button>
 
   </view>
@@ -54,19 +54,19 @@
   <view style='display:{{view2}}'>
       <view class='all_list' wx:if="{{detail !=''}}">
           <view class='today_reserve_detail' style='display:{{view3}}'>
-              <view>当日出库数量：{{out_reserve_num}}</view>
-              <view>当日入库数量：{{in_reserve_num}}</view>
+              <view>Daily delivery quantity:{{out_reserve_num}}</view>
+              <view>Date of storage:{{in_reserve_num}}</view>
           </view>
           <view  wx:for="{{detail}}" wx:key="{{index}}" style='display:flex;justify-content: space-between;border-bottom:1px solid#ddd;padding:5px 0'>
               <view>
                   <view>{{item.createdAt}}</view>
-                  <view wx:if='{{item.type == -1}}'>实际出库价格：￥{{item.retailPrice}}（X{{item.num}}）</view>
-                  <view  wx:elif='{{item.type == 1}}'>实际入库价格：￥{{item.retailPrice}}（X{{item.num}}）</view>
+                  <view wx:if='{{item.type == -1}}'>Actual ex-warehouse price:￥{{item.retailPrice}}（X{{item.num}}）</view>
+                  <view  wx:elif='{{item.type == 1}}'>Actual warehousing price:￥{{item.retailPrice}}（X{{item.num}}）</view>
               </view>
-              <view wx:if='{{item.type ==1}}' class='order_get'>入库</view>
-              <view wx:elif='{{item.type ==-1}}' class='order_out'>出库</view>
+              <view wx:if='{{item.type ==1}}' class='order_get'>Warehousing</view>
+              <view wx:elif='{{item.type ==-1}}' class='order_out'>Out of stock</view>
           </view>
       </view>
-      <view wx:else class='no_operations'>暂无操作记录</view>
+      <view wx:else class='no_operations'>No operation record</view>
   </view>
 </view>

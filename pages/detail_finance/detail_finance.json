@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-详细报表",
+  "navigationBarTitleText": "Detailed report forms",
   "usingComponents": {
     "i-panel": "../../component/panel/index",
     "i-grid": "../../component/grid/index",

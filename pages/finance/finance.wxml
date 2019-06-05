@@ -2,56 +2,56 @@
 <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
 <block wx:else>
 <i-tabs current="{{ current }}" bindchange="handleChange">
-    <i-tab key="1" title="出入库数量"></i-tab>
-    <i-tab key="2" title="出入库金额"></i-tab>
+    <i-tab key="1" title="Number of entries and exits"></i-tab>
+    <i-tab key="2" title="Inbound and outbound amount"></i-tab>
 </i-tabs>
 <view hidden="{{current!=1}}">
   <view class='bg-white padded-t-10'>
     <i-grid i-class="fin-grid">
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content border-r'>
-          <label class='fin-grid-item-title'>入库总数</label>
+          <label class='fin-grid-item-title'>The total number of incoming</label>
           <label class='fin-grid-item-num'>{{totalEntering}}</label>
         </view>
       </i-grid-item>
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content border-r'>
-          <label class='fin-grid-item-title'>出库总数</label>
+          <label class='fin-grid-item-title'>The total number of outbound</label>
           <label class='fin-grid-item-num'>{{totalDelivery}}</label>
         </view>
       </i-grid-item>
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content border-r'>
-          <label class='fin-grid-item-title'>日入库数</label>
+          <label class='fin-grid-item-title'>Daily warehouse number</label>
           <label class='fin-grid-item-num'>{{dayEntering}}</label>
         </view>
       </i-grid-item>
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content'>
-          <label class='fin-grid-item-title'>日出库数</label>
+          <label class='fin-grid-item-title'>Sunrise library number</label>
           <label class='fin-grid-item-num'>{{dayDelivery}}</label>
         </view>
       </i-grid-item>
     </i-grid>
   </view>
   <view class='canvas-title'>
-    <text>近七天出入库概况</text>
+    <text>Overview of Access and Depot in the Past Seven Days</text>
     <i-icon type="feedback" size="20" color="#80848f" bindtap='handleTip'/>
   </view>
   <view class='canvas-tip' wx:if="{{tipShow}}">
-    <view>近七天出入库概况：<text>近七天产品的出库入库数量统计对比图。</text></view>
+    <view>Overview of access to warehouses in the past seven days:<text>Statistical comparison chart of the number of products in storage and out of warehouse in the past seven days.</text></view>
   </view>
   <view class='canvas-content margin-b-10'>
     <canvas canvas-id="finCanvas" data-type='count' disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
     <i-spin fix wx:if="{{canvasSpinShow}}" custom>
       <view class="loading"></view>
-      <view>加载中...</view>
+      <view>Loading...</view>
     </i-spin>
   </view>
-  <i-cell i-class="border-b-1" title="近七天入库总数" value="{{weekEntering}}">
+  <i-cell i-class="border-b-1" title="Total storage in the past seven days" value="{{weekEntering}}">
     <i-icon type="label" size="18" slot="icon" />
   </i-cell>
-  <i-cell title="近七天出库总数" value="{{weekDelivery}}">
+  <i-cell title="Total number of discharges in the past seven days" value="{{weekDelivery}}">
     <i-icon type="label" size="18" slot="icon" />
   </i-cell>
 </view>
@@ -61,19 +61,19 @@
     <i-grid i-class="fin-grid">
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content border-r'>
-          <label class='fin-grid-item-title'>入库总额</label>
+          <label class='fin-grid-item-title'>Total storage</label>
           <label class='fin-grid-item-num'><text>￥</text>{{totalEnteringPrice}}</label>
         </view>
       </i-grid-item>
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content border-r'>
-          <label class='fin-grid-item-title'>出库总额</label>
+          <label class='fin-grid-item-title'>Total outgoing stock</label>
           <label class='fin-grid-item-num'><text>￥</text>{{totalDeliveryPrice}}</label>
         </view>
       </i-grid-item>
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content'>
-          <label class='fin-grid-item-title'>总净利润</label>
+          <label class='fin-grid-item-title'>Total net profit</label>
           <label class='fin-grid-item-num'><text>￥</text>{{totalProfit}}</label>
         </view>
       </i-grid-item>
@@ -84,45 +84,45 @@
     <i-grid i-class="fin-grid">
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content border-r'>
-          <label class='fin-grid-item-title'>日入库总额</label>
+          <label class='fin-grid-item-title'>Total daily warehousing</label>
           <label class='fin-grid-item-num'><text>￥</text>{{dayEnteringPrice}}</label>
         </view>
       </i-grid-item>
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content border-r'>
-          <label class='fin-grid-item-title'>日出库总额</label>
+          <label class='fin-grid-item-title'>Total sunrise warehouse</label>
           <label class='fin-grid-item-num'><text>￥</text>{{dayDeliveryPrice}}</label>
         </view>
       </i-grid-item>
       <i-grid-item i-class="fin-grid-item">
         <view class='fin-grid-item-content'>
-          <label class='fin-grid-item-title'>日净利润</label>
+          <label class='fin-grid-item-title'>Daily net profit</label>
           <label class='fin-grid-item-num'><text>￥</text>{{dayProfit}}</label>
         </view>
       </i-grid-item>
     </i-grid>
   </view>
   <view class='canvas-title'>
-      <text>近七天出入库概况</text>
+      <text>Overview of Access and Depot in the Past Seven Days</text>
       <i-icon type="feedback" size="20" color="#80848f" bindtap='handleTip'/>
     </view>
     <view class='canvas-tip' wx:if="{{tipShow}}">
-      <view>近七天出入库金额概况：<text>近七天产品的出库入库金额统计对比图。</text></view>
+      <view>Overview of the amount of money in and out of the warehouse in the past seven days:<text>Statistical comparison chart of the amount of goods in and out of warehouse in the past seven days.</text></view>
     </view>
     <view class='canvas-content margin-b-10'>
       <canvas canvas-id="finPriceCanvas" data-type='price' disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
       <i-spin fix wx:if="{{canvasSpinShow}}" custom>
         <view class="loading"></view>
-        <view>加载中...</view>
+        <view>Loading...</view>
       </i-spin>
     </view>
-    <i-cell i-class="border-b-1" title="近七天入库总额" value="{{weekEnteringPrice}} (元)">
+    <i-cell i-class="border-b-1" title="Total storage in the past seven days" value="{{weekEnteringPrice}}">
       <i-icon type="redpacket" size="18" slot="icon" />
     </i-cell>
-    <i-cell i-class="border-b-1" title="近七天出库总额" value="{{weekDeliveryPrice}} (元)">
+    <i-cell i-class="border-b-1" title="Total Output in the Near Seven Days" value="{{weekDeliveryPrice}}">
       <i-icon type="redpacket" size="18" slot="icon" />
     </i-cell>
-    <i-cell title="近七天利润总额" value="{{weekProfit}} (元)">
+    <i-cell title="Total profits in the past seven days" value="{{weekProfit}}">
       <i-icon type="redpacket" size="18" slot="icon" />
     </i-cell>
   </view>

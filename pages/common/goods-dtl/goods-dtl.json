@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-产品详情",
+  "navigationBarTitleText": "Product details",
   "usingComponents": {
     "i-panel": "../../../component/panel/index",
     "i-card": "../../../component/card/index",

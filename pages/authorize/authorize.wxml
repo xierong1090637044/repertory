@@ -14,10 +14,10 @@
       <view class="bd">
         <image class="smalltitle" src="/images/authorize/smalltitle.png"></image>
         <button class="confirm-btn" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
-          <text>用户授权</text>
+          <text>Authorization</text>
         </button>
         <button class="confirm-btn" wx:else bindtap='linkToIndex'>
-          <text>立即体验</text>
+          <text>Experience</text>
         </button>
         <text class="copyright">Copyright © 谢荣 All Rights Reserved</text>
       </view>

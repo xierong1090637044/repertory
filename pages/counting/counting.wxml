@@ -2,16 +2,16 @@
 <i-message id="message" />
 <view class='padded-t-10 extra' wx:if="{{!isEmpty}}">
   <view class='margin-b-10' wx:for="{{goods}}" wx:key="{{item.goodsId}}">
-    <i-card title="产品名称：{{item.goodsName}}" extra="当前库存：{{item.reserve}}">
+    <i-card title="Product name:{{item.goodsName}}" extra="Current stock:{{item.reserve}}">
       <view slot="content">
-        <view>产品规格：{{item.packageContent}}/{{item.packingUnit}}</view>
+        <view>Specifications:{{item.packageContent}}/{{item.packingUnit}}</view>
         <view class='margin-t-5' style='display:flex;justify-content: space-between'>
-        <view style='display:flex;'>盘点后数量：
+        <view style='display:flex;'>Quantity after inventory:
           <i-input i-class="counting_number" data-idx="{{index}}" placeholder='{{item.reserve}}' bind:change="handleNumChange" type='digit'/>
         </view>
         
         <view class='del' bindtap='handleDel' data-idx="{{index}}">
-          <i-icon type="close" />删除</view>
+          <i-icon type="close" />delete</view>
         </view>
       </view>
     </i-card>
@@ -19,11 +19,11 @@
 </view>
 <view class='no-data' wx:else>
   <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
+  <text>Temporarily no data</text>
 </view>
 
 <view class='btn-group' bindtap='handleDelivery'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      确认盘点数目
+      Confirm
     </button>
 </view>

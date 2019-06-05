@@ -21,15 +21,15 @@ Page({
     goods: [],
     totalGoods: [],
     isEmpty: false,
-    selectd_stockposition: "存放位置",//存放位置
+    selectd_stockposition: "location",//存放位置
     // 搜索
     inputShowed: false,
     inputVal: "",
     currenttab: '1',
     length: null,
-    selectd_stock: "库存情况",
-    stock: ["库存充足", "库存不足"],
-    selectd_class: "产品类别",
+    selectd_stock: "situation",
+    stock: ["large stock", "Insufficient stock"],
+    selectd_class: "category",
 
     limitPage: 50,//限制条数
     page: 1,//限制的页数
@@ -40,7 +40,7 @@ Page({
     let type = detail.type;
     if (type === 'next') {
       if (that.data.length < that.data.limitPage) {
-        wx.showToast({ icon: 'none', title: '最后一页了', })
+        wx.showToast({ icon: 'none', title: 'Last page', })
       } else {
         that.setData({ limitPage: that.data.limitPage, page: that.data.page + 1, current: [], currGoods: [] })
         that.loadGoods(type, null, select_id);
@@ -86,7 +86,7 @@ Page({
       wx.setStorageSync("class", res);
 
       var all = {};
-      all.class_text = "全部";
+      all.class_text = "whole";
       all.objectId = null;
 
       res.push(all);
@@ -128,7 +128,7 @@ Page({
   link2page: function () {
     if (that.data.currGoods.length < 1) {
       $Message({
-        content: '未选择产品，请确认',
+        content: 'No product selected, please confirm',
         type: 'warning',
         duration: 5
       });
@@ -269,8 +269,8 @@ Page({
     this.setData({
       current: [],
       currGoods: [],
-      selectd_stock: "库存情况",
-      selectd_class: "产品类别"
+      selectd_stock: "situation",
+      selectd_class: "category"
     });
 
     wx.getStorage({

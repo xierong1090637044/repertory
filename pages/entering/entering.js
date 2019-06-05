@@ -21,7 +21,7 @@ Page({
     var isAllZero = true
     if (that.data.goods.length < 1) {
       $Message({
-        content: '未选择产品，请确认',
+        content: 'No product selected, please confirm',
         type: 'warning',
         duration: 5
       });
@@ -37,7 +37,7 @@ Page({
 
     if (isAllZero == false) {
       $Message({
-        content: '入库量必须大于0',
+        content: 'Storage must be greater than 0',
         type: 'warning',
         duration: 5
       });
@@ -45,9 +45,9 @@ Page({
     }else
     {
       wx.showModal({
-        title: '提示',
-        content: '确认将商品入库？',
-        confirmText: '确认',
+        title: 'Tips',
+        content: 'Confirmation of warehousing?',
+        confirmText: 'confirm',
         success: function (res) {
           if (res.confirm) {
             wx.setStorageSync("operate_goods", that.data.goods);

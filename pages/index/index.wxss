@@ -57,7 +57,7 @@
   width: calc(100% - 60rpx);
   left: 30rpx;
   right: 30rpx;
-  bottom: 10%;
+  bottom: 4%;
   background: linear-gradient(to right, #426ab3 , #118fff);
   line-height: 80rpx;
   text-align: center;

@@ -11,8 +11,8 @@ Page({
   data: {
     current: '1',
     spinShow: true,
-    selectd_start_data:"选择开始日期",
-    selectd_end_data: "选择结束日期",
+    selectd_start_data:"Choose the Start Date",
+    selectd_end_data: "Choose the end date",
   },
 
   //选择开始日期

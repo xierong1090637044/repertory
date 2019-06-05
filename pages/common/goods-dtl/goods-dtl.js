@@ -47,7 +47,7 @@ Page({
     var type = e.target.dataset.type;
 
     wx.showActionSheet({
-      itemList: ['二维码', '条形码'],
+      itemList: ['QR code', 'bar code'],
       success(res) {
         console.log(res.tapIndex)
  
@@ -109,9 +109,9 @@ Page({
   onLoad: function (options) {
     that = this;
     var flag = options.type;
-    var title = flag==1?'产品详情':'库存详情';
+    var title = flag == 1 ? 'product details' :'Inventory details';
     wx.setNavigationBarTitle({
-      title: '库存助手-'+title
+      title: 'Inventory assistant-'+title
     });
 
     if(options.id !=null )

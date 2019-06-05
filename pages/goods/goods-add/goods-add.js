@@ -67,26 +67,26 @@ Page({
     //先进行表单非空验证
     if (goodsForm.goodsName == "") {
       $Message({
-        content: '请输入产品名称',
+        content: 'Please enter the product name.',
         type: 'warning',
         duration: 5
       });
     } else if (goodsForm.costPrice == "") {
       $Message({
-        content: '请输入进货价格',
+        content: 'Please enter the purchase price.',
         type: 'warning',
         duration: 5
       });
     } else if (goodsForm.retailPrice == "") {
       $Message({
-        content: '请输入零售价格',
+        content: 'Please enter the retail price.',
         type: 'warning',
         duration: 5
       });
     } else {
         wx.showModal({
-          title: '提示',
-          content: '是否确认新增产品',
+          title: 'Tips',
+          content: 'Whether to confirm new products',
           success: function (res) {
             if (res.confirm) {
               that.setData({
@@ -121,7 +121,7 @@ Page({
                     success: function (results) {
                       if (results.length > 0) {
                         $Message({
-                          content: '该产品已存在，请确认',
+                          content: 'This product already exists, please confirm it.',
                           type: 'warning',
                           duration: 5
                         });
@@ -167,7 +167,7 @@ Page({
                                 query.save().then(res => {
                                   console.log(res)
                                   wx.showToast({
-                                    title: '新增产品成功',
+                                    title: 'Success of new products',
                                     icon: 'success',
                                     success: function () {
                                       that.setData({
@@ -193,7 +193,7 @@ Page({
                               })
                             } else {
                               wx.showToast({
-                                title: '新增产品成功',
+                                title: 'Success of new products',
                                 icon: 'success',
                                 success: function () {
                                   that.setData({

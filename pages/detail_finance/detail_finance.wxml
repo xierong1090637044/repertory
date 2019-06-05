@@ -22,23 +22,23 @@
   </view>
 
   <view style='display:{{view1}}'>
-  <view class='text_desicbe'>概况：</view>
+  <view class='text_desicbe'>Survey:</view>
   <view class='frist_content'>
     <view style='width:50%'>
       <i-cell-group >
-        <i-cell title="入库数量" value="{{get_reserve}}"></i-cell>
-        <i-cell title="入库成本总额" value="{{get_reserve_num}}" ></i-cell>
-        <i-cell title="预计卖出总额" value="{{get_reserve_real_money}}" ></i-cell>
-        <i-cell title="预计可获盈利" value="{{get_reserve_get_num}}" ></i-cell>
+        <i-cell title="Quantity of warehousing" value="{{get_reserve}}"></i-cell>
+        <i-cell title="Total warehousing cost" value="{{get_reserve_num}}" ></i-cell>
+        <i-cell title="Total expected sales" value="{{get_reserve_real_money}}" ></i-cell>
+        <i-cell title="Expected profitability" value="{{get_reserve_get_num}}" ></i-cell>
       </i-cell-group>
     </view>
 
     <view style='width:50%'>
       <i-cell-group >
-        <i-cell title="出库数量" value="{{out_reserve}}"></i-cell>
-        <i-cell title="出库成本总额" value="{{out_reserve_real_money}}" ></i-cell>
-        <i-cell title="出库应收总额" value="{{out_reserve_num}}" ></i-cell>
-        <i-cell title="毛利润" value="{{out_reserve_get_num}}" ></i-cell>
+        <i-cell title="Outgoing quantity" value="{{out_reserve}}"></i-cell>
+        <i-cell title="Total Outgoing Cost" value="{{out_reserve_real_money}}" ></i-cell>
+        <i-cell title="Total Outgoing Receivables" value="{{out_reserve_num}}" ></i-cell>
+        <i-cell title="Gross profit" value="{{out_reserve_get_num}}" ></i-cell>
       </i-cell-group>
     </view>
   </view>
@@ -46,13 +46,13 @@
   <view class='second_content'>
     <view style='width:50%'>
       <i-cell-group >
-        <i-cell title="当日应收" value="￥{{should_get_money}}"></i-cell>
+        <i-cell title="Receivable on that day" value="￥{{should_get_money}}"></i-cell>
       </i-cell-group>
     </view>
 
     <view style='width:50%'>
       <i-cell-group >
-        <i-cell title="当日实收" value="￥{{real_get_money}}"></i-cell>
+        <i-cell title="Actual receipt on that day" value="￥{{real_get_money}}"></i-cell>
       </i-cell-group>
     </view>
   </view>

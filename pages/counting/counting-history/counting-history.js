@@ -121,7 +121,7 @@ Page({
             query.save().then(res => {
               console.log("添加操作历史记录成功", res);
               wx.showToast({
-                title: '库存盘点成功',
+                title: 'Success',
                 icon: 'success',
                 success: function () {
                   setTimeout(() => {

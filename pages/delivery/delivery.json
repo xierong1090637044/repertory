@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "库存助手-产品出库",
+  "navigationBarTitleText": "Product outgoing",
   "usingComponents": {
     "i-card": "../../../component/card/index",
     "i-panel": "../../../component/panel/index",

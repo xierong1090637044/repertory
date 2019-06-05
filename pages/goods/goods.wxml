@@ -12,23 +12,23 @@
     <view class="search-bar-form">
       <view class="search-bar-box">
         <icon class="icon-search_in-box" type="search" size="14"></icon>
-        <input type="text" class="search-bar-input" placeholder="请输入关键字查询" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchAction"/>
+        <input type="text" class="search-bar-input" placeholder="Please enter keyword query" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchAction"/>
         <view class="icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
           <icon type="clear" size="14"></icon>
         </view>
       </view>
       <label class="search-bar-label" hidden="{{inputShowed}}" bindtap="showInput">
         <icon class="icon-search" type="search" size="14"></icon>
-        <view class="search-bar-text">搜索</view>
+        <view class="search-bar-text">search</view>
       </label>
     </view>
-    <view class="search-bar-cancel-btn" hidden="{{!inputShowed}}" bindtap="searchAction">搜索</view>
+    <view class="search-bar-cancel-btn" hidden="{{!inputShowed}}" bindtap="searchAction">search</view>
   </view>
 </view>
 
   <navigator url='/pages/goods/goods-add/goods-add' class='btn-group'>
     <button class='i-btn i-btn-primary i-btn-small' form-type="submit" wx:if="{{!loading}}">
-      <i-icon type="add" /> 新增产品
+      <i-icon type="add" /> New product
     </button>
 </navigator>
 
@@ -78,7 +78,7 @@
 
 <view class='no-data' wx:if="{{isEmpty}}">
   <image src='/images/common/no-data.png'></image>
-  <text>暂无数据</text>
+  <text>No data</text>
 </view>
 
 <view wx:else>
@@ -87,7 +87,7 @@
 
   <view class='no-data' wx:if="{{contentEmpty}}" style='height:calc(100vh - 202px)'>
     <image src='/images/common/no-data.png'></image>
-    <text>暂无数据</text>
+    <text>No data</text>
   </view>
 
 <view class='right_item' wx:else>
@@ -95,19 +95,19 @@
   <block wx:for="{{goods}}" wx:key="unique">
     <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}">
       <view slot="content">
-        <i-cell bind:click="handleDetial" data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="产品：{{item.goodsName}}" label="库存数量：{{item.reserve}}">
+        <i-cell bind:click="handleDetial" data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="Products:{{item.goodsName}}" label="Inventory quantity:{{item.reserve}}">
               <image src='/images/common/goods-default.png' style='width:40px;margin-top:5px' slot="icon" wx:if="{{item.goodsIcon ==''}}" mode='widthFix' lazy-load="true"></image>
               <image src='{{item.goodsIcon}}' style='width:40px;margin-top:5px' slot="icon" mode='widthFix' wx:else lazy-load="true"></image>
-              <view slot="extra" class='i-cell-desc'>预警数量：{{item.warning_num}} </view>
-              <view slot="extra_stock" class='i-cell-desc' wx:if="{{item.stocks.stock_name}}">存放位置：{{item.stocks.stock_name}} </view>
+              <view slot="extra" class='i-cell-desc'>Quantity of early warning:{{item.warning_num}} </view>
+              <view slot="extra_stock" class='i-cell-desc' wx:if="{{item.stocks.stock_name}}">Storage location:{{item.stocks.stock_name}} </view>
         </i-cell>
       </view>
     </i-swipeout>
   </block>
   </i-cell-group>
   <i-page current="{{ page }}" bind:change="handlePageChange" >
-    <view slot="prev">上一页</view>
-    <view slot="next">下一页</view>
+    <view slot="prev">Previous</view>
+    <view slot="next">Next</view>
   </i-page>
   </view>
   
@@ -118,7 +118,7 @@
 
 
 
-<i-modal title="{{now_goodsName}}的货损记录" visible="{{visible}}" bind:ok="handleadd_badnum" bind:cancel="handleClose">
+<i-modal title="{{now_goodsName}}'s Damage record" visible="{{visible}}" bind:ok="handleadd_badnum" bind:cancel="handleClose">
   <i-input type="digit" name="bad_goods" bindchange="get_badnum" value='0'/>
-  <i-input placeholder="请输入备注" name="beizhu" bindchange="get_beizhu" />
+  <i-input placeholder="Please enter notes" name="beizhu" bindchange="get_beizhu" />
 </i-modal>

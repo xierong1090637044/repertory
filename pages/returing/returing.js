@@ -22,7 +22,7 @@ Page({
     var isAllZero = true
     if (that.data.goods.length < 1) {
       $Message({
-        content: '未选择产品，请确认',
+        content: 'Product not selected, please confirm',
         type: 'warning',
         duration: 5
       });
@@ -35,16 +35,16 @@ Page({
     }
     if (isAllZero== false) {
       $Message({
-        content: '入库量必须大于1',
+        content: 'The incoming quantity must be greater than 1',
         type: 'warning',
         duration: 5
       });
       return
     }else{
       wx.showModal({
-        title: '提示',
-        content: '确认将商品退货入库？',
-        confirmText: '确认',
+        title: 'prompt',
+        content: 'Confirm return goods to warehouse?',
+        confirmText: 'confirm',
         success: function (res) {
           if (res.confirm) {
             wx.setStorageSync("operate_goods", that.data.goods);
