@@ -83,7 +83,7 @@ Page({
                   var goods = new Goods();
 
                   if (that.data.goodsClass) { //产品类别
-                    var Class_User = Bmob.Object.extend("class_user");
+                    var Class_User = Bmob.Object.extend("second_class");
                     var class_user = new Class_User();
                     class_user.id = that.data.goodsClass;
                   }
@@ -116,7 +116,7 @@ Page({
                       } else {
                         // 添加产品
                         goods.set("userId", user);
-                        if (that.data.goodsClass) { goods.set("goodsClass", class_user); }
+                        if (that.data.goodsClass) { goods.set("second_class", class_user); }
                         goods.set("stocks", stocks);
                         goods.set("goodsName", goodsForm.goodsName);
                         goods.set("regNumber", goodsForm.regNumber);

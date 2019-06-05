@@ -109,7 +109,7 @@ Page({
                 user.id = res.data;
                 
                 if (that.data.goodsClass != '') { //产品类别
-                  var Class_User = Bmob.Object.extend("class_user");
+                  var Class_User = Bmob.Object.extend("second_class");
                   var class_user = new Class_User();
                   class_user.id = that.data.goodsClass;
                 }
@@ -126,7 +126,7 @@ Page({
                   success: function (results) {
                     // 修改产品
                     results.set("goodsName", goodsForm.goodsName);
-                    results.set("goodsClass", class_user);
+                    results.set("second_class", class_user);
                     results.set("stocks", stocks);
                     results.set("goodsIcon", goodsForm.goodsIcon);
                     results.set("regNumber", goodsForm.regNumber);
@@ -233,6 +233,14 @@ Page({
         stock = res.data
         that.setData({ stock: res.data.stock_name })
       }
+    });
+
+    wx.getStorage({
+      key: 'class',
+      success(res) {
+        console.log(res)
+        that.setData({ class_select_text: res.data.class_text, goodsClass: res.data.objectId })
+      }
     })
   },
 
@@ -240,7 +248,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    wx.removeStorageSync("class");
   },
 
   /**
@@ -248,6 +256,7 @@ Page({
    */
   onUnload: function () {
     wx.removeStorageSync("stock")
+    wx.removeStorageSync("class");
   },
 
   /**

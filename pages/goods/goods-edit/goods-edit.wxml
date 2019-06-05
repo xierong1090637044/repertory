@@ -21,9 +21,9 @@
     </i-panel>
 
     <i-panel title="产品类别">
-     <picker bindchange="bindPickerChange" value="{{index}}" range="{{class_text}}" range-key="class_text">
+     <navigator open-type="navigate" url="/pages/mine/add_class/add_class?type=select" hover-class='none'>
         <i-input title="产品类别" value="{{class_select_text}}" name="goodsClass" placeholder="请选择产品类别" disabled='true'/>
-     </picker>
+     </navigator>
     </i-panel>
     
     <i-panel title="产品规格" style="flex:1">

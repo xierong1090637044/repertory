@@ -161,7 +161,7 @@ Page({
     var Goods = Bmob.Object.extend("Goods");
     var query = new Bmob.Query(Goods);
     query.equalTo("userId", userid);
-    if (class_id != null) query.equalTo("goodsClass", class_id);
+    if (class_id != null) query.equalTo("second_class", class_id);
     if (stockposition != null) query.equalTo("stocks", stockposition.objectId);
     if (type == true) {
       query.equalTo("stocktype", 1);
@@ -175,6 +175,7 @@ Page({
     query.descending("goodsName"); //按照货物名字
     query.include("userId");
     query.include("stocks");
+    query.include("second_class");
     query.find({
       success: function (res) {
         that.setData({ length: res.length });

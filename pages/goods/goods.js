@@ -267,7 +267,7 @@ Page({
     }else{}
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
-    if (class_id != null) query.equalTo("goodsClass", class_id);
+    if (class_id != null) query.equalTo("second_class", class_id);
     if (stockposition != null) query.equalTo("stocks", stockposition.objectId);
     
     query.limit(that.data.limitPage);
@@ -276,6 +276,7 @@ Page({
     query.include("userId");
     query.include("goodsClass"); 
     query.include("stocks");
+    query.include("second_class");
     query.find({
       success: function (res) {
         that.setData({length: res.length });
@@ -304,7 +305,7 @@ Page({
             tempGoods.reserve = res[i].get("reserve").toFixed(wx.getStorageSync("print_setting").show_float) || 0;
             tempGoods.costPrice = res[i].get("costPrice") || 0;
             tempGoods.retailPrice = res[i].get("retailPrice") || 0;
-            tempGoods.class_text = res[i].get("goodsClass") || '';
+            tempGoods.class_text = res[i].get("second_class") || '';
             tempGoods.product_info = res[i].get("product_info") || '';
             tempGoods.bad_num = res[i].get("bad_num") || 0;
             tempGoods.warning_num = res[i].get("warning_num") || 0;
