@@ -56,13 +56,7 @@ Page({
     }
   },
 
-  //选择产品类别
-  bindclass_Change: function (e) {
-    var index = e.detail.value;
-    select_id = class_array[index].objectId;
-    that.setData({ selectd_class: class_array[index].class_text, current: [], currGoods: [] });
-    that.loadGoods(type, null, select_id);
-  },
+
 
   //选择库存情况
   bindstock_Change: function (e) {
@@ -76,23 +70,6 @@ Page({
       that.setData({ selectd_stock: that.data.stock[e.detail.value], current: [], currGoods: [] });
       type = false;
     }
-  },
-
-  //得到类别列表
-  getclass_list: function () {
-    const query = Bmob_new.Query("class_user");
-    query.equalTo("parent", "==", userid);
-    query.find().then(res => {
-      wx.setStorageSync("class", res);
-
-      var all = {};
-      all.class_text = "全部";
-      all.objectId = null;
-
-      res.push(all);
-      that.setData({ all_class: res });
-      class_array = res;
-    });
   },
 
   // 搜索
@@ -207,8 +184,6 @@ Page({
           that.setData({ contentEmpty: false })
         }
 
-        that.getclass_list();
-
         var tempGoodsArr = new Array();
         for (var i = 0; i < res.length; i++) {
           var tempGoods = {}
@@ -280,6 +255,15 @@ Page({
         that.setData({ selectd_stockposition: res.data.stock_name })
         that.loadGoods(type, null, select_id);
       }
+    });
+
+    wx.getStorage({
+      key: 'class',
+      success(res) {
+        console.log(res)
+        that.setData({ selectd_class: res.data.class_text })
+        that.loadGoods(type, null, res.data.objectId);
+      }
     })
   },
 
@@ -287,6 +271,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    wx.removeStorageSync("class");
   },
 
   /*** 生命周期函数--监听页面卸载*/
@@ -295,6 +280,7 @@ Page({
     select_id = null;//类别选择的id
     stockposition = null;//选择的仓库
     wx.removeStorageSync("stock");
+    wx.removeStorageSync("class");
   },
 
   /**

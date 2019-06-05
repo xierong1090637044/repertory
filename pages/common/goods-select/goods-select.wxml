@@ -40,12 +40,12 @@
 <!--*筛选器*-->
   <view class='select'>
     <view class="section">
-      <picker bindchange="bindclass_Change" range-key	="class_text" range="{{all_class}}">
+      <navigator open-type="navigate" url="/pages/mine/add_class/add_class?type=select" hover-class='none'>
         <view class="picker">
           <text>{{selectd_class}}</text>
-          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:14px"></i>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
         </view>
-      </picker>
+       </navigator>
     </view>
 
     <view class="section">

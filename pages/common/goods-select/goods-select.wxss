@@ -19,3 +19,20 @@
 {
   width: 120px;
 }
+
+.section
+{
+  font-size: 26rpx;
+  width:33.33%;
+  text-align:center;
+  background-color:#f6f6f6;
+  background:#fff;
+}
+
+.picker
+{
+  width: 90%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
