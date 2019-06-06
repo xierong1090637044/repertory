@@ -11,6 +11,7 @@ var type;//库存情况
 var class_array;//产品类别
 var select_id;//产品类别id
 let stockposition;//仓库选择
+let class_flag = "createdAt";
 Page({
 
   /*** 页面的初始数据*/
@@ -29,7 +30,9 @@ Page({
     length: null,
     selectd_stock: "库存情况",
     stock: ["库存充足", "库存不足"],
+    classes: ["创建时间", "库存量"],
     selectd_class: "产品类别",
+    selectd_order: "排序",
 
     limitPage: 50,//限制条数
     page: 1,//限制的页数
@@ -56,8 +59,6 @@ Page({
     }
   },
 
-
-
   //选择库存情况
   bindstock_Change: function (e) {
     if (e.detail.value == "0") {
@@ -70,6 +71,18 @@ Page({
       that.setData({ selectd_stock: that.data.stock[e.detail.value], current: [], currGoods: [] });
       type = false;
     }
+  },
+
+  //排序点击选择
+  bindclass_Change: function (e) {
+    console.log(e);
+    if (e.detail.value == "0") {
+      class_flag = "createdAt"
+    } else if (e.detail.value == "1") {
+      class_flag = "reserve"
+    }
+    that.setData({ selectd_order: that.data.classes[e.detail.value] })
+    that.loadGoods(type, null, select_id);
   },
 
   // 搜索
@@ -172,7 +185,7 @@ Page({
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     query.limit(that.data.limitPage);
     query.skip(that.data.limitPage * (that.data.page - 1));
-    query.descending("goodsName"); //按照货物名字
+    query.descending(class_flag); //按照货物名字
     query.include("userId");
     query.include("stocks");
     query.include("second_class");

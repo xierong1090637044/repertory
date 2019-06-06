@@ -66,6 +66,16 @@
       </navigator>
     </view>
 
+    <!--排序点击-->
+    <view class="section">
+      <picker bindchange="bindclass_Change" value="{{index}}" range="{{classes}}">
+        <view class="picker">
+          <text>{{selectd_order}}</text>
+          <i class="icon iconfont icon-xiangxia1" style="margin-left:8px;font-size:24rpx;"></i>
+        </view>
+      </picker>
+    </view>
+
   </view>
 
 <view style='display:flex'>

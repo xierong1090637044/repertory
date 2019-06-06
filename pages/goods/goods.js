@@ -14,7 +14,7 @@ let bad_num = null;//货损数量
 let beizhu_text = '';//备注信息
 let stockposition;//仓库选择
 let time_flag;
-let class_flag ="goodsName";
+let class_flag ="createdAt";
 Page({
 
   /**
@@ -77,6 +77,20 @@ Page({
     time_flag = e.detail.value;
 
     that.setData({ selectd_time: that.data.time[time_flag] });
+    that.loadGoods(type, null, select_id);
+  },
+
+  //排序点击选择
+  bindclass_Change:function(e)
+  {
+    console.log(e);
+    if (e.detail.value == "0")
+    {
+      class_flag ="createdAt"
+    } else if (e.detail.value == "1"){
+      class_flag = "reserve"
+    }
+    that.setData({ selectd_order: that.data.classes[e.detail.value] })
     that.loadGoods(type, null, select_id);
   },
 
@@ -264,7 +278,7 @@ Page({
     if (time_flag == "0")
     {
       query.equalTo("nousetime", { "$lte": { "__type": "Date", "iso": config.getDay(0) + " 00:00:00" } });
-    }else{}
+    }
 
     if (content != null) query.equalTo("goodsName", { "$regex": "" + content + ".*" });
     if (class_id != null) query.equalTo("second_class", class_id);
@@ -362,7 +376,7 @@ Page({
       selectd_stock:"库存",
       stock:["库存充足","库存不足"],
       time: ["已失效", "未失效"],
-      classes:["创建时间","名字"],
+      classes:["创建时间","库存量"],
       selectd_class:"类别",
       selectd_order:"排序",
     })
@@ -396,7 +410,7 @@ Page({
     {
       this.handleRefresh();
       wx.setStorageSync("is_add", false);
-    }else{}
+    }
 
     wx.getStorage({
       key: 'stock',
