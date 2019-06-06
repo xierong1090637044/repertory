@@ -175,7 +175,7 @@ Page({
     var inputVal = this.data.inputVal
     var filterFriends = _.chain(that.data.totalFriends)
       .filter(function (res) {
-        return res.userName.match(new RegExp(inputVal));
+        return res.nickName.match(new RegExp(inputVal));
       })
       .map(function (res) {
         return res;
@@ -209,7 +209,7 @@ Page({
           var tempFriend = {}
           tempFriend.friendId = res[i].get("friendId").objectId;
           tempFriend.openid = res[i].get("friendId").openid;
-          tempFriend.userName = res[i].get("friendId").username;
+          tempFriend.nickName = res[i].get("friendId").nickName;
           tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
           tempFriend.id = res[i].id || '';
           tempFriend.status = res[i].get("status") || 0;
@@ -292,7 +292,7 @@ Page({
           })
           var tempFriend = {}
           tempFriend.friendId = res[i].get("friendId").objectId;
-          tempFriend.userName = res[i].get("friendId").username;
+          tempFriend.nickName = res[i].get("friendId").nickName;
           tempFriend.openid = res[i].get("friendId").openid;
           tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
           tempFriend.id = res[i].id || '';

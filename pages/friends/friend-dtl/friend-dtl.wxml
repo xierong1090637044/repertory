@@ -5,7 +5,7 @@
     <image class='banner-img' src='{{friend.avatarUrl}}'/>
     <image class='avatar' src='{{friend.avatarUrl}}'/>
     <view class='sex {{friend.sex==1?"text-default":"text-warning"}}'>{{friend.sex==1?'♂':'♀'}}</view>
-    <text class="username">{{friend.username}}</text>
+    <text class="username">{{friend.nickName}}</text>
   </view>
   <view class='follow text-warning' wx:if="{{flag==-1}}"
         bindtap='handleAddFriend' data-friendId='{{friend.id}}'>

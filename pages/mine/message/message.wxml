@@ -27,7 +27,7 @@
 <view wx:else>
 <i-cell-group i-class="wrap">
   <block wx:for="{{friends}}" wx:key="unique">
-    <i-cell bind:click="handleDetial" data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}" label="备注：{{item.remark||'暂无备注'}}">
+    <i-cell bind:click="handleDetial" data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.nickName}}" label="备注：{{item.remark||'暂无备注'}}">
       <image src='{{item.avatarUrl}}' style='width:40px;height:40px;margin-top:5px' slot="icon"></image>
       <view slot="footer">
         <button class="btn-add" data-friendid='{{item.friendId}}'

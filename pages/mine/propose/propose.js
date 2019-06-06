@@ -195,7 +195,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    username = wx.getStorageSync("username");
+    nickName = wx.getStorageSync("nickName");
     userid = wx.getStorageSync("userid");
     that.setData({//初始化数据
       src: "",
@@ -207,7 +207,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         var info = '**用户信息**\r\n';
-        info += '用户名：' + username;
+        info += '用户名：' + nickName;
         info += '\r\n手机型号：' + res.model;
         info += '（' + res.platform + ' - ' + res.windowWidth + 'x' + res.windowHeight + '）';
         info += '\r\n微信版本号：' + res.version;

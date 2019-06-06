@@ -20,7 +20,7 @@ Page({
     query.get(wx.getStorageSync('friendId'), {
       success: function (result) {
         friend.id = result.id
-        friend.username = result.get("username")
+        friend.nickName = result.get("nickName")
         friend.avatarUrl = result.get("avatarUrl")
         friend.sex = result.get("sex")
         that.setData({

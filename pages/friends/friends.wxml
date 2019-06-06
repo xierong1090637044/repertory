@@ -35,7 +35,7 @@
   <block wx:for="{{friends}}" wx:key="unique" >
     <i-swipeout  i-class="i-swipeout-item" operateWidth="{{210}}" data-friendid="{{item.friendId}}" bindtap="operation">
     <view slot="content">
-     <i-cell data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.userName}}">
+     <i-cell data-item="{{item}}" i-class="padded-t-5 padded-b-5" title="好友名称：{{item.nickName}}">
       <image src='{{item.avatarUrl}}' style='width:40px;height:40px;margin-top:5px' slot="icon"></image>
      </i-cell>
     </view>

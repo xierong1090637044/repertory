@@ -11,7 +11,7 @@
      <view style='display:flex;width:calc(100% - 60px);'>
           <view style='line-height:40px'><i class="iconfont icon-jihua icon-order"></i></view>
           <view style='margin-left:10px'>
-              <view><text style='color:#999'>操作者：</text>{{item.opreater.username}}</view>
+              <view><text style='color:#999'>操作者：</text>{{item.opreater.nickName}}</view>
               <view wx:if='{{item.goodsName != null}}'><text style='color:#999'>操作商品：</text>{{item.goodsName}}  等...</view>
               <view wx:if="{{item.beizhu != ''}}" class='item_beizhu'><text style='color:#999'>备注：</text>{{item.beizhu}}</view>
               <view><text style='color:#999'>操作时间：</text>{{item.createdAt}}</view>

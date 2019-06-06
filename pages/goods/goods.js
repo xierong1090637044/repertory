@@ -304,7 +304,7 @@ Page({
           for (var i = 0; i < res.length; i++) {
             var tempGoods = {}
             tempGoods.userid = userid || '';
-            tempGoods.userName = res[i].get("userId").username || '';
+            tempGoods.nickName = res[i].get("userId").nickName || '';
             tempGoods.avatarUrl = res[i].get("userId").avatarUrl || '';
             tempGoods.goodsId = res[i].id || '';
             tempGoods.goodsName = res[i].get("goodsName") || '';

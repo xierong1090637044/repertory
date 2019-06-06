@@ -52,7 +52,7 @@ Page({
     var inputVal = this.data.inputVal
     var filterFriends = _.chain(that.data.totalFriends)
       .filter(function (res) {
-        return res.userName.match(new RegExp(inputVal));
+        return res.nickName.match(new RegExp(inputVal));
       })
       .map(function (res) {
         return res;
@@ -159,12 +159,12 @@ Page({
           var tempFriend = {}
           if (userid == res[i].get("userId").objectId){
             tempFriend.friendId = res[i].get("friendId").objectId;
-            tempFriend.userName = res[i].get("friendId").username;
+            tempFriend.nickName = res[i].get("friendId").nickName;
             tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
             tempFriend.from = 0;
           }else{
             tempFriend.friendId = res[i].get("userId").objectId;
-            tempFriend.userName = res[i].get("userId").username;
+            tempFriend.nickName = res[i].get("userId").nickName;
             tempFriend.avatarUrl = res[i].get("userId").avatarUrl;
             tempFriend.from = 1;
           }
@@ -257,12 +257,12 @@ Page({
           var tempFriend = {}
           if (userid == res[i].get("userId").objectId) {
             tempFriend.friendId = res[i].get("friendId").objectId;
-            tempFriend.userName = res[i].get("friendId").username;
+            tempFriend.nickName = res[i].get("friendId").nickName;
             tempFriend.avatarUrl = res[i].get("friendId").avatarUrl;
             tempFriend.from = 0;
           } else {
             tempFriend.friendId = res[i].get("userId").objectId;
-            tempFriend.userName = res[i].get("userId").username;
+            tempFriend.nickName = res[i].get("userId").nickName;
             tempFriend.avatarUrl = res[i].get("userId").avatarUrl;
             tempFriend.from = 1;
           }
